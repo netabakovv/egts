@@ -15,9 +15,6 @@ public enum EgtsPacketType implements Codeable{
         return code;
     }
 
-    public static final byte PT_APP_DATA_CODE = (byte) PT_APP_DATA.getCode();
-    public static final byte PT_RESPONSE_CODE = (byte) PT_RESPONSE.getCode();
-
     private static final EgtsPacketType[] LOOKUP = new EgtsPacketType[256];
 
     static {

@@ -1,29 +1,33 @@
 package org.example.libs;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import lombok.Getter;
 
-public class EgtsPackage implements BinaryData {
-    // Поля заголовка
-    private byte protocolVersion;
-    private byte securityKeyId;
-    private String prefix;
-    private String route;
-    private String encryptionAlg;
-    private String compression;
-    private String priority;
-    private byte headerLength;
-    private byte headerEncoding;
-    private short frameDataLength;
-    private short packetIdentifier;
-    private EgtsPacketType packetType;
-    private short peerAddress;
-    private short recipientAddress;
-    private byte timeToLive;
-    private byte headerCheckSum;
-    private BinaryData servicesFrameData;
-    private short servicesFrameDataCheckSum;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+@Getter
+public class EgtsPackage {
+    private byte protocolVersion;           // Версия протокола
+    private byte securityKeyId;             // Идентификатор ключа безопасности
+    private String prefix;                  // Префикс
+    private String route;                   // Маршрут
+    private String encryptionAlg;           // Алгоритм шифрования
+    private String compression;             // Компрессия
+    private String priority;                // Приоритет
+    private byte headerLength;             // Длина заголовка
+    private byte headerEncoding;            // Кодировка заголовка
+    private short frameDataLength;          // Длина секции данных
+    private short packetIdentifier;         // Идентификатор пакета
+    private EgtsPacketType packetType;               // Тип пакета
+    private short peerAddress;              // Адрес отправителя
+    private short recipientAddress;         // Адрес получателя
+    private byte timeToLive;               // Время жизни пакета
+    private byte headerCheckSum;           // Контрольная сумма заголовка
+    private BinaryData servicesFrameData;  // Данные сервиса
+    private short servicesFrameDataCheckSum; // Контрольная сумма данных сервиса
+
+    public record EncodeOptions(SecretKey secretKey) {}
+    public record DecodeOptions(SecretKey secretKey) {}
 
     public enum DecodeResultCode {
         OK,
@@ -36,91 +40,22 @@ public class EgtsPackage implements BinaryData {
 
     public record DecodeResult(DecodeResultCode code, String message, EgtsPackage pkg) {}
 
-    // Options
-    public record EncodeOptions(SecretKey secretKey) {}
-    public record DecodeOptions(SecretKey secretKey) {}
+    public byte[] encode(EncodeOptions... options) throws IOException {
+        var opt = new EncodeOptions(null);
+        if (options.length > 0) opt = options[0];
 
-    @Override
-    public void decode(byte[] data) throws IOException {
-        ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
-
-        this.protocolVersion = buf.get();
-        this.securityKeyId = buf.get();
-
-        byte flags = buf.get();
-        parseFlags(flags);
-
-        this.headerLength = buf.get();
-        this.headerEncoding = buf.get();
-
-        this.frameDataLength = buf.getShort();
-        this.packetIdentifier = buf.getShort();
-        this.packetType = EgtsPacketType.fromCode(buf.get());
-
-        if ("1".equals(route)) {
-            this.peerAddress = buf.getShort();
-            this.recipientAddress = buf.getShort();
-            this.timeToLive = buf.get();
-        }
-
-        this.headerCheckSum = buf.get();
-
-        // Проверка CRC8 заголовка
-        int headerEndPos = buf.position();
-        byte[] headerBytes = new byte[headerEndPos];
-        System.arraycopy(data, 0, headerBytes, 0, headerEndPos);
-        byte calculatedHcs = CRC.crc8(headerBytes);
-
-        if (calculatedHcs != headerCheckSum) {
-            throw new IOException("CRC8 заголовка неверен");
-        }
-
-        // Чтение тела пакета
-        byte[] sfrd = new byte[frameDataLength];
-        buf.get(sfrd);
-
-        boolean isEncrypted = !"00".equals(encryptionAlg);
-        if (isEncrypted && servicesFrameData != null) {
-            // Здесь можно добавить расшифровку, если есть ключ
-            throw new IOException("Шифрование не поддерживается в текущей версии");
-        }
-
-        // Выбор типа данных сервиса
-        switch (packetType) {
-            case PT_APP_DATA -> servicesFrameData = new ServiceDataSet();
-            case PT_RESPONSE -> servicesFrameData = new PtResponse();
-            default -> throw new IOException("Неизвестный тип пакета: " + packetType);
-        }
-
-        servicesFrameData.decode(sfrd);
-
-        if (buf.remaining() >= 2) {
-            this.servicesFrameDataCheckSum = buf.getShort();
-            short expectedCrc = CRC.crc16(sfrd);
-            if (expectedCrc != servicesFrameDataCheckSum) {
-                throw new IOException("CRC16 тела пакета неверен");
-            }
-        } else {
-            throw new IOException("Недостаточно данных для чтения CRC16");
-        }
-    }
-
-    @Override
-    public byte[] encode() throws IOException {
-        ByteBuffer buf = ByteBuffer.allocate(1024).order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buf = ByteBuffer.allocate(1024);
+        SecretKey secretKey = opt.secretKey();
 
         buf.put(protocolVersion);
         buf.put(securityKeyId);
 
-        // Собираем флаги
-        long flagBits = Long.parseLong(prefix + route + encryptionAlg + compression + priority, 2);
-        buf.put((byte) flagBits);
+        int flags = parseFlags(prefix, route, encryptionAlg, compression, priority);
+        buf.put((byte) flags);
 
         if (headerLength == 0) {
-            headerLength = 11;
-            if ("1".equals(route)) {
-                headerLength += 5;
-            }
+            headerLength = 11; // DEFAULT_HEADER_LEN
+            if ("1".equals(route)) headerLength += 5;
         }
         buf.put(headerLength);
         buf.put(headerEncoding);
@@ -128,6 +63,9 @@ public class EgtsPackage implements BinaryData {
         byte[] sfrd = new byte[0];
         if (servicesFrameData != null) {
             sfrd = servicesFrameData.encode();
+            if (!"00".equals(encryptionAlg) && secretKey != null) {
+                sfrd = secretKey.encode();
+            }
             frameDataLength = (short) sfrd.length;
         }
 
@@ -141,18 +79,16 @@ public class EgtsPackage implements BinaryData {
             buf.put(timeToLive);
         }
 
-        // CRC8 заголовка
         int headerEndPos = buf.position();
         byte[] headerBytes = new byte[headerEndPos];
         buf.rewind();
         buf.get(headerBytes);
         buf.position(headerEndPos);
 
-        byte calculatedHcs = CRC.crc8(headerBytes);
-        buf.put(calculatedHcs);
+        byte calculatedHCS = CRC.crc8(headerBytes);
+        buf.put(calculatedHCS);
 
-        // Добавляем данные сервиса
-        if (sfrd.length > 0) {
+        if (frameDataLength > 0) {
             buf.put(sfrd);
             short crc16 = CRC.crc16(sfrd);
             buf.putShort(crc16);
@@ -164,25 +100,87 @@ public class EgtsPackage implements BinaryData {
         return result;
     }
 
-    @Override
-    public int length() {
+    public DecodeResult decode(byte[] content, DecodeOptions... options) {
+        var opt = new DecodeOptions(null);
+        if (options.length > 0) opt = options[0];
+
+        SecretKey secretKey = opt.secretKey();
+        ByteBuffer buf = ByteBuffer.wrap(content);
+
         try {
-            return encode().length;
-        } catch (IOException e) {
-            return 0;
+            protocolVersion = buf.get();
+            securityKeyId = buf.get();
+
+            byte flags = buf.get();
+            parseFlags(flags);
+
+            headerLength = buf.get();
+            headerEncoding = buf.get();
+
+            frameDataLength = buf.getShort();
+            packetIdentifier = buf.getShort();
+            packetType = EgtsPacketType.fromCode(buf.get());
+
+            if ("1".equals(route)) {
+                peerAddress = buf.getShort();
+                recipientAddress = buf.getShort();
+                timeToLive = buf.get();
+            }
+
+            int headerEndPos = buf.position();
+            byte[] headerBytes = new byte[headerEndPos];
+            System.arraycopy(content, 0, headerBytes, 0, headerEndPos);
+            headerCheckSum = buf.get();
+            byte calculatedHCS = CRC.crc8(headerBytes);
+            if (headerCheckSum != calculatedHCS) {
+                return new DecodeResult(DecodeResultCode.HEADER_CRC_ERROR, "CRC8 заголовка неверен", this);
+            }
+
+            byte[] dataFrameBytes = new byte[frameDataLength];
+            buf.get(dataFrameBytes);
+
+            boolean isEncrypted = !"00".equals(encryptionAlg);
+            if (isEncrypted) {
+                if (secretKey == null) {
+                    return new DecodeResult(DecodeResultCode.DECRYPTION_ERROR, "Отсутствует ключь шифрования", this);
+                }
+                dataFrameBytes = secretKey.decode(dataFrameBytes);
+            }
+
+            switch (packetType) {
+                case PT_APP_DATA -> servicesFrameData = new ServiceDataSet();
+                case PT_RESPONSE -> servicesFrameData = new PtResponse();
+                default -> {
+                    return new DecodeResult(DecodeResultCode.UNSUPPORTED_PACKET_TYPE, "Неизвестный тип пакета", this);
+                }
+            }
+
+            servicesFrameData.decode(dataFrameBytes);
+
+            servicesFrameDataCheckSum = buf.getShort();
+            short expectedCrc = CRC.crc16(dataFrameBytes);
+            if (servicesFrameDataCheckSum != expectedCrc) {
+                return new DecodeResult(DecodeResultCode.HEADER_CRC_ERROR, "CRC16 тела пакета неверен", this);
+            }
+
+            return new DecodeResult(DecodeResultCode.OK, "Успешно декодировано", this);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-    /**
-     * Парсит флаги из одного байта.
-     */
+    private int parseFlags(String prefix, String route, String enc, String cmp, String pr) {
+        String flagBits = prefix + route + enc + cmp + pr;
+        return Integer.parseInt(flagBits, 2);
+    }
+
     private void parseFlags(byte flagsByte) {
         int flags = Byte.toUnsignedInt(flagsByte);
-
-        prefix = String.format("%02d", (flags >> 6) & 0x03); // PRF
-        route = String.valueOf((flags >> 5) & 0x01);         // RTE
-        encryptionAlg = String.format("%02d", (flags >> 3) & 0x03); // ENA
-        compression = String.valueOf((flags >> 2) & 0x01);   // CMP
-        priority = String.format("%02d", flags & 0x03);     // PR
+        prefix = String.format("%02d", (flags >> 6) & 0x03);
+        route = String.valueOf((flags >> 5) & 0x01);
+        encryptionAlg = String.format("%02d", (flags >> 3) & 0x03);
+        compression = String.valueOf((flags >> 2) & 0x01);
+        priority = String.format("%02d", flags & 0x03);
     }
 }
