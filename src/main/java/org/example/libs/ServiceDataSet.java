@@ -17,7 +17,7 @@ public class ServiceDataSet implements BinaryData {
     }
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         int offset = 0;
 
         while (offset < data.length) {
@@ -59,7 +59,7 @@ public class ServiceDataSet implements BinaryData {
 
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         for (ServiceDataRecord record : records) {
             baos.write(record.encode());
@@ -68,7 +68,7 @@ public class ServiceDataSet implements BinaryData {
     }
 
     @Override
-    public short length() {
+    public int length() {
         try {
             return (short) encode().length;
         } catch (Exception e) {

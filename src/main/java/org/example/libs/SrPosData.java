@@ -3,6 +3,7 @@ package org.example.libs;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ public class SrPosData implements BinaryData {
     private static final LocalDateTime START_DATE = LocalDateTime.of(2010, 1, 1, 0, 0);
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
         long seconds = Integer.toUnsignedLong(buf.getInt());
@@ -79,7 +80,7 @@ public class SrPosData implements BinaryData {
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(1024).order(ByteOrder.LITTLE_ENDIAN);
 
         long seconds = navigationTime.toEpochSecond(ZoneOffset.UTC) - START_DATE.toEpochSecond(ZoneOffset.UTC);
@@ -133,7 +134,7 @@ public class SrPosData implements BinaryData {
     }
 
     @Override
-    public short length() {
+    public int length() {
         try {
             return (short) encode().length;
         } catch (Exception e) {

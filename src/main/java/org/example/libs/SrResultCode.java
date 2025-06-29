@@ -13,7 +13,7 @@ public class SrResultCode implements BinaryData{
     private byte resultCode;
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         if (data == null || data.length < 1) {
             throw new IOException("Данные пустые или недостаточная длина для SrResultCode");
         }
@@ -28,14 +28,14 @@ public class SrResultCode implements BinaryData{
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         baos.write(resultCode);
         return baos.toByteArray();
     }
 
     @Override
-    public short length() {
+    public int length() {
         return 1; // всегда 1 байт
     }
 

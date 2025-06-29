@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class RecordDataSet implements BinaryData {
     }
 
     @Override
-    public void decode(byte[] recDS) throws Exception {
+    public void decode(byte[] recDS) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(recDS).order(ByteOrder.LITTLE_ENDIAN);
 
         while (buf.hasRemaining()) {
@@ -67,7 +68,7 @@ public class RecordDataSet implements BinaryData {
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              DataOutputStream dos = new DataOutputStream(baos)) {
 
@@ -79,7 +80,7 @@ public class RecordDataSet implements BinaryData {
                 }
 
                 if (rd.getSubrecordData() == null) {
-                    throw new Exception("Missing subrecordData for type: " + type);
+                    throw new IOException("Missing subrecordData for type: " + type);
                 }
 
                 byte[] srdBytes = rd.getSubrecordData().encode();
@@ -95,7 +96,7 @@ public class RecordDataSet implements BinaryData {
     }
 
     @Override
-    public short length() {
+    public int length() {
         try {
             return (short) encode().length;
         } catch (Exception e) {
@@ -130,7 +131,7 @@ public class RecordDataSet implements BinaryData {
         };
     }
 
-    private byte detectSubrecordType(BinaryData data) throws Exception {
+    private byte detectSubrecordType(BinaryData data) throws IOException {
         if (data instanceof SrPosData) return SrPosDataType;
         if (data instanceof SrTermIdentity) return SrTermIdentityType;
         if (data instanceof SrResponse) return SrRecordResponseType;
@@ -146,7 +147,7 @@ public class RecordDataSet implements BinaryData {
         if (data instanceof SrAbsAnSensData) return SrAbsAnSensDataType;
         if (data instanceof SrDispatcherIdentity) return SrDispatcherIdentityType;
         if (data instanceof SrPassengersCountersData) return SrPassengersCountersType;
-        throw new Exception("Unknown subrecord type for class: " + data.getClass().getSimpleName());
+        throw new IOException("Unknown subrecord type for class: " + data.getClass().getSimpleName());
     }
 
     // ======================

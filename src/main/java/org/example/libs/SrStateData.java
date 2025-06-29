@@ -21,7 +21,7 @@ public class SrStateData implements BinaryData{
     private String BBU = "0";
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         if (data == null || data.length < 5) {
             throw new IOException("Недостаточно данных для SrStateData");
         }
@@ -45,7 +45,7 @@ public class SrStateData implements BinaryData{
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         baos.write(state);
@@ -66,7 +66,7 @@ public class SrStateData implements BinaryData{
     }
 
     @Override
-    public short length() {
+    public int length() {
         return 5; // Всегда 5 байт (4 поля по 1 + 1 байт флагов)
     }
 

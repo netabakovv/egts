@@ -1,24 +1,26 @@
 package org.example.libs;
 
+import java.io.IOException;
+
 public interface BinaryData {
     /**
      * Декодирует бинарные данные
      * @param data входные бинарные данные
-     * @throws Exception в случае ошибки декодирования
+     * @throws IOException в случае ошибки декодирования
      */
-    void decode(byte[] data) throws Exception;
+    void decode(byte[] data) throws IOException;
 
     /**
      * Кодирует данные в бинарный формат
      * @return закодированные бинарные данные
-     * @throws Exception в случае ошибки кодирования
+     * @throws IOException в случае ошибки кодирования
      */
-    byte[] encode() throws Exception;
+    byte[] encode() throws IOException;
 
     /**
      * Возвращает длину данных в байтах
      * @return длина данных
      */
-    short length();
+    int length();
 }
 

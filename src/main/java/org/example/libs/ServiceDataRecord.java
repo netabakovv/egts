@@ -36,7 +36,7 @@ public class ServiceDataRecord implements BinaryData {
     private RecordDataSet recordDataSet;
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
         recordLength = buf.getShort();
@@ -80,7 +80,7 @@ public class ServiceDataRecord implements BinaryData {
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              DataOutputStream dos = new DataOutputStream(baos)) {
 
@@ -121,7 +121,7 @@ public class ServiceDataRecord implements BinaryData {
     }
 
     @Override
-    public short length() {
+    public int length() {
         try {
             return (short) encode().length;
         } catch (Exception e) {

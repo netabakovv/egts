@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class SrTermIdentity implements BinaryData {
     private String mobileNumber;
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
         terminalIdentifier = Integer.toUnsignedLong(buf.getInt());
@@ -85,7 +86,7 @@ public class SrTermIdentity implements BinaryData {
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
 
         ByteBuffer buf = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
@@ -143,7 +144,7 @@ public class SrTermIdentity implements BinaryData {
     }
 
     @Override
-    public short length() {
+    public int length() {
         try {
             return (short) encode().length;
         } catch (Exception e) {

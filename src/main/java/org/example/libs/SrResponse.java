@@ -14,7 +14,7 @@ public class SrResponse implements BinaryData{
     private short recordStatus; // uint8
 
     @Override
-    public void decode(byte[] data) throws Exception {
+    public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
         if (data.length < 3) {
@@ -35,7 +35,7 @@ public class SrResponse implements BinaryData{
     }
 
     @Override
-    public byte[] encode() throws Exception {
+    public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(3).order(ByteOrder.LITTLE_ENDIAN);
 
         buf.putShort((short) confirmedRecordNumber);
@@ -45,7 +45,7 @@ public class SrResponse implements BinaryData{
     }
 
     @Override
-    public short length() {
+    public int length() {
         return 3;
     }
 }
