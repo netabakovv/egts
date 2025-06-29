@@ -1,146 +1,212 @@
 package org.example.libs;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import java.util.BitSet;
 
-// SrCountersData структура подзаписи типа EGTS_SR_COUNTERS_DATA, которая используется аппаратно-программным
-// комплексом для передачи на абонентский терминал данных о значении счетных входов
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SrCountersData {
-    public String CounterFieldExists1;
-    public String CounterFieldExists2;
-    public String CounterFieldExists3;
-    public String CounterFieldExists4;
-    public String CounterFieldExists5;
-    public String CounterFieldExists6;
-    public String CounterFieldExists7;
-    public String CounterFieldExists8;
+    private String counterFieldExists1 = "0";
+    private String counterFieldExists2 = "0";
+    private String counterFieldExists3 = "0";
+    private String counterFieldExists4 = "0";
+    private String counterFieldExists5 = "0";
+    private String counterFieldExists6 = "0";
+    private String counterFieldExists7 = "0";
+    private String counterFieldExists8 = "0";
 
-    public long Counter1;
-    public long Counter2;
-    public long Counter3;
-    public long Counter4;
-    public long Counter5;
-    public long Counter6;
-    public long Counter7;
-    public long Counter8;
+    private long counter1;
+    private long counter2;
+    private long counter3;
+    private long counter4;
+    private long counter5;
+    private long counter6;
+    private long counter7;
+    private long counter8;
 
-    // decode разбирает байты в структуру подзаписи
-    public void decode(byte[] content) throws IOException {
-        ByteArrayInputStream buf = new ByteArrayInputStream(content);
+    /**
+     * Декодирует байты в структуру SrCountersData.
+     */
+    public void decode(byte[] content) throws Exception {
+        if (content == null || content.length < 1) {
+            throw new IllegalArgumentException("Недостаточно данных для декодирования.");
+        }
 
-        int flags = buf.read();
-        if (flags == -1) {
-            throw new IOException("Не удалось получить байт цифровых выходов sr_counters_data");
-        }
-        String flagBits = String.format("%8s", Integer.toBinaryString(flags & 0xFF)).replace(' ', '0');
+        ByteBuffer buffer = ByteBuffer.wrap(content);
 
-        CounterFieldExists8 = flagBits.substring(0, 1);
-        CounterFieldExists7 = flagBits.substring(1, 2);
-        CounterFieldExists6 = flagBits.substring(2, 3);
-        CounterFieldExists5 = flagBits.substring(3, 4);
-        CounterFieldExists4 = flagBits.substring(4, 5);
-        CounterFieldExists3 = flagBits.substring(5, 6);
-        CounterFieldExists2 = flagBits.substring(6, 7);
-        CounterFieldExists1 = flagBits.substring(7);
+        byte flags = buffer.get();
+        BitSet flagBits = BitSet.valueOf(new byte[]{flags});
 
-        byte[] tmpBuf = new byte[3];
-        byte[] counterVal;
+        this.counterFieldExists8 = flagBits.get(0) ? "1" : "0";
+        this.counterFieldExists7 = flagBits.get(1) ? "1" : "0";
+        this.counterFieldExists6 = flagBits.get(2) ? "1" : "0";
+        this.counterFieldExists5 = flagBits.get(3) ? "1" : "0";
+        this.counterFieldExists4 = flagBits.get(4) ? "1" : "0";
+        this.counterFieldExists3 = flagBits.get(5) ? "1" : "0";
+        this.counterFieldExists2 = flagBits.get(6) ? "1" : "0";
+        this.counterFieldExists1 = flagBits.get(7) ? "1" : "0";
 
-        if (CounterFieldExists1.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN1");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter1 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+        if ("1".equals(counterFieldExists1)) {
+            this.counter1 = readCounter(buffer);
         }
-        if (CounterFieldExists2.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN2");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter2 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists2)) {
+            this.counter2 = readCounter(buffer);
         }
-        if (CounterFieldExists3.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN3");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter3 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists3)) {
+            this.counter3 = readCounter(buffer);
         }
-        if (CounterFieldExists4.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN4");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter4 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists4)) {
+            this.counter4 = readCounter(buffer);
         }
-        if (CounterFieldExists5.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN5");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter5 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists5)) {
+            this.counter5 = readCounter(buffer);
         }
-        if (CounterFieldExists6.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN6");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter6 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists6)) {
+            this.counter6 = readCounter(buffer);
         }
-        if (CounterFieldExists7.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN7");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter7 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists7)) {
+            this.counter7 = readCounter(buffer);
         }
-        if (CounterFieldExists8.equals("1")) {
-            if (buf.read(tmpBuf) != 3) throw new IOException("Не удалось получить показания CN8");
-            counterVal = new byte[]{tmpBuf[0], tmpBuf[1], tmpBuf[2], 0};
-            Counter8 = ByteBuffer.wrap(counterVal).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+
+        if ("1".equals(counterFieldExists8)) {
+            this.counter8 = readCounter(buffer);
         }
     }
 
-    // encode преобразовывает подзапись в набор байт
-    public byte[] encode() throws IOException {
-        ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        String flagsBits = CounterFieldExists8 + CounterFieldExists7 + CounterFieldExists6 + CounterFieldExists5 +
-                CounterFieldExists4 + CounterFieldExists3 + CounterFieldExists2 + CounterFieldExists1;
-        int flags = Integer.parseInt(flagsBits, 2);
-        buf.write(flags);
-
-        ByteBuffer sensVal = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-
-        if (CounterFieldExists1.equals("1")) {
-            sensVal.putInt(0, (int) Counter1);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists2.equals("1")) {
-            sensVal.putInt(0, (int) Counter2);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists3.equals("1")) {
-            sensVal.putInt(0, (int) Counter3);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists4.equals("1")) {
-            sensVal.putInt(0, (int) Counter4);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists5.equals("1")) {
-            sensVal.putInt(0, (int) Counter5);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists6.equals("1")) {
-            sensVal.putInt(0, (int) Counter6);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists7.equals("1")) {
-            sensVal.putInt(0, (int) Counter7);
-            buf.write(sensVal.array(), 0, 3);
-        }
-        if (CounterFieldExists8.equals("1")) {
-            sensVal.putInt(0, (int) Counter8);
-            buf.write(sensVal.array(), 0, 3);
+    private long readCounter(ByteBuffer buffer) throws Exception {
+        if (buffer.remaining() < 3) {
+            throw new IllegalArgumentException("Недостаточно данных для чтения 3 байт счетчика.");
         }
 
-        return buf.toByteArray();
+        byte[] bytes = new byte[3];
+        buffer.get(bytes);
+
+        // Добавляем нулевой байт в конец для получения uint32
+        byte[] full = new byte[4];
+        System.arraycopy(bytes, 0, full, 0, 3);
+        return ByteBuffer.wrap(full).order(java.nio.ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
     }
 
+    /**
+     * Кодирует структуру в массив байт.
+     */
+    public byte[] encode() throws Exception {
+        StringBuilder flagBuilder = new StringBuilder();
+        flagBuilder.append(counterFieldExists8)
+                .append(counterFieldExists7)
+                .append(counterFieldExists6)
+                .append(counterFieldExists5)
+                .append(counterFieldExists4)
+                .append(counterFieldExists3)
+                .append(counterFieldExists2)
+                .append(counterFieldExists1);
+
+        String flagStr = flagBuilder.toString();
+
+        if (flagStr.length() != 8) {
+            throw new IllegalArgumentException("Флаг должен быть длиной 8 символов");
+        }
+
+        for (int i = 0; i < flagStr.length(); i++) {
+            char c = flagStr.charAt(i);
+            if (c != '0' && c != '1') {
+                throw new IllegalArgumentException("Флаг содержит недопустимый символ на позиции " + i + ": '" + c + "'");
+            }
+        }
+
+        int flags;
+        try {
+            flags = Integer.parseInt(flagStr, 2);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Не удалось преобразовать флаг в число", e);
+        }
+
+        ByteBuffer buffer = ByteBuffer.allocate(1 + 3 * countEnabledFlags(flagStr));
+
+        buffer.put((byte) flags);
+
+        if ("1".equals(counterFieldExists1)) {
+            buffer.put(encodeCounter(counter1));
+        }
+
+        if ("1".equals(counterFieldExists2)) {
+            buffer.put(encodeCounter(counter2));
+        }
+
+        if ("1".equals(counterFieldExists3)) {
+            buffer.put(encodeCounter(counter3));
+        }
+
+        if ("1".equals(counterFieldExists4)) {
+            buffer.put(encodeCounter(counter4));
+        }
+
+        if ("1".equals(counterFieldExists5)) {
+            buffer.put(encodeCounter(counter5));
+        }
+
+        if ("1".equals(counterFieldExists6)) {
+            buffer.put(encodeCounter(counter6));
+        }
+
+        if ("1".equals(counterFieldExists7)) {
+            buffer.put(encodeCounter(counter7));
+        }
+
+        if ("1".equals(counterFieldExists8)) {
+            buffer.put(encodeCounter(counter8));
+        }
+
+        byte[] result = new byte[buffer.position()];
+        buffer.rewind();
+        buffer.get(result);
+
+        return result;
+    }
+
+    private int countEnabledFlags(String flagStr) {
+        int count = 0;
+        for (int i = 0; i < flagStr.length(); i++) {
+            if (flagStr.charAt(i) == '1') count++;
+        }
+        return count;
+    }
+
+    private byte[] encodeCounter(long value) {
+        if (value < 0 || value > 0xFFFFFFFFL) {
+            throw new IllegalArgumentException("Значение вне диапазона uint32: " + value);
+        }
+
+        byte[] full = ByteBuffer.allocate(4)
+                .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                .putInt((int) value)
+                .array();
+
+        byte[] threeBytes = new byte[3];
+        System.arraycopy(full, 0, threeBytes, 0, 3);
+        return threeBytes;
+    }
+
+    /**
+     * Возвращает длину закодированной подзаписи.
+     */
     public int length() {
         try {
             return encode().length;
-        } catch (IOException e) {
+        } catch (Exception e) {
             return 0;
         }
     }
