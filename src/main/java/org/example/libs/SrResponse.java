@@ -24,9 +24,14 @@ public class SrResponse implements BinaryData{
         confirmedRecordNumber = Short.toUnsignedInt(buf.getShort());
         recordStatus = (short) Byte.toUnsignedInt(buf.get());
 
-        // TODO: возможно пихнуть ServiceDataSet
-        // Пропускаем декодирование ServiceDataSet, т.к. его нет в структуре SrResponse в Java
-        // В оригинале это Go-ошибка (некорректный вызов sfd.Decode на оставшихся байтах)
+        if (buf.remaining() > 0) {
+            byte[] remaining = new byte[buf.remaining()];
+            buf.get(remaining);
+
+            ServiceDataSet dataSet = new ServiceDataSet();
+            dataSet.decode(remaining);
+            // TODO: сохранить, если надо — например, this.serviceDataSet = dataSet;
+        }
     }
 
     @Override

@@ -147,6 +147,7 @@ public class SrTermIdentity implements BinaryData {
         try {
             return (short) encode().length;
         } catch (Exception e) {
+            // e.printStackTrace();
             return 0;
         }
     }

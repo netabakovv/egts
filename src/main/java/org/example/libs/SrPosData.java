@@ -80,7 +80,7 @@ public class SrPosData implements BinaryData {
 
     @Override
     public byte[] encode() throws Exception {
-        ByteBuffer buf = ByteBuffer.allocate(32).order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buf = ByteBuffer.allocate(1024).order(ByteOrder.LITTLE_ENDIAN);
 
         long seconds = navigationTime.toEpochSecond(ZoneOffset.UTC) - START_DATE.toEpochSecond(ZoneOffset.UTC);
         buf.putInt((int) seconds);
@@ -107,7 +107,7 @@ public class SrPosData implements BinaryData {
         spdEnc |= (dirHiBit & 1) << 15;
         buf.putShort((short) spdEnc);
 
-        buf.put((byte) (direction & 0x7F)); // только младшие 7 бит
+        buf.put(direction);
 
         int odo = (int) odometer;
         buf.put((byte) (odo & 0xFF));
@@ -128,6 +128,8 @@ public class SrPosData implements BinaryData {
         buf.flip();
         buf.get(result);
         return result;
+
+        /* TODO: разобраться с кодировкой высоты */
     }
 
     @Override
