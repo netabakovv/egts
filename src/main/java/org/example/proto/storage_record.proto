@@ -1,0 +1,241 @@
+syntax = "proto3";
+
+option java_package = "org.example.libs";
+option java_multiple_files = true;
+
+// Причина формирования отметки
+message StorageRecord {
+  enum Reason {
+    DEVICE_RESET = 0;
+    PROFILE_CHANGE = 1;
+    IGNITION_ON = 2;
+    IGNITION_OFF = 3;
+    TRIP_BEGIN = 4;
+    TRIP_END = 5;
+    STOP = 6;
+    MOVE = 7;
+    TOWING_BEGIN = 8;
+    TOWING_END = 9;
+    TIMER_MOVE = 10;
+    TIMER_STOP = 11;
+    ANGLE = 12;
+    DISTANCE = 13;
+    SOS_BUTTON = 14;
+    SERVICE_BUTTON = 15;
+    TAMPER = 16;
+    ANTENNA_SWITCH = 17;
+    GSM_LOST = 18;
+    GSM_RECONNECT = 19;
+    GNSS_LOST = 20;
+    GNSS_REAQUISITION = 21;
+    JAMMER_GSM = 22;
+    JAMMER_GNSS = 23;
+    OVER_SPEED = 24;
+    OVER_RPM = 25;
+    OVER_TEMPERATURE = 26;
+    DANGEROUS_DRIVING = 27;
+    ACCIDENT = 28;
+    OVERTHROW = 29;
+    ON_BATTERY = 30;
+    BATTERY_DISCHARGE = 31;
+    RADIO_TAG_REG = 32;
+    RADIO_TAG_UNREG = 33;
+    MOVE_WITHOUT_RADIO_TAG = 34;
+    ECU_ERROR_CODE = 35;
+    EXTERNAL_REQUEST = 36;
+    DEVICE_TEST = 37;
+    OTHER_REASON = 99;
+  }
+
+  uint32 record_number = 1; // Номер записи
+  fixed32 time_stamp = 2;   // Время отметки
+  repeated Reason record_reason = 3; // Причины формирования отметки
+  fixed32 status_flags = 4; // Статусные флаги
+
+  repeated SensAccelerometerData sens_accelerometer_data = 18; // Датчик ускорения
+  repeated SensAinAinValue sens_ain_ain_value = 9;            // Аналоговый вход
+  repeated SensBufferData sens_buffer_data = 20;              // Буферизованные данные
+  repeated SensButtonPressCounter sens_button_press_counter = 14; // Кнопка
+  repeated SensCanLogData sens_can_log_data = 16;            // CAN-лог
+  repeated SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17; // Расширение CAN-лога
+  repeated SensCounterCount sens_counter_count = 11;         // Счётчик
+  repeated SensCrashData sens_crash_data = 24;              // Данные об аварии
+  repeated SensDinsFlags sens_dins_flags = 10;              // Цифровые входы
+  repeated SensDoutsFlags sens_douts_flags = 19;            // Цифровые выходы
+  repeated SensFmeterFrequency sens_fmeter_frequency = 12;  // Частотомер
+  repeated SensFuelLevel sens_fuel_level = 8;               // Уровень топлива
+  repeated SensGsmCellMonitoring sens_gsm_cell_monitoring = 13; // Информация о базовых станциях GSM
+  repeated SensNdNavData sens_nd_nav_data = 7;              // Навигационные данные
+  repeated SensStorInfo sens_stor_info = 21;                // Статистика хранилище навигационных данных
+  repeated SensTermoData sens_termo_data = 15;              // Датчик температуры
+  repeated SensTestEraTests sens_test_era_tests = 23;       // Тесты ЭРА ГЛОНАСС
+  repeated SensTrackerInfo sens_tracker_info = 22;          // Статистика трекера
+}
+
+// Данные акселерометра
+message SensAccelerometerData {
+  uint32 sens_num = 1;     // Номер датчика
+  bytes buf = 2;           // Буфер с данными
+  uint32 atm = 3;          // UTC время формирования первой отметки в буфере
+  uint32 frequency = 4;    // Частота следования отметок в ГЦ деленная на 10
+  uint32 range = 5;        // Диапазон измерений акселерометра умноженный на 10
+  uint32 format = 6;       // Тип кодирования отметок (0 - 8-ми битовые значения со знаком,
+  // 1 - 16-ти битовые значения со знаком, 2 - 32-х битовые значения со знаком, 3 - в формате ASN1 PER )
+  uint32 zlib = 7;         // Битовый флаг использования архиватора данных
+}
+
+// Аналоговый вход
+message SensAinAinValue {
+  uint32 sens_num = 1;     // Номер датчика
+  uint32 mv = 2;           // Значение в милливольтах
+}
+
+// Буферизованные данные
+message SensBufferData {
+  uint32 sens_num = 1;     // Номер датчика
+  bytes data = 2;          // Данные
+  bool is_packed = 3;      // Данные запакованы
+}
+
+// Состояние кнопки
+message SensButtonPressCounter {
+  uint32 sens_num = 1;     // Номер датчика
+  bool state = 2;          // Состояние кнопки
+}
+
+// CAN-лог
+message SensCanLogData {
+  uint32 sens_num = 1;     // Номер датчика
+  uint32 flag_security_state = 2; // Флаги работоспособности и безопасности устройства
+  uint32 flag_alarm = 3;   // Флаги контроллеров аварии
+  uint32 engine_time_all = 4;     // Полное время работы двигателя, ч*100. Пример: 1ч 15мин = 125.
+  uint32 engine_turn_speed = 5;   // Обороты двигателя
+  sint32 engine_temperature = 6;  // Температура двигателя, Ц.
+  uint32 fuel_consumption_all = 7; // Полный расход топлива, л.
+  uint32 fuel_level = 8;   // bit0..bit14 - Уровень топлива. bit15- Единицы измерения. 1 - %, 0 - л.
+  uint32 track_all = 9;    // Полный пробег транспортного средства, км*100
+  uint32 speed = 10;       // Скорость, км/ч.
+  uint32 pressure_axis_1 = 11; // Давление на ось 1, кг*10
+  uint32 pressure_axis_2 = 12; // Давление на ось 2
+  uint32 pressure_axis_3 = 13; // Давление на ось 3
+  uint32 pressure_axis_4 = 14; // Давление на ось 4
+  uint32 pressure_axis_5 = 15; // Давление на ось 5
+}
+
+// Расширение CAN-лога
+message SensCanLogTmpDataExt {
+  uint32 sens_num = 1; // Номер датчика
+  uint32 flags_high = 2; // Флаги механизмов
+  uint32 flags_low = 3; // Флаги механизмов
+}
+
+// Счетчик
+message SensCounterCount {
+  uint32 sens_num = 1; // Номер датчика
+  uint32 value = 2;
+}
+
+// Датчик аварии
+message SensCrashData {
+  uint32 sens_num = 1; // Номер датчика
+  uint32 energy = 2; // Сила удара
+  bool is_overturned = 3; // Признак переворота
+}
+
+// Цифровые входы
+message SensDinsFlags {
+  uint32 sens_num = 1; // Номер датчика
+  uint32 device = 2;  // Входы прибора (каждый бит соответствует своему входу)
+  uint32 external = 3; // Внешние входы (каждый бит соответствует своему входу)
+}
+
+// Цифровые выходы
+message SensDoutsFlags {
+  uint32 sens_num = 1; // Номер датчика
+  uint32 device = 2; // Выходы прибора (каждый бит соответствует своему выходу)
+  uint32 external = 3; // Внешние выходы (каждый бит соответствует своему выходу)
+}
+
+// Частотомер
+message SensFmeterFrequency {
+  uint32 sens_num = 1; // Номер датчика
+  uint32 value = 2;
+}
+
+// Уровень топлива
+message SensFuelLevel {
+  uint32 sens_num = 1; // Номер датчика
+  float value = 2; // Значение датчика
+  uint32 parrots = 3; // Значение датчика в условных единицах
+  uint32  unit    = 4;  // Единица измерения для поля value (1 - литры, 2 - миллилитры)
+  uint32  t       = 5;  // Температура датчика
+  uint32  status  = 6;  // Статус датчика
+
+}
+
+// Информация о базовых станциях GSM
+message SensGsmCellMonitoring {
+  uint32 sens_num = 1; // Номер датчика
+  bytes   lac      = 4;  // Код локальной зоны
+  bytes   cid      = 5;  // Идентификатор соты
+  bytes   rssi     = 6;  // Уровень принимаемого по данному каналу радиосигнала на входе в приёмник телефона
+  bytes   time_adv = 7;  // Параметр компенсации времени прохождения сигнала от телефона до БС
+  uint32  mcc      = 2;  // Код страны
+  uint32  mnc      = 3;  // Код сотовой сети
+}
+
+// Навигационные данные
+message SensNdNavData {
+  uint32 sens_num = 1;     // Номер датчика
+  sfixed32  longitude = 2;  // Долгота (в формате МНД ЭРА ГЛОНАСС)
+  sfixed32  latitude  = 3;  // Широта (в формате МНД ЭРА ГЛОНАСС)
+  uint32    altitude  = 4;  // Высота, м
+  uint32    speed     = 5;  // Скорость, км/ч
+  uint32    course    = 6;  // Курс (угол)
+  uint32    sat_count = 7;  // Количество спутников
+  uint32    pdop      = 8;  // Погрешность позиционирования
+  uint32    track     = 9;  // Трэк, м
+  uint32    odometer  = 10;  // Одометр, м
+}
+
+// Статистика хранилища
+message SensStorInfo {
+  uint32 sens_num = 1; // Номер датчика
+  uint32  id_max           = 2;  // Идентификатор самой новой отметки
+  uint32  id_min           = 3;  // Идентификатор самой старой отметки
+  uint32  tm_oldest        = 4;  // Время создания самой старой отметки
+  uint32  tm_oldest_unack  = 5;  // Время создания самой старой отметки, которая не подтверждена
+  uint32  cnt_unack        = 6;  // Количество неподтвержденных отметок
+  uint32  cnt_unack_losted = 7;  // Количество потерянных неподтвержденных отметок
+}
+
+// Датчик температуры
+message SensTermoData {
+  uint32 sens_num = 1; // Номер датчика
+  uint32  status      = 2;  // Статус датчика (0 - исправен, 1 - нет ответа, 2 - неисправность)
+  sint32  temperature = 3;  // Температура
+}
+
+// Тесты ЭРА ГЛОНАСС
+message SensTestEraTests {
+  uint32 sens_num = 1; // Номер датчика
+  bool  mic_con_failure        = 2;  // Некорректное подключение микрофона
+  bool  mic_failure            = 3;  // Неработоспособность микрофона
+  bool  ignition_failure       = 4;  // Неисправность при определении состояния линии зажигания
+  bool  uim_failure            = 5;  // Неисправность БИП
+  bool  bat_failure            = 6;  // Неисправность резервной батареи
+  bool  bat_volt_low           = 7;  // Разряд резервной батарее ниже допустимого уровня
+  bool  crash_sens_failure     = 8;  // Неисправность датчика автоматической идентификации события ДТП
+  bool  raim_problem           = 9;  // Отсутствие целостности (достоверности) определяемых приемником ГНСС навигационно-временных параметров (функция RAIM)
+  bool  gnss_antenna_failure   = 10;  // Неработоспособность приемника ГНСС
+  bool  events_memory_overflow = 11;  // Переполнение внутренней памяти событий
+}
+
+// Статистика трекера
+message SensTrackerInfo {
+  uint32 sens_num = 1; // Номер датчика
+  uint32  cnt_ack          = 2;  // Количество подтвержденных отметок
+  uint32  cnt_ack_realtime = 3;  // Количество подтвержденных отметок в качестве realtime
+  uint32  cnt_noack        = 4;  // Количество отметок, которых не получилось отправить
+  uint32  cnt_connect      = 5;  // Количество соединений с сервером
+}

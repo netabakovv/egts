@@ -26,6 +26,12 @@
             <artifactId>picocli</artifactId>
             <version>4.7.7</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>4.28.2</version>
+        </dependency>
     </dependencies>
 
 </project>
