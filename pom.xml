@@ -20,6 +20,12 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/info.picocli/picocli -->
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>4.7.7</version>
+        </dependency>
     </dependencies>
 
 </project>

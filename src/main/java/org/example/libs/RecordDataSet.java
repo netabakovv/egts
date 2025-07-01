@@ -124,7 +124,7 @@ public class RecordDataSet implements BinaryData {
             case SrAuthInfoType -> new SrAuthInfo();
             case SrCountersDataType -> new SrCountersData();
             case SrEgtsPlusDataType -> new StorageRecord();
-            case SrAbsAnSensDataType -> new SrAbsAnSensData();
+            case SrAbsAnSensDataType -> new SrAbsSensData();
             case SrDispatcherIdentityType -> new SrDispatcherIdentity();
             case SrPassengersCountersType -> new SrPassengersCountersData();
             default -> null;
@@ -144,7 +144,7 @@ public class RecordDataSet implements BinaryData {
         if (data instanceof SrAuthInfo) return SrAuthInfoType;
         if (data instanceof SrCountersData) return SrCountersDataType;
         if (data instanceof StorageRecord) return SrEgtsPlusDataType;
-        if (data instanceof SrAbsAnSensData) return SrAbsAnSensDataType;
+        if (data instanceof SrAbsSensData) return SrAbsAnSensDataType;
         if (data instanceof SrDispatcherIdentity) return SrDispatcherIdentityType;
         if (data instanceof SrPassengersCountersData) return SrPassengersCountersType;
         throw new IOException("Unknown subrecord type for class: " + data.getClass().getSimpleName());
