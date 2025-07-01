@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -17,7 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrPassengersCountersData {
+public class SrPassengersCountersData implements BinaryData{
     private String rawDataFlag = "0";               // RawDataFlag — бит 0 флага
     private String doorsPresented = "00000000";     // Doors Presented — байт
     private String doorsReleased = "00000000";      // Doors Released — байт
@@ -28,7 +29,8 @@ public class SrPassengersCountersData {
     /**
      * Декодирует байты в структуру SrPassengersCountersData.
      */
-    public void decode(byte[] content) throws Exception {
+    @Override
+    public void decode(byte[] content) throws IOException{
         if (content == null || content.length < 5) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrPassengersCountersData");
         }
@@ -82,7 +84,8 @@ public class SrPassengersCountersData {
     /**
      * Кодирует структуру в массив байт.
      */
-    public byte[] encode() throws Exception {
+    @Override
+    public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(1024); // достаточно большой буфер
 
         // Флаги
@@ -141,6 +144,7 @@ public class SrPassengersCountersData {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;

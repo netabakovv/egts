@@ -5,13 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.BitSet;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrExtPosData {
+public class SrExtPosData implements BinaryData{
     private String navigationSystemFieldExists = "0"; // NSFE
     private String satellitesFieldExists = "0";       // SFE
     private String pdopFieldExists = "0";             // PFE
@@ -27,7 +28,8 @@ public class SrExtPosData {
     /**
      * Декодирует байты в структуру SrExtPosData.
      */
-    public void decode(byte[] content) throws Exception {
+    @Override
+    public void decode(byte[] content) throws IOException{
         if (content == null || content.length < 1) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrExtPosData");
         }
@@ -88,7 +90,8 @@ public class SrExtPosData {
     /**
      * Кодирует структуру в массив байт.
      */
-    public byte[] encode() throws Exception {
+    @Override
+    public byte[] encode() throws IOException {
         StringBuilder flagBuilder = new StringBuilder();
         flagBuilder.append('0') // биты 0-2 — зарезервированы
                 .append('0')
@@ -161,6 +164,7 @@ public class SrExtPosData {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;

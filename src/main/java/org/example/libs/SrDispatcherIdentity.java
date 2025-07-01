@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrDispatcherIdentity {
+public class SrDispatcherIdentity implements BinaryData{
     private byte dispatcherType; // DT (Dispatcher Type)
     private int dispatcherID;    // DID (Dispatcher ID)
     private String description;  // DSCR (Description)
@@ -18,7 +19,8 @@ public class SrDispatcherIdentity {
     /**
      * Декодирует байты в структуру SrDispatcherIdentity.
      */
-    public void decode(byte[] content) throws Exception {
+    @Override
+    public void decode(byte[] content) throws IOException{
         if (content == null || content.length < 5) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrDispatcherIdentity");
         }
@@ -48,7 +50,8 @@ public class SrDispatcherIdentity {
     /**
      * Кодирует структуру в массив байт.
      */
-    public byte[] encode() throws Exception {
+    @Override
+    public byte[] encode() throws IOException {
         byte[] descBytes = description != null ? description.getBytes() : new byte[0];
 
         ByteBuffer buf = ByteBuffer.allocate(1 + 4 + descBytes.length);
@@ -69,6 +72,7 @@ public class SrDispatcherIdentity {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;

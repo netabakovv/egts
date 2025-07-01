@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.BitSet;
 
@@ -12,7 +13,7 @@ import java.util.BitSet;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrCountersData {
+public class SrCountersData implements BinaryData {
     private String counterFieldExists1 = "0";
     private String counterFieldExists2 = "0";
     private String counterFieldExists3 = "0";
@@ -34,7 +35,8 @@ public class SrCountersData {
     /**
      * Декодирует байты в структуру SrCountersData.
      */
-    public void decode(byte[] content) throws Exception {
+    @Override
+    public void decode(byte[] content) throws IOException {
         if (content == null || content.length < 1) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования.");
         }
@@ -86,7 +88,7 @@ public class SrCountersData {
         }
     }
 
-    private long readCounter(ByteBuffer buffer) throws Exception {
+    private long readCounter(ByteBuffer buffer) throws IOException {
         if (buffer.remaining() < 3) {
             throw new IllegalArgumentException("Недостаточно данных для чтения 3 байт счетчика.");
         }
@@ -103,7 +105,8 @@ public class SrCountersData {
     /**
      * Кодирует структуру в массив байт.
      */
-    public byte[] encode() throws Exception {
+    @Override
+    public byte[] encode() throws IOException{
         StringBuilder flagBuilder = new StringBuilder();
         flagBuilder.append(counterFieldExists8)
                 .append(counterFieldExists7)
@@ -203,6 +206,7 @@ public class SrCountersData {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;

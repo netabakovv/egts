@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
@@ -16,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrModuleData {
+public class SrModuleData implements BinaryData{
     private byte moduleType;        // MT — Module Type
     private int vendorID;           // VID — Vendor Identifier
     private short firmwareVersion;  // FWV — Firmware Version
@@ -32,7 +33,8 @@ public class SrModuleData {
     /**
      * Декодирует байты в структуру SrModuleData.
      */
-    public void decode(byte[] content) throws Exception {
+    @Override
+    public void decode(byte[] content) throws IOException{
         if (content == null || content.length < 14) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrModuleData");
         }
@@ -72,7 +74,8 @@ public class SrModuleData {
     /**
      * Кодирует структуру в массив байт.
      */
-    public byte[] encode() throws Exception {
+    @Override
+    public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(calculateEncodedLength());
 
         buf.put(moduleType);
@@ -120,6 +123,7 @@ public class SrModuleData {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.BitSet;
 
@@ -15,7 +16,7 @@ import java.util.BitSet;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrLiquidLevelSensor {
+public class SrLiquidLevelSensor implements BinaryData{
     // Битовые флаги (биты 7-0 в первом байте)
     @ToString.Exclude
     private String liquidLevelSensorErrorFlag = "0"; // LLSEF — Bit 6
@@ -33,7 +34,8 @@ public class SrLiquidLevelSensor {
     /**
      * Декодирует байты в структуру SrLiquidLevelSensor.
      */
-    public void decode(byte[] content) throws Exception {
+    @Override
+    public void decode(byte[] content) throws IOException{
         if (content == null || content.length < 7) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrLiquidLevelSensor");
         }
@@ -75,7 +77,8 @@ public class SrLiquidLevelSensor {
     /**
      * Кодирует структуру в массив байт.
      */
-    public byte[] encode() throws Exception {
+    @Override
+    public byte[] encode() throws IOException {
         StringBuilder flagBuilder = new StringBuilder();
         flagBuilder.append('0') // Бит 7 — зарезервирован
                 .append(liquidLevelSensorErrorFlag)
@@ -130,6 +133,7 @@ public class SrLiquidLevelSensor {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;
