@@ -15,7 +15,7 @@ import java.util.BitSet;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrLiquidLevelSensor {
+public class SrLiquidLevelSensor implements BinaryData {
     // Битовые флаги (биты 7-0 в первом байте)
     @ToString.Exclude
     private String liquidLevelSensorErrorFlag = "0"; // LLSEF — Bit 6
@@ -33,6 +33,7 @@ public class SrLiquidLevelSensor {
     /**
      * Декодирует байты в структуру SrLiquidLevelSensor.
      */
+    @Override
     public void decode(byte[] content) throws Exception {
         if (content == null || content.length < 7) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrLiquidLevelSensor");
@@ -75,6 +76,7 @@ public class SrLiquidLevelSensor {
     /**
      * Кодирует структуру в массив байт.
      */
+    @Override
     public byte[] encode() throws Exception {
         StringBuilder flagBuilder = new StringBuilder();
         flagBuilder.append('0') // Бит 7 — зарезервирован
@@ -130,6 +132,7 @@ public class SrLiquidLevelSensor {
     /**
      * Возвращает длину закодированной подзаписи.
      */
+    @Override
     public int length() {
         try {
             return encode().length;

@@ -1,11 +1,13 @@
 package org.example.libs;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
 @Getter
+@Setter
 public class EgtsPackage {
     private byte protocolVersion;           // Версия протокола
     private byte securityKeyId;             // Идентификатор ключа безопасности
