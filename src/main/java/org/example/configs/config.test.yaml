@@ -1,0 +1,41 @@
+host: "127.0.0.1"
+port: "7000"
+con_live_sec: 10
+log_level: "DEBUG"
+
+storage:
+  postgresql:
+    host: "localhost"
+    port: "5432"
+    user: "egts"
+    password: "egts"
+    database: "receiver"
+    table: "points"
+    sslmode: disable
+  redis:
+    server: "localhost:6379"
+    queue: "egts"
+    password: ""
+    db: "0"
+  mysql:
+    uri: "egts:egts@/receiver"
+    table: "points"
+#  rabbitmq:
+#    host: "localhost"
+#    port: "5672"
+#    user: "guest"
+#    password: "guest"
+#    exchange: "receiver"
+#  nats:
+#    plugin: "nats.so"
+#    servers: "nats://localhost:1222, nats://localhost:1223, nats://localhost:1224"
+#    topic: "receiver"
+#  tarantool_queue:
+#    host: "localhost"
+#    port: "5672"
+#    user: "user"
+#    password: "pass"
+#    max_recons: 5
+#    timeout: 1
+#    reconnect: 1
+#    queue: "points"
