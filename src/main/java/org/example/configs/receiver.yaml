@@ -26,6 +26,12 @@ storage:
     user: "guest"
     password: "guest"
     exchange: "receiver"
+  clickhouse:
+    host: "localhost"
+    port: "8123"
+    database: "receiver"
+    user: "default"
+    password: ""
 #  nats:
 #    plugin: "nats.so"
 #    servers: "nats://localhost:1222, nats://localhost:1223, nats://localhost:1224"
