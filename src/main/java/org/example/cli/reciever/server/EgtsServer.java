@@ -11,6 +11,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,14 +32,21 @@ public class EgtsServer {
     }
 
     public void run() throws IOException {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            logger.info("Сервер запущен на {}:{}", address, port);
+        ServerSocket serverSocket = new ServerSocket(port);
+        logger.info("Сервер запущен на {}:{}", address, port);
 
-            while (!Thread.interrupted()) {
-                Socket socket = serverSocket.accept();
-                logger.info("Подключение от {}", socket.getRemoteSocketAddress());
-                new Thread(new ConnectionHandler(socket, storage)).start();
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        while (!serverSocket.isClosed()) {
+            try {
+                Socket clientSocket = serverSocket.accept();
+                logger.info("Установлено соединение с {}", clientSocket.getRemoteSocketAddress());
+                executor.execute(new ConnectionHandler(clientSocket, storage));
+            } catch (IOException e) {
+                logger.error("Ошибка при подключении клиента", e);
             }
         }
+
+        executor.shutdownNow();
     }
 }
