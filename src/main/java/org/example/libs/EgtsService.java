@@ -1,8 +1,8 @@
 package org.example.libs;
 
 public enum EgtsService implements Codeable {
-    AUTH_SERVICE(1),
-    TELEDATA_SERVICE(2);
+    AUTH_SERVICE((byte) 1),
+    TELEDATA_SERVICE((byte) 2);
 
     private final int code;
 

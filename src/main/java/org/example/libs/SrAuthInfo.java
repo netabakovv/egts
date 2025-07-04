@@ -38,11 +38,15 @@ public class SrAuthInfo implements BinaryData{
     public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(1024);
 
-        putStringWithSeparator(buf, userName);
-        putStringWithSeparator(buf, userPassword);
+        // userName + 0x00
+        putStringWithSeparator(buf, userName, true);
 
+        // userPassword + 0x00
+        putStringWithSeparator(buf, userPassword, true);
+
+        // serverSequence — если есть, то тоже + 0x00
         if (serverSequence != null && !serverSequence.isEmpty()) {
-            putStringWithSeparator(buf, serverSequence);
+            putStringWithSeparator(buf, serverSequence, false); // Нет завершающего 0x00
         }
 
         byte[] result = new byte[buf.position()];
@@ -60,11 +64,13 @@ public class SrAuthInfo implements BinaryData{
         }
     }
 
-    private void putStringWithSeparator(ByteBuffer buf, String str) {
+    private void putStringWithSeparator(ByteBuffer buf, String str, boolean addTrailingSeparator) {
         if (str != null && !str.isEmpty()) {
             byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
             buf.put(bytes);
-            buf.put(SEPARATOR);
+            if (addTrailingSeparator) {
+                buf.put(SEPARATOR);
+            }
         } else {
             buf.put(SEPARATOR);
         }
@@ -72,15 +78,18 @@ public class SrAuthInfo implements BinaryData{
 
     private String readNullTerminatedString(ByteBuffer buf) throws IOException {
         StringBuilder sb = new StringBuilder();
+        boolean found = false;
+
         while (buf.hasRemaining()) {
             byte b = buf.get();
             if (b == SEPARATOR) {
+                found = true;
                 break;
             }
             sb.append((char) b);
         }
 
-        if (!buf.hasRemaining() && sb.isEmpty()) {
+        if (!found && sb.isEmpty()) {
             throw new IOException("Неверный формат строки: отсутствует разделитель или данные");
         }
 
