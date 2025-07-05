@@ -181,10 +181,10 @@ public class EgtsPackage {
 
     private void parseFlags(byte flagsByte) {
         int flags = Byte.toUnsignedInt(flagsByte);
-        prefix = String.format("%02d", (flags >> 6) & 0x03);
+        prefix = String.format("%2s", Integer.toBinaryString((flags >> 6) & 0x03)).replace(' ', '0');
         route = String.valueOf((flags >> 5) & 0x01);
-        encryptionAlg = String.format("%02d", (flags >> 3) & 0x03);
+        encryptionAlg = String.format("%2s", Integer.toBinaryString((flags >> 3) & 0x03)).replace(' ', '0');
         compression = String.valueOf((flags >> 2) & 0x01);
-        priority = String.format("%02d", flags & 0x03);
+        priority = String.format("%2s", Integer.toBinaryString(flags & 0x03)).replace(' ', '0');
     }
 }

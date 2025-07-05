@@ -1,5 +1,6 @@
 package org.example.libs;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,8 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-@Getter
-@Setter
+@Data
 public class SrStateData implements BinaryData{
     private byte state;
     private byte mainPowerSourceVoltage;

@@ -1,5 +1,6 @@
 package org.example.libs;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,29 +8,29 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 
-@Getter
-@Setter
+@Data
 public class SrTermIdentity implements BinaryData {
+
     private long terminalIdentifier;
 
-    private boolean MNE;
-    private boolean BSE;
-    private boolean NIDE;
-    private boolean SSRA;
-    private boolean LNGCE;
-    private boolean IMSIE;
-    private boolean IMEIE;
-    private boolean HDIDE;
+    private String MNE = "0";
+    private String BSE = "0";
+    private String NIDE = "0";
+    private String SSRA = "0";
+    private String LNGCE = "0";
+    private String IMSIE = "0";
+    private String IMEIE = "0";
+    private String HDIDE = "0";
 
     private int homeDispatcherIdentifier;
-    private String IMEI;
-    private String IMSI;
-    private String languageCode;
-    private byte[] networkIdentifier;
+    private String IMEI = "";
+    private String IMSI = "";
+    private String languageCode = "";
+    private byte[] networkIdentifier = new byte[0];
     private int bufferSize;
-    private String mobileNumber;
+    private String mobileNumber = "";
 
     @Override
     public void decode(byte[] data) throws IOException {
@@ -38,50 +39,55 @@ public class SrTermIdentity implements BinaryData {
         terminalIdentifier = Integer.toUnsignedLong(buf.getInt());
 
         byte flags = buf.get();
-        MNE = ((flags >> 7) & 0x01) == 1;
-        BSE = ((flags >> 6) & 0x01) == 1;
-        NIDE = ((flags >> 5) & 0x01) == 1;
-        SSRA = ((flags >> 4) & 0x01) == 1;
-        LNGCE = ((flags >> 3) & 0x01) == 1;
-        IMSIE = ((flags >> 2) & 0x01) == 1;
-        IMEIE = ((flags >> 1) & 0x01) == 1;
-        HDIDE = (flags & 0x01) == 1;
+        String flagBits = String.format("%8s", Integer.toBinaryString(flags & 0xFF)).replace(' ', '0');
 
-        if (HDIDE) {
+        // В Go младший бит последний, в Java так же (читаем слева направо)
+        MNE = flagBits.substring(0, 1);
+        BSE = flagBits.substring(1, 2);
+        NIDE = flagBits.substring(2, 3);
+        SSRA = flagBits.substring(3, 4);
+        LNGCE = flagBits.substring(4, 5);
+        IMSIE = flagBits.substring(5, 6);
+        IMEIE = flagBits.substring(6, 7);
+        HDIDE = flagBits.substring(7, 8);
+
+        if ("1".equals(HDIDE)) {
             homeDispatcherIdentifier = Short.toUnsignedInt(buf.getShort());
         }
 
-        if (IMEIE) {
+        if ("1".equals(IMEIE)) {
             byte[] imeiBytes = new byte[15];
             buf.get(imeiBytes);
-            IMEI = new String(imeiBytes).trim();
+            IMEI = new String(imeiBytes, StandardCharsets.US_ASCII);
         }
 
-        if (IMSIE) {
+        if ("1".equals(IMSIE)) {
             byte[] imsiBytes = new byte[16];
             buf.get(imsiBytes);
-            IMSI = new String(imsiBytes).trim();
+            IMSI = new String(imsiBytes, StandardCharsets.US_ASCII);
         }
 
-        if (LNGCE) {
+        if ("1".equals(LNGCE)) {
             byte[] langBytes = new byte[3];
             buf.get(langBytes);
-            languageCode = new String(langBytes).trim();
+            languageCode = new String(langBytes, StandardCharsets.US_ASCII);
         }
 
-        if (NIDE) {
+        if ("1".equals(NIDE)) {
             networkIdentifier = new byte[3];
             buf.get(networkIdentifier);
+        } else {
+            networkIdentifier = new byte[0];
         }
 
-        if (BSE) {
+        if ("1".equals(BSE)) {
             bufferSize = Short.toUnsignedInt(buf.getShort());
         }
 
-        if (MNE) {
+        if ("1".equals(MNE)) {
             byte[] mobileBytes = new byte[15];
             buf.get(mobileBytes);
-            mobileNumber = new String(mobileBytes).trim();
+            mobileNumber = new String(mobileBytes, StandardCharsets.US_ASCII);
         }
     }
 
@@ -90,53 +96,56 @@ public class SrTermIdentity implements BinaryData {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
 
         ByteBuffer buf = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-        buf.putInt(Math.toIntExact(terminalIdentifier));
+        buf.putInt((int) terminalIdentifier);
         output.write(buf.array());
 
-        byte flags = 0;
-        flags |= (MNE ? 1 : 0) << 7;
-        flags |= (BSE ? 1 : 0) << 6;
-        flags |= (NIDE ? 1 : 0) << 5;
-        flags |= (SSRA ? 1 : 0) << 4;
-        flags |= (LNGCE ? 1 : 0) << 3;
-        flags |= (IMSIE ? 1 : 0) << 2;
-        flags |= (IMEIE ? 1 : 0) << 1;
-        flags |= (HDIDE ? 1 : 0);
+        String flagStr = MNE + BSE + NIDE + SSRA + LNGCE + IMSIE + IMEIE + HDIDE;
+        int flags = Integer.parseInt(flagStr, 2);
         output.write(flags);
 
-        if (HDIDE) {
+        if ("1".equals(HDIDE)) {
             buf = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
             buf.putShort((short) homeDispatcherIdentifier);
             output.write(buf.array());
         }
 
-        if (IMEIE) {
-            byte[] imeiBytes = Arrays.copyOf(IMEI.getBytes(), 15);
+        if ("1".equals(IMEIE)) {
+            byte[] imeiBytes = new byte[15];
+            byte[] rawImei = IMEI.getBytes(StandardCharsets.US_ASCII);
+            System.arraycopy(rawImei, 0, imeiBytes, 0, Math.min(rawImei.length, 15));
             output.write(imeiBytes);
         }
 
-        if (IMSIE) {
-            byte[] imsiBytes = Arrays.copyOf(IMSI.getBytes(), 16);
+        if ("1".equals(IMSIE)) {
+            byte[] imsiBytes = new byte[16];
+            byte[] rawImsi = IMSI.getBytes(StandardCharsets.US_ASCII);
+            System.arraycopy(rawImsi, 0, imsiBytes, 0, Math.min(rawImsi.length, 16));
             output.write(imsiBytes);
         }
 
-        if (LNGCE) {
-            byte[] langBytes = Arrays.copyOf(languageCode.getBytes(), 3);
+        if ("1".equals(LNGCE)) {
+            byte[] langBytes = new byte[3];
+            byte[] rawLang = languageCode.getBytes(StandardCharsets.US_ASCII);
+            System.arraycopy(rawLang, 0, langBytes, 0, Math.min(rawLang.length, 3));
             output.write(langBytes);
         }
 
-        if (NIDE) {
+        if ("1".equals(NIDE)) {
+            if (networkIdentifier.length != 3)
+                throw new IOException("networkIdentifier length must be 3 when NIDE flag is set");
             output.write(networkIdentifier);
         }
 
-        if (BSE) {
+        if ("1".equals(BSE)) {
             buf = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
             buf.putShort((short) bufferSize);
             output.write(buf.array());
         }
 
-        if (MNE) {
-            byte[] mobileBytes = Arrays.copyOf(mobileNumber.getBytes(), 15);
+        if ("1".equals(MNE)) {
+            byte[] mobileBytes = new byte[15];
+            byte[] rawMobile = mobileNumber.getBytes(StandardCharsets.US_ASCII);
+            System.arraycopy(rawMobile, 0, mobileBytes, 0, Math.min(rawMobile.length, 15));
             output.write(mobileBytes);
         }
 
@@ -146,9 +155,8 @@ public class SrTermIdentity implements BinaryData {
     @Override
     public int length() {
         try {
-            return (short) encode().length;
+            return encode().length;
         } catch (Exception e) {
-            // e.printStackTrace();
             return 0;
         }
     }
