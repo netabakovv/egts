@@ -4,13 +4,14 @@ con_live_sec: 10
 log_level: "DEBUG"
 
 storage:
-#  postgresql:
-#    host: "localhost"
-#    port: "5432"
-#    user: "postgres"
-#    password: "postgres"
-#    database: "receiver"
-#    table: "points"
+  postgresql:
+    host: "localhost"
+    port: "5432"
+    user: "postgres"
+    password: "postgres"
+    database: "receiver"
+    table: "points"
+    sslmode: disable
 #  redis:
 #    server: "redis:6379"
 #    queue: "egts"
