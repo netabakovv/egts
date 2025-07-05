@@ -3,15 +3,8 @@ package org.example;
 import org.example.cli.receiver.config.ConfigLoader;
 import org.example.cli.receiver.config.Settings;
 import org.example.cli.receiver.storage.*;
-import org.example.cli.reciever.server.EgtsServer;
-import org.example.cli.reciever.server.LoggingSetup;
-import org.example.libs.EgtsPackage;
-import org.example.libs.RecordDataSet;
-import org.example.libs.ServiceDataSet;
-
-import java.io.ObjectInputFilter.Config;
-import java.time.Duration;
-import java.util.List;
+import org.example.cli.receiver.server.EgtsServer;
+import org.example.cli.receiver.server.LoggingSetup;
 
 public class Main {
     public static void main(String[] args) {
