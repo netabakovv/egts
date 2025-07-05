@@ -4,13 +4,14 @@ con_live_sec: 10
 log_level: "DEBUG"
 
 storage:
-#  postgresql:
-#    host: "localhost"
-#    port: "5432"
-#    user: "postgres"
-#    password: "postgres"
-#    database: "receiver"
-#    table: "points"
+  postgresql:
+    host: "localhost"
+    port: "5555"
+    user: "postgres"
+    password: "1"
+    database: "receiver"
+    table: "points"
+    sslmode: "disable"
 #  redis:
 #    server: "redis:6379"
 #    queue: "egts"
@@ -20,18 +21,18 @@ storage:
 #    uri: ""
 #    database: "receiver"
 #    table: "points"
-  rabbitmq:
-    host: "localhost"
-    port: "5672"
-    user: "guest"
-    password: "guest"
-    exchange: "receiver"
-  clickhouse:
-    host: "localhost"
-    port: "8123"
-    database: "receiver"
-    user: "default"
-    password: ""
+#  rabbitmq:
+#    host: "localhost"
+#    port: "5672"
+#    user: "guest"
+#    password: "guest"
+#    exchange: "receiver"
+#  clickhouse:
+#    host: "localhost"
+#    port: "8123"
+#    database: "receiver"
+#    user: "default"
+#    password: ""
 #  nats:
 #    plugin: "nats.so"
 #    servers: "nats://localhost:1222, nats://localhost:1223, nats://localhost:1224"
