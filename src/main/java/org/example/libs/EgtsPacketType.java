@@ -1,8 +1,8 @@
 package org.example.libs;
 
 public enum EgtsPacketType implements Codeable{
-    PT_APP_DATA(1),
-    PT_RESPONSE(0);
+    PT_APP_DATA((byte) 0x00),
+    PT_RESPONSE((byte) 0x01);
 
     private final int code;
 
