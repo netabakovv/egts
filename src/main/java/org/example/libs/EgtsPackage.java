@@ -1,13 +1,14 @@
 package org.example.libs;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
-@Getter
-@Setter
+@Data
 public class EgtsPackage {
     private byte protocolVersion;           // Версия протокола
     private byte securityKeyId;             // Идентификатор ключа безопасности
@@ -46,7 +47,7 @@ public class EgtsPackage {
         var opt = new EncodeOptions(null);
         if (options.length > 0) opt = options[0];
 
-        ByteBuffer buf = ByteBuffer.allocate(1024);
+        ByteBuffer buf = ByteBuffer.allocate(1024).order(ByteOrder.LITTLE_ENDIAN);
         SecretKey secretKey = opt.secretKey();
 
         buf.put(protocolVersion);
@@ -93,6 +94,7 @@ public class EgtsPackage {
         if (frameDataLength > 0) {
             buf.put(sfrd);
             short crc16 = CRC.crc16(sfrd);
+            servicesFrameDataCheckSum = crc16;
             buf.putShort(crc16);
         }
 
@@ -107,7 +109,7 @@ public class EgtsPackage {
         if (options.length > 0) opt = options[0];
 
         SecretKey secretKey = opt.secretKey();
-        ByteBuffer buf = ByteBuffer.wrap(content);
+        ByteBuffer buf = ByteBuffer.wrap(content).order(ByteOrder.LITTLE_ENDIAN);
 
         try {
             protocolVersion = buf.get();

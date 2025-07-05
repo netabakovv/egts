@@ -83,15 +83,15 @@ public class PacketGen implements Callable<Integer> {
 
             // === SrPosData ===
             SrPosData pos = new SrPosData();
-            pos.setNavigationTime(time.atZone(ZoneOffset.UTC).toLocalDateTime());
+            pos.setNavigationTime(time.atZone(ZoneOffset.UTC));
             pos.setLatitude(latitude);
             pos.setLongitude(longitude);
-            pos.setALTE(true);
-            pos.setLOHS(false);
-            pos.setLAHS(false);
-            pos.setMV(true);
-            pos.setBB(true);
-            pos.setCS(false);
+            pos.setAlte("1");
+            pos.setLohs("0");
+            pos.setLahs("0");
+            pos.setMv("1");
+            pos.setBb("1");
+            pos.setCs("0");
             pos.setSpeed(34);
             pos.setDirection((byte) 172);
             pos.setAltitude(30);
@@ -99,8 +99,8 @@ public class PacketGen implements Callable<Integer> {
             pos.setOdometer(191);
             pos.setDigitalInputs((byte) 144);
             pos.setSource((byte) 0);
-            pos.setVLD(true);
-            pos.setFIX(true);
+            pos.setVld("1");
+            pos.setFix("1");
 
             rds.addRecord(createRecord(RecordDataSet.SrPosDataType, pos));
 

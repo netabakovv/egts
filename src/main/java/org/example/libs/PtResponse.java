@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-@Getter
-@Setter
+@Data
 public class PtResponse implements BinaryData {
     private short responsePacketID;
     private byte processingResult;

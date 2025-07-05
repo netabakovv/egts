@@ -1,5 +1,6 @@
 package org.example.libs;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +11,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-@Getter
-@Setter
+@Data
 public class ServiceDataRecord implements BinaryData {
 
     private static final long TIME_OFFSET_SECONDS = LocalDateTime.of(2010, 1, 1, 0, 0).toEpochSecond(ZoneOffset.UTC);
@@ -90,8 +90,8 @@ public class ServiceDataRecord implements BinaryData {
                 recordLength = (short) rdsBytes.length;
             }
 
-            dos.writeShort(Short.toUnsignedInt(recordLength));
-            dos.writeShort(Short.toUnsignedInt(recordNumber));
+            writeShortLE(dos, recordLength);
+            writeShortLE(dos, recordNumber);
 
             String flagBits = sourceServiceOnDevice + recipientServiceOnDevice + group + recordProcessingPriority +
                     timeFieldExists + eventIDFieldExists + objectIDFieldExists;
@@ -100,16 +100,16 @@ public class ServiceDataRecord implements BinaryData {
             dos.writeByte(flags);
 
             if (objectIDFieldExists.equals("1")) {
-                dos.writeInt(objectIdentifier);
+                writeIntLE(dos, objectIdentifier);
             }
 
             if (eventIDFieldExists.equals("1")) {
-                dos.writeInt(eventIdentifier);
+                writeIntLE(dos, eventIdentifier);
             }
 
             if (timeFieldExists.equals("1")) {
                 long seconds = time.getEpochSecond() - TIME_OFFSET_SECONDS;
-                dos.writeInt((int) seconds);
+                writeIntLE(dos, (int) seconds);
             }
 
             dos.writeByte(sourceServiceType);
@@ -119,6 +119,19 @@ public class ServiceDataRecord implements BinaryData {
             return baos.toByteArray();
         }
     }
+
+    private void writeShortLE(DataOutputStream dos, short value) throws IOException {
+        dos.writeByte(value & 0xFF);
+        dos.writeByte((value >> 8) & 0xFF);
+    }
+
+    private void writeIntLE(DataOutputStream dos, int value) throws IOException {
+        dos.writeByte(value & 0xFF);
+        dos.writeByte((value >> 8) & 0xFF);
+        dos.writeByte((value >> 16) & 0xFF);
+        dos.writeByte((value >> 24) & 0xFF);
+    }
+
 
     @Override
     public int length() {

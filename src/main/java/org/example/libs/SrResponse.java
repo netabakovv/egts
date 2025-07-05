@@ -1,5 +1,6 @@
 package org.example.libs;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,8 +8,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-@Getter
-@Setter
+@Data
 public class SrResponse implements BinaryData{
     private int confirmedRecordNumber; // uint16
     private short recordStatus; // uint8

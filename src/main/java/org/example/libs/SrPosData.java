@@ -1,142 +1,163 @@
 package org.example.libs;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
-@Getter
-@Setter
+@Data
 public class SrPosData implements BinaryData {
-    private LocalDateTime navigationTime;
+    private ZonedDateTime navigationTime;
     private double latitude;
     private double longitude;
 
-    private boolean ALTE, LOHS, LAHS, MV, BB, CS, FIX, VLD;
+    private String alte;
+    private String lohs;
+    private String lahs;
+    private String mv;
+    private String bb;
+    private String cs;
+    private String fix;
+    private String vld;
+
+    private byte directionHighestBit;
     private int altitudeSign;
-    private int speed;
-    private byte direction; // младшие 7 бит
-    private long odometer;
+    private int speed;         // 14 бит, 0–16383
+    private byte direction;    // 7 бит (8 с флагом)
+
+    private int odometer;      // 24 бита
     private byte digitalInputs;
     private byte source;
-    private long altitude;
-
-    private static final LocalDateTime START_DATE = LocalDateTime.of(2010, 1, 1, 0, 0);
+    private int altitude;      // 24 бита
 
     @Override
-    public void decode(byte[] data) throws IOException {
+    public void decode(byte[] data) {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
-        long seconds = Integer.toUnsignedLong(buf.getInt());
-        navigationTime = START_DATE.plusSeconds(seconds);
+        // 1. Navigation time
+        long secondsSince2010 = Integer.toUnsignedLong(buf.getInt());
+        navigationTime = ZonedDateTime.ofInstant(
+                Instant.ofEpochSecond(secondsSince2010 + 1262304000L),
+                ZoneOffset.UTC
+        );
 
+        // 2. Latitude
         long rawLat = Integer.toUnsignedLong(buf.getInt());
         latitude = (double) rawLat * 90 / 0xFFFFFFFFL;
 
-        long rawLon = Integer.toUnsignedLong(buf.getInt());
-        longitude = (double) rawLon * 180 / 0xFFFFFFFFL;
+        // 3. Longitude
+        long rawLong = Integer.toUnsignedLong(buf.getInt());
+        longitude = (double) rawLong * 180 / 0xFFFFFFFFL;
 
+        // 4. Flags (byte -> 8 флагов)
         byte flags = buf.get();
-        ALTE = ((flags >> 7) & 1) == 1;
-        LOHS = ((flags >> 6) & 1) == 1;
-        LAHS = ((flags >> 5) & 1) == 1;
-        MV   = ((flags >> 4) & 1) == 1;
-        BB   = ((flags >> 3) & 1) == 1;
-        CS   = ((flags >> 2) & 1) == 1;
-        FIX  = ((flags >> 1) & 1) == 1;
-        VLD  = (flags & 1) == 1;
+        String bits = String.format("%8s", Integer.toBinaryString(flags & 0xFF)).replace(' ', '0');
+        alte = bits.substring(0, 1);
+        lohs = bits.substring(1, 2);
+        lahs = bits.substring(2, 3);
+        mv   = bits.substring(3, 4);
+        bb   = bits.substring(4, 5);
+        cs   = bits.substring(5, 6);
+        fix  = bits.substring(6, 7);
+        vld  = bits.substring(7);
 
+        // 5. Speed with embedded bits
         int spdBits = Short.toUnsignedInt(buf.getShort());
-        int directionHighestBit = (spdBits >> 15) & 1;
-        altitudeSign = (spdBits >> 14) & 1;
+        directionHighestBit = (byte) ((spdBits >> 15) & 0x1);
+        altitudeSign = (byte) ((spdBits >> 14) & 0x1);
         speed = (spdBits & 0x3FFF) / 10;
 
+        // 6. Direction (7 бит + старший из spdBits)
         byte dirByte = buf.get();
-        direction = (byte) (dirByte & 0x7F); // сохраняем только младшие 7 бит
-        if (directionHighestBit == 1) {
-            direction |= (1 << 7);
-        }
+        direction = (byte) ((dirByte & 0x7F) | (directionHighestBit << 7));
 
-        byte[] odoBytes = new byte[4];
-        odoBytes[0] = buf.get();
-        odoBytes[1] = buf.get();
-        odoBytes[2] = buf.get();
-        odoBytes[3] = 0x00;
-        odometer = Integer.toUnsignedLong(ByteBuffer.wrap(odoBytes).order(ByteOrder.LITTLE_ENDIAN).getInt());
+        // 7. Odometer (3 байта)
+        byte[] odoBuf = new byte[]{buf.get(), buf.get(), buf.get(), 0x00};
+        odometer = ByteBuffer.wrap(odoBuf).order(ByteOrder.LITTLE_ENDIAN).getInt();
 
+        // 8. Digital inputs
         digitalInputs = buf.get();
+
+        // 9. Source
         source = buf.get();
 
-        if (ALTE) {
-            byte[] altBytes = new byte[4];
-            buf.get(altBytes, 0, 3);
-            altBytes[3] = 0x00;
-            altitude = Integer.toUnsignedLong(ByteBuffer.wrap(altBytes).order(ByteOrder.LITTLE_ENDIAN).getInt());
+        // 10. Altitude (если ALTE == "1")
+        if ("1".equals(alte)) {
+            byte[] altBuf = new byte[]{buf.get(), buf.get(), buf.get(), 0x00};
+            altitude = ByteBuffer.wrap(altBuf).order(ByteOrder.LITTLE_ENDIAN).getInt();
         }
     }
 
     @Override
-    public byte[] encode() throws IOException {
-        ByteBuffer buf = ByteBuffer.allocate(1024).order(ByteOrder.LITTLE_ENDIAN);
+    public byte[] encode() {
+        ByteBuffer buf = ByteBuffer.allocate(32).order(ByteOrder.LITTLE_ENDIAN);
 
-        long seconds = navigationTime.toEpochSecond(ZoneOffset.UTC) - START_DATE.toEpochSecond(ZoneOffset.UTC);
-        buf.putInt((int) seconds);
+        // 1. Navigation time
+        long secondsSince2010 = navigationTime.toEpochSecond() - 1262304000L;
+        buf.putInt((int) secondsSince2010);
 
-        long latRaw = (long) (latitude / 90 * 0xFFFFFFFFL);
-        long lonRaw = (long) (longitude / 180 * 0xFFFFFFFFL);
-        buf.putInt((int) latRaw);
-        buf.putInt((int) lonRaw);
+        // 2. Latitude
+        long latVal = (long)((latitude / 90.0) * 0xFFFFFFFFL);
+        // Раскладываем на 4 байта в Little Endian
+        buf.put((byte)(latVal & 0xFF));
+        buf.put((byte)((latVal >> 8) & 0xFF));
+        buf.put((byte)((latVal >> 16) & 0xFF));
+        buf.put((byte)((latVal >> 24) & 0xFF));
 
-        byte flags = 0;
-        flags |= (ALTE ? 1 : 0) << 7;
-        flags |= (LOHS ? 1 : 0) << 6;
-        flags |= (LAHS ? 1 : 0) << 5;
-        flags |= (MV   ? 1 : 0) << 4;
-        flags |= (BB   ? 1 : 0) << 3;
-        flags |= (CS   ? 1 : 0) << 2;
-        flags |= (FIX  ? 1 : 0) << 1;
-        flags |= (VLD  ? 1 : 0);
+        // 3. Longitude
+        long lonVal = (long)((longitude / 180.0) * 0xFFFFFFFFL);
+        buf.put((byte)(lonVal & 0xFF));
+        buf.put((byte)((lonVal >> 8) & 0xFF));
+        buf.put((byte)((lonVal >> 16) & 0xFF));
+        buf.put((byte)((lonVal >> 24) & 0xFF));
+
+
+        // 4. Flags
+        String flagBits = alte + lohs + lahs + mv + bb + cs + fix + vld;
+        byte flags = (byte) Integer.parseInt(flagBits, 2);
         buf.put(flags);
 
-        int dirHiBit = (direction >> 7) & 1;
+        // 5. Speed + bits
         int spdEnc = (speed * 10) & 0x3FFF;
-        spdEnc |= (altitudeSign & 1) << 14;
-        spdEnc |= (dirHiBit & 1) << 15;
+        spdEnc |= (altitudeSign & 0x1) << 14;
+        spdEnc |= (directionHighestBit & 0x1) << 15;
         buf.putShort((short) spdEnc);
 
-        buf.put(direction);
+        // 6. Direction (без старшего бита)
+        buf.put((byte) (direction & 0x7F));
 
-        int odo = (int) odometer;
-        buf.put((byte) (odo & 0xFF));
-        buf.put((byte) ((odo >> 8) & 0xFF));
-        buf.put((byte) ((odo >> 16) & 0xFF));
+        // 7. Odometer (3 байта)
+        buf.put((byte) (odometer & 0xFF));
+        buf.put((byte) ((odometer >> 8) & 0xFF));
+        buf.put((byte) ((odometer >> 16) & 0xFF));
 
+        // 8. Digital Inputs
         buf.put(digitalInputs);
+
+        // 9. Source
         buf.put(source);
 
-        if (ALTE) {
-            int alt = (int) altitude;
-            buf.put((byte) (alt & 0xFF));
-            buf.put((byte) ((alt >> 8) & 0xFF));
-            buf.put((byte) ((alt >> 16) & 0xFF));
+        // 10. Altitude
+        if ("1".equals(alte)) {
+            buf.put((byte) (altitude & 0xFF));
+            buf.put((byte) ((altitude >> 8) & 0xFF));
+            buf.put((byte) ((altitude >> 16) & 0xFF));
         }
 
-        byte[] result = new byte[buf.position()];
-        buf.flip();
-        buf.get(result);
-        return result;
-
-        /* TODO: разобраться с кодировкой высоты */
+        // Return only written bytes
+        byte[] out = new byte[buf.position()];
+        buf.rewind();
+        buf.get(out);
+        return out;
     }
 
     @Override
     public int length() {
         try {
-            return (short) encode().length;
+            return encode().length;
         } catch (Exception e) {
             return 0;
         }
@@ -148,12 +169,22 @@ public class SrPosData implements BinaryData {
                 "navigationTime=" + navigationTime +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", alte='" + alte + '\'' +
+                ", lohs='" + lohs + '\'' +
+                ", lahs='" + lahs + '\'' +
+                ", mv='" + mv + '\'' +
+                ", bb='" + bb + '\'' +
+                ", cs='" + cs + '\'' +
+                ", fix='" + fix + '\'' +
+                ", vld='" + vld + '\'' +
+                ", directionHighestBit=" + directionHighestBit +
+                ", altitudeSign=" + altitudeSign +
                 ", speed=" + speed +
-                ", direction=" + direction +
+                ", direction=" + (direction & 0xFF) +
                 ", odometer=" + odometer +
+                ", digitalInputs=" + (digitalInputs & 0xFF) +
+                ", source=" + (source & 0xFF) +
                 ", altitude=" + altitude +
-                ", ALTE=" + ALTE +
-                ", VLD=" + VLD +
                 '}';
     }
 }

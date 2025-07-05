@@ -47,8 +47,8 @@ public enum EgtsProcessingCode {
         this.code = code;
     }
 
-    public int getCode() {
-        return code;
+    public short getCode() {
+        return (short) code;
     }
 
     public static EgtsProcessingCode fromCode(int code) {

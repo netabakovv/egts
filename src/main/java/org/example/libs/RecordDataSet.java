@@ -1,5 +1,6 @@
 package org.example.libs;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Data
 public class RecordDataSet implements BinaryData {
 
-    @Getter
-    @Setter
+    @Data
     public static class RecordData {
         private byte subrecordType;
         private short subrecordLength;
@@ -87,7 +88,8 @@ public class RecordDataSet implements BinaryData {
                 short length = (short) srdBytes.length;
 
                 dos.writeByte(type);
-                dos.writeShort(Short.toUnsignedInt(length)); // ensure 2 bytes
+                dos.writeByte(length & 0xFF);       // младший байт
+                dos.writeByte((length >> 8) & 0xFF); // старший байт
                 dos.write(srdBytes);
             }
 

@@ -1,18 +1,18 @@
 package org.example.libs;
 
 public enum EgtsPacketType implements Codeable{
-    PT_APP_DATA((byte) 0x00),
-    PT_RESPONSE((byte) 0x01);
+    PT_RESPONSE((byte) 0x00),
+    PT_APP_DATA((byte) 0x01);
 
-    private final int code;
+    private final byte code;
 
-    EgtsPacketType(int code) {
+    EgtsPacketType(byte code) {
         this.code = code;
     }
 
     @Override
     public int getCode() {
-        return code;
+        return Byte.toUnsignedInt(code); // безопасно
     }
 
     private static final EgtsPacketType[] LOOKUP = new EgtsPacketType[256];
