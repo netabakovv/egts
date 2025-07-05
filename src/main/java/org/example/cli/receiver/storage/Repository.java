@@ -1,6 +1,7 @@
 package org.example.cli.receiver.storage;
 
 import org.example.cli.receiver.storage.store.clickhous.ClickHouseConnector;
+import org.example.cli.receiver.storage.store.postgresql.PGConnector;
 import org.example.cli.receiver.storage.store.rabbitmq.RabbitMQConnector;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class Repository<T extends Serializable> {
             Store<T> store = switch (storeName.toLowerCase()) {
                 case "rabbitmq" -> (Store<T>) new RabbitMQConnector(params);
                 case "clickhouse" -> (Store<T>) new ClickHouseConnector(params);
+                case "postgresql" -> (Store<T>) new PGConnector(params);
                 default -> throw new IOException("Хранилище не поддерживается: " + storeName);
             };
 
