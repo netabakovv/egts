@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.BitSet;
 
 
@@ -41,65 +42,65 @@ public class SrCountersData implements BinaryData {
             throw new IllegalArgumentException("Недостаточно данных для декодирования.");
         }
 
-        ByteBuffer buffer = ByteBuffer.wrap(content);
+        ByteBuffer buffer = ByteBuffer.wrap(content).order(ByteOrder.LITTLE_ENDIAN);
 
         byte flags = buffer.get();
-        BitSet flagBits = BitSet.valueOf(new byte[]{flags});
 
-        this.counterFieldExists8 = flagBits.get(0) ? "1" : "0";
-        this.counterFieldExists7 = flagBits.get(1) ? "1" : "0";
-        this.counterFieldExists6 = flagBits.get(2) ? "1" : "0";
-        this.counterFieldExists5 = flagBits.get(3) ? "1" : "0";
-        this.counterFieldExists4 = flagBits.get(4) ? "1" : "0";
-        this.counterFieldExists3 = flagBits.get(5) ? "1" : "0";
-        this.counterFieldExists2 = flagBits.get(6) ? "1" : "0";
-        this.counterFieldExists1 = flagBits.get(7) ? "1" : "0";
+        // Читаем флаги: старший бит первым (C1...C8)
+        this.counterFieldExists1 = ((flags >> 7) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists2 = ((flags >> 6) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists3 = ((flags >> 5) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists4 = ((flags >> 4) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists5 = ((flags >> 3) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists6 = ((flags >> 2) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists7 = ((flags >> 1) & 0x01) == 1 ? "1" : "0";
+        this.counterFieldExists8 = (flags & 0x01) == 1 ? "1" : "0";
 
-        if ("1".equals(counterFieldExists1)) {
+        // Теперь считываем счетчики
+        if ("1".equals(counterFieldExists1) && buffer.remaining() >= 3) {
             this.counter1 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists2)) {
+        if ("1".equals(counterFieldExists2) && buffer.remaining() >= 3) {
             this.counter2 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists3)) {
+        if ("1".equals(counterFieldExists3) && buffer.remaining() >= 3) {
             this.counter3 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists4)) {
+        if ("1".equals(counterFieldExists4) && buffer.remaining() >= 3) {
             this.counter4 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists5)) {
+        if ("1".equals(counterFieldExists5) && buffer.remaining() >= 3) {
             this.counter5 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists6)) {
+        if ("1".equals(counterFieldExists6) && buffer.remaining() >= 3) {
             this.counter6 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists7)) {
+        if ("1".equals(counterFieldExists7) && buffer.remaining() >= 3) {
             this.counter7 = readCounter(buffer);
         }
 
-        if ("1".equals(counterFieldExists8)) {
+        if ("1".equals(counterFieldExists8) && buffer.remaining() >= 3) {
             this.counter8 = readCounter(buffer);
         }
     }
 
     private long readCounter(ByteBuffer buffer) throws IOException {
         if (buffer.remaining() < 3) {
-            throw new IllegalArgumentException("Недостаточно данных для чтения 3 байт счетчика.");
+            throw new IOException("Недостаточно данных для чтения 3-байтного счетчика");
         }
 
         byte[] bytes = new byte[3];
         buffer.get(bytes);
 
-        // Добавляем нулевой байт в конец для получения uint32
         byte[] full = new byte[4];
         System.arraycopy(bytes, 0, full, 0, 3);
-        return ByteBuffer.wrap(full).order(java.nio.ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL;
+        return (ByteBuffer.wrap(full).order(ByteOrder.LITTLE_ENDIAN).getInt() & 0xFFFFFFFFL);
     }
 
     /**

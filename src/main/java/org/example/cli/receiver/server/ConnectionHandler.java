@@ -1,4 +1,4 @@
-package org.example.cli.reciever.server;
+package org.example.cli.receiver.server;
 
 import org.example.libs.*;
 import org.example.cli.receiver.storage.NavRecord;

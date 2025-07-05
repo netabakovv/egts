@@ -1,4 +1,4 @@
-package org.example.cli.reciever.server;
+package org.example.cli.receiver.server;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
