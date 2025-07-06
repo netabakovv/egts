@@ -93,14 +93,15 @@ public class SrExtPosData implements BinaryData{
     @Override
     public byte[] encode() throws IOException {
         StringBuilder flagBuilder = new StringBuilder();
-        flagBuilder.append('0') // биты 0-2 — зарезервированы
-                .append('0')
-                .append('0')
-                .append(navigationSystemFieldExists)
-                .append(satellitesFieldExists)
-                .append(pdopFieldExists)
+        flagBuilder.append(vdopFieldExists)
                 .append(hdopFieldExists)
-                .append(vdopFieldExists);
+                .append(pdopFieldExists)
+                .append(satellitesFieldExists)
+                .append(navigationSystemFieldExists)
+                .append('0')
+                .append('0')
+                .append('0');
+
 
         String flagStr = flagBuilder.toString();
 

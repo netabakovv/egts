@@ -35,39 +35,30 @@ public class SrLiquidLevelSensor implements BinaryData{
      * Декодирует байты в структуру SrLiquidLevelSensor.
      */
     @Override
-    public void decode(byte[] content) throws IOException{
+    public void decode(byte[] content) throws IOException {
         if (content == null || content.length < 7) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrLiquidLevelSensor");
         }
 
         ByteBuffer buf = ByteBuffer.wrap(content);
+        buf.order(java.nio.ByteOrder.LITTLE_ENDIAN);  // Ставим порядок сразу
 
         byte flags = buf.get();
 
-        BitSet flagBits = BitSet.valueOf(new byte[]{flags});
+        // Разбор битовых флагов через маски и сдвиги
+        this.liquidLevelSensorErrorFlag = ((flags >> 6) & 1) == 1 ? "1" : "0";
+        this.rawDataFlag = ((flags >> 3) & 1) == 1 ? "1" : "0";
 
-        this.liquidLevelSensorErrorFlag = flagBits.get(6) ? "1" : "0";
-        this.rawDataFlag = flagBits.get(3) ? "1" : "0";
+        int llvu = (flags >> 4) & 0b11;  // биты 5-4
+        this.liquidLevelSensorValueUnit = String.format("%2s", Integer.toBinaryString(llvu)).replace(' ', '0');
 
-        // LLSVU — биты 5 и 4
-        this.liquidLevelSensorValueUnit = (flagBits.get(5) ? "1" : "0") + (flagBits.get(4) ? "1" : "0");
+        this.liquidLevelSensorNumber = flags & 0b111; // биты 2-0
 
-        // LLSN — биты 2, 1, 0
-        int llsn = 0;
-        for (int i = 0; i < 3; i++) {
-            if (flagBits.get(i)) {
-                llsn |= (1 << i);
-            }
-        }
-        this.liquidLevelSensorNumber = llsn;
-
-        // Чтение адреса модуля (2 байта)
         if (buf.remaining() < 2) {
             throw new IllegalArgumentException("Недостаточно данных для чтения MADDR");
         }
         this.moduleAddress = Short.toUnsignedInt(buf.getShort());
 
-        // Чтение данных датчика (4 байта)
         if (buf.remaining() < 4) {
             throw new IllegalArgumentException("Недостаточно данных для чтения LLSD");
         }
@@ -79,52 +70,33 @@ public class SrLiquidLevelSensor implements BinaryData{
      */
     @Override
     public byte[] encode() throws IOException {
-        StringBuilder flagBuilder = new StringBuilder();
-        flagBuilder.append('0') // Бит 7 — зарезервирован
-                .append(liquidLevelSensorErrorFlag)
-                .append(liquidLevelSensorValueUnit.charAt(0))
-                .append(liquidLevelSensorValueUnit.charAt(1))
-                .append(rawDataFlag)
-                .append(String.format("%3s", Integer.toBinaryString(liquidLevelSensorNumber & 0x07)).replace(' ', '0'));
+        // Формируем байт флагов через битовые операции
+        int flags = 0;
+        flags |= (liquidLevelSensorNumber & 0b111); // биты 0-2
 
-        String flagStr = flagBuilder.toString();
-
-        // Проверка флагов
-        if (flagStr.length() != 8) {
-            throw new IllegalArgumentException("Флаг должен быть длиной 8 символов");
+        if ("1".equals(rawDataFlag)) {
+            flags |= (1 << 3);
         }
 
-        for (int i = 0; i < flagStr.length(); i++) {
-            char c = flagStr.charAt(i);
-            if (c != '0' && c != '1') {
-                throw new IllegalArgumentException("Флаг содержит недопустимый символ на позиции " + i + ": '" + c + "'");
-            }
+        // liquidLevelSensorValueUnit - строка из 2 символов '0' или '1'
+        if (liquidLevelSensorValueUnit == null || liquidLevelSensorValueUnit.length() != 2
+                || !liquidLevelSensorValueUnit.matches("[01]{2}")) {
+            throw new IllegalArgumentException("LLSVU должен быть строкой из двух бит (например, \"00\", \"10\")");
+        }
+        int llvu = Integer.parseInt(liquidLevelSensorValueUnit, 2);
+        flags |= (llvu << 4); // биты 4-5
+
+        if ("1".equals(liquidLevelSensorErrorFlag)) {
+            flags |= (1 << 6);
         }
 
-        int flags;
-        try {
-            flags = Integer.parseInt(flagStr, 2);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Не удалось преобразовать флаг в число", e);
-        }
+        // бит 7 — зарезервирован (0)
 
-        int requiredSize = 1 + // флаг
-                ("1".equals(liquidLevelSensorErrorFlag) ? 2 : 0) +
-                ("1".equals(rawDataFlag) ? 2 : 0) +
-                ("1".equals(liquidLevelSensorValueUnit) ? 2 : 0) +
-                2 + // MADDR
-                4;  // LLSD
+        ByteBuffer buf = ByteBuffer.allocate(7);
+        buf.order(java.nio.ByteOrder.LITTLE_ENDIAN);  // Ставим порядок сразу
 
-        ByteBuffer buf = ByteBuffer.allocate(requiredSize);
-
-        // Запись флага
         buf.put((byte) flags);
-
-        // Запись адреса модуля
-        buf.order(java.nio.ByteOrder.LITTLE_ENDIAN);
         buf.putShort((short) moduleAddress);
-
-        // Запись данных датчика
         buf.putInt((int) liquidLevelSensorData);
 
         return buf.array();

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -40,7 +41,7 @@ public class SrModuleData implements BinaryData{
         }
 
         ByteBuffer buf = ByteBuffer.wrap(content);
-
+        buf.order(ByteOrder.LITTLE_ENDIAN);
         this.moduleType = buf.get();
 
         this.vendorID = buf.getInt(); // UINT32 (Little Endian)
@@ -58,8 +59,10 @@ public class SrModuleData implements BinaryData{
         }
         this.serialNumber = srnBuilder.toString();
 
-        // Пропускаем возможные оставшиеся байты до разделителя
-        while (buf.hasRemaining() && buf.get() != DELIMITER) {}
+        // Пропускаем один байт delimiter после SerialNumber (если он не прочитан в цикле)
+        if (buf.hasRemaining() && buf.get(buf.position() - 1) != DELIMITER) {
+            buf.get();
+        }
 
         // Чтение Description
         StringBuilder dscrBuilder = new StringBuilder();
@@ -77,7 +80,7 @@ public class SrModuleData implements BinaryData{
     @Override
     public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(calculateEncodedLength());
-
+        buf.order(ByteOrder.LITTLE_ENDIAN);
         buf.put(moduleType);
         buf.putInt(vendorID);
         buf.putShort(firmwareVersion);

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
@@ -36,6 +37,7 @@ public class SrPassengersCountersData implements BinaryData{
         }
 
         ByteBuffer buf = ByteBuffer.wrap(content);
+        buf.order(ByteOrder.LITTLE_ENDIAN);
 
         // Чтение первого байта флагов
         byte flagsByte = buf.get();
@@ -87,13 +89,14 @@ public class SrPassengersCountersData implements BinaryData{
     @Override
     public byte[] encode() throws IOException {
         ByteBuffer buf = ByteBuffer.allocate(1024); // достаточно большой буфер
+        buf.order(ByteOrder.LITTLE_ENDIAN);
 
         // Флаги
         StringBuilder flagBuilder = new StringBuilder();
+        flagBuilder.append(rawDataFlag);
         for (int i = 0; i < 7; i++) {
             flagBuilder.append('0');
         }
-        flagBuilder.append(rawDataFlag);
         String flagStr = flagBuilder.toString();
 
         if (flagStr.length() != 8) {
@@ -122,7 +125,7 @@ public class SrPassengersCountersData implements BinaryData{
         buf.put((byte) Integer.parseInt(doorsReleased, 2));
 
         // ModuleAddress
-        buf.putShort(Short.reverseBytes((short) moduleAddress));
+        buf.putShort((short) moduleAddress);
 
         // Данные о пассажирах
         if ("0".equals(rawDataFlag)) {
