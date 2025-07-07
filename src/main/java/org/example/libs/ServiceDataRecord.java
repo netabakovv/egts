@@ -18,13 +18,13 @@ public class ServiceDataRecord implements BinaryData {
 
     private short recordLength;
     private short recordNumber;
-    private String sourceServiceOnDevice;
-    private String recipientServiceOnDevice;
-    private String group;
-    private String recordProcessingPriority;
-    private String timeFieldExists;
-    private String eventIDFieldExists;
-    private String objectIDFieldExists;
+    private String sourceServiceOnDevice = "0";
+    private String recipientServiceOnDevice = "0";
+    private String group = "0";
+    private String recordProcessingPriority = "00";
+    private String timeFieldExists = "0";
+    private String eventIDFieldExists = "0";
+    private String objectIDFieldExists = "0";
 
     private int objectIdentifier;
     private int eventIdentifier;

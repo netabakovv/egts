@@ -1,9 +1,12 @@
 package org.example.libs;
 
+import lombok.Data;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+@Data
 public class SrAbsCntrData implements BinaryData {
     private byte counterNumber;
     private int counterValue;
@@ -19,7 +22,10 @@ public class SrAbsCntrData implements BinaryData {
 
         this.counterNumber = buf.get();
 
-        int fullValue = buf.getInt();
+        int fullValue = 0;
+        fullValue |= (buf.get() & 0xFF);       // байт 1
+        fullValue |= (buf.get() & 0xFF) << 8;  // байт 2
+        fullValue |= (buf.get() & 0xFF) << 16;
         this.counterValue = fullValue & 0x00FFFFFF;
     }
 
@@ -29,11 +35,13 @@ public class SrAbsCntrData implements BinaryData {
         buf.order(ByteOrder.LITTLE_ENDIAN);
 
         buf.put(counterNumber);
+        buf.put((byte) counterValue);         // байт 2
+        buf.put((byte) (counterValue >> 8));  // байт 3
+        buf.put((byte) (counterValue >> 16));
 
-        buf.putInt(counterValue);
-        byte[] allBytes = buf.array();
-        byte[] result = new  byte[4];
-        System.arraycopy(allBytes, 0, result, 0, 4);
+        byte[] result = new byte[buf.position()];
+        buf.flip();
+        buf.get(result);
         return result;
     }
 

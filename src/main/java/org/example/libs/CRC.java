@@ -20,7 +20,7 @@ public class CRC {
     public static short crc16(byte[] data) {
         int crc = 0xFFFF;
         for (byte b : data) {
-            crc ^= ((b & 0xFF) << 8);
+            crc ^= Byte.toUnsignedInt(b) << 8;
 
             for (int i = 0; i < 8; i++) {
                 if ((crc & 0x8000) != 0) {

@@ -1,6 +1,6 @@
 package org.example.libs;
 
-public enum EgtsSubrecordType implements Codeable{
+public enum EgtsSubrecordType{
     EGTS_SR_RECORD_RESPONSE(0),
     EGTS_SR_TERM_IDENTITY(1),
     EGTS_SR_MODULE_DATA(2),
@@ -28,7 +28,7 @@ public enum EgtsSubrecordType implements Codeable{
         this.code = code;
     }
 
-    @Override
+
     public int getCode() {
         return code;
     }

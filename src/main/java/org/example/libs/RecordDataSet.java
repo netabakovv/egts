@@ -50,8 +50,21 @@ public class RecordDataSet implements BinaryData {
             RecordData rd = new RecordData();
             rd.setSubrecordType(buf.get());
 
-            short length = buf.getShort();
+            System.out.println("Осталось байтов: " + buf.remaining());
+            if (buf.remaining() < 2) {
+                throw new IOException("Недостаточно данных для RecordNumber");
+            }
+
+            short length = buf.getShort() ;
             rd.setSubrecordLength(length);
+
+            if (length < 0) {
+                throw new IOException("Отрицательная длина подзаписи: " + length);
+            }
+
+            if (buf.remaining() < length) {
+                throw new IOException("Недостаточно данных для подзаписи");
+            }
 
             byte[] subRecordBytes = new byte[length];
             buf.get(subRecordBytes);

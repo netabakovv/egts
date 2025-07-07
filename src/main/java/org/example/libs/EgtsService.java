@@ -1,6 +1,6 @@
 package org.example.libs;
 
-public enum EgtsService implements Codeable {
+public enum EgtsService{
     AUTH_SERVICE((byte) 1),
     TELEDATA_SERVICE((byte) 2);
 
@@ -10,7 +10,6 @@ public enum EgtsService implements Codeable {
         this.code = code;
     }
 
-    @Override
     public int getCode() {
         return code;
     }
@@ -23,10 +22,10 @@ public enum EgtsService implements Codeable {
         }
     }
 
-    public static EgtsService fromCode(int code) {
-        if (code < 0 || code >= LOOKUP.length || LOOKUP[code] == null) {
-            throw new IllegalArgumentException("Unknown service code: " + code);
+    public static EgtsService fromCode(byte code) {
+        for (EgtsService t : values()) {
+            if (t.code == code) return t;
         }
-        return LOOKUP[code];
+        throw new IllegalArgumentException("Unknown packet type: " + code);
     }
 }

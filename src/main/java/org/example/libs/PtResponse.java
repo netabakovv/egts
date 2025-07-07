@@ -15,7 +15,7 @@ public class PtResponse implements BinaryData {
     @Override
     public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data);
-        buf.order(ByteOrder.LITTLE_ENDIAN); // Устанавливаем порядок байтов
+        buf.order(ByteOrder.LITTLE_ENDIAN);
 
         if (buf.remaining() < 2) {
             throw new IOException("Недостаточно данных для чтения ResponsePacketID");
