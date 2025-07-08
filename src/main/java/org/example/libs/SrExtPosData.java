@@ -19,9 +19,9 @@ public class SrExtPosData implements BinaryData{
     private String hdopFieldExists = "0";             // HFE
     private String vdopFieldExists = "0";             // VFE
 
-    private int verticalDilutionOfPrecision;   // VDOP
-    private int horizontalDilutionOfPrecision; // HDOP
-    private int positionDilutionOfPrecision;   // PDOP
+    private int vdop;   // VDOP
+    private int hdop; // HDOP
+    private int pdop;   // PDOP
     private byte satellites;                   // SAT
     private int navigationSystem;              // NS
 
@@ -52,7 +52,7 @@ public class SrExtPosData implements BinaryData{
                 throw new IllegalArgumentException("Недостаточно данных для чтения VDOP");
 
             buf.get(tmpBuf);
-            this.verticalDilutionOfPrecision = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            this.vdop = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
         }
 
         if ("1".equals(hdopFieldExists)) {
@@ -60,7 +60,7 @@ public class SrExtPosData implements BinaryData{
                 throw new IllegalArgumentException("Недостаточно данных для чтения HDOP");
 
             buf.get(tmpBuf);
-            this.horizontalDilutionOfPrecision = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            this.hdop = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
         }
 
         if ("1".equals(pdopFieldExists)) {
@@ -68,7 +68,7 @@ public class SrExtPosData implements BinaryData{
                 throw new IllegalArgumentException("Недостаточно данных для чтения PDOP");
 
             buf.get(tmpBuf);
-            this.positionDilutionOfPrecision = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            this.pdop = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
         }
 
         if ("1".equals(satellitesFieldExists)) {
@@ -136,15 +136,15 @@ public class SrExtPosData implements BinaryData{
         buf.put((byte) flags);
 
         if ("1".equals(vdopFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) verticalDilutionOfPrecision));
+            buf.putShort(Short.reverseBytes((short) vdop));
         }
 
         if ("1".equals(hdopFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) horizontalDilutionOfPrecision));
+            buf.putShort(Short.reverseBytes((short) hdop));
         }
 
         if ("1".equals(pdopFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) positionDilutionOfPrecision));
+            buf.putShort(Short.reverseBytes((short) pdop));
         }
 
         if ("1".equals(satellitesFieldExists)) {

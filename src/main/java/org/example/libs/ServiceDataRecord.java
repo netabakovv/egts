@@ -1,8 +1,6 @@
 package org.example.libs;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -12,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiceDataRecord implements BinaryData {
 
     private static final long TIME_OFFSET_SECONDS = LocalDateTime.of(2010, 1, 1, 0, 0).toEpochSecond(ZoneOffset.UTC);

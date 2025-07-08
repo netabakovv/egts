@@ -19,9 +19,9 @@ class SrExtPosDataTest {
         original.setSatellitesFieldExists("1");
         original.setNavigationSystemFieldExists("1");
 
-        original.setVerticalDilutionOfPrecision(1234);   // 0x04D2
-        original.setHorizontalDilutionOfPrecision(2345); // 0x0929
-        original.setPositionDilutionOfPrecision(3456);   // 0x0D80
+        original.setVdop(1234);   // 0x04D2
+        original.setHdop(2345); // 0x0929
+        original.setPdop(3456);   // 0x0D80
         original.setSatellites((byte) 12);
         original.setNavigationSystem(2); // GPS
 
@@ -36,9 +36,9 @@ class SrExtPosDataTest {
         assertEquals("1", decoded.getSatellitesFieldExists());
         assertEquals("1", decoded.getNavigationSystemFieldExists());
 
-        assertEquals(1234, decoded.getVerticalDilutionOfPrecision());
-        assertEquals(2345, decoded.getHorizontalDilutionOfPrecision());
-        assertEquals(3456, decoded.getPositionDilutionOfPrecision());
+        assertEquals(1234, decoded.getVdop());
+        assertEquals(2345, decoded.getHdop());
+        assertEquals(3456, decoded.getPdop());
         assertEquals(12, decoded.getSatellites());
         assertEquals(2, decoded.getNavigationSystem());
     }

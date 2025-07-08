@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -115,14 +116,22 @@ public class ConnectionHandler implements Runnable {
                                 case RecordDataSet.SrAdSensorsDataType -> {
                                     var ad = (SrAdSensorsData) rd.getSubrecordData();
                                     List<AnSensor> sensors = new ArrayList<>();
-                                    if ("1".equals(ad.getAnalogSensorFieldExists1())) sensors.add(AnSensor.of(1, ad.getAnalogSensor1()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists2())) sensors.add(AnSensor.of(2, ad.getAnalogSensor2()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists3())) sensors.add(AnSensor.of(3, ad.getAnalogSensor3()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists4())) sensors.add(AnSensor.of(4, ad.getAnalogSensor4()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists5())) sensors.add(AnSensor.of(5, ad.getAnalogSensor5()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists6())) sensors.add(AnSensor.of(6, ad.getAnalogSensor6()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists7())) sensors.add(AnSensor.of(7, ad.getAnalogSensor7()));
-                                    if ("1".equals(ad.getAnalogSensorFieldExists8())) sensors.add(AnSensor.of(8, ad.getAnalogSensor8()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists1()))
+                                        sensors.add(AnSensor.of(1, ad.getAnalogSensor1()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists2()))
+                                        sensors.add(AnSensor.of(2, ad.getAnalogSensor2()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists3()))
+                                        sensors.add(AnSensor.of(3, ad.getAnalogSensor3()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists4()))
+                                        sensors.add(AnSensor.of(4, ad.getAnalogSensor4()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists5()))
+                                        sensors.add(AnSensor.of(5, ad.getAnalogSensor5()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists6()))
+                                        sensors.add(AnSensor.of(6, ad.getAnalogSensor6()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists7()))
+                                        sensors.add(AnSensor.of(7, ad.getAnalogSensor7()));
+                                    if ("1".equals(ad.getAnalogSensorFieldExists8()))
+                                        sensors.add(AnSensor.of(8, ad.getAnalogSensor8()));
 
                                     navRecord = new NavRecord(
                                             navRecord.client(),
@@ -164,17 +173,106 @@ public class ConnectionHandler implements Runnable {
                                             sensors
                                     );
                                 }
+                                case RecordDataSet.SrExtPosDataType -> { // EGTS_SR_EXT_POS_DATA
+                                    var extPos = (SrExtPosData) rd.getSubrecordData();
+                                    navRecord = new NavRecord(
+                                            navRecord.client(),
+                                            navRecord.packetID(),
+                                            navRecord.navigationTimestamp(),
+                                            navRecord.receivedTimestamp(),
+                                            navRecord.latitude(),
+                                            navRecord.longitude(),
+                                            navRecord.speed(),
+                                            extPos.getPdop(),
+                                            extPos.getHdop(),
+                                            extPos.getVdop(),
+                                            extPos.getSatellites(),
+                                            extPos.getNavigationSystem(),
+                                            navRecord.course(),
+                                            navRecord.anSensors(),
+                                            navRecord.liquidSensors()
+                                    );
+                                }
+                                case RecordDataSet.SrStateDataType -> { // EGTS_SR_STATE_DATA
+                                    var state = (SrStateData) rd.getSubrecordData();
+                                    // Обработка состояния устройства
+                                    logger.info("Состояние АСН: режим={}, напряжение={}V",
+                                            state.getState(), state.getMainPowerSourceVoltage());
+                                }
+                                case RecordDataSet.SrAbsAnSensDataType -> { // EGTS_SR_ABS_AN_SENS_DATA
+                                    var absAn = (SrAbsSensData) rd.getSubrecordData();
+                                    List<AnSensor> sensors = new ArrayList<>(navRecord.anSensors());
+                                    sensors.add(AnSensor.of(absAn.getSensorNumber(), absAn.getValue()));
+                                    navRecord = new NavRecord(
+                                            navRecord.client(),
+                                            navRecord.packetID(),
+                                            navRecord.navigationTimestamp(),
+                                            navRecord.receivedTimestamp(),
+                                            navRecord.latitude(),
+                                            navRecord.longitude(),
+                                            navRecord.speed(),
+                                            navRecord.pdop(),
+                                            navRecord.hdop(),
+                                            navRecord.vdop(),
+                                            navRecord.nsat(),
+                                            navRecord.ns(),
+                                            navRecord.course(),
+                                            sensors,
+                                            navRecord.liquidSensors()
+                                    );
+                                }
+                                case RecordDataSet.SrAbsCntrDataType -> { // EGTS_SR_ABS_AN_SENS_DATA
+                                    var absCntr = (SrAbsCntrData) rd.getSubrecordData();
+                                    List<AnSensor> sensors = new ArrayList<>(navRecord.anSensors());
+                                    sensors.add(AnSensor.of(absCntr.getCounterNumber(), absCntr.getCounterValue()));
+                                    navRecord = new NavRecord(
+                                            navRecord.client(),
+                                            navRecord.packetID(),
+                                            navRecord.navigationTimestamp(),
+                                            navRecord.receivedTimestamp(),
+                                            navRecord.latitude(),
+                                            navRecord.longitude(),
+                                            navRecord.speed(),
+                                            navRecord.pdop(),
+                                            navRecord.hdop(),
+                                            navRecord.vdop(),
+                                            navRecord.nsat(),
+                                            navRecord.ns(),
+                                            navRecord.course(),
+                                            sensors,
+                                            navRecord.liquidSensors()
+                                    );
+
+                                }
                                 default -> logger.info("Неизвестная подзапись: {}", rd.getSubrecordType());
                             }
                         }
-
-                        if (save) {
-                            storage.save(navRecord);
-                        }
+//
+//                        if (save) {
+//                            storage.save(navRecord);
+//                        }
                     }
 
-                    byte[] response = createPtResponse(egtsPkg.getPacketIdentifier(), (byte) 0, (byte) 0);
-                    output.write(response);
+                    PtResponse pt = new PtResponse();
+                    pt.setResponsePacketID(egtsPkg.getPacketIdentifier());
+                    pt.setProcessingResult((byte) 0);
+
+                    EgtsPackage resp = new EgtsPackage();
+                    resp.setProtocolVersion((byte) 1);
+                    resp.setSecurityKeyId((byte) 0);
+                    resp.setPrefix("00");
+                    resp.setRoute("0");
+                    resp.setEncryptionAlg("00");
+                    resp.setCompression("0");
+                    resp.setPriority("00");
+                    resp.setHeaderLength((byte) 11);
+                    resp.setHeaderEncoding((byte) 0);
+                    resp.setPacketIdentifier((short) (egtsPkg.getPacketIdentifier() + 1));
+                    resp.setPacketType(EgtsPacketType.PT_RESPONSE);
+                    resp.setServicesFrameData(pt);
+
+                    byte[] buf = resp.encode();
+                    output.write(buf);
                 }
             }
         } catch (IOException e) {
@@ -182,11 +280,8 @@ public class ConnectionHandler implements Runnable {
         } finally {
             try {
                 socket.close();
-            } catch (IOException ignored) {}
+            } catch (IOException ignored) {
+            }
         }
-    }
-
-    private byte[] createPtResponse(short pid, byte resultCode, byte serviceType) {
-        return new byte[0]; // Реализуй аналогично Go
     }
 }
