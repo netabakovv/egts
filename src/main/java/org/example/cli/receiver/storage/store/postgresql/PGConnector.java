@@ -89,7 +89,12 @@ public class PGConnector implements Store<Serializable> {
         try (PreparedStatement stmt = connection.prepareStatement(insertQuery)) {
             byte[] jsonData = data.toBytes();
 
+            if (jsonData == null || jsonData.length == 0) {
+                throw new IOException("Данные для сохранения пустые");
+            }
+
             String jsonString = new String(jsonData, StandardCharsets.UTF_8);
+            System.out.println("JSON для отправки в БД: " + jsonString);
 
             stmt.setString(1, jsonString);
 

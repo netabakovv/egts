@@ -6,9 +6,9 @@ log_level: "DEBUG"
 storage:
   postgresql:
     host: "localhost"
-    port: "5555"
+    port: "5050"
     user: "postgres"
-    password: "1"
+    password: "Qq1234567"
     database: "receiver"
     table: "points"
     sslmode: "disable"
