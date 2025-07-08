@@ -4,6 +4,7 @@ import org.example.cli.receiver.storage.Store;
 import org.example.cli.receiver.storage.Serializable;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.Map;
 
@@ -88,7 +89,9 @@ public class PGConnector implements Store<Serializable> {
         try (PreparedStatement stmt = connection.prepareStatement(insertQuery)) {
             byte[] jsonData = data.toBytes();
 
-            stmt.setObject(1, jsonData, Types.VARBINARY);
+            String jsonString = new String(jsonData, StandardCharsets.UTF_8);
+
+            stmt.setString(1, jsonString);
 
             stmt.executeUpdate();
         } catch (Exception e) {
