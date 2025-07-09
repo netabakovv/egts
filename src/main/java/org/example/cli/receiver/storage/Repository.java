@@ -11,15 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class Repository {
-    private final List<Saver<Serializable>> storages = new ArrayList<>();
+public class Repository<T extends Serializable> {
+    private final List<Saver<T>> storages = new ArrayList<>();
 
-    public void addStore(Saver<Serializable> store) {
+    public void addStore(Saver<T> store) {
         storages.add(store);
     }
 
-    public void save(NavRecord message) throws IOException {
-        for (Saver<Serializable> store : storages) {
+    public void save(T message) throws IOException {
+        for (Saver<T> store : storages) {
             store.save(message);
         }
     }
@@ -33,10 +33,10 @@ public class Repository {
             String storeName = entry.getKey();
             Map<String, String> params = entry.getValue();
 
-            Store<Serializable> store = switch (storeName.toLowerCase()) {
-                case "rabbitmq" -> new RabbitMQConnector(params);
-                case "clickhouse" -> new ClickHouseConnector(params);
-                case "postgresql" -> new PGConnector(params);
+            Store<T> store = switch (storeName.toLowerCase()) {
+                case "rabbitmq" -> (Store<T>) new RabbitMQConnector(params);
+                case "clickhouse" -> (Store<T>) new ClickHouseConnector(params);
+                case "postgresql" -> (Store<T>) new PGConnector(params);
                 default -> throw new IOException("Хранилище не поддерживается: " + storeName);
             };
 
