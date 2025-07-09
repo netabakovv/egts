@@ -1,34 +1,45 @@
 package org.example.libs;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Класс для работы с подзаписью "Данные аналоговых и дискретных датчиков" (SR_AD_SENSORS_DATA)
+ * согласно ГОСТ 33472-2015 (EGTS)
+ */
 @Getter
 @Setter
 public class SrAdSensorsData implements BinaryData {
-    private String digitalInputsOctetExists1 = "0";
-    private String digitalInputsOctetExists2 = "0";
-    private String digitalInputsOctetExists3 = "0";
-    private String digitalInputsOctetExists4 = "0";
-    private String digitalInputsOctetExists5 = "0";
-    private String digitalInputsOctetExists6 = "0";
-    private String digitalInputsOctetExists7 = "0";
-    private String digitalInputsOctetExists8 = "0";
+    // Флаги наличия дополнительных цифровых входов (1 бит на каждый)
+    private boolean digitalInputsOctetExists1;
+    private boolean digitalInputsOctetExists2;
+    private boolean digitalInputsOctetExists3;
+    private boolean digitalInputsOctetExists4;
+    private boolean digitalInputsOctetExists5;
+    private boolean digitalInputsOctetExists6;
+    private boolean digitalInputsOctetExists7;
+    private boolean digitalInputsOctetExists8;
 
+    // Основные цифровые выходы (1 байт)
     private byte digitalOutputs;
 
-    private String analogSensorFieldExists1 = "0";
-    private String analogSensorFieldExists2 = "0";
-    private String analogSensorFieldExists3 = "0";
-    private String analogSensorFieldExists4 = "0";
-    private String analogSensorFieldExists5 = "0";
-    private String analogSensorFieldExists6 = "0";
-    private String analogSensorFieldExists7 = "0";
-    private String analogSensorFieldExists8 = "0";
+    // Флаги наличия аналоговых датчиков (1 бит на каждый)
+    private boolean analogSensorFieldExists1;
+    private boolean analogSensorFieldExists2;
+    private boolean analogSensorFieldExists3;
+    private boolean analogSensorFieldExists4;
+    private boolean analogSensorFieldExists5;
+    private boolean analogSensorFieldExists6;
+    private boolean analogSensorFieldExists7;
+    private boolean analogSensorFieldExists8;
 
+    // Дополнительные цифровые входы (по 1 байту на каждый)
     private byte additionalDigitalInputsOctet1;
     private byte additionalDigitalInputsOctet2;
     private byte additionalDigitalInputsOctet3;
@@ -38,6 +49,7 @@ public class SrAdSensorsData implements BinaryData {
     private byte additionalDigitalInputsOctet7;
     private byte additionalDigitalInputsOctet8;
 
+    // Значения аналоговых датчиков (по 3 байта на каждый)
     private int analogSensor1;
     private int analogSensor2;
     private int analogSensor3;
@@ -47,139 +59,162 @@ public class SrAdSensorsData implements BinaryData {
     private int analogSensor7;
     private int analogSensor8;
 
+    /**
+     * Внутренний класс для хранения данных одного аналогового датчика
+     */
+    @Getter
+    @Setter
+    public static class AnalogSensor {
+        private final int sensorNumber;
+        private int value;
+
+        public AnalogSensor(int sensorNumber, int value) {
+            this.sensorNumber = sensorNumber;
+            this.value = value;
+        }
+    }
+
+    /**
+     * Получить список всех активных аналоговых датчиков
+     */
+    public List<AnalogSensor> getActiveAnalogSensors() {
+        List<AnalogSensor> sensors = new ArrayList<>();
+        if (analogSensorFieldExists1) sensors.add(new AnalogSensor(1, analogSensor1));
+        if (analogSensorFieldExists2) sensors.add(new AnalogSensor(2, analogSensor2));
+        if (analogSensorFieldExists3) sensors.add(new AnalogSensor(3, analogSensor3));
+        if (analogSensorFieldExists4) sensors.add(new AnalogSensor(4, analogSensor4));
+        if (analogSensorFieldExists5) sensors.add(new AnalogSensor(5, analogSensor5));
+        if (analogSensorFieldExists6) sensors.add(new AnalogSensor(6, analogSensor6));
+        if (analogSensorFieldExists7) sensors.add(new AnalogSensor(7, analogSensor7));
+        if (analogSensorFieldExists8) sensors.add(new AnalogSensor(8, analogSensor8));
+        return sensors;
+    }
+
     @Override
     public void decode(byte[] data) throws IOException {
+        if (data == null || data.length < 3) {
+            throw new IOException("Недостаточно данных для декодирования SR_AD_SENSORS_DATA");
+        }
+
         ByteBuffer buf = ByteBuffer.wrap(data);
         buf.order(ByteOrder.LITTLE_ENDIAN);
 
-        if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения флагов");
-
+        // Чтение флагов цифровых входов
         byte flags = buf.get();
+        digitalInputsOctetExists1 = (flags & 0x01) != 0;
+        digitalInputsOctetExists2 = (flags & 0x02) != 0;
+        digitalInputsOctetExists3 = (flags & 0x04) != 0;
+        digitalInputsOctetExists4 = (flags & 0x08) != 0;
+        digitalInputsOctetExists5 = (flags & 0x10) != 0;
+        digitalInputsOctetExists6 = (flags & 0x20) != 0;
+        digitalInputsOctetExists7 = (flags & 0x40) != 0;
+        digitalInputsOctetExists8 = (flags & 0x80) != 0;
 
-        int flagBits = Byte.toUnsignedInt(flags);
-        this.digitalInputsOctetExists8 = ((flagBits >> 7) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists7 = ((flagBits >> 6) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists6 = ((flagBits >> 5) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists5 = ((flagBits >> 4) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists4 = ((flagBits >> 3) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists3 = ((flagBits >> 2) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists2 = ((flagBits >> 1) & 0x01) == 1 ? "1" : "0";
-        this.digitalInputsOctetExists1 = (flagBits & 0x01) == 1 ? "1" : "0";
+        // Чтение цифровых выходов
+        if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения digitalOutputs");
+        digitalOutputs = buf.get();
 
-        if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтений дискретных флагов");
-        this.digitalOutputs = buf.get();
-
-        if (!buf.hasRemaining()) throw new IOException("Недостаточно даннях для чтения флагов аналоговых датчиков");
+        // Чтение флагов аналоговых датчиков
+        if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения флагов аналоговых датчиков");
         flags = buf.get();
-        flagBits = Byte.toUnsignedInt(flags);
+        analogSensorFieldExists1 = (flags & 0x80) != 0;
+        analogSensorFieldExists2 = (flags & 0x40) != 0;
+        analogSensorFieldExists3 = (flags & 0x20) != 0;
+        analogSensorFieldExists4 = (flags & 0x10) != 0;
+        analogSensorFieldExists5 = (flags & 0x08) != 0;
+        analogSensorFieldExists6 = (flags & 0x04) != 0;
+        analogSensorFieldExists7 = (flags & 0x02) != 0;
+        analogSensorFieldExists8 = (flags & 0x01) != 0;
 
-        this.analogSensorFieldExists1 = ((flagBits >> 7) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists2 = ((flagBits >> 6) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists3 = ((flagBits >> 5) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists4 = ((flagBits >> 4) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists5 = ((flagBits >> 3) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists6 = ((flagBits >> 2) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists7 = ((flagBits >> 1) & 0x01) == 1 ? "1" : "0";
-        this.analogSensorFieldExists8 = (flagBits & 0x01) == 1 ? "1" : "0";
+        // Чтение дополнительных цифровых входов
+        if (digitalInputsOctetExists1) additionalDigitalInputsOctet1 = readOptionalByte(buf, "ADIO1");
+        if (digitalInputsOctetExists2) additionalDigitalInputsOctet2 = readOptionalByte(buf, "ADIO2");
+        if (digitalInputsOctetExists3) additionalDigitalInputsOctet3 = readOptionalByte(buf, "ADIO3");
+        if (digitalInputsOctetExists4) additionalDigitalInputsOctet4 = readOptionalByte(buf, "ADIO4");
+        if (digitalInputsOctetExists5) additionalDigitalInputsOctet5 = readOptionalByte(buf, "ADIO5");
+        if (digitalInputsOctetExists6) additionalDigitalInputsOctet6 = readOptionalByte(buf, "ADIO6");
+        if (digitalInputsOctetExists7) additionalDigitalInputsOctet7 = readOptionalByte(buf, "ADIO7");
+        if (digitalInputsOctetExists8) additionalDigitalInputsOctet8 = readOptionalByte(buf, "ADIO8");
 
-        if ("1".equals(digitalInputsOctetExists1)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO1");
-            this.additionalDigitalInputsOctet1 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists2)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO2");
-            this.additionalDigitalInputsOctet2 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists3)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO3");
-            this.additionalDigitalInputsOctet3 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists4)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO4");
-            this.additionalDigitalInputsOctet4 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists5)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO5");
-            this.additionalDigitalInputsOctet5 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists6)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO6");
-            this.additionalDigitalInputsOctet6 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists7)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO7");
-            this.additionalDigitalInputsOctet7 = buf.get();
-        }
-        if ("1".equals(digitalInputsOctetExists8)) {
-            if (!buf.hasRemaining()) throw new IOException("Недостаточно данных для чтения ADIO8");
-            this.additionalDigitalInputsOctet8 = buf.get();
-        }
-
-        readAnalogSensor(buf, analogSensorFieldExists1, i -> analogSensor1 = i);
-        readAnalogSensor(buf, analogSensorFieldExists2, i -> analogSensor2 = i);
-        readAnalogSensor(buf, analogSensorFieldExists3, i -> analogSensor3 = i);
-        readAnalogSensor(buf, analogSensorFieldExists4, i -> analogSensor4 = i);
-        readAnalogSensor(buf, analogSensorFieldExists5, i -> analogSensor5 = i);
-        readAnalogSensor(buf, analogSensorFieldExists6, i -> analogSensor6 = i);
-        readAnalogSensor(buf, analogSensorFieldExists7, i -> analogSensor7 = i);
-        readAnalogSensor(buf, analogSensorFieldExists8, i -> analogSensor8 = i);
+        // Чтение аналоговых датчиков
+        if (analogSensorFieldExists1) analogSensor1 = readAnalogSensorValue(buf, 1);
+        if (analogSensorFieldExists2) analogSensor2 = readAnalogSensorValue(buf, 2);
+        if (analogSensorFieldExists3) analogSensor3 = readAnalogSensorValue(buf, 3);
+        if (analogSensorFieldExists4) analogSensor4 = readAnalogSensorValue(buf, 4);
+        if (analogSensorFieldExists5) analogSensor5 = readAnalogSensorValue(buf, 5);
+        if (analogSensorFieldExists6) analogSensor6 = readAnalogSensorValue(buf, 6);
+        if (analogSensorFieldExists7) analogSensor7 = readAnalogSensorValue(buf, 7);
+        if (analogSensorFieldExists8) analogSensor8 = readAnalogSensorValue(buf, 8);
     }
 
-    private void readAnalogSensor(ByteBuffer buf, String existsFlag, AnalogSensorConsumer setter) throws IOException {
-        if ("1".equals(existsFlag)) {
-            if (buf.remaining() < 3) throw new IOException("Недостаточно данных для чтения аналогового датчика");
-            int value = (buf.get() & 0xFF) |
-                    ((buf.get() & 0xFF) << 8) |
-                    ((buf.get() & 0xFF) << 16);
-            setter.accept(value);
+    private byte readOptionalByte(ByteBuffer buf, String fieldName) throws IOException {
+        if (!buf.hasRemaining()) {
+            throw new IOException("Недостаточно данных для чтения " + fieldName);
         }
+        return buf.get();
     }
 
-    @FunctionalInterface
-    private interface AnalogSensorConsumer {
-        void accept(int value);
+    private int readAnalogSensorValue(ByteBuffer buf, int sensorNumber) throws IOException {
+        if (buf.remaining() < 3) {
+            throw new IOException(String.format("Недостаточно данных для чтения аналогового датчика %d", sensorNumber));
+        }
+        return ((buf.get() & 0xFF) | (buf.get() & 0xFF) << 8 | (buf.get() & 0xFF) << 16);
     }
 
     @Override
     public byte[] encode() throws IOException {
-        ByteBuffer buf = ByteBuffer.allocate(32);
+        // Вычисляем размер буфера
+        int size = 3; // Минимальный размер (флаги + digitalOutputs)
+
+        // Добавляем место для дополнительных цифровых входов
+        size += countActiveDigitalInputs();
+
+        // Добавляем место для аналоговых датчиков
+        size += countActiveAnalogSensors() * 3;
+
+        ByteBuffer buf = ByteBuffer.allocate(size);
         buf.order(ByteOrder.LITTLE_ENDIAN);
 
-        int flagBits =
-                ("1".equals(digitalInputsOctetExists1) ? 0x01 : 0x00) |
-                        ("1".equals(digitalInputsOctetExists2) ? 0x01 : 0x00) << 1 |
-                        ("1".equals(digitalInputsOctetExists3) ? 0x01 : 0x00) << 2 |
-                        ("1".equals(digitalInputsOctetExists4) ? 0x01 : 0x00) << 3 |
-                        ("1".equals(digitalInputsOctetExists5) ? 0x01 : 0x00) << 4 |
-                        ("1".equals(digitalInputsOctetExists6) ? 0x01 : 0x00) << 5 |
-                        ("1".equals(digitalInputsOctetExists7) ? 0x01 : 0x00) << 6 |
-                        ("1".equals(digitalInputsOctetExists8) ? 0x01 : 0x00) << 7;
+        // Запись флагов цифровых входов
+        byte flags = (byte) (
+                (digitalInputsOctetExists1 ? 0x01 : 0) |
+                        (digitalInputsOctetExists2 ? 0x02 : 0) |
+                        (digitalInputsOctetExists3 ? 0x04 : 0) |
+                        (digitalInputsOctetExists4 ? 0x08 : 0) |
+                        (digitalInputsOctetExists5 ? 0x10 : 0) |
+                        (digitalInputsOctetExists6 ? 0x20 : 0) |
+                        (digitalInputsOctetExists7 ? 0x40 : 0) |
+                        (digitalInputsOctetExists8 ? 0x80 : 0)
+        );
+        buf.put(flags);
 
-        buf.put((byte) flagBits);
-
+        // Запись цифровых выходов
         buf.put(digitalOutputs);
 
-        flagBits =
-                ("1".equals(analogSensorFieldExists1) ? 0x01 : 0x00) << 7 |
-                        ("1".equals(analogSensorFieldExists2) ? 0x01 : 0x00) << 6 |
-                        ("1".equals(analogSensorFieldExists3) ? 0x01 : 0x00) << 5 |
-                        ("1".equals(analogSensorFieldExists4) ? 0x01 : 0x00) << 4 |
-                        ("1".equals(analogSensorFieldExists5) ? 0x01 : 0x00) << 3 |
-                        ("1".equals(analogSensorFieldExists6) ? 0x01 : 0x00) << 2 |
-                        ("1".equals(analogSensorFieldExists7) ? 0x01 : 0x00) << 1 |
-                        ("1".equals(analogSensorFieldExists8) ? 0x01 : 0x00);
+        // Запись флагов аналоговых датчиков
+        flags = (byte) (
+                (analogSensorFieldExists1 ? 0x80 : 0) |
+                        (analogSensorFieldExists2 ? 0x40 : 0) |
+                        (analogSensorFieldExists3 ? 0x20 : 0) |
+                        (analogSensorFieldExists4 ? 0x10 : 0) |
+                        (analogSensorFieldExists5 ? 0x08 : 0) |
+                        (analogSensorFieldExists6 ? 0x04 : 0) |
+                        (analogSensorFieldExists7 ? 0x02 : 0) |
+                        (analogSensorFieldExists8 ? 0x01 : 0)
+        );
+        buf.put(flags);
 
-        buf.put((byte) flagBits);
+        // Запись дополнительных цифровых входов
+        if (digitalInputsOctetExists1) buf.put(additionalDigitalInputsOctet1);
+        if (digitalInputsOctetExists2) buf.put(additionalDigitalInputsOctet2);
+        if (digitalInputsOctetExists3) buf.put(additionalDigitalInputsOctet3);
+        if (digitalInputsOctetExists4) buf.put(additionalDigitalInputsOctet4);
+        if (digitalInputsOctetExists5) buf.put(additionalDigitalInputsOctet5);
+        if (digitalInputsOctetExists6) buf.put(additionalDigitalInputsOctet6);
+        if (digitalInputsOctetExists7) buf.put(additionalDigitalInputsOctet7);
+        if (digitalInputsOctetExists8) buf.put(additionalDigitalInputsOctet8);
 
-        if ("1".equals(digitalInputsOctetExists1)) buf.put(additionalDigitalInputsOctet1);
-        if ("1".equals(digitalInputsOctetExists2)) buf.put(additionalDigitalInputsOctet2);
-        if ("1".equals(digitalInputsOctetExists3)) buf.put(additionalDigitalInputsOctet3);
-        if ("1".equals(digitalInputsOctetExists4)) buf.put(additionalDigitalInputsOctet4);
-        if ("1".equals(digitalInputsOctetExists5)) buf.put(additionalDigitalInputsOctet5);
-        if ("1".equals(digitalInputsOctetExists6)) buf.put(additionalDigitalInputsOctet6);
-        if ("1".equals(digitalInputsOctetExists7)) buf.put(additionalDigitalInputsOctet7);
-        if ("1".equals(digitalInputsOctetExists8)) buf.put(additionalDigitalInputsOctet8);
-
+        // Запись аналоговых датчиков
         writeAnalogSensor(buf, analogSensorFieldExists1, analogSensor1);
         writeAnalogSensor(buf, analogSensorFieldExists2, analogSensor2);
         writeAnalogSensor(buf, analogSensorFieldExists3, analogSensor3);
@@ -195,11 +230,37 @@ public class SrAdSensorsData implements BinaryData {
         return result;
     }
 
-    private void writeAnalogSensor(ByteBuffer buf, String existsFlag, int sensorValue) {
-        if ("1".equals(existsFlag)) {
-            buf.put((byte) sensorValue);
-            buf.put((byte) (sensorValue >>> 8));
-            buf.put((byte) (sensorValue >>> 16));
+    private int countActiveDigitalInputs() {
+        int count = 0;
+        if (digitalInputsOctetExists1) count++;
+        if (digitalInputsOctetExists2) count++;
+        if (digitalInputsOctetExists3) count++;
+        if (digitalInputsOctetExists4) count++;
+        if (digitalInputsOctetExists5) count++;
+        if (digitalInputsOctetExists6) count++;
+        if (digitalInputsOctetExists7) count++;
+        if (digitalInputsOctetExists8) count++;
+        return count;
+    }
+
+    private int countActiveAnalogSensors() {
+        int count = 0;
+        if (analogSensorFieldExists1) count++;
+        if (analogSensorFieldExists2) count++;
+        if (analogSensorFieldExists3) count++;
+        if (analogSensorFieldExists4) count++;
+        if (analogSensorFieldExists5) count++;
+        if (analogSensorFieldExists6) count++;
+        if (analogSensorFieldExists7) count++;
+        if (analogSensorFieldExists8) count++;
+        return count;
+    }
+
+    private void writeAnalogSensor(ByteBuffer buf, boolean exists, int value) {
+        if (exists) {
+            buf.put((byte) (value & 0xFF));
+            buf.put((byte) ((value >> 8) & 0xFF));
+            buf.put((byte) ((value >> 16) & 0xFF));
         }
     }
 

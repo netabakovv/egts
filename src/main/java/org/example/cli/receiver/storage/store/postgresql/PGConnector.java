@@ -100,7 +100,7 @@ public class PGConnector implements Store<Serializable> {
 
             stmt.executeUpdate();
         } catch (Exception e) {
-            throw new IOException("Не удалось вставить запись в PostgreSQL: " + e.getMessage(), e);
+            throw new IOException("Не удалось вставить запись в PostgreSQL: " + e.getMessage(), e.getCause());
         }
     }
 
