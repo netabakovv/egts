@@ -1,9 +1,8 @@
 package org.example.cli.receiver.storage.store.postgresql;
 
+import org.example.cli.receiver.storage.NavRecord;
 import org.example.cli.receiver.storage.Store;
 import org.example.cli.receiver.storage.Serializable;
-import org.postgresql.PGConnection;
-import org.postgresql.jdbc.PgConnection;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -86,7 +85,7 @@ public class PGConnector implements Store<Serializable> {
 
     @Override
     public void save(Serializable data) throws IOException {
-        String insertQuery = String.format("INSERT INTO %s (point) VALUES (?)", table);
+        String insertQuery = String.format("INSERT INTO %s (point) VALUES (?::jsonb)", table);
 
         try (PreparedStatement stmt = connection.prepareStatement(insertQuery)) {
             byte[] jsonData = data.toBytes();
@@ -98,7 +97,7 @@ public class PGConnector implements Store<Serializable> {
             String jsonString = new String(jsonData, StandardCharsets.UTF_8);
             System.out.println("JSON для отправки в БД: " + jsonString);
 
-            stmt.setString(1, jsonString);  // <-- вот эта строка была пропущена!
+            stmt.setString(1, jsonString);
 
             stmt.executeUpdate();
         } catch (Exception e) {
