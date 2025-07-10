@@ -59,7 +59,7 @@ public class ConnectionHandler implements Runnable {
                     logger.warn("Ошибка декодирования пакета: {}", result.message());
                     continue;
                 }
-
+                logger.info("Получен пакет от {} байт, packetId={}", fullPacket.length, egtsPkg.getPacketIdentifier());
                 Instant receivedTime = Instant.now();
 
                 if (egtsPkg.getPacketType() == EgtsPacketType.PT_APP_DATA) {
@@ -221,7 +221,7 @@ public class ConnectionHandler implements Runnable {
                                             navRecord.liquidSensors()
                                     );
                                 }
-                                case RecordDataSet.SrAbsCntrDataType -> { // EGTS_SR_ABS_AN_SENS_DATA
+                                case RecordDataSet.SrAbsCntrDataType -> { // // EGTS_SR_COUNTERS_DATA
                                     var absCntr = (SrAbsCntrData) rd.getSubrecordData();
                                     List<AnSensor> sensors = new ArrayList<>(navRecord.anSensors());
                                     sensors.add(AnSensor.of(absCntr.getCounterNumber(), absCntr.getCounterValue()));
@@ -247,10 +247,12 @@ public class ConnectionHandler implements Runnable {
                                 default -> logger.info("Неизвестная подзапись: {}", rd.getSubrecordType());
                             }
                         }
-//
-//                        if (save) {
-//                            storage.save(navRecord);
-//                        }
+                        System.out.println("_________________________NAV");
+                        System.out.println(navRecord);
+                        System.out.println("_________________________NAV");
+                        if (save) {
+                            storage.save(navRecord);
+                        }
                     }
 
                     PtResponse pt = new PtResponse();

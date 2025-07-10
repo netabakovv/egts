@@ -98,6 +98,8 @@ public class PGConnector implements Store<Serializable> {
             String jsonString = new String(jsonData, StandardCharsets.UTF_8);
             System.out.println("JSON для отправки в БД: " + jsonString);
 
+            stmt.setString(1, jsonString);  // <-- вот эта строка была пропущена!
+
             stmt.executeUpdate();
         } catch (Exception e) {
             throw new IOException("Не удалось вставить запись в PostgreSQL: " + e.getMessage(), e);
