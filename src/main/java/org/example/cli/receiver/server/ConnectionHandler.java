@@ -65,196 +65,127 @@ public class ConnectionHandler implements Runnable {
                 if (egtsPkg.getPacketType() == EgtsPacketType.PT_APP_DATA) {
                     ServiceDataSet sds = (ServiceDataSet) egtsPkg.getServicesFrameData();
                     for (var record : sds.getRecords()) {
-                        NavRecord navRecord = new NavRecord(
-                                0, 0, 0, 0,
-                                0, 0, 0, 0, 0, 0, 0, 0, 0, null, null);
-                        boolean save = false;
+                        // Переменные для накопления данных
+                        long clientId = 0;
+                        int packetId = egtsPkg.getPacketIdentifier();
+                        long navigationTs = 0;
+                        long receivedTs = receivedTime.getEpochSecond();
+                        double latitude = 0, longitude = 0;
+                        int speed = 0, pdop = 0, hdop = 0, vdop = 0, nsat = 0, ns = 0, course = 0;
+                        List<AnSensor> anSensors = new ArrayList<>();
+                        List<LiquidSensor> liquidSensors = new ArrayList<>();
+                        boolean hasPosition = false;
 
                         for (var rd : record.getRecordDataSet().getRecords()) {
                             switch (rd.getSubrecordType()) {
                                 case RecordDataSet.SrPosDataType -> {
                                     var pos = (SrPosData) rd.getSubrecordData();
-                                    navRecord = new NavRecord(
-                                            navRecord.client(),
-                                            0,
-                                            pos.getNavigationTime().getSecond(),
-                                            receivedTime.getEpochSecond(),
-                                            pos.getLatitude(),
-                                            pos.getLongitude(),
-                                            pos.getSpeed(),
-                                            0,
-                                            0,
-                                            0,
-                                            0,
-                                            0,
-                                            pos.getDirection(),
-                                            new ArrayList<>(),
-                                            new ArrayList<>()
-                                    );
-                                    save = true;
+                                    navigationTs = pos.getNavigationTime().getSecond();
+                                    latitude = pos.getLatitude();
+                                    longitude = pos.getLongitude();
+                                    speed = pos.getSpeed();
+                                    course = pos.getDirection();
+                                    hasPosition = true;
                                 }
                                 case RecordDataSet.SrTermIdentityType -> {
                                     var term = (SrTermIdentity) rd.getSubrecordData();
-                                    navRecord = new NavRecord(
-                                            term.getTerminalIdentifier(),
-                                            navRecord.packetID(),
-                                            navRecord.navigationTimestamp(),
-                                            navRecord.receivedTimestamp(),
-                                            navRecord.latitude(),
-                                            navRecord.longitude(),
-                                            navRecord.speed(),
-                                            navRecord.pdop(),
-                                            navRecord.hdop(),
-                                            navRecord.vdop(),
-                                            navRecord.nsat(),
-                                            navRecord.ns(),
-                                            navRecord.course(),
-                                            navRecord.anSensors(),
-                                            navRecord.liquidSensors()
-                                    );
+                                    clientId = term.getTerminalIdentifier();
                                 }
                                 case RecordDataSet.SrAdSensorsDataType -> {
                                     var ad = (SrAdSensorsData) rd.getSubrecordData();
-                                    List<AnSensor> sensors = new ArrayList<>();
                                     if ("1".equals(ad.getAnalogSensorFieldExists1()))
-                                        sensors.add(AnSensor.of(1, ad.getAnalogSensor1()));
+                                        anSensors.add(AnSensor.of(1, ad.getAnalogSensor1()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists2()))
-                                        sensors.add(AnSensor.of(2, ad.getAnalogSensor2()));
+                                        anSensors.add(AnSensor.of(2, ad.getAnalogSensor2()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists3()))
-                                        sensors.add(AnSensor.of(3, ad.getAnalogSensor3()));
+                                        anSensors.add(AnSensor.of(3, ad.getAnalogSensor3()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists4()))
-                                        sensors.add(AnSensor.of(4, ad.getAnalogSensor4()));
+                                        anSensors.add(AnSensor.of(4, ad.getAnalogSensor4()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists5()))
-                                        sensors.add(AnSensor.of(5, ad.getAnalogSensor5()));
+                                        anSensors.add(AnSensor.of(5, ad.getAnalogSensor5()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists6()))
-                                        sensors.add(AnSensor.of(6, ad.getAnalogSensor6()));
+                                        anSensors.add(AnSensor.of(6, ad.getAnalogSensor6()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists7()))
-                                        sensors.add(AnSensor.of(7, ad.getAnalogSensor7()));
+                                        anSensors.add(AnSensor.of(7, ad.getAnalogSensor7()));
                                     if ("1".equals(ad.getAnalogSensorFieldExists8()))
-                                        sensors.add(AnSensor.of(8, ad.getAnalogSensor8()));
-
-                                    navRecord = new NavRecord(
-                                            navRecord.client(),
-                                            navRecord.packetID(),
-                                            navRecord.navigationTimestamp(),
-                                            navRecord.receivedTimestamp(),
-                                            navRecord.latitude(),
-                                            navRecord.longitude(),
-                                            navRecord.speed(),
-                                            navRecord.pdop(),
-                                            navRecord.hdop(),
-                                            navRecord.vdop(),
-                                            navRecord.nsat(),
-                                            navRecord.ns(),
-                                            navRecord.course(),
-                                            sensors,
-                                            navRecord.liquidSensors()
-                                    );
+                                        anSensors.add(AnSensor.of(8, ad.getAnalogSensor8()));
                                 }
                                 case RecordDataSet.SrLiquidLevelSensorType -> {
                                     var fuel = (SrLiquidLevelSensor) rd.getSubrecordData();
-                                    List<LiquidSensor> sensors = new ArrayList<>();
-                                    sensors.add(LiquidSensor.of(fuel.getLiquidLevelSensorNumber(), fuel.getLiquidLevelSensorErrorFlag(), fuel.getLiquidLevelSensorData(), 0));
-                                    navRecord = new NavRecord(
-                                            navRecord.client(),
-                                            navRecord.packetID(),
-                                            navRecord.navigationTimestamp(),
-                                            navRecord.receivedTimestamp(),
-                                            navRecord.latitude(),
-                                            navRecord.longitude(),
-                                            navRecord.speed(),
-                                            navRecord.pdop(),
-                                            navRecord.hdop(),
-                                            navRecord.vdop(),
-                                            navRecord.nsat(),
-                                            navRecord.ns(),
-                                            navRecord.course(),
-                                            navRecord.anSensors(),
-                                            sensors
+                                    liquidSensors.add(
+                                            LiquidSensor.of(
+                                                    fuel.getLiquidLevelSensorNumber(),
+                                                    fuel.getLiquidLevelSensorErrorFlag(),
+                                                    fuel.getLiquidLevelSensorData(),
+                                                    0
+                                            )
                                     );
                                 }
-                                case RecordDataSet.SrExtPosDataType -> { // EGTS_SR_EXT_POS_DATA
-                                    var extPos = (SrExtPosData) rd.getSubrecordData();
-                                    navRecord = new NavRecord(
-                                            navRecord.client(),
-                                            navRecord.packetID(),
-                                            navRecord.navigationTimestamp(),
-                                            navRecord.receivedTimestamp(),
-                                            navRecord.latitude(),
-                                            navRecord.longitude(),
-                                            navRecord.speed(),
-                                            extPos.getPdop(),
-                                            extPos.getHdop(),
-                                            extPos.getVdop(),
-                                            extPos.getSatellites(),
-                                            extPos.getNavigationSystem(),
-                                            navRecord.course(),
-                                            navRecord.anSensors(),
-                                            navRecord.liquidSensors()
-                                    );
+                                case RecordDataSet.SrExtPosDataType -> {
+                                    var ext = (SrExtPosData) rd.getSubrecordData();
+                                    pdop = ext.getPdop(); hdop = ext.getHdop(); vdop = ext.getVdop();
+                                    nsat = ext.getSatellites(); ns = ext.getNavigationSystem();
                                 }
-                                case RecordDataSet.SrStateDataType -> { // EGTS_SR_STATE_DATA
+                                case RecordDataSet.SrStateDataType -> {
                                     var state = (SrStateData) rd.getSubrecordData();
-                                    // Обработка состояния устройства
                                     logger.info("Состояние АСН: режим={}, напряжение={}V",
                                             state.getState(), state.getMainPowerSourceVoltage());
                                 }
-                                case RecordDataSet.SrAbsAnSensDataType -> { // EGTS_SR_ABS_AN_SENS_DATA
-                                    var absAn = (SrAbsSensData) rd.getSubrecordData();
-                                    List<AnSensor> sensors = new ArrayList<>(navRecord.anSensors());
-                                    sensors.add(AnSensor.of(absAn.getSensorNumber(), absAn.getValue()));
-                                    navRecord = new NavRecord(
-                                            navRecord.client(),
-                                            navRecord.packetID(),
-                                            navRecord.navigationTimestamp(),
-                                            navRecord.receivedTimestamp(),
-                                            navRecord.latitude(),
-                                            navRecord.longitude(),
-                                            navRecord.speed(),
-                                            navRecord.pdop(),
-                                            navRecord.hdop(),
-                                            navRecord.vdop(),
-                                            navRecord.nsat(),
-                                            navRecord.ns(),
-                                            navRecord.course(),
-                                            sensors,
-                                            navRecord.liquidSensors()
-                                    );
-                                }
-                                case RecordDataSet.SrAbsCntrDataType -> { // // EGTS_SR_COUNTERS_DATA
-                                    var absCntr = (SrAbsCntrData) rd.getSubrecordData();
-                                    List<AnSensor> sensors = new ArrayList<>(navRecord.anSensors());
-                                    sensors.add(AnSensor.of(absCntr.getCounterNumber(), absCntr.getCounterValue()));
-                                    navRecord = new NavRecord(
-                                            navRecord.client(),
-                                            navRecord.packetID(),
-                                            navRecord.navigationTimestamp(),
-                                            navRecord.receivedTimestamp(),
-                                            navRecord.latitude(),
-                                            navRecord.longitude(),
-                                            navRecord.speed(),
-                                            navRecord.pdop(),
-                                            navRecord.hdop(),
-                                            navRecord.vdop(),
-                                            navRecord.nsat(),
-                                            navRecord.ns(),
-                                            navRecord.course(),
-                                            sensors,
-                                            navRecord.liquidSensors()
-                                    );
-
-                                }
+//                                // Новые подзаписи по ГОСТ 33472-2015
+//                                case RecordDataSet.SrAccelDataType -> {
+//                                    var accel = (SensAccelerometerData) rd.getSubrecordData();
+//                                    // TODO: обработка данных акселерометра (accel.getX(), getY(), getZ())
+//                                }
+////                                case RecordDataSet.SrLoopInDataType -> {
+////                                    var loop = (SrLoopinData) rd.getSubrecordData();
+////                                    // TODO: обработка статусов петлевых входов (loop.getLoopinStates())
+////                                }
+//                                case RecordDataSet.SrAbsDigSensDataType -> {
+//                                    var dig = (SensButtonPressCounter) rd.getSubrecordData();
+//                                    anSensors.add(AnSensor.of(dig.getSensNum(), dig.getValue()));
+//                                }
+//                                case RecordDataSet.SrCountersDataType -> {
+//                                    // TODO Раздефать
+//                                    var cnts = (SrCountersData) rd.getSubrecordData();
+//                                    for (var c : cnts.get()) {
+//                                        anSensors.add(AnSensor.of(c.getCounterNumber(), c.getCounterValue()));
+//                                    }
+//                                }
+////                                case RecordDataSet.SrAbsLoopInDataType -> {
+////                                    var absLoop = (SrAbsLoopinData) rd.getSubrecordData();
+////                                    // TODO: обработка одного петлевого входа absLoop.getLoopinNumber(), getFlag()
+////                                }
+//                                case RecordDataSet.SrPassengersCntrType -> {
+//                                    var pas = (SrPassengersCountersData) rd.getSubrecordData();
+//                                    // TODO: обработка пассажирских счётчиков pas.getCounters()
+//                                }
                                 default -> logger.info("Неизвестная подзапись: {}", rd.getSubrecordType());
                             }
                         }
-                        System.out.println("_________________________NAV");
-                        System.out.println(navRecord);
-                        System.out.println("_________________________NAV");
-                        if (save) {
-                            storage.save(navRecord);
+                        if (hasPosition) {
+                            NavRecord nav = new NavRecord(
+                                    clientId,
+                                    packetId,
+                                    navigationTs,
+                                    receivedTs,
+                                    latitude,
+                                    longitude,
+                                    speed,
+                                    pdop,
+                                    hdop,
+                                    vdop,
+                                    nsat,
+                                    ns,
+                                    course,
+                                    anSensors,
+                                    liquidSensors
+                            );
+                            storage.save(nav);
+                            logger.debug("Сохранен NavRecord: {}", nav);
                         }
                     }
 
+                    // Ответ
                     PtResponse pt = new PtResponse();
                     pt.setResponsePacketID(egtsPkg.getPacketIdentifier());
                     pt.setProcessingResult((byte) 0);
