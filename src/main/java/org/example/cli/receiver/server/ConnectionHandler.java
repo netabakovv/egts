@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +68,9 @@ public class ConnectionHandler implements Runnable {
                     for (var record : sds.getRecords()) {
                         // Переменные для накопления данных
                         long clientId = 0;
+                        if (!Objects.equals(record.getObjectIDFieldExists(), "0")){
+                            clientId = record.getObjectIdentifier();
+                        }
                         int packetId = egtsPkg.getPacketIdentifier();
                         long navigationTs = 0;
                         long receivedTs = receivedTime.getEpochSecond();
@@ -80,11 +84,11 @@ public class ConnectionHandler implements Runnable {
                             switch (rd.getSubrecordType()) {
                                 case RecordDataSet.SrPosDataType -> {
                                     var pos = (SrPosData) rd.getSubrecordData();
-                                    navigationTs = pos.getNavigationTime().getSecond();
+                                    navigationTs = pos.getNavigationTime().getEpochSecond();
                                     latitude = pos.getLatitude();
                                     longitude = pos.getLongitude();
                                     speed = pos.getSpeed();
-                                    course = pos.getDirection();
+                                    course = pos.getDirection() & 0XFF;
                                     hasPosition = true;
                                 }
                                 case RecordDataSet.SrTermIdentityType -> {
@@ -117,12 +121,15 @@ public class ConnectionHandler implements Runnable {
                                                     fuel.getLiquidLevelSensorNumber(),
                                                     fuel.getLiquidLevelSensorErrorFlag(),
                                                     fuel.getLiquidLevelSensorData(),
-                                                    0
+                                                    Long.parseLong(fuel.getLiquidLevelSensorValueUnit())
                                             )
                                     );
                                 }
                                 case RecordDataSet.SrExtPosDataType -> {
                                     var ext = (SrExtPosData) rd.getSubrecordData();
+                                    logger.info("SrExtPosData: pdop={}, hdop={}, vdop={}, nsat={}, ns={}",
+                                            ext.getPdop(), ext.getHdop(), ext.getVdop(), ext.getSatellites(), ext.getNavigationSystem());
+
                                     pdop = ext.getPdop(); hdop = ext.getHdop(); vdop = ext.getVdop();
                                     nsat = ext.getSatellites(); ns = ext.getNavigationSystem();
                                 }
@@ -186,7 +193,7 @@ public class ConnectionHandler implements Runnable {
 
                     // Ответ
                     PtResponse pt = new PtResponse();
-                    pt.setResponsePacketID(egtsPkg.getPacketIdentifier());
+                    pt.setResponsePacketID((short) egtsPkg.getPacketIdentifier());
                     pt.setProcessingResult((byte) 0);
 
                     EgtsPackage resp = new EgtsPackage();

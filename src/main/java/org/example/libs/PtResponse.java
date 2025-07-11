@@ -8,7 +8,7 @@ import java.nio.ByteOrder;
 
 @Data
 public class PtResponse implements BinaryData {
-    private short responsePacketID;
+    private int responsePacketID;
     private byte processingResult;
     private BinaryData sdr;
 
@@ -40,7 +40,7 @@ public class PtResponse implements BinaryData {
         ByteBuffer buf = ByteBuffer.allocate(1024);
         buf.order(ByteOrder.LITTLE_ENDIAN);
 
-        buf.putShort(responsePacketID);
+        buf.putShort((short) responsePacketID);
         buf.put(processingResult);
 
         if (sdr != null) {

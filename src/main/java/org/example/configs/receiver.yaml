@@ -6,9 +6,9 @@ log_level: "DEBUG"
 storage:
   postgresql:
     host: "localhost"
-    port: "5555"
+    port: "5432"
     user: "postgres"
-    password: "1"
+    password: "123456"
     database: "receiver"
     table: "points"
     sslmode: "disable"
@@ -27,12 +27,11 @@ storage:
 #    user: "guest"
 #    password: "guest"
 #    exchange: "receiver"
-#  clickhouse:
-#    host: "localhost"
-#    port: "8123"
-#    database: "receiver"
-#    user: "default"
-#    password: ""
+  clickhouse:
+    host: "localhost"
+    port: "8123"
+    database: "default"
+    user: "default"
 #  nats:
 #    plugin: "nats.so"
 #    servers: "nats://localhost:1222, nats://localhost:1223, nats://localhost:1224"

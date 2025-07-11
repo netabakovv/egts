@@ -18,7 +18,7 @@ public class EgtsPackage {
     private byte headerLength;             // Длина заголовка
     private byte headerEncoding;            // Кодировка заголовка
     private short frameDataLength;          // Длина секции данных
-    private short packetIdentifier;         // Идентификатор пакета
+    private int packetIdentifier;         // Идентификатор пакета
     private EgtsPacketType packetType;               // Тип пакета
     private short peerAddress;              // Адрес отправителя
     private short recipientAddress;         // Адрес получателя
@@ -71,7 +71,7 @@ public class EgtsPackage {
         }
 
         buf.putShort(frameDataLength);
-        buf.putShort(packetIdentifier);
+        buf.putShort((short) packetIdentifier);
         buf.put((byte) packetType.getCode());
 
         if ("1".equals(route)) {
@@ -120,7 +120,7 @@ public class EgtsPackage {
             headerEncoding = buf.get();
 
             frameDataLength = buf.getShort();
-            packetIdentifier = buf.getShort();
+            packetIdentifier = Short.toUnsignedInt(buf.getShort());
             packetType = EgtsPacketType.fromCode(buf.get());
 
             if ("1".equals(route)) {

@@ -129,19 +129,22 @@ public class ClickHouseConnector implements Store<Serializable> {
                 database, table
         );
 
+        System.out.printf("pdop=%d, hdop=%d, vdop=%d, nsat=%d, ns=%d\n",
+                record.pdop(), record.hdop(), record.vdop(), record.nsat(), record.ns());
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, record.client());
             stmt.setLong(2, record.packetID());
-            stmt.setLong(3, record.navigationTimestamp());
-            stmt.setLong(4, record.receivedTimestamp());
+            stmt.setTimestamp(3, new Timestamp(record.navigationTimestamp() * 1000));
+            stmt.setTimestamp(4, new Timestamp(record.receivedTimestamp() * 1000));
             stmt.setDouble(5, record.latitude());
             stmt.setDouble(6, record.longitude());
             stmt.setInt(7, record.speed());
-            stmt.setInt(8, record.pdop());
-            stmt.setInt(9, record.hdop());
-            stmt.setInt(10, record.vdop());
-            stmt.setInt(11, record.nsat());
-            stmt.setInt(12, record.ns());
+            stmt.setShort(8, (short) record.pdop());
+            stmt.setShort(9, (short) record.hdop());
+            stmt.setShort(10, (short) record.vdop());
+            stmt.setByte(11, (byte) record.nsat());
+            stmt.setShort(12, (short) record.ns());
             stmt.setInt(13, record.course());
             stmt.setObject(14, serializeAnSensors(record.anSensors()));
             stmt.setObject(15, serializeLiquidSensors(record.liquidSensors()));

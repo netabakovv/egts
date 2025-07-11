@@ -37,120 +37,88 @@ public class SrTermIdentity implements BinaryData {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
         terminalIdentifier = Integer.toUnsignedLong(buf.getInt());
+        System.out.println(">> [SrTermIdentity] Прочитан terminalIdentifier = " + terminalIdentifier);
+
 
         byte flags = buf.get();
-        String flagBits = String.format("%8s", Integer.toBinaryString(flags & 0xFF)).replace(' ', '0');
+        MNE = isBitSet(flags, 7);
+        BSE = isBitSet(flags, 6);
+        NIDE = isBitSet(flags, 5);
+        SSRA = isBitSet(flags, 4);
+        LNGCE = isBitSet(flags, 3);
+        IMSIE = isBitSet(flags, 2);
+        IMEIE = isBitSet(flags, 1);
+        HDIDE = isBitSet(flags, 0);
 
-        // В Go младший бит последний, в Java так же (читаем слева направо)
-        MNE = flagBits.substring(0, 1);
-        BSE = flagBits.substring(1, 2);
-        NIDE = flagBits.substring(2, 3);
-        SSRA = flagBits.substring(3, 4);
-        LNGCE = flagBits.substring(4, 5);
-        IMSIE = flagBits.substring(5, 6);
-        IMEIE = flagBits.substring(6, 7);
-        HDIDE = flagBits.substring(7, 8);
-
-        if ("1".equals(HDIDE)) {
-            homeDispatcherIdentifier = Short.toUnsignedInt(buf.getShort());
-        }
-
-        if ("1".equals(IMEIE)) {
-            byte[] imeiBytes = new byte[15];
-            buf.get(imeiBytes);
-            IMEI = new String(imeiBytes, StandardCharsets.US_ASCII);
-        }
-
-        if ("1".equals(IMSIE)) {
-            byte[] imsiBytes = new byte[16];
-            buf.get(imsiBytes);
-            IMSI = new String(imsiBytes, StandardCharsets.US_ASCII);
-        }
-
-        if ("1".equals(LNGCE)) {
-            byte[] langBytes = new byte[3];
-            buf.get(langBytes);
-            languageCode = new String(langBytes, StandardCharsets.US_ASCII);
-        }
-
+        if ("1".equals(HDIDE)) homeDispatcherIdentifier = Short.toUnsignedInt(buf.getShort());
+        if ("1".equals(IMEIE)) IMEI = readString(buf, 15);
+        if ("1".equals(IMSIE)) IMSI = readString(buf, 16);
+        if ("1".equals(LNGCE)) languageCode = readString(buf, 3);
         if ("1".equals(NIDE)) {
             networkIdentifier = new byte[3];
             buf.get(networkIdentifier);
-        } else {
-            networkIdentifier = new byte[0];
         }
-
-        if ("1".equals(BSE)) {
-            bufferSize = Short.toUnsignedInt(buf.getShort());
-        }
-
-        if ("1".equals(MNE)) {
-            byte[] mobileBytes = new byte[15];
-            buf.get(mobileBytes);
-            mobileNumber = new String(mobileBytes, StandardCharsets.US_ASCII);
-        }
+        if ("1".equals(BSE)) bufferSize = Short.toUnsignedInt(buf.getShort());
+        if ("1".equals(MNE)) mobileNumber = readString(buf, 15);
     }
 
     @Override
     public byte[] encode() throws IOException {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
+        output.write(ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt((int) terminalIdentifier).array());
 
-        ByteBuffer buf = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
-        buf.putInt((int) terminalIdentifier);
-        output.write(buf.array());
-
-        String flagStr = MNE + BSE + NIDE + SSRA + LNGCE + IMSIE + IMEIE + HDIDE;
-        int flags = Integer.parseInt(flagStr, 2);
+        byte flags = 0;
+        flags |= bit(MNE, 7);
+        flags |= bit(BSE, 6);
+        flags |= bit(NIDE, 5);
+        flags |= bit(SSRA, 4);
+        flags |= bit(LNGCE, 3);
+        flags |= bit(IMSIE, 2);
+        flags |= bit(IMEIE, 1);
+        flags |= bit(HDIDE, 0);
         output.write(flags);
 
-        if ("1".equals(HDIDE)) {
-            buf = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
-            buf.putShort((short) homeDispatcherIdentifier);
-            output.write(buf.array());
-        }
-
-        if ("1".equals(IMEIE)) {
-            byte[] imeiBytes = new byte[15];
-            byte[] rawImei = IMEI.getBytes(StandardCharsets.US_ASCII);
-            System.arraycopy(rawImei, 0, imeiBytes, 0, Math.min(rawImei.length, 15));
-            output.write(imeiBytes);
-        }
-
-        if ("1".equals(IMSIE)) {
-            byte[] imsiBytes = new byte[16];
-            byte[] rawImsi = IMSI.getBytes(StandardCharsets.US_ASCII);
-            System.arraycopy(rawImsi, 0, imsiBytes, 0, Math.min(rawImsi.length, 16));
-            output.write(imsiBytes);
-        }
-
-        if ("1".equals(LNGCE)) {
-            byte[] langBytes = new byte[3];
-            byte[] rawLang = languageCode.getBytes(StandardCharsets.US_ASCII);
-            System.arraycopy(rawLang, 0, langBytes, 0, Math.min(rawLang.length, 3));
-            output.write(langBytes);
-        }
-
+        if ("1".equals(HDIDE)) output.write(shortToBytes(homeDispatcherIdentifier));
+        if ("1".equals(IMEIE)) output.write(fixedLengthBytes(IMEI, 15));
+        if ("1".equals(IMSIE)) output.write(fixedLengthBytes(IMSI, 16));
+        if ("1".equals(LNGCE)) output.write(fixedLengthBytes(languageCode, 3));
         if ("1".equals(NIDE)) {
             if (networkIdentifier.length != 3)
-                throw new IOException("networkIdentifier length must be 3 when NIDE flag is set");
+                throw new IOException("networkIdentifier must be 3 bytes if NIDE == 1");
             output.write(networkIdentifier);
         }
-
-        if ("1".equals(BSE)) {
-            buf = ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN);
-            buf.putShort((short) bufferSize);
-            output.write(buf.array());
-        }
-
-        if ("1".equals(MNE)) {
-            byte[] mobileBytes = new byte[15];
-            byte[] rawMobile = mobileNumber.getBytes(StandardCharsets.US_ASCII);
-            System.arraycopy(rawMobile, 0, mobileBytes, 0, Math.min(rawMobile.length, 15));
-            output.write(mobileBytes);
-        }
+        if ("1".equals(BSE)) output.write(shortToBytes(bufferSize));
+        if ("1".equals(MNE)) output.write(fixedLengthBytes(mobileNumber, 15));
 
         return output.toByteArray();
     }
+
+    // Вспомогательные методы:
+    private String isBitSet(byte flags, int pos) {
+        return ((flags >> pos) & 0x01) == 1 ? "1" : "0";
+    }
+
+    private byte bit(String flag, int pos) {
+        return "1".equals(flag) ? (byte) (1 << pos) : 0;
+    }
+
+    private byte[] shortToBytes(int value) {
+        return ByteBuffer.allocate(2).order(ByteOrder.LITTLE_ENDIAN).putShort((short) value).array();
+    }
+
+    private byte[] fixedLengthBytes(String input, int length) {
+        byte[] result = new byte[length];
+        byte[] src = input.getBytes(StandardCharsets.US_ASCII);
+        System.arraycopy(src, 0, result, 0, Math.min(src.length, length));
+        return result;
+    }
+
+    private String readString(ByteBuffer buf, int len) {
+        byte[] arr = new byte[len];
+        buf.get(arr);
+        return new String(arr, StandardCharsets.US_ASCII);
+    }
+
 
     @Override
     public int length() {

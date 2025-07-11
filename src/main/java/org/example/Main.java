@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             // Загрузка конфигурации
-            Settings settings = ConfigLoader.load("D:\\Саня\\java\\EGTS\\untitled\\src\\main\\java\\org\\example\\configs\\receiver.yaml");
+            Settings settings = ConfigLoader.load("C:\\Users\\shini\\OneDrive\\Рабочий стол\\egts\\src\\main\\java\\org\\example\\configs\\receiver.yaml");
 
             // Настройка логирования
             LoggingSetup.setLevel(settings.getParsedLogLevel());

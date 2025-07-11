@@ -48,38 +48,45 @@ public class RecordDataSet implements BinaryData {
 
         while (buf.hasRemaining()) {
             RecordData rd = new RecordData();
-            rd.setSubrecordType(buf.get());
 
-            System.out.println("Осталось байтов: " + buf.remaining());
-            if (buf.remaining() < 2) {
-                throw new IOException("Недостаточно данных для RecordNumber");
+            if (buf.remaining() < 3) {  // 1 байт типа + 2 байта длины
+                throw new IOException("Недостаточно данных для чтения заголовка подзаписи");
             }
 
-            short length = buf.getShort() ;
-            rd.setSubrecordLength(length);
+            byte subrecordType = buf.get();
+            short length = buf.getShort();  // Little-endian уже установлен
 
             if (length < 0) {
                 throw new IOException("Отрицательная длина подзаписи: " + length);
             }
 
             if (buf.remaining() < length) {
-                throw new IOException("Недостаточно данных для подзаписи");
+                throw new IOException("Недостаточно данных для чтения тела подзаписи: требуется " + length + ", доступно " + buf.remaining());
             }
 
             byte[] subRecordBytes = new byte[length];
-            buf.get(subRecordBytes);
+            buf.get(subRecordBytes);  // ВСЕГДА считываем, чтобы сместить позицию буфера
 
-            BinaryData subrecord = createSubrecord(rd.getSubrecordType(), length);
+            BinaryData subrecord = createSubrecord(subrecordType, length);
             if (subrecord == null) {
-                System.out.printf("Unknown subrecord type: %d, length: %d%n", rd.getSubrecordType(), length);
+                // Неизвестный тип — логируем и пропускаем
+                System.out.printf("Неизвестный подтип подзаписи: %d, длина: %d%n", subrecordType, length);
                 continue;
             }
 
-            subrecord.decode(subRecordBytes);
+            try {
+                subrecord.decode(subRecordBytes);
+            } catch (Exception e) {
+                throw new IOException("Ошибка при разборе подзаписи типа " + subrecordType + ": " + e.getMessage(), e);
+            }
+
+            rd.setSubrecordType(subrecordType);
+            rd.setSubrecordLength(length);
             rd.setSubrecordData(subrecord);
             records.add(rd);
         }
     }
+
 
     @Override
     public byte[] encode() throws IOException {

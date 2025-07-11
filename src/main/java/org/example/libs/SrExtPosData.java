@@ -1,150 +1,101 @@
 package org.example.libs;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.BitSet;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SrExtPosData implements BinaryData{
-    private String navigationSystemFieldExists = "0"; // NSFE
-    private String satellitesFieldExists = "0";       // SFE
-    private String pdopFieldExists = "0";             // PFE
-    private String hdopFieldExists = "0";             // HFE
-    private String vdopFieldExists = "0";             // VFE
+public class SrExtPosData implements BinaryData {
 
-    private int vdop;   // VDOP
-    private int hdop; // HDOP
-    private int pdop;   // PDOP
-    private byte satellites;                   // SAT
-    private int navigationSystem;              // NS
+    private String vdopFieldExists = "0";             // бит 0
+    private String hdopFieldExists = "0";             // бит 1
+    private String pdopFieldExists = "0";             // бит 2
+    private String satellitesFieldExists = "0";       // бит 3
+    private String navigationSystemFieldExists = "0"; // бит 4
 
-    /**
-     * Декодирует байты в структуру SrExtPosData.
-     */
+    private int vdop;              // VDOP
+    private int hdop;              // HDOP
+    private int pdop;              // PDOP
+    private byte satellites;       // SAT
+    private int navigationSystem;  // NS
+
     @Override
-    public void decode(byte[] content) throws IOException{
+    public void decode(byte[] content) throws IOException {
         if (content == null || content.length < 1) {
             throw new IllegalArgumentException("Недостаточно данных для декодирования SrExtPosData");
         }
 
-        ByteBuffer buf = ByteBuffer.wrap(content);
+        ByteBuffer buf = ByteBuffer.wrap(content).order(java.nio.ByteOrder.LITTLE_ENDIAN);
         byte flags = buf.get();
 
-        BitSet flagBits = BitSet.valueOf(new byte[]{flags});
-
-        this.vdopFieldExists = flagBits.get(7) ? "1" : "0";
-        this.hdopFieldExists = flagBits.get(6) ? "1" : "0";
-        this.pdopFieldExists = flagBits.get(5) ? "1" : "0";
-        this.satellitesFieldExists = flagBits.get(4) ? "1" : "0";
-        this.navigationSystemFieldExists = flagBits.get(3) ? "1" : "0";
-
-        byte[] tmpBuf = new byte[2];
+        // порядок битов: от младшего к старшему (бит 0 — VFE, бит 4 — NSFE)
+        this.vdopFieldExists = ((flags >> 0) & 1) == 1 ? "1" : "0";
+        this.hdopFieldExists = ((flags >> 1) & 1) == 1 ? "1" : "0";
+        this.pdopFieldExists = ((flags >> 2) & 1) == 1 ? "1" : "0";
+        this.satellitesFieldExists = ((flags >> 3) & 1) == 1 ? "1" : "0";
+        this.navigationSystemFieldExists = ((flags >> 4) & 1) == 1 ? "1" : "0";
 
         if ("1".equals(vdopFieldExists)) {
-            if (buf.remaining() < 2)
-                throw new IllegalArgumentException("Недостаточно данных для чтения VDOP");
-
-            buf.get(tmpBuf);
-            this.vdop = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            if (buf.remaining() < 2) throw new IllegalArgumentException("Недостаточно данных для VDOP");
+            this.vdop = Short.toUnsignedInt(buf.getShort());
         }
 
         if ("1".equals(hdopFieldExists)) {
-            if (buf.remaining() < 2)
-                throw new IllegalArgumentException("Недостаточно данных для чтения HDOP");
-
-            buf.get(tmpBuf);
-            this.hdop = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            if (buf.remaining() < 2) throw new IllegalArgumentException("Недостаточно данных для HDOP");
+            this.hdop = Short.toUnsignedInt(buf.getShort());
         }
 
         if ("1".equals(pdopFieldExists)) {
-            if (buf.remaining() < 2)
-                throw new IllegalArgumentException("Недостаточно данных для чтения PDOP");
-
-            buf.get(tmpBuf);
-            this.pdop = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            if (buf.remaining() < 2) throw new IllegalArgumentException("Недостаточно данных для PDOP");
+            this.pdop = Short.toUnsignedInt(buf.getShort());
         }
 
         if ("1".equals(satellitesFieldExists)) {
-            if (buf.remaining() < 1)
-                throw new IllegalArgumentException("Недостаточно данных для чтения SAT");
-
+            if (buf.remaining() < 1) throw new IllegalArgumentException("Недостаточно данных для SAT");
             this.satellites = buf.get();
         }
 
         if ("1".equals(navigationSystemFieldExists)) {
-            if (buf.remaining() < 2)
-                throw new IllegalArgumentException("Недостаточно данных для чтения NS");
-
-            buf.get(tmpBuf);
-            this.navigationSystem = Short.toUnsignedInt(ByteBuffer.wrap(tmpBuf).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort());
+            if (buf.remaining() < 2) throw new IllegalArgumentException("Недостаточно данных для NS");
+            this.navigationSystem = Short.toUnsignedInt(buf.getShort());
         }
     }
 
-    /**
-     * Кодирует структуру в массив байт.
-     */
     @Override
     public byte[] encode() throws IOException {
-        StringBuilder flagBuilder = new StringBuilder();
-        flagBuilder.append(vdopFieldExists)
-                .append(hdopFieldExists)
-                .append(pdopFieldExists)
-                .append(satellitesFieldExists)
-                .append(navigationSystemFieldExists)
-                .append('0')
-                .append('0')
-                .append('0');
+        // собрать флаг в виде одного байта (от бита 0 к 7)
+        int flags = 0;
+        flags |= "1".equals(vdopFieldExists) ? (1 << 0) : 0;
+        flags |= "1".equals(hdopFieldExists) ? (1 << 1) : 0;
+        flags |= "1".equals(pdopFieldExists) ? (1 << 2) : 0;
+        flags |= "1".equals(satellitesFieldExists) ? (1 << 3) : 0;
+        flags |= "1".equals(navigationSystemFieldExists) ? (1 << 4) : 0;
 
-
-        String flagStr = flagBuilder.toString();
-
-        // Проверка флагов
-        if (flagStr.length() != 8) {
-            throw new IllegalArgumentException("Флаг должен быть длиной 8 символов");
-        }
-
-        for (int i = 0; i < flagStr.length(); i++) {
-            char c = flagStr.charAt(i);
-            if (c != '0' && c != '1') {
-                throw new IllegalArgumentException("Флаг содержит недопустимый символ на позиции " + i + ": '" + c + "'");
-            }
-        }
-
-        int flags;
-        try {
-            flags = Integer.parseInt(flagStr, 2);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Не удалось преобразовать флаг в число", e);
-        }
-
-        int requiredSize = 1 + // флаг
+        int size = 1 + // flags
                 ("1".equals(vdopFieldExists) ? 2 : 0) +
                 ("1".equals(hdopFieldExists) ? 2 : 0) +
                 ("1".equals(pdopFieldExists) ? 2 : 0) +
                 ("1".equals(satellitesFieldExists) ? 1 : 0) +
                 ("1".equals(navigationSystemFieldExists) ? 2 : 0);
 
-        ByteBuffer buf = ByteBuffer.allocate(requiredSize);
-
+        ByteBuffer buf = ByteBuffer.allocate(size).order(java.nio.ByteOrder.LITTLE_ENDIAN);
         buf.put((byte) flags);
 
         if ("1".equals(vdopFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) vdop));
+            buf.putShort((short) vdop);
         }
 
         if ("1".equals(hdopFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) hdop));
+            buf.putShort((short) hdop);
         }
 
         if ("1".equals(pdopFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) pdop));
+            buf.putShort((short) pdop);
         }
 
         if ("1".equals(satellitesFieldExists)) {
@@ -152,25 +103,19 @@ public class SrExtPosData implements BinaryData{
         }
 
         if ("1".equals(navigationSystemFieldExists)) {
-            buf.putShort(Short.reverseBytes((short) navigationSystem));
+            buf.putShort((short) navigationSystem);
         }
 
-        byte[] result = new byte[buf.position()];
-        buf.rewind();
-        buf.get(result);
-
-        return result;
+        return buf.array();
     }
 
-    /**
-     * Возвращает длину закодированной подзаписи.
-     */
     @Override
     public int length() {
-        try {
-            return encode().length;
-        } catch (Exception e) {
-            return 0;
-        }
+        return 1 +
+                ("1".equals(vdopFieldExists) ? 2 : 0) +
+                ("1".equals(hdopFieldExists) ? 2 : 0) +
+                ("1".equals(pdopFieldExists) ? 2 : 0) +
+                ("1".equals(satellitesFieldExists) ? 1 : 0) +
+                ("1".equals(navigationSystemFieldExists) ? 2 : 0);
     }
 }

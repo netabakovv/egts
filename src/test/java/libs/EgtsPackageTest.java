@@ -27,7 +27,7 @@ public class EgtsPackageTest {
     @Test
     void test_encode_pos_data() throws IOException {
         SrPosData srPosData = new SrPosData();
-        srPosData.setNavigationTime(LocalDateTime.of(2018, 7, 5, 20, 8, 53, 0).atZone(ZoneOffset.UTC));
+        srPosData.setNavigationTime(LocalDateTime.of(2018, 7, 5, 20, 8, 53, 0).atZone(ZoneOffset.UTC).toInstant());
         srPosData.setLatitude(55.55389399769574);
         srPosData.setLongitude(37.43236696287812);
         srPosData.setAlte("0");
@@ -131,7 +131,7 @@ public class EgtsPackageTest {
         assertEquals(21, rd.getSubrecordLength());
 
         SrPosData posData = (SrPosData) rd.getSubrecordData();
-        assertEquals(LocalDateTime.of(2018, 7, 5, 20, 8, 53, 0).atZone(ZoneOffset.UTC).toInstant(), posData.getNavigationTime().toInstant());
+        assertEquals(LocalDateTime.of(2018, 7, 5, 20, 8, 53, 0).atZone(ZoneOffset.UTC).toInstant(), posData.getNavigationTime());
         assertEquals(55.55389399769574, posData.getLatitude(), 1e-10);
         assertEquals(37.43236696287812, posData.getLongitude(), 1e-10);
         assertEquals("0", posData.getAlte());

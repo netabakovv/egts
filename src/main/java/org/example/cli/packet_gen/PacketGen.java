@@ -36,7 +36,7 @@ public class PacketGen implements Callable<Integer> {
     private double longitude = 0.0;
 
     @Option(names = "--server", description = "Server address, format host:port")
-    private String server = "localhost:5555";
+    private String server = "127.0.0.1:6000";
 
     @Option(names = "--timeout", description = "Timeout in seconds")
     private int timeout = 0;
@@ -83,7 +83,7 @@ public class PacketGen implements Callable<Integer> {
 
             // === SrPosData ===
             SrPosData pos = new SrPosData();
-            pos.setNavigationTime(time.atZone(ZoneOffset.UTC));
+            pos.setNavigationTime(time.atZone(ZoneOffset.UTC).toInstant());
             pos.setLatitude(latitude);
             pos.setLongitude(longitude);
             pos.setAlte("1");
@@ -127,6 +127,11 @@ public class PacketGen implements Callable<Integer> {
 
             try (Socket socket = new Socket(host, port)) {
                 socket.setSoTimeout(timeout * 1000);
+                System.out.println("=== RAW HEX ===");
+                for (byte b : encoded) {
+                    System.out.printf("%02X ", b);
+                }
+                System.out.println("\n=== END HEX ===");
                 socket.getOutputStream().write(encoded);
 
                 byte[] ackBuf = new byte[1024];
@@ -166,6 +171,14 @@ public class PacketGen implements Callable<Integer> {
                     }
                 }
 
+                // === Подробное логирование отправленного пакета ===
+                System.out.println("\n=== Sent EGTS Packet Data ===");
+                System.out.printf("Packet ID: %d%n", packet.getPacketIdentifier());
+                System.out.printf("Object ID: %d%n", oid);
+                System.out.printf("Latitude: %.6f%n", latitude);
+                System.out.printf("Longitude: %.6f%n", longitude);
+                System.out.printf("Time: %s%n", time.atZone(ZoneOffset.UTC));
+                System.out.printf("Liquid level: %d%n", liquidLevel);
                 System.out.println("Packet sent and processed correctly.");
             }
 

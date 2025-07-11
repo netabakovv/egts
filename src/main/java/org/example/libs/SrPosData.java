@@ -5,12 +5,10 @@ import lombok.Data;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 
 @Data
 public class SrPosData implements BinaryData {
-    private ZonedDateTime navigationTime;
+    private Instant navigationTime;
     private double latitude;
     private double longitude;
 
@@ -39,10 +37,7 @@ public class SrPosData implements BinaryData {
 
         // 1. Navigation time
         long secondsSince2010 = Integer.toUnsignedLong(buf.getInt());
-        navigationTime = ZonedDateTime.ofInstant(
-                Instant.ofEpochSecond(secondsSince2010 + 1262304000L),
-                ZoneOffset.UTC
-        );
+        navigationTime = Instant.ofEpochSecond(secondsSince2010 + 1262304000L);
 
         // 2. Latitude
         long rawLat = Integer.toUnsignedLong(buf.getInt());
@@ -96,7 +91,7 @@ public class SrPosData implements BinaryData {
         ByteBuffer buf = ByteBuffer.allocate(32).order(ByteOrder.LITTLE_ENDIAN);
 
         // 1. Navigation time
-        long secondsSince2010 = navigationTime.toEpochSecond() - 1262304000L;
+        long secondsSince2010 = navigationTime.getEpochSecond() - 1262304000L;
         buf.putInt((int) secondsSince2010);
 
         // 2. Latitude

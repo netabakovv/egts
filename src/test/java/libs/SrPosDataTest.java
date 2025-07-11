@@ -12,9 +12,7 @@ public class SrPosDataTest {
 
     private SrPosData getExpected() {
         SrPosData res = new SrPosData();
-        res.setNavigationTime(
-                LocalDateTime.of(2018, Month.JULY, 6, 20, 8, 53, 0).atZone(ZoneOffset.UTC)
-        );
+        res.setNavigationTime(Instant.parse("2018-07-06T20:08:53Z"));
         res.setLatitude(55.55389399769574);
         res.setLongitude(37.43236696287812);
         res.setAlte("0");
