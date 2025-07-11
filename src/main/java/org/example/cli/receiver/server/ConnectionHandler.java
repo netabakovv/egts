@@ -131,7 +131,6 @@ public class ConnectionHandler implements Runnable {
                                     logger.info("Состояние АСН: режим={}, напряжение={}V",
                                             state.getState(), state.getMainPowerSourceVoltage());
                                 }
-//                                // Новые подзаписи по ГОСТ 33472-2015
 //                                case RecordDataSet.SrAccelDataType -> {
 //                                    var accel = (SensAccelerometerData) rd.getSubrecordData();
 //                                    // TODO: обработка данных акселерометра (accel.getX(), getY(), getZ())

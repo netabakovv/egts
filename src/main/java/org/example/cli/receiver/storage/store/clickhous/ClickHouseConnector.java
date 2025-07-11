@@ -1,11 +1,11 @@
 package org.example.cli.receiver.storage.store.clickhous;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.cli.receiver.storage.*;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -143,8 +143,8 @@ public class ClickHouseConnector implements Store<Serializable> {
             stmt.setInt(11, record.nsat());
             stmt.setInt(12, record.ns());
             stmt.setInt(13, record.course());
-            stmt.setString(14, serializeAnSensors(record.anSensors()));
-            stmt.setString(15, serializeLiquidSensors(record.liquidSensors()));
+            stmt.setObject(14, serializeAnSensors(record.anSensors()));
+            stmt.setObject(15, serializeLiquidSensors(record.liquidSensors()));
             stmt.setString(16, objectMapper.writeValueAsString(record));
 
             stmt.executeUpdate();
@@ -153,34 +153,38 @@ public class ClickHouseConnector implements Store<Serializable> {
         }
     }
 
-    private String serializeAnSensors(List<AnSensor> sensors) {
+    private Object[] serializeAnSensors(List<AnSensor> sensors) {
         if (sensors == null || sensors.isEmpty()) {
-            return "[]";
+            return new Object[0];
         }
-        StringBuilder sb = new StringBuilder("[");
+
+        Object[] result = new Object[sensors.size()];
         for (int i = 0; i < sensors.size(); i++) {
-            if (i > 0) sb.append(",");
             AnSensor sensor = sensors.get(i);
-            sb.append(String.format("(%d,%d)", sensor.sensorNumber(), sensor.value()));
+            result[i] = new Object[]{
+                    (short) sensor.sensorNumber(),  // UInt8
+                    sensor.value()                  // UInt32
+            };
         }
-        return sb.append("]").toString();
+        return result;
     }
 
-    private String serializeLiquidSensors(List<LiquidSensor> sensors) {
+    private Object[] serializeLiquidSensors(List<LiquidSensor> sensors) {
         if (sensors == null || sensors.isEmpty()) {
-            return "[]";
+            return new Object[0];
         }
-        StringBuilder sb = new StringBuilder("[");
+
+        Object[] result = new Object[sensors.size()];
         for (int i = 0; i < sensors.size(); i++) {
-            if (i > 0) sb.append(",");
             LiquidSensor sensor = sensors.get(i);
-            sb.append(String.format("(%d,'%s',%d,%d)",
-                    sensor.sensorNumber(),
-                    sensor.errorFlag(),
-                    sensor.valueMm(),
-                    sensor.valueL()));
+            result[i] = new Object[]{
+                    (short) sensor.sensorNumber(),  // UInt8
+                    sensor.errorFlag(),             // String
+                    sensor.valueMm(),               // UInt32
+                    sensor.valueL()                 // UInt32
+            };
         }
-        return sb.append("]").toString();
+        return result;
     }
 
     @Override

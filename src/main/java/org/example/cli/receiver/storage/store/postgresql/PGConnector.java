@@ -65,7 +65,7 @@ public class PGConnector implements Store<Serializable> {
 
     private void createTableIfNotExists() throws SQLException {
         String createTableSQL = String.format(
-                "CREATE TABLE IF NOT EXISTS %s (id SERIAL PRIMARY KEY, point TEXT NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);",
+                "CREATE TABLE IF NOT EXISTS %s (id SERIAL PRIMARY KEY, point JSONB NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);",
                 table
         );
         String createIndexSQL = String.format(
