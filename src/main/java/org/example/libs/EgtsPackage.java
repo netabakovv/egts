@@ -67,8 +67,8 @@ public class EgtsPackage {
             if (!"00".equals(encryptionAlg) && secretKey != null) {
                 sfrd = secretKey.encode();
             }
-            frameDataLength = (short) sfrd.length;
         }
+        frameDataLength = (short) sfrd.length;
 
         buf.putShort(frameDataLength);
         buf.putShort((short) packetIdentifier);
