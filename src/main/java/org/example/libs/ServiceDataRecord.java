@@ -16,8 +16,8 @@ public class ServiceDataRecord implements BinaryData {
 
     private static final long TIME_OFFSET_SECONDS = LocalDateTime.of(2010, 1, 1, 0, 0).toEpochSecond(ZoneOffset.UTC);
 
-    private short recordLength;
-    private short recordNumber;
+    private int recordLength;
+    private int recordNumber;
     private String sourceServiceOnDevice = "0";
     private String recipientServiceOnDevice = "0";
     private String group = "0";
@@ -39,8 +39,13 @@ public class ServiceDataRecord implements BinaryData {
     public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
-        recordLength = buf.getShort();
-        recordNumber = buf.getShort();
+        recordLength = Short.toUnsignedInt(buf.getShort());
+        if (buf.remaining() < recordLength) {
+            throw new IOException(String.format(
+                    "ServiceDataRecord: recordLength=%d, available=%d",
+                    recordLength, buf.remaining()));
+        }
+        recordNumber = Short.toUnsignedInt(buf.getShort());
 
         byte flags = buf.get();
         String flagBits = String.format("%8s", Integer.toBinaryString(flags & 0xFF)).replace(' ', '0');
@@ -70,13 +75,16 @@ public class ServiceDataRecord implements BinaryData {
         recipientServiceType = buf.get();
 
         int remaining = buf.remaining();
-        if (remaining > 0) {
-            byte[] rdsBytes = new byte[remaining];
-            buf.get(rdsBytes);
-
-            recordDataSet = new RecordDataSet();
-            recordDataSet.decode(rdsBytes);
+        if (remaining < recordLength) {
+            throw new IOException(String.format(
+                    "ServiceDataRecord: recordLength=%d, а оставшихся байт=%d",
+                    recordLength, remaining));
         }
+        byte[] rdsBytes = new byte[recordLength];
+        buf.get(rdsBytes);
+        this.recordDataSet = new RecordDataSet();
+        recordDataSet.decode(rdsBytes);
+
     }
 
     @Override
@@ -120,7 +128,7 @@ public class ServiceDataRecord implements BinaryData {
         }
     }
 
-    private void writeShortLE(DataOutputStream dos, short value) throws IOException {
+    private void writeShortLE(DataOutputStream dos, int value) throws IOException {
         dos.writeByte(value & 0xFF);
         dos.writeByte((value >> 8) & 0xFF);
     }

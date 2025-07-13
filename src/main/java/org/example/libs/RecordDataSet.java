@@ -19,7 +19,7 @@ public class RecordDataSet implements BinaryData {
     @Data
     public static class RecordData {
         private byte subrecordType;
-        private short subrecordLength;
+        private int subrecordLength;
         private BinaryData subrecordData;
 
         @Override
@@ -54,7 +54,7 @@ public class RecordDataSet implements BinaryData {
             }
 
             byte subrecordType = buf.get();
-            short length = buf.getShort();  // Little-endian уже установлен
+            int length = Short.toUnsignedInt(buf.getShort());  // Little-endian уже установлен
 
             if (length < 0) {
                 throw new IOException("Отрицательная длина подзаписи: " + length);
@@ -136,7 +136,7 @@ public class RecordDataSet implements BinaryData {
     // ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ
     // ======================
 
-    private BinaryData createSubrecord(byte type, short length) {
+    private BinaryData createSubrecord(byte type, int length) {
         return switch (type) {
             case SrPosDataType -> new SrPosData();
             case SrTermIdentityType -> new SrTermIdentity();

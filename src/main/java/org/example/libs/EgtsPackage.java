@@ -17,15 +17,15 @@ public class EgtsPackage {
     private String priority;                // Приоритет
     private byte headerLength;             // Длина заголовка
     private byte headerEncoding;            // Кодировка заголовка
-    private short frameDataLength;          // Длина секции данных
+    private int frameDataLength;          // Длина секции данных
     private int packetIdentifier;         // Идентификатор пакета
     private EgtsPacketType packetType;               // Тип пакета
-    private short peerAddress;              // Адрес отправителя
-    private short recipientAddress;         // Адрес получателя
+    private int peerAddress;              // Адрес отправителя
+    private int recipientAddress;         // Адрес получателя
     private byte timeToLive;               // Время жизни пакета
     private byte headerCheckSum;           // Контрольная сумма заголовка
     private BinaryData servicesFrameData;  // Данные сервиса
-    private short servicesFrameDataCheckSum; // Контрольная сумма данных сервиса
+    private int servicesFrameDataCheckSum; // Контрольная сумма данных сервиса
 
     public record EncodeOptions(SecretKey secretKey) {}
     public record DecodeOptions(SecretKey secretKey) {}
@@ -70,13 +70,13 @@ public class EgtsPackage {
         }
         frameDataLength = (short) sfrd.length;
 
-        buf.putShort(frameDataLength);
-        buf.putShort((short) packetIdentifier);
+        buf.put((byte) frameDataLength);
+        buf.put((byte) packetIdentifier);
         buf.put((byte) packetType.getCode());
 
         if ("1".equals(route)) {
-            buf.putShort(peerAddress);
-            buf.putShort(recipientAddress);
+            buf.put((byte) peerAddress);
+            buf.put((byte) recipientAddress);
             buf.put(timeToLive);
         }
 
@@ -119,13 +119,13 @@ public class EgtsPackage {
             headerLength = buf.get();
             headerEncoding = buf.get();
 
-            frameDataLength = buf.getShort();
+            frameDataLength = Short.toUnsignedInt(buf.getShort());
             packetIdentifier = Short.toUnsignedInt(buf.getShort());
             packetType = EgtsPacketType.fromCode(buf.get());
 
             if ("1".equals(route)) {
-                peerAddress = buf.getShort();
-                recipientAddress = buf.getShort();
+                peerAddress = Short.toUnsignedInt(buf.getShort());
+                recipientAddress = Short.toUnsignedInt(buf.getShort());
                 timeToLive = buf.get();
             }
 
@@ -159,7 +159,7 @@ public class EgtsPackage {
 
             servicesFrameData.decode(dataFrameBytes);
 
-            servicesFrameDataCheckSum = buf.getShort();
+            servicesFrameDataCheckSum = Short.toUnsignedInt(buf.getShort());
             short expectedCrc = CRC.crc16(dataFrameBytes);
             if (servicesFrameDataCheckSum != expectedCrc) {
                 return new DecodeResult(DecodeResultCode.HEADER_CRC_ERROR, "CRC16 тела пакета неверен", this);
