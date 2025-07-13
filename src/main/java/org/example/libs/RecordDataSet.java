@@ -64,8 +64,14 @@ public class RecordDataSet implements BinaryData {
                 throw new IOException("Недостаточно данных для чтения тела подзаписи: требуется " + length + ", доступно " + buf.remaining());
             }
 
+            if (buf.remaining() < length) {
+                throw new IOException(String.format(
+                        "Недостаточно байт для EGTS‑Plus (%d ожидается, %d есть)",
+                        length, buf.remaining()));
+            }
             byte[] subRecordBytes = new byte[length];
-            buf.get(subRecordBytes);  // ВСЕГДА считываем, чтобы сместить позицию буфера
+            buf.get(subRecordBytes);
+
 
             BinaryData subrecord = createSubrecord(subrecordType, length);
             if (subrecord == null) {
@@ -145,7 +151,7 @@ public class RecordDataSet implements BinaryData {
             case SrAbsCntrDataType -> new SrAbsCntrData();
             case SrAuthInfoType -> new SrAuthInfo();
             case SrCountersDataType -> new SrCountersData();
-            case SrEgtsPlusDataType -> new StorageRecordWrapper(); // Обертка над сгенерированным StorageRecord
+            case SrEgtsPlusDataType -> StorageRecord.newBuilder(); // Обертка над сгенерированным StorageRecord
             case SrAbsAnSensDataType -> new SrAbsSensData();
             case SrDispatcherIdentityType -> new SrDispatcherIdentity();
             case SrPassengersCountersType -> new SrPassengersCountersData();
@@ -165,7 +171,7 @@ public class RecordDataSet implements BinaryData {
         if (data instanceof SrAbsCntrData) return SrAbsCntrDataType;
         if (data instanceof SrAuthInfo) return SrAuthInfoType;
         if (data instanceof SrCountersData) return SrCountersDataType;
-        if (data instanceof StorageRecordWrapper) return SrEgtsPlusDataType;  // Обертка над сгенерированным StorageRecord
+        if (data instanceof StorageRecord.Builder) return SrEgtsPlusDataType;  // Обертка над сгенерированным StorageRecord
         if (data instanceof SrAbsSensData) return SrAbsAnSensDataType;
         if (data instanceof SrDispatcherIdentity) return SrDispatcherIdentityType;
         if (data instanceof SrPassengersCountersData) return SrPassengersCountersType;

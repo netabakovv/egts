@@ -5,3698 +5,708 @@
 
 package org.example.libs;
 
+import java.io.IOException;
+
 /**
  * <pre>
  * Причина формирования отметки
  * </pre>
- *
+ * <p>
  * Protobuf type {@code StorageRecord}
  */
 public final class StorageRecord extends
-    com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:StorageRecord)
-    StorageRecordOrBuilder {
-private static final long serialVersionUID = 0L;
-  static {
-    com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
-      com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
-      /* major= */ 4,
-      /* minor= */ 30,
-      /* patch= */ 2,
-      /* suffix= */ "",
-      StorageRecord.class.getName());
-  }
-  // Use StorageRecord.newBuilder() to construct.
-  private StorageRecord(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-    super(builder);
-  }
-  private StorageRecord() {
-    recordReason_ = emptyIntList();
-    sensAccelerometerData_ = java.util.Collections.emptyList();
-    sensAinAinValue_ = java.util.Collections.emptyList();
-    sensBufferData_ = java.util.Collections.emptyList();
-    sensButtonPressCounter_ = java.util.Collections.emptyList();
-    sensCanLogData_ = java.util.Collections.emptyList();
-    sensCanLogTmpDataExt_ = java.util.Collections.emptyList();
-    sensCounterCount_ = java.util.Collections.emptyList();
-    sensCrashData_ = java.util.Collections.emptyList();
-    sensDinsFlags_ = java.util.Collections.emptyList();
-    sensDoutsFlags_ = java.util.Collections.emptyList();
-    sensFmeterFrequency_ = java.util.Collections.emptyList();
-    sensFuelLevel_ = java.util.Collections.emptyList();
-    sensGsmCellMonitoring_ = java.util.Collections.emptyList();
-    sensNdNavData_ = java.util.Collections.emptyList();
-    sensStorInfo_ = java.util.Collections.emptyList();
-    sensTermoData_ = java.util.Collections.emptyList();
-    sensTestEraTests_ = java.util.Collections.emptyList();
-    sensTrackerInfo_ = java.util.Collections.emptyList();
-  }
-
-  public static final com.google.protobuf.Descriptors.Descriptor
-      getDescriptor() {
-    return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
-  }
-
-  @java.lang.Override
-  protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internalGetFieldAccessorTable() {
-    return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_fieldAccessorTable
-        .ensureFieldAccessorsInitialized(
-            org.example.libs.StorageRecord.class, org.example.libs.StorageRecord.Builder.class);
-  }
-
-  /**
-   * Protobuf enum {@code StorageRecord.Reason}
-   */
-  public enum Reason
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>DEVICE_RESET = 0;</code>
-     */
-    DEVICE_RESET(0),
-    /**
-     * <code>PROFILE_CHANGE = 1;</code>
-     */
-    PROFILE_CHANGE(1),
-    /**
-     * <code>IGNITION_ON = 2;</code>
-     */
-    IGNITION_ON(2),
-    /**
-     * <code>IGNITION_OFF = 3;</code>
-     */
-    IGNITION_OFF(3),
-    /**
-     * <code>TRIP_BEGIN = 4;</code>
-     */
-    TRIP_BEGIN(4),
-    /**
-     * <code>TRIP_END = 5;</code>
-     */
-    TRIP_END(5),
-    /**
-     * <code>STOP = 6;</code>
-     */
-    STOP(6),
-    /**
-     * <code>MOVE = 7;</code>
-     */
-    MOVE(7),
-    /**
-     * <code>TOWING_BEGIN = 8;</code>
-     */
-    TOWING_BEGIN(8),
-    /**
-     * <code>TOWING_END = 9;</code>
-     */
-    TOWING_END(9),
-    /**
-     * <code>TIMER_MOVE = 10;</code>
-     */
-    TIMER_MOVE(10),
-    /**
-     * <code>TIMER_STOP = 11;</code>
-     */
-    TIMER_STOP(11),
-    /**
-     * <code>ANGLE = 12;</code>
-     */
-    ANGLE(12),
-    /**
-     * <code>DISTANCE = 13;</code>
-     */
-    DISTANCE(13),
-    /**
-     * <code>SOS_BUTTON = 14;</code>
-     */
-    SOS_BUTTON(14),
-    /**
-     * <code>SERVICE_BUTTON = 15;</code>
-     */
-    SERVICE_BUTTON(15),
-    /**
-     * <code>TAMPER = 16;</code>
-     */
-    TAMPER(16),
-    /**
-     * <code>ANTENNA_SWITCH = 17;</code>
-     */
-    ANTENNA_SWITCH(17),
-    /**
-     * <code>GSM_LOST = 18;</code>
-     */
-    GSM_LOST(18),
-    /**
-     * <code>GSM_RECONNECT = 19;</code>
-     */
-    GSM_RECONNECT(19),
-    /**
-     * <code>GNSS_LOST = 20;</code>
-     */
-    GNSS_LOST(20),
-    /**
-     * <code>GNSS_REAQUISITION = 21;</code>
-     */
-    GNSS_REAQUISITION(21),
-    /**
-     * <code>JAMMER_GSM = 22;</code>
-     */
-    JAMMER_GSM(22),
-    /**
-     * <code>JAMMER_GNSS = 23;</code>
-     */
-    JAMMER_GNSS(23),
-    /**
-     * <code>OVER_SPEED = 24;</code>
-     */
-    OVER_SPEED(24),
-    /**
-     * <code>OVER_RPM = 25;</code>
-     */
-    OVER_RPM(25),
-    /**
-     * <code>OVER_TEMPERATURE = 26;</code>
-     */
-    OVER_TEMPERATURE(26),
-    /**
-     * <code>DANGEROUS_DRIVING = 27;</code>
-     */
-    DANGEROUS_DRIVING(27),
-    /**
-     * <code>ACCIDENT = 28;</code>
-     */
-    ACCIDENT(28),
-    /**
-     * <code>OVERTHROW = 29;</code>
-     */
-    OVERTHROW(29),
-    /**
-     * <code>ON_BATTERY = 30;</code>
-     */
-    ON_BATTERY(30),
-    /**
-     * <code>BATTERY_DISCHARGE = 31;</code>
-     */
-    BATTERY_DISCHARGE(31),
-    /**
-     * <code>RADIO_TAG_REG = 32;</code>
-     */
-    RADIO_TAG_REG(32),
-    /**
-     * <code>RADIO_TAG_UNREG = 33;</code>
-     */
-    RADIO_TAG_UNREG(33),
-    /**
-     * <code>MOVE_WITHOUT_RADIO_TAG = 34;</code>
-     */
-    MOVE_WITHOUT_RADIO_TAG(34),
-    /**
-     * <code>ECU_ERROR_CODE = 35;</code>
-     */
-    ECU_ERROR_CODE(35),
-    /**
-     * <code>EXTERNAL_REQUEST = 36;</code>
-     */
-    EXTERNAL_REQUEST(36),
-    /**
-     * <code>DEVICE_TEST = 37;</code>
-     */
-    DEVICE_TEST(37),
-    /**
-     * <code>OTHER_REASON = 99;</code>
-     */
-    OTHER_REASON(99),
-    UNRECOGNIZED(-1),
-    ;
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:StorageRecord)
+        StorageRecordOrBuilder {
+    private static final long serialVersionUID = 0L;
 
     static {
-      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
-        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
-        /* major= */ 4,
-        /* minor= */ 30,
-        /* patch= */ 2,
-        /* suffix= */ "",
-        Reason.class.getName());
-    }
-    /**
-     * <code>DEVICE_RESET = 0;</code>
-     */
-    public static final int DEVICE_RESET_VALUE = 0;
-    /**
-     * <code>PROFILE_CHANGE = 1;</code>
-     */
-    public static final int PROFILE_CHANGE_VALUE = 1;
-    /**
-     * <code>IGNITION_ON = 2;</code>
-     */
-    public static final int IGNITION_ON_VALUE = 2;
-    /**
-     * <code>IGNITION_OFF = 3;</code>
-     */
-    public static final int IGNITION_OFF_VALUE = 3;
-    /**
-     * <code>TRIP_BEGIN = 4;</code>
-     */
-    public static final int TRIP_BEGIN_VALUE = 4;
-    /**
-     * <code>TRIP_END = 5;</code>
-     */
-    public static final int TRIP_END_VALUE = 5;
-    /**
-     * <code>STOP = 6;</code>
-     */
-    public static final int STOP_VALUE = 6;
-    /**
-     * <code>MOVE = 7;</code>
-     */
-    public static final int MOVE_VALUE = 7;
-    /**
-     * <code>TOWING_BEGIN = 8;</code>
-     */
-    public static final int TOWING_BEGIN_VALUE = 8;
-    /**
-     * <code>TOWING_END = 9;</code>
-     */
-    public static final int TOWING_END_VALUE = 9;
-    /**
-     * <code>TIMER_MOVE = 10;</code>
-     */
-    public static final int TIMER_MOVE_VALUE = 10;
-    /**
-     * <code>TIMER_STOP = 11;</code>
-     */
-    public static final int TIMER_STOP_VALUE = 11;
-    /**
-     * <code>ANGLE = 12;</code>
-     */
-    public static final int ANGLE_VALUE = 12;
-    /**
-     * <code>DISTANCE = 13;</code>
-     */
-    public static final int DISTANCE_VALUE = 13;
-    /**
-     * <code>SOS_BUTTON = 14;</code>
-     */
-    public static final int SOS_BUTTON_VALUE = 14;
-    /**
-     * <code>SERVICE_BUTTON = 15;</code>
-     */
-    public static final int SERVICE_BUTTON_VALUE = 15;
-    /**
-     * <code>TAMPER = 16;</code>
-     */
-    public static final int TAMPER_VALUE = 16;
-    /**
-     * <code>ANTENNA_SWITCH = 17;</code>
-     */
-    public static final int ANTENNA_SWITCH_VALUE = 17;
-    /**
-     * <code>GSM_LOST = 18;</code>
-     */
-    public static final int GSM_LOST_VALUE = 18;
-    /**
-     * <code>GSM_RECONNECT = 19;</code>
-     */
-    public static final int GSM_RECONNECT_VALUE = 19;
-    /**
-     * <code>GNSS_LOST = 20;</code>
-     */
-    public static final int GNSS_LOST_VALUE = 20;
-    /**
-     * <code>GNSS_REAQUISITION = 21;</code>
-     */
-    public static final int GNSS_REAQUISITION_VALUE = 21;
-    /**
-     * <code>JAMMER_GSM = 22;</code>
-     */
-    public static final int JAMMER_GSM_VALUE = 22;
-    /**
-     * <code>JAMMER_GNSS = 23;</code>
-     */
-    public static final int JAMMER_GNSS_VALUE = 23;
-    /**
-     * <code>OVER_SPEED = 24;</code>
-     */
-    public static final int OVER_SPEED_VALUE = 24;
-    /**
-     * <code>OVER_RPM = 25;</code>
-     */
-    public static final int OVER_RPM_VALUE = 25;
-    /**
-     * <code>OVER_TEMPERATURE = 26;</code>
-     */
-    public static final int OVER_TEMPERATURE_VALUE = 26;
-    /**
-     * <code>DANGEROUS_DRIVING = 27;</code>
-     */
-    public static final int DANGEROUS_DRIVING_VALUE = 27;
-    /**
-     * <code>ACCIDENT = 28;</code>
-     */
-    public static final int ACCIDENT_VALUE = 28;
-    /**
-     * <code>OVERTHROW = 29;</code>
-     */
-    public static final int OVERTHROW_VALUE = 29;
-    /**
-     * <code>ON_BATTERY = 30;</code>
-     */
-    public static final int ON_BATTERY_VALUE = 30;
-    /**
-     * <code>BATTERY_DISCHARGE = 31;</code>
-     */
-    public static final int BATTERY_DISCHARGE_VALUE = 31;
-    /**
-     * <code>RADIO_TAG_REG = 32;</code>
-     */
-    public static final int RADIO_TAG_REG_VALUE = 32;
-    /**
-     * <code>RADIO_TAG_UNREG = 33;</code>
-     */
-    public static final int RADIO_TAG_UNREG_VALUE = 33;
-    /**
-     * <code>MOVE_WITHOUT_RADIO_TAG = 34;</code>
-     */
-    public static final int MOVE_WITHOUT_RADIO_TAG_VALUE = 34;
-    /**
-     * <code>ECU_ERROR_CODE = 35;</code>
-     */
-    public static final int ECU_ERROR_CODE_VALUE = 35;
-    /**
-     * <code>EXTERNAL_REQUEST = 36;</code>
-     */
-    public static final int EXTERNAL_REQUEST_VALUE = 36;
-    /**
-     * <code>DEVICE_TEST = 37;</code>
-     */
-    public static final int DEVICE_TEST_VALUE = 37;
-    /**
-     * <code>OTHER_REASON = 99;</code>
-     */
-    public static final int OTHER_REASON_VALUE = 99;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
+        com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+                com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+                /* major= */ 4,
+                /* minor= */ 30,
+                /* patch= */ 2,
+                /* suffix= */ "",
+                StorageRecord.class.getName());
     }
 
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static Reason valueOf(int value) {
-      return forNumber(value);
+    // Use StorageRecord.newBuilder() to construct.
+    private StorageRecord(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
     }
 
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     */
-    public static Reason forNumber(int value) {
-      switch (value) {
-        case 0: return DEVICE_RESET;
-        case 1: return PROFILE_CHANGE;
-        case 2: return IGNITION_ON;
-        case 3: return IGNITION_OFF;
-        case 4: return TRIP_BEGIN;
-        case 5: return TRIP_END;
-        case 6: return STOP;
-        case 7: return MOVE;
-        case 8: return TOWING_BEGIN;
-        case 9: return TOWING_END;
-        case 10: return TIMER_MOVE;
-        case 11: return TIMER_STOP;
-        case 12: return ANGLE;
-        case 13: return DISTANCE;
-        case 14: return SOS_BUTTON;
-        case 15: return SERVICE_BUTTON;
-        case 16: return TAMPER;
-        case 17: return ANTENNA_SWITCH;
-        case 18: return GSM_LOST;
-        case 19: return GSM_RECONNECT;
-        case 20: return GNSS_LOST;
-        case 21: return GNSS_REAQUISITION;
-        case 22: return JAMMER_GSM;
-        case 23: return JAMMER_GNSS;
-        case 24: return OVER_SPEED;
-        case 25: return OVER_RPM;
-        case 26: return OVER_TEMPERATURE;
-        case 27: return DANGEROUS_DRIVING;
-        case 28: return ACCIDENT;
-        case 29: return OVERTHROW;
-        case 30: return ON_BATTERY;
-        case 31: return BATTERY_DISCHARGE;
-        case 32: return RADIO_TAG_REG;
-        case 33: return RADIO_TAG_UNREG;
-        case 34: return MOVE_WITHOUT_RADIO_TAG;
-        case 35: return ECU_ERROR_CODE;
-        case 36: return EXTERNAL_REQUEST;
-        case 37: return DEVICE_TEST;
-        case 99: return OTHER_REASON;
-        default: return null;
-      }
+    private StorageRecord() {
+        recordReason_ = emptyIntList();
+        sensAccelerometerData_ = java.util.Collections.emptyList();
+        sensAinAinValue_ = java.util.Collections.emptyList();
+        sensBufferData_ = java.util.Collections.emptyList();
+        sensButtonPressCounter_ = java.util.Collections.emptyList();
+        sensCanLogData_ = java.util.Collections.emptyList();
+        sensCanLogTmpDataExt_ = java.util.Collections.emptyList();
+        sensCounterCount_ = java.util.Collections.emptyList();
+        sensCrashData_ = java.util.Collections.emptyList();
+        sensDinsFlags_ = java.util.Collections.emptyList();
+        sensDoutsFlags_ = java.util.Collections.emptyList();
+        sensFmeterFrequency_ = java.util.Collections.emptyList();
+        sensFuelLevel_ = java.util.Collections.emptyList();
+        sensGsmCellMonitoring_ = java.util.Collections.emptyList();
+        sensNdNavData_ = java.util.Collections.emptyList();
+        sensStorInfo_ = java.util.Collections.emptyList();
+        sensTermoData_ = java.util.Collections.emptyList();
+        sensTestEraTests_ = java.util.Collections.emptyList();
+        sensTrackerInfo_ = java.util.Collections.emptyList();
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<Reason>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Reason> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Reason>() {
-            public Reason findValueByNumber(int number) {
-              return Reason.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
-            "Can't get the descriptor of an unrecognized enum value.");
-      }
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return org.example.libs.StorageRecord.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final Reason[] VALUES = values();
-
-    public static Reason valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private Reason(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:StorageRecord.Reason)
-  }
-
-  public static final int RECORD_NUMBER_FIELD_NUMBER = 1;
-  private int recordNumber_ = 0;
-  /**
-   * <pre>
-   * Номер записи
-   * </pre>
-   *
-   * <code>uint32 record_number = 1;</code>
-   * @return The recordNumber.
-   */
-  @java.lang.Override
-  public int getRecordNumber() {
-    return recordNumber_;
-  }
-
-  public static final int TIME_STAMP_FIELD_NUMBER = 2;
-  private int timeStamp_ = 0;
-  /**
-   * <pre>
-   * Время отметки
-   * </pre>
-   *
-   * <code>fixed32 time_stamp = 2;</code>
-   * @return The timeStamp.
-   */
-  @java.lang.Override
-  public int getTimeStamp() {
-    return timeStamp_;
-  }
-
-  public static final int RECORD_REASON_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private com.google.protobuf.Internal.IntList recordReason_;
-  private static final com.google.protobuf.Internal.IntListAdapter.IntConverter<
-      org.example.libs.StorageRecord.Reason> recordReason_converter_ =
-          new com.google.protobuf.Internal.IntListAdapter.IntConverter<
-              org.example.libs.StorageRecord.Reason>() {
-            public org.example.libs.StorageRecord.Reason convert(int from) {
-              org.example.libs.StorageRecord.Reason result = org.example.libs.StorageRecord.Reason.forNumber(from);
-              return result == null ? org.example.libs.StorageRecord.Reason.UNRECOGNIZED : result;
-            }
-          };
-  /**
-   * <pre>
-   * Причины формирования отметки
-   * </pre>
-   *
-   * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-   * @return A list containing the recordReason.
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.StorageRecord.Reason> getRecordReasonList() {
-    return new com.google.protobuf.Internal.IntListAdapter<
-        org.example.libs.StorageRecord.Reason>(recordReason_, recordReason_converter_);
-  }
-  /**
-   * <pre>
-   * Причины формирования отметки
-   * </pre>
-   *
-   * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-   * @return The count of recordReason.
-   */
-  @java.lang.Override
-  public int getRecordReasonCount() {
-    return recordReason_.size();
-  }
-  /**
-   * <pre>
-   * Причины формирования отметки
-   * </pre>
-   *
-   * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-   * @param index The index of the element to return.
-   * @return The recordReason at the given index.
-   */
-  @java.lang.Override
-  public org.example.libs.StorageRecord.Reason getRecordReason(int index) {
-    return recordReason_converter_.convert(recordReason_.getInt(index));
-  }
-  /**
-   * <pre>
-   * Причины формирования отметки
-   * </pre>
-   *
-   * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-   * @return A list containing the enum numeric values on the wire for recordReason.
-   */
-  @java.lang.Override
-  public java.util.List<java.lang.Integer>
-  getRecordReasonValueList() {
-    return recordReason_;
-  }
-  /**
-   * <pre>
-   * Причины формирования отметки
-   * </pre>
-   *
-   * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-   * @param index The index of the value to return.
-   * @return The enum numeric value on the wire of recordReason at the given index.
-   */
-  @java.lang.Override
-  public int getRecordReasonValue(int index) {
-    return recordReason_.getInt(index);
-  }
-  private int recordReasonMemoizedSerializedSize;
-
-  public static final int STATUS_FLAGS_FIELD_NUMBER = 4;
-  private int statusFlags_ = 0;
-  /**
-   * <pre>
-   * Статусные флаги
-   * </pre>
-   *
-   * <code>fixed32 status_flags = 4;</code>
-   * @return The statusFlags.
-   */
-  @java.lang.Override
-  public int getStatusFlags() {
-    return statusFlags_;
-  }
-
-  public static final int SENS_ACCELEROMETER_DATA_FIELD_NUMBER = 18;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensAccelerometerData> sensAccelerometerData_;
-  /**
-   * <pre>
-   * Датчик ускорения
-   * </pre>
-   *
-   * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensAccelerometerData> getSensAccelerometerDataList() {
-    return sensAccelerometerData_;
-  }
-  /**
-   * <pre>
-   * Датчик ускорения
-   * </pre>
-   *
-   * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensAccelerometerDataOrBuilder> 
-      getSensAccelerometerDataOrBuilderList() {
-    return sensAccelerometerData_;
-  }
-  /**
-   * <pre>
-   * Датчик ускорения
-   * </pre>
-   *
-   * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-   */
-  @java.lang.Override
-  public int getSensAccelerometerDataCount() {
-    return sensAccelerometerData_.size();
-  }
-  /**
-   * <pre>
-   * Датчик ускорения
-   * </pre>
-   *
-   * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensAccelerometerData getSensAccelerometerData(int index) {
-    return sensAccelerometerData_.get(index);
-  }
-  /**
-   * <pre>
-   * Датчик ускорения
-   * </pre>
-   *
-   * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensAccelerometerDataOrBuilder getSensAccelerometerDataOrBuilder(
-      int index) {
-    return sensAccelerometerData_.get(index);
-  }
-
-  public static final int SENS_AIN_AIN_VALUE_FIELD_NUMBER = 9;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensAinAinValue> sensAinAinValue_;
-  /**
-   * <pre>
-   * Аналоговый вход
-   * </pre>
-   *
-   * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensAinAinValue> getSensAinAinValueList() {
-    return sensAinAinValue_;
-  }
-  /**
-   * <pre>
-   * Аналоговый вход
-   * </pre>
-   *
-   * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensAinAinValueOrBuilder> 
-      getSensAinAinValueOrBuilderList() {
-    return sensAinAinValue_;
-  }
-  /**
-   * <pre>
-   * Аналоговый вход
-   * </pre>
-   *
-   * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-   */
-  @java.lang.Override
-  public int getSensAinAinValueCount() {
-    return sensAinAinValue_.size();
-  }
-  /**
-   * <pre>
-   * Аналоговый вход
-   * </pre>
-   *
-   * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensAinAinValue getSensAinAinValue(int index) {
-    return sensAinAinValue_.get(index);
-  }
-  /**
-   * <pre>
-   * Аналоговый вход
-   * </pre>
-   *
-   * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensAinAinValueOrBuilder getSensAinAinValueOrBuilder(
-      int index) {
-    return sensAinAinValue_.get(index);
-  }
-
-  public static final int SENS_BUFFER_DATA_FIELD_NUMBER = 20;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensBufferData> sensBufferData_;
-  /**
-   * <pre>
-   * Буферизованные данные
-   * </pre>
-   *
-   * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensBufferData> getSensBufferDataList() {
-    return sensBufferData_;
-  }
-  /**
-   * <pre>
-   * Буферизованные данные
-   * </pre>
-   *
-   * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensBufferDataOrBuilder> 
-      getSensBufferDataOrBuilderList() {
-    return sensBufferData_;
-  }
-  /**
-   * <pre>
-   * Буферизованные данные
-   * </pre>
-   *
-   * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-   */
-  @java.lang.Override
-  public int getSensBufferDataCount() {
-    return sensBufferData_.size();
-  }
-  /**
-   * <pre>
-   * Буферизованные данные
-   * </pre>
-   *
-   * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensBufferData getSensBufferData(int index) {
-    return sensBufferData_.get(index);
-  }
-  /**
-   * <pre>
-   * Буферизованные данные
-   * </pre>
-   *
-   * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensBufferDataOrBuilder getSensBufferDataOrBuilder(
-      int index) {
-    return sensBufferData_.get(index);
-  }
-
-  public static final int SENS_BUTTON_PRESS_COUNTER_FIELD_NUMBER = 14;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensButtonPressCounter> sensButtonPressCounter_;
-  /**
-   * <pre>
-   * Кнопка
-   * </pre>
-   *
-   * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensButtonPressCounter> getSensButtonPressCounterList() {
-    return sensButtonPressCounter_;
-  }
-  /**
-   * <pre>
-   * Кнопка
-   * </pre>
-   *
-   * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensButtonPressCounterOrBuilder> 
-      getSensButtonPressCounterOrBuilderList() {
-    return sensButtonPressCounter_;
-  }
-  /**
-   * <pre>
-   * Кнопка
-   * </pre>
-   *
-   * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-   */
-  @java.lang.Override
-  public int getSensButtonPressCounterCount() {
-    return sensButtonPressCounter_.size();
-  }
-  /**
-   * <pre>
-   * Кнопка
-   * </pre>
-   *
-   * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensButtonPressCounter getSensButtonPressCounter(int index) {
-    return sensButtonPressCounter_.get(index);
-  }
-  /**
-   * <pre>
-   * Кнопка
-   * </pre>
-   *
-   * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensButtonPressCounterOrBuilder getSensButtonPressCounterOrBuilder(
-      int index) {
-    return sensButtonPressCounter_.get(index);
-  }
-
-  public static final int SENS_CAN_LOG_DATA_FIELD_NUMBER = 16;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensCanLogData> sensCanLogData_;
-  /**
-   * <pre>
-   * CAN-лог
-   * </pre>
-   *
-   * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensCanLogData> getSensCanLogDataList() {
-    return sensCanLogData_;
-  }
-  /**
-   * <pre>
-   * CAN-лог
-   * </pre>
-   *
-   * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensCanLogDataOrBuilder> 
-      getSensCanLogDataOrBuilderList() {
-    return sensCanLogData_;
-  }
-  /**
-   * <pre>
-   * CAN-лог
-   * </pre>
-   *
-   * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-   */
-  @java.lang.Override
-  public int getSensCanLogDataCount() {
-    return sensCanLogData_.size();
-  }
-  /**
-   * <pre>
-   * CAN-лог
-   * </pre>
-   *
-   * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCanLogData getSensCanLogData(int index) {
-    return sensCanLogData_.get(index);
-  }
-  /**
-   * <pre>
-   * CAN-лог
-   * </pre>
-   *
-   * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCanLogDataOrBuilder getSensCanLogDataOrBuilder(
-      int index) {
-    return sensCanLogData_.get(index);
-  }
-
-  public static final int SENS_CAN_LOG_TMP_DATA_EXT_FIELD_NUMBER = 17;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensCanLogTmpDataExt> sensCanLogTmpDataExt_;
-  /**
-   * <pre>
-   * Расширение CAN-лога
-   * </pre>
-   *
-   * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensCanLogTmpDataExt> getSensCanLogTmpDataExtList() {
-    return sensCanLogTmpDataExt_;
-  }
-  /**
-   * <pre>
-   * Расширение CAN-лога
-   * </pre>
-   *
-   * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensCanLogTmpDataExtOrBuilder> 
-      getSensCanLogTmpDataExtOrBuilderList() {
-    return sensCanLogTmpDataExt_;
-  }
-  /**
-   * <pre>
-   * Расширение CAN-лога
-   * </pre>
-   *
-   * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-   */
-  @java.lang.Override
-  public int getSensCanLogTmpDataExtCount() {
-    return sensCanLogTmpDataExt_.size();
-  }
-  /**
-   * <pre>
-   * Расширение CAN-лога
-   * </pre>
-   *
-   * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCanLogTmpDataExt getSensCanLogTmpDataExt(int index) {
-    return sensCanLogTmpDataExt_.get(index);
-  }
-  /**
-   * <pre>
-   * Расширение CAN-лога
-   * </pre>
-   *
-   * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCanLogTmpDataExtOrBuilder getSensCanLogTmpDataExtOrBuilder(
-      int index) {
-    return sensCanLogTmpDataExt_.get(index);
-  }
-
-  public static final int SENS_COUNTER_COUNT_FIELD_NUMBER = 11;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensCounterCount> sensCounterCount_;
-  /**
-   * <pre>
-   * Счётчик
-   * </pre>
-   *
-   * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensCounterCount> getSensCounterCountList() {
-    return sensCounterCount_;
-  }
-  /**
-   * <pre>
-   * Счётчик
-   * </pre>
-   *
-   * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensCounterCountOrBuilder> 
-      getSensCounterCountOrBuilderList() {
-    return sensCounterCount_;
-  }
-  /**
-   * <pre>
-   * Счётчик
-   * </pre>
-   *
-   * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-   */
-  @java.lang.Override
-  public int getSensCounterCountCount() {
-    return sensCounterCount_.size();
-  }
-  /**
-   * <pre>
-   * Счётчик
-   * </pre>
-   *
-   * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCounterCount getSensCounterCount(int index) {
-    return sensCounterCount_.get(index);
-  }
-  /**
-   * <pre>
-   * Счётчик
-   * </pre>
-   *
-   * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCounterCountOrBuilder getSensCounterCountOrBuilder(
-      int index) {
-    return sensCounterCount_.get(index);
-  }
-
-  public static final int SENS_CRASH_DATA_FIELD_NUMBER = 24;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensCrashData> sensCrashData_;
-  /**
-   * <pre>
-   * Данные об аварии
-   * </pre>
-   *
-   * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensCrashData> getSensCrashDataList() {
-    return sensCrashData_;
-  }
-  /**
-   * <pre>
-   * Данные об аварии
-   * </pre>
-   *
-   * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensCrashDataOrBuilder> 
-      getSensCrashDataOrBuilderList() {
-    return sensCrashData_;
-  }
-  /**
-   * <pre>
-   * Данные об аварии
-   * </pre>
-   *
-   * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-   */
-  @java.lang.Override
-  public int getSensCrashDataCount() {
-    return sensCrashData_.size();
-  }
-  /**
-   * <pre>
-   * Данные об аварии
-   * </pre>
-   *
-   * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCrashData getSensCrashData(int index) {
-    return sensCrashData_.get(index);
-  }
-  /**
-   * <pre>
-   * Данные об аварии
-   * </pre>
-   *
-   * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensCrashDataOrBuilder getSensCrashDataOrBuilder(
-      int index) {
-    return sensCrashData_.get(index);
-  }
-
-  public static final int SENS_DINS_FLAGS_FIELD_NUMBER = 10;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensDinsFlags> sensDinsFlags_;
-  /**
-   * <pre>
-   * Цифровые входы
-   * </pre>
-   *
-   * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensDinsFlags> getSensDinsFlagsList() {
-    return sensDinsFlags_;
-  }
-  /**
-   * <pre>
-   * Цифровые входы
-   * </pre>
-   *
-   * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensDinsFlagsOrBuilder> 
-      getSensDinsFlagsOrBuilderList() {
-    return sensDinsFlags_;
-  }
-  /**
-   * <pre>
-   * Цифровые входы
-   * </pre>
-   *
-   * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-   */
-  @java.lang.Override
-  public int getSensDinsFlagsCount() {
-    return sensDinsFlags_.size();
-  }
-  /**
-   * <pre>
-   * Цифровые входы
-   * </pre>
-   *
-   * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensDinsFlags getSensDinsFlags(int index) {
-    return sensDinsFlags_.get(index);
-  }
-  /**
-   * <pre>
-   * Цифровые входы
-   * </pre>
-   *
-   * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensDinsFlagsOrBuilder getSensDinsFlagsOrBuilder(
-      int index) {
-    return sensDinsFlags_.get(index);
-  }
-
-  public static final int SENS_DOUTS_FLAGS_FIELD_NUMBER = 19;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensDoutsFlags> sensDoutsFlags_;
-  /**
-   * <pre>
-   * Цифровые выходы
-   * </pre>
-   *
-   * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensDoutsFlags> getSensDoutsFlagsList() {
-    return sensDoutsFlags_;
-  }
-  /**
-   * <pre>
-   * Цифровые выходы
-   * </pre>
-   *
-   * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensDoutsFlagsOrBuilder> 
-      getSensDoutsFlagsOrBuilderList() {
-    return sensDoutsFlags_;
-  }
-  /**
-   * <pre>
-   * Цифровые выходы
-   * </pre>
-   *
-   * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-   */
-  @java.lang.Override
-  public int getSensDoutsFlagsCount() {
-    return sensDoutsFlags_.size();
-  }
-  /**
-   * <pre>
-   * Цифровые выходы
-   * </pre>
-   *
-   * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensDoutsFlags getSensDoutsFlags(int index) {
-    return sensDoutsFlags_.get(index);
-  }
-  /**
-   * <pre>
-   * Цифровые выходы
-   * </pre>
-   *
-   * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensDoutsFlagsOrBuilder getSensDoutsFlagsOrBuilder(
-      int index) {
-    return sensDoutsFlags_.get(index);
-  }
-
-  public static final int SENS_FMETER_FREQUENCY_FIELD_NUMBER = 12;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensFmeterFrequency> sensFmeterFrequency_;
-  /**
-   * <pre>
-   * Частотомер
-   * </pre>
-   *
-   * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensFmeterFrequency> getSensFmeterFrequencyList() {
-    return sensFmeterFrequency_;
-  }
-  /**
-   * <pre>
-   * Частотомер
-   * </pre>
-   *
-   * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensFmeterFrequencyOrBuilder> 
-      getSensFmeterFrequencyOrBuilderList() {
-    return sensFmeterFrequency_;
-  }
-  /**
-   * <pre>
-   * Частотомер
-   * </pre>
-   *
-   * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-   */
-  @java.lang.Override
-  public int getSensFmeterFrequencyCount() {
-    return sensFmeterFrequency_.size();
-  }
-  /**
-   * <pre>
-   * Частотомер
-   * </pre>
-   *
-   * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensFmeterFrequency getSensFmeterFrequency(int index) {
-    return sensFmeterFrequency_.get(index);
-  }
-  /**
-   * <pre>
-   * Частотомер
-   * </pre>
-   *
-   * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensFmeterFrequencyOrBuilder getSensFmeterFrequencyOrBuilder(
-      int index) {
-    return sensFmeterFrequency_.get(index);
-  }
-
-  public static final int SENS_FUEL_LEVEL_FIELD_NUMBER = 8;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensFuelLevel> sensFuelLevel_;
-  /**
-   * <pre>
-   * Уровень топлива
-   * </pre>
-   *
-   * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensFuelLevel> getSensFuelLevelList() {
-    return sensFuelLevel_;
-  }
-  /**
-   * <pre>
-   * Уровень топлива
-   * </pre>
-   *
-   * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensFuelLevelOrBuilder> 
-      getSensFuelLevelOrBuilderList() {
-    return sensFuelLevel_;
-  }
-  /**
-   * <pre>
-   * Уровень топлива
-   * </pre>
-   *
-   * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-   */
-  @java.lang.Override
-  public int getSensFuelLevelCount() {
-    return sensFuelLevel_.size();
-  }
-  /**
-   * <pre>
-   * Уровень топлива
-   * </pre>
-   *
-   * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensFuelLevel getSensFuelLevel(int index) {
-    return sensFuelLevel_.get(index);
-  }
-  /**
-   * <pre>
-   * Уровень топлива
-   * </pre>
-   *
-   * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensFuelLevelOrBuilder getSensFuelLevelOrBuilder(
-      int index) {
-    return sensFuelLevel_.get(index);
-  }
-
-  public static final int SENS_GSM_CELL_MONITORING_FIELD_NUMBER = 13;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensGsmCellMonitoring> sensGsmCellMonitoring_;
-  /**
-   * <pre>
-   * Информация о базовых станциях GSM
-   * </pre>
-   *
-   * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensGsmCellMonitoring> getSensGsmCellMonitoringList() {
-    return sensGsmCellMonitoring_;
-  }
-  /**
-   * <pre>
-   * Информация о базовых станциях GSM
-   * </pre>
-   *
-   * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensGsmCellMonitoringOrBuilder> 
-      getSensGsmCellMonitoringOrBuilderList() {
-    return sensGsmCellMonitoring_;
-  }
-  /**
-   * <pre>
-   * Информация о базовых станциях GSM
-   * </pre>
-   *
-   * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-   */
-  @java.lang.Override
-  public int getSensGsmCellMonitoringCount() {
-    return sensGsmCellMonitoring_.size();
-  }
-  /**
-   * <pre>
-   * Информация о базовых станциях GSM
-   * </pre>
-   *
-   * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensGsmCellMonitoring getSensGsmCellMonitoring(int index) {
-    return sensGsmCellMonitoring_.get(index);
-  }
-  /**
-   * <pre>
-   * Информация о базовых станциях GSM
-   * </pre>
-   *
-   * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensGsmCellMonitoringOrBuilder getSensGsmCellMonitoringOrBuilder(
-      int index) {
-    return sensGsmCellMonitoring_.get(index);
-  }
-
-  public static final int SENS_ND_NAV_DATA_FIELD_NUMBER = 7;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensNdNavData> sensNdNavData_;
-  /**
-   * <pre>
-   * Навигационные данные
-   * </pre>
-   *
-   * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensNdNavData> getSensNdNavDataList() {
-    return sensNdNavData_;
-  }
-  /**
-   * <pre>
-   * Навигационные данные
-   * </pre>
-   *
-   * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensNdNavDataOrBuilder> 
-      getSensNdNavDataOrBuilderList() {
-    return sensNdNavData_;
-  }
-  /**
-   * <pre>
-   * Навигационные данные
-   * </pre>
-   *
-   * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-   */
-  @java.lang.Override
-  public int getSensNdNavDataCount() {
-    return sensNdNavData_.size();
-  }
-  /**
-   * <pre>
-   * Навигационные данные
-   * </pre>
-   *
-   * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensNdNavData getSensNdNavData(int index) {
-    return sensNdNavData_.get(index);
-  }
-  /**
-   * <pre>
-   * Навигационные данные
-   * </pre>
-   *
-   * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensNdNavDataOrBuilder getSensNdNavDataOrBuilder(
-      int index) {
-    return sensNdNavData_.get(index);
-  }
-
-  public static final int SENS_STOR_INFO_FIELD_NUMBER = 21;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensStorInfo> sensStorInfo_;
-  /**
-   * <pre>
-   * Статистика хранилище навигационных данных
-   * </pre>
-   *
-   * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensStorInfo> getSensStorInfoList() {
-    return sensStorInfo_;
-  }
-  /**
-   * <pre>
-   * Статистика хранилище навигационных данных
-   * </pre>
-   *
-   * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensStorInfoOrBuilder> 
-      getSensStorInfoOrBuilderList() {
-    return sensStorInfo_;
-  }
-  /**
-   * <pre>
-   * Статистика хранилище навигационных данных
-   * </pre>
-   *
-   * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-   */
-  @java.lang.Override
-  public int getSensStorInfoCount() {
-    return sensStorInfo_.size();
-  }
-  /**
-   * <pre>
-   * Статистика хранилище навигационных данных
-   * </pre>
-   *
-   * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensStorInfo getSensStorInfo(int index) {
-    return sensStorInfo_.get(index);
-  }
-  /**
-   * <pre>
-   * Статистика хранилище навигационных данных
-   * </pre>
-   *
-   * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensStorInfoOrBuilder getSensStorInfoOrBuilder(
-      int index) {
-    return sensStorInfo_.get(index);
-  }
-
-  public static final int SENS_TERMO_DATA_FIELD_NUMBER = 15;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensTermoData> sensTermoData_;
-  /**
-   * <pre>
-   * Датчик температуры
-   * </pre>
-   *
-   * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensTermoData> getSensTermoDataList() {
-    return sensTermoData_;
-  }
-  /**
-   * <pre>
-   * Датчик температуры
-   * </pre>
-   *
-   * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensTermoDataOrBuilder> 
-      getSensTermoDataOrBuilderList() {
-    return sensTermoData_;
-  }
-  /**
-   * <pre>
-   * Датчик температуры
-   * </pre>
-   *
-   * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-   */
-  @java.lang.Override
-  public int getSensTermoDataCount() {
-    return sensTermoData_.size();
-  }
-  /**
-   * <pre>
-   * Датчик температуры
-   * </pre>
-   *
-   * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensTermoData getSensTermoData(int index) {
-    return sensTermoData_.get(index);
-  }
-  /**
-   * <pre>
-   * Датчик температуры
-   * </pre>
-   *
-   * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensTermoDataOrBuilder getSensTermoDataOrBuilder(
-      int index) {
-    return sensTermoData_.get(index);
-  }
-
-  public static final int SENS_TEST_ERA_TESTS_FIELD_NUMBER = 23;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensTestEraTests> sensTestEraTests_;
-  /**
-   * <pre>
-   * Тесты ЭРА ГЛОНАСС
-   * </pre>
-   *
-   * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensTestEraTests> getSensTestEraTestsList() {
-    return sensTestEraTests_;
-  }
-  /**
-   * <pre>
-   * Тесты ЭРА ГЛОНАСС
-   * </pre>
-   *
-   * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensTestEraTestsOrBuilder> 
-      getSensTestEraTestsOrBuilderList() {
-    return sensTestEraTests_;
-  }
-  /**
-   * <pre>
-   * Тесты ЭРА ГЛОНАСС
-   * </pre>
-   *
-   * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-   */
-  @java.lang.Override
-  public int getSensTestEraTestsCount() {
-    return sensTestEraTests_.size();
-  }
-  /**
-   * <pre>
-   * Тесты ЭРА ГЛОНАСС
-   * </pre>
-   *
-   * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensTestEraTests getSensTestEraTests(int index) {
-    return sensTestEraTests_.get(index);
-  }
-  /**
-   * <pre>
-   * Тесты ЭРА ГЛОНАСС
-   * </pre>
-   *
-   * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensTestEraTestsOrBuilder getSensTestEraTestsOrBuilder(
-      int index) {
-    return sensTestEraTests_.get(index);
-  }
-
-  public static final int SENS_TRACKER_INFO_FIELD_NUMBER = 22;
-  @SuppressWarnings("serial")
-  private java.util.List<org.example.libs.SensTrackerInfo> sensTrackerInfo_;
-  /**
-   * <pre>
-   * Статистика трекера
-   * </pre>
-   *
-   * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-   */
-  @java.lang.Override
-  public java.util.List<org.example.libs.SensTrackerInfo> getSensTrackerInfoList() {
-    return sensTrackerInfo_;
-  }
-  /**
-   * <pre>
-   * Статистика трекера
-   * </pre>
-   *
-   * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-   */
-  @java.lang.Override
-  public java.util.List<? extends org.example.libs.SensTrackerInfoOrBuilder> 
-      getSensTrackerInfoOrBuilderList() {
-    return sensTrackerInfo_;
-  }
-  /**
-   * <pre>
-   * Статистика трекера
-   * </pre>
-   *
-   * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-   */
-  @java.lang.Override
-  public int getSensTrackerInfoCount() {
-    return sensTrackerInfo_.size();
-  }
-  /**
-   * <pre>
-   * Статистика трекера
-   * </pre>
-   *
-   * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensTrackerInfo getSensTrackerInfo(int index) {
-    return sensTrackerInfo_.get(index);
-  }
-  /**
-   * <pre>
-   * Статистика трекера
-   * </pre>
-   *
-   * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-   */
-  @java.lang.Override
-  public org.example.libs.SensTrackerInfoOrBuilder getSensTrackerInfoOrBuilder(
-      int index) {
-    return sensTrackerInfo_.get(index);
-  }
-
-  private byte memoizedIsInitialized = -1;
-  @java.lang.Override
-  public final boolean isInitialized() {
-    byte isInitialized = memoizedIsInitialized;
-    if (isInitialized == 1) return true;
-    if (isInitialized == 0) return false;
-
-    memoizedIsInitialized = 1;
-    return true;
-  }
-
-  @java.lang.Override
-  public void writeTo(com.google.protobuf.CodedOutputStream output)
-                      throws java.io.IOException {
-    getSerializedSize();
-    if (recordNumber_ != 0) {
-      output.writeUInt32(1, recordNumber_);
-    }
-    if (timeStamp_ != 0) {
-      output.writeFixed32(2, timeStamp_);
-    }
-    if (getRecordReasonList().size() > 0) {
-      output.writeUInt32NoTag(26);
-      output.writeUInt32NoTag(recordReasonMemoizedSerializedSize);
-    }
-    for (int i = 0; i < recordReason_.size(); i++) {
-      output.writeEnumNoTag(recordReason_.getInt(i));
-    }
-    if (statusFlags_ != 0) {
-      output.writeFixed32(4, statusFlags_);
-    }
-    for (int i = 0; i < sensNdNavData_.size(); i++) {
-      output.writeMessage(7, sensNdNavData_.get(i));
-    }
-    for (int i = 0; i < sensFuelLevel_.size(); i++) {
-      output.writeMessage(8, sensFuelLevel_.get(i));
-    }
-    for (int i = 0; i < sensAinAinValue_.size(); i++) {
-      output.writeMessage(9, sensAinAinValue_.get(i));
-    }
-    for (int i = 0; i < sensDinsFlags_.size(); i++) {
-      output.writeMessage(10, sensDinsFlags_.get(i));
-    }
-    for (int i = 0; i < sensCounterCount_.size(); i++) {
-      output.writeMessage(11, sensCounterCount_.get(i));
-    }
-    for (int i = 0; i < sensFmeterFrequency_.size(); i++) {
-      output.writeMessage(12, sensFmeterFrequency_.get(i));
-    }
-    for (int i = 0; i < sensGsmCellMonitoring_.size(); i++) {
-      output.writeMessage(13, sensGsmCellMonitoring_.get(i));
-    }
-    for (int i = 0; i < sensButtonPressCounter_.size(); i++) {
-      output.writeMessage(14, sensButtonPressCounter_.get(i));
-    }
-    for (int i = 0; i < sensTermoData_.size(); i++) {
-      output.writeMessage(15, sensTermoData_.get(i));
-    }
-    for (int i = 0; i < sensCanLogData_.size(); i++) {
-      output.writeMessage(16, sensCanLogData_.get(i));
-    }
-    for (int i = 0; i < sensCanLogTmpDataExt_.size(); i++) {
-      output.writeMessage(17, sensCanLogTmpDataExt_.get(i));
-    }
-    for (int i = 0; i < sensAccelerometerData_.size(); i++) {
-      output.writeMessage(18, sensAccelerometerData_.get(i));
-    }
-    for (int i = 0; i < sensDoutsFlags_.size(); i++) {
-      output.writeMessage(19, sensDoutsFlags_.get(i));
-    }
-    for (int i = 0; i < sensBufferData_.size(); i++) {
-      output.writeMessage(20, sensBufferData_.get(i));
-    }
-    for (int i = 0; i < sensStorInfo_.size(); i++) {
-      output.writeMessage(21, sensStorInfo_.get(i));
-    }
-    for (int i = 0; i < sensTrackerInfo_.size(); i++) {
-      output.writeMessage(22, sensTrackerInfo_.get(i));
-    }
-    for (int i = 0; i < sensTestEraTests_.size(); i++) {
-      output.writeMessage(23, sensTestEraTests_.get(i));
-    }
-    for (int i = 0; i < sensCrashData_.size(); i++) {
-      output.writeMessage(24, sensCrashData_.get(i));
-    }
-    getUnknownFields().writeTo(output);
-  }
-
-  @java.lang.Override
-  public int getSerializedSize() {
-    int size = memoizedSize;
-    if (size != -1) return size;
-
-    size = 0;
-    if (recordNumber_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeUInt32Size(1, recordNumber_);
-    }
-    if (timeStamp_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeFixed32Size(2, timeStamp_);
-    }
-    {
-      int dataSize = 0;
-      for (int i = 0; i < recordReason_.size(); i++) {
-        dataSize += com.google.protobuf.CodedOutputStream
-          .computeEnumSizeNoTag(recordReason_.getInt(i));
-      }
-      size += dataSize;
-      if (!getRecordReasonList().isEmpty()) {  size += 1;
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32SizeNoTag(dataSize);
-      }recordReasonMemoizedSerializedSize = dataSize;
-    }
-    if (statusFlags_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeFixed32Size(4, statusFlags_);
-    }
-    for (int i = 0; i < sensNdNavData_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(7, sensNdNavData_.get(i));
-    }
-    for (int i = 0; i < sensFuelLevel_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(8, sensFuelLevel_.get(i));
-    }
-    for (int i = 0; i < sensAinAinValue_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(9, sensAinAinValue_.get(i));
-    }
-    for (int i = 0; i < sensDinsFlags_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(10, sensDinsFlags_.get(i));
-    }
-    for (int i = 0; i < sensCounterCount_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(11, sensCounterCount_.get(i));
-    }
-    for (int i = 0; i < sensFmeterFrequency_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(12, sensFmeterFrequency_.get(i));
-    }
-    for (int i = 0; i < sensGsmCellMonitoring_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(13, sensGsmCellMonitoring_.get(i));
-    }
-    for (int i = 0; i < sensButtonPressCounter_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(14, sensButtonPressCounter_.get(i));
-    }
-    for (int i = 0; i < sensTermoData_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(15, sensTermoData_.get(i));
-    }
-    for (int i = 0; i < sensCanLogData_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(16, sensCanLogData_.get(i));
-    }
-    for (int i = 0; i < sensCanLogTmpDataExt_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(17, sensCanLogTmpDataExt_.get(i));
-    }
-    for (int i = 0; i < sensAccelerometerData_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(18, sensAccelerometerData_.get(i));
-    }
-    for (int i = 0; i < sensDoutsFlags_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(19, sensDoutsFlags_.get(i));
-    }
-    for (int i = 0; i < sensBufferData_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(20, sensBufferData_.get(i));
-    }
-    for (int i = 0; i < sensStorInfo_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(21, sensStorInfo_.get(i));
-    }
-    for (int i = 0; i < sensTrackerInfo_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(22, sensTrackerInfo_.get(i));
-    }
-    for (int i = 0; i < sensTestEraTests_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(23, sensTestEraTests_.get(i));
-    }
-    for (int i = 0; i < sensCrashData_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(24, sensCrashData_.get(i));
-    }
-    size += getUnknownFields().getSerializedSize();
-    memoizedSize = size;
-    return size;
-  }
-
-  @java.lang.Override
-  public boolean equals(final java.lang.Object obj) {
-    if (obj == this) {
-     return true;
-    }
-    if (!(obj instanceof org.example.libs.StorageRecord)) {
-      return super.equals(obj);
-    }
-    org.example.libs.StorageRecord other = (org.example.libs.StorageRecord) obj;
-
-    if (getRecordNumber()
-        != other.getRecordNumber()) return false;
-    if (getTimeStamp()
-        != other.getTimeStamp()) return false;
-    if (!recordReason_.equals(other.recordReason_)) return false;
-    if (getStatusFlags()
-        != other.getStatusFlags()) return false;
-    if (!getSensAccelerometerDataList()
-        .equals(other.getSensAccelerometerDataList())) return false;
-    if (!getSensAinAinValueList()
-        .equals(other.getSensAinAinValueList())) return false;
-    if (!getSensBufferDataList()
-        .equals(other.getSensBufferDataList())) return false;
-    if (!getSensButtonPressCounterList()
-        .equals(other.getSensButtonPressCounterList())) return false;
-    if (!getSensCanLogDataList()
-        .equals(other.getSensCanLogDataList())) return false;
-    if (!getSensCanLogTmpDataExtList()
-        .equals(other.getSensCanLogTmpDataExtList())) return false;
-    if (!getSensCounterCountList()
-        .equals(other.getSensCounterCountList())) return false;
-    if (!getSensCrashDataList()
-        .equals(other.getSensCrashDataList())) return false;
-    if (!getSensDinsFlagsList()
-        .equals(other.getSensDinsFlagsList())) return false;
-    if (!getSensDoutsFlagsList()
-        .equals(other.getSensDoutsFlagsList())) return false;
-    if (!getSensFmeterFrequencyList()
-        .equals(other.getSensFmeterFrequencyList())) return false;
-    if (!getSensFuelLevelList()
-        .equals(other.getSensFuelLevelList())) return false;
-    if (!getSensGsmCellMonitoringList()
-        .equals(other.getSensGsmCellMonitoringList())) return false;
-    if (!getSensNdNavDataList()
-        .equals(other.getSensNdNavDataList())) return false;
-    if (!getSensStorInfoList()
-        .equals(other.getSensStorInfoList())) return false;
-    if (!getSensTermoDataList()
-        .equals(other.getSensTermoDataList())) return false;
-    if (!getSensTestEraTestsList()
-        .equals(other.getSensTestEraTestsList())) return false;
-    if (!getSensTrackerInfoList()
-        .equals(other.getSensTrackerInfoList())) return false;
-    if (!getUnknownFields().equals(other.getUnknownFields())) return false;
-    return true;
-  }
-
-  @java.lang.Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + RECORD_NUMBER_FIELD_NUMBER;
-    hash = (53 * hash) + getRecordNumber();
-    hash = (37 * hash) + TIME_STAMP_FIELD_NUMBER;
-    hash = (53 * hash) + getTimeStamp();
-    if (getRecordReasonCount() > 0) {
-      hash = (37 * hash) + RECORD_REASON_FIELD_NUMBER;
-      hash = (53 * hash) + recordReason_.hashCode();
-    }
-    hash = (37 * hash) + STATUS_FLAGS_FIELD_NUMBER;
-    hash = (53 * hash) + getStatusFlags();
-    if (getSensAccelerometerDataCount() > 0) {
-      hash = (37 * hash) + SENS_ACCELEROMETER_DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getSensAccelerometerDataList().hashCode();
-    }
-    if (getSensAinAinValueCount() > 0) {
-      hash = (37 * hash) + SENS_AIN_AIN_VALUE_FIELD_NUMBER;
-      hash = (53 * hash) + getSensAinAinValueList().hashCode();
-    }
-    if (getSensBufferDataCount() > 0) {
-      hash = (37 * hash) + SENS_BUFFER_DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getSensBufferDataList().hashCode();
-    }
-    if (getSensButtonPressCounterCount() > 0) {
-      hash = (37 * hash) + SENS_BUTTON_PRESS_COUNTER_FIELD_NUMBER;
-      hash = (53 * hash) + getSensButtonPressCounterList().hashCode();
-    }
-    if (getSensCanLogDataCount() > 0) {
-      hash = (37 * hash) + SENS_CAN_LOG_DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getSensCanLogDataList().hashCode();
-    }
-    if (getSensCanLogTmpDataExtCount() > 0) {
-      hash = (37 * hash) + SENS_CAN_LOG_TMP_DATA_EXT_FIELD_NUMBER;
-      hash = (53 * hash) + getSensCanLogTmpDataExtList().hashCode();
-    }
-    if (getSensCounterCountCount() > 0) {
-      hash = (37 * hash) + SENS_COUNTER_COUNT_FIELD_NUMBER;
-      hash = (53 * hash) + getSensCounterCountList().hashCode();
-    }
-    if (getSensCrashDataCount() > 0) {
-      hash = (37 * hash) + SENS_CRASH_DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getSensCrashDataList().hashCode();
-    }
-    if (getSensDinsFlagsCount() > 0) {
-      hash = (37 * hash) + SENS_DINS_FLAGS_FIELD_NUMBER;
-      hash = (53 * hash) + getSensDinsFlagsList().hashCode();
-    }
-    if (getSensDoutsFlagsCount() > 0) {
-      hash = (37 * hash) + SENS_DOUTS_FLAGS_FIELD_NUMBER;
-      hash = (53 * hash) + getSensDoutsFlagsList().hashCode();
-    }
-    if (getSensFmeterFrequencyCount() > 0) {
-      hash = (37 * hash) + SENS_FMETER_FREQUENCY_FIELD_NUMBER;
-      hash = (53 * hash) + getSensFmeterFrequencyList().hashCode();
-    }
-    if (getSensFuelLevelCount() > 0) {
-      hash = (37 * hash) + SENS_FUEL_LEVEL_FIELD_NUMBER;
-      hash = (53 * hash) + getSensFuelLevelList().hashCode();
-    }
-    if (getSensGsmCellMonitoringCount() > 0) {
-      hash = (37 * hash) + SENS_GSM_CELL_MONITORING_FIELD_NUMBER;
-      hash = (53 * hash) + getSensGsmCellMonitoringList().hashCode();
-    }
-    if (getSensNdNavDataCount() > 0) {
-      hash = (37 * hash) + SENS_ND_NAV_DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getSensNdNavDataList().hashCode();
-    }
-    if (getSensStorInfoCount() > 0) {
-      hash = (37 * hash) + SENS_STOR_INFO_FIELD_NUMBER;
-      hash = (53 * hash) + getSensStorInfoList().hashCode();
-    }
-    if (getSensTermoDataCount() > 0) {
-      hash = (37 * hash) + SENS_TERMO_DATA_FIELD_NUMBER;
-      hash = (53 * hash) + getSensTermoDataList().hashCode();
-    }
-    if (getSensTestEraTestsCount() > 0) {
-      hash = (37 * hash) + SENS_TEST_ERA_TESTS_FIELD_NUMBER;
-      hash = (53 * hash) + getSensTestEraTestsList().hashCode();
-    }
-    if (getSensTrackerInfoCount() > 0) {
-      hash = (37 * hash) + SENS_TRACKER_INFO_FIELD_NUMBER;
-      hash = (53 * hash) + getSensTrackerInfoList().hashCode();
-    }
-    hash = (29 * hash) + getUnknownFields().hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
-  public static org.example.libs.StorageRecord parseFrom(
-      java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      java.nio.ByteBuffer data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      com.google.protobuf.ByteString data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-  public static org.example.libs.StorageRecord parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      byte[] data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-  public static org.example.libs.StorageRecord parseFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessage
-        .parseWithIOException(PARSER, input);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      java.io.InputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessage
-        .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-  public static org.example.libs.StorageRecord parseDelimitedFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessage
-        .parseDelimitedWithIOException(PARSER, input);
-  }
-
-  public static org.example.libs.StorageRecord parseDelimitedFrom(
-      java.io.InputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessage
-        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      com.google.protobuf.CodedInputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessage
-        .parseWithIOException(PARSER, input);
-  }
-  public static org.example.libs.StorageRecord parseFrom(
-      com.google.protobuf.CodedInputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessage
-        .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-  @java.lang.Override
-  public Builder newBuilderForType() { return newBuilder(); }
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-  public static Builder newBuilder(org.example.libs.StorageRecord prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-  }
-  @java.lang.Override
-  public Builder toBuilder() {
-    return this == DEFAULT_INSTANCE
-        ? new Builder() : new Builder().mergeFrom(this);
-  }
-
-  @java.lang.Override
-  protected Builder newBuilderForType(
-      com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-    Builder builder = new Builder(parent);
-    return builder;
-  }
-  /**
-   * <pre>
-   * Причина формирования отметки
-   * </pre>
-   *
-   * Protobuf type {@code StorageRecord}
-   */
-  public static final class Builder extends
-      com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:StorageRecord)
-      org.example.libs.StorageRecordOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
+    getDescriptor() {
+        return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.example.libs.StorageRecord.class, org.example.libs.StorageRecord.Builder.class);
+    internalGetFieldAccessorTable() {
+        return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        org.example.libs.StorageRecord.class, org.example.libs.StorageRecord.Builder.class);
     }
 
-    // Construct using org.example.libs.StorageRecord.newBuilder()
-    private Builder() {
+    /**
+     * Protobuf enum {@code StorageRecord.Reason}
+     */
+    public enum Reason
+            implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>DEVICE_RESET = 0;</code>
+         */
+        DEVICE_RESET(0),
+        /**
+         * <code>PROFILE_CHANGE = 1;</code>
+         */
+        PROFILE_CHANGE(1),
+        /**
+         * <code>IGNITION_ON = 2;</code>
+         */
+        IGNITION_ON(2),
+        /**
+         * <code>IGNITION_OFF = 3;</code>
+         */
+        IGNITION_OFF(3),
+        /**
+         * <code>TRIP_BEGIN = 4;</code>
+         */
+        TRIP_BEGIN(4),
+        /**
+         * <code>TRIP_END = 5;</code>
+         */
+        TRIP_END(5),
+        /**
+         * <code>STOP = 6;</code>
+         */
+        STOP(6),
+        /**
+         * <code>MOVE = 7;</code>
+         */
+        MOVE(7),
+        /**
+         * <code>TOWING_BEGIN = 8;</code>
+         */
+        TOWING_BEGIN(8),
+        /**
+         * <code>TOWING_END = 9;</code>
+         */
+        TOWING_END(9),
+        /**
+         * <code>TIMER_MOVE = 10;</code>
+         */
+        TIMER_MOVE(10),
+        /**
+         * <code>TIMER_STOP = 11;</code>
+         */
+        TIMER_STOP(11),
+        /**
+         * <code>ANGLE = 12;</code>
+         */
+        ANGLE(12),
+        /**
+         * <code>DISTANCE = 13;</code>
+         */
+        DISTANCE(13),
+        /**
+         * <code>SOS_BUTTON = 14;</code>
+         */
+        SOS_BUTTON(14),
+        /**
+         * <code>SERVICE_BUTTON = 15;</code>
+         */
+        SERVICE_BUTTON(15),
+        /**
+         * <code>TAMPER = 16;</code>
+         */
+        TAMPER(16),
+        /**
+         * <code>ANTENNA_SWITCH = 17;</code>
+         */
+        ANTENNA_SWITCH(17),
+        /**
+         * <code>GSM_LOST = 18;</code>
+         */
+        GSM_LOST(18),
+        /**
+         * <code>GSM_RECONNECT = 19;</code>
+         */
+        GSM_RECONNECT(19),
+        /**
+         * <code>GNSS_LOST = 20;</code>
+         */
+        GNSS_LOST(20),
+        /**
+         * <code>GNSS_REAQUISITION = 21;</code>
+         */
+        GNSS_REAQUISITION(21),
+        /**
+         * <code>JAMMER_GSM = 22;</code>
+         */
+        JAMMER_GSM(22),
+        /**
+         * <code>JAMMER_GNSS = 23;</code>
+         */
+        JAMMER_GNSS(23),
+        /**
+         * <code>OVER_SPEED = 24;</code>
+         */
+        OVER_SPEED(24),
+        /**
+         * <code>OVER_RPM = 25;</code>
+         */
+        OVER_RPM(25),
+        /**
+         * <code>OVER_TEMPERATURE = 26;</code>
+         */
+        OVER_TEMPERATURE(26),
+        /**
+         * <code>DANGEROUS_DRIVING = 27;</code>
+         */
+        DANGEROUS_DRIVING(27),
+        /**
+         * <code>ACCIDENT = 28;</code>
+         */
+        ACCIDENT(28),
+        /**
+         * <code>OVERTHROW = 29;</code>
+         */
+        OVERTHROW(29),
+        /**
+         * <code>ON_BATTERY = 30;</code>
+         */
+        ON_BATTERY(30),
+        /**
+         * <code>BATTERY_DISCHARGE = 31;</code>
+         */
+        BATTERY_DISCHARGE(31),
+        /**
+         * <code>RADIO_TAG_REG = 32;</code>
+         */
+        RADIO_TAG_REG(32),
+        /**
+         * <code>RADIO_TAG_UNREG = 33;</code>
+         */
+        RADIO_TAG_UNREG(33),
+        /**
+         * <code>MOVE_WITHOUT_RADIO_TAG = 34;</code>
+         */
+        MOVE_WITHOUT_RADIO_TAG(34),
+        /**
+         * <code>ECU_ERROR_CODE = 35;</code>
+         */
+        ECU_ERROR_CODE(35),
+        /**
+         * <code>EXTERNAL_REQUEST = 36;</code>
+         */
+        EXTERNAL_REQUEST(36),
+        /**
+         * <code>DEVICE_TEST = 37;</code>
+         */
+        DEVICE_TEST(37),
+        /**
+         * <code>OTHER_REASON = 99;</code>
+         */
+        OTHER_REASON(99),
+        UNRECOGNIZED(-1),
+        ;
 
-    }
+        static {
+            com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+                    com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+                    /* major= */ 4,
+                    /* minor= */ 30,
+                    /* patch= */ 2,
+                    /* suffix= */ "",
+                    Reason.class.getName());
+        }
 
-    private Builder(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      super(parent);
+        /**
+         * <code>DEVICE_RESET = 0;</code>
+         */
+        public static final int DEVICE_RESET_VALUE = 0;
+        /**
+         * <code>PROFILE_CHANGE = 1;</code>
+         */
+        public static final int PROFILE_CHANGE_VALUE = 1;
+        /**
+         * <code>IGNITION_ON = 2;</code>
+         */
+        public static final int IGNITION_ON_VALUE = 2;
+        /**
+         * <code>IGNITION_OFF = 3;</code>
+         */
+        public static final int IGNITION_OFF_VALUE = 3;
+        /**
+         * <code>TRIP_BEGIN = 4;</code>
+         */
+        public static final int TRIP_BEGIN_VALUE = 4;
+        /**
+         * <code>TRIP_END = 5;</code>
+         */
+        public static final int TRIP_END_VALUE = 5;
+        /**
+         * <code>STOP = 6;</code>
+         */
+        public static final int STOP_VALUE = 6;
+        /**
+         * <code>MOVE = 7;</code>
+         */
+        public static final int MOVE_VALUE = 7;
+        /**
+         * <code>TOWING_BEGIN = 8;</code>
+         */
+        public static final int TOWING_BEGIN_VALUE = 8;
+        /**
+         * <code>TOWING_END = 9;</code>
+         */
+        public static final int TOWING_END_VALUE = 9;
+        /**
+         * <code>TIMER_MOVE = 10;</code>
+         */
+        public static final int TIMER_MOVE_VALUE = 10;
+        /**
+         * <code>TIMER_STOP = 11;</code>
+         */
+        public static final int TIMER_STOP_VALUE = 11;
+        /**
+         * <code>ANGLE = 12;</code>
+         */
+        public static final int ANGLE_VALUE = 12;
+        /**
+         * <code>DISTANCE = 13;</code>
+         */
+        public static final int DISTANCE_VALUE = 13;
+        /**
+         * <code>SOS_BUTTON = 14;</code>
+         */
+        public static final int SOS_BUTTON_VALUE = 14;
+        /**
+         * <code>SERVICE_BUTTON = 15;</code>
+         */
+        public static final int SERVICE_BUTTON_VALUE = 15;
+        /**
+         * <code>TAMPER = 16;</code>
+         */
+        public static final int TAMPER_VALUE = 16;
+        /**
+         * <code>ANTENNA_SWITCH = 17;</code>
+         */
+        public static final int ANTENNA_SWITCH_VALUE = 17;
+        /**
+         * <code>GSM_LOST = 18;</code>
+         */
+        public static final int GSM_LOST_VALUE = 18;
+        /**
+         * <code>GSM_RECONNECT = 19;</code>
+         */
+        public static final int GSM_RECONNECT_VALUE = 19;
+        /**
+         * <code>GNSS_LOST = 20;</code>
+         */
+        public static final int GNSS_LOST_VALUE = 20;
+        /**
+         * <code>GNSS_REAQUISITION = 21;</code>
+         */
+        public static final int GNSS_REAQUISITION_VALUE = 21;
+        /**
+         * <code>JAMMER_GSM = 22;</code>
+         */
+        public static final int JAMMER_GSM_VALUE = 22;
+        /**
+         * <code>JAMMER_GNSS = 23;</code>
+         */
+        public static final int JAMMER_GNSS_VALUE = 23;
+        /**
+         * <code>OVER_SPEED = 24;</code>
+         */
+        public static final int OVER_SPEED_VALUE = 24;
+        /**
+         * <code>OVER_RPM = 25;</code>
+         */
+        public static final int OVER_RPM_VALUE = 25;
+        /**
+         * <code>OVER_TEMPERATURE = 26;</code>
+         */
+        public static final int OVER_TEMPERATURE_VALUE = 26;
+        /**
+         * <code>DANGEROUS_DRIVING = 27;</code>
+         */
+        public static final int DANGEROUS_DRIVING_VALUE = 27;
+        /**
+         * <code>ACCIDENT = 28;</code>
+         */
+        public static final int ACCIDENT_VALUE = 28;
+        /**
+         * <code>OVERTHROW = 29;</code>
+         */
+        public static final int OVERTHROW_VALUE = 29;
+        /**
+         * <code>ON_BATTERY = 30;</code>
+         */
+        public static final int ON_BATTERY_VALUE = 30;
+        /**
+         * <code>BATTERY_DISCHARGE = 31;</code>
+         */
+        public static final int BATTERY_DISCHARGE_VALUE = 31;
+        /**
+         * <code>RADIO_TAG_REG = 32;</code>
+         */
+        public static final int RADIO_TAG_REG_VALUE = 32;
+        /**
+         * <code>RADIO_TAG_UNREG = 33;</code>
+         */
+        public static final int RADIO_TAG_UNREG_VALUE = 33;
+        /**
+         * <code>MOVE_WITHOUT_RADIO_TAG = 34;</code>
+         */
+        public static final int MOVE_WITHOUT_RADIO_TAG_VALUE = 34;
+        /**
+         * <code>ECU_ERROR_CODE = 35;</code>
+         */
+        public static final int ECU_ERROR_CODE_VALUE = 35;
+        /**
+         * <code>EXTERNAL_REQUEST = 36;</code>
+         */
+        public static final int EXTERNAL_REQUEST_VALUE = 36;
+        /**
+         * <code>DEVICE_TEST = 37;</code>
+         */
+        public static final int DEVICE_TEST_VALUE = 37;
+        /**
+         * <code>OTHER_REASON = 99;</code>
+         */
+        public static final int OTHER_REASON_VALUE = 99;
 
-    }
-    @java.lang.Override
-    public Builder clear() {
-      super.clear();
-      bitField0_ = 0;
-      recordNumber_ = 0;
-      timeStamp_ = 0;
-      recordReason_ = emptyIntList();
-      bitField0_ = (bitField0_ & ~0x00000004);
-      statusFlags_ = 0;
-      if (sensAccelerometerDataBuilder_ == null) {
-        sensAccelerometerData_ = java.util.Collections.emptyList();
-      } else {
-        sensAccelerometerData_ = null;
-        sensAccelerometerDataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000010);
-      if (sensAinAinValueBuilder_ == null) {
-        sensAinAinValue_ = java.util.Collections.emptyList();
-      } else {
-        sensAinAinValue_ = null;
-        sensAinAinValueBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000020);
-      if (sensBufferDataBuilder_ == null) {
-        sensBufferData_ = java.util.Collections.emptyList();
-      } else {
-        sensBufferData_ = null;
-        sensBufferDataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000040);
-      if (sensButtonPressCounterBuilder_ == null) {
-        sensButtonPressCounter_ = java.util.Collections.emptyList();
-      } else {
-        sensButtonPressCounter_ = null;
-        sensButtonPressCounterBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000080);
-      if (sensCanLogDataBuilder_ == null) {
-        sensCanLogData_ = java.util.Collections.emptyList();
-      } else {
-        sensCanLogData_ = null;
-        sensCanLogDataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000100);
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        sensCanLogTmpDataExt_ = java.util.Collections.emptyList();
-      } else {
-        sensCanLogTmpDataExt_ = null;
-        sensCanLogTmpDataExtBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000200);
-      if (sensCounterCountBuilder_ == null) {
-        sensCounterCount_ = java.util.Collections.emptyList();
-      } else {
-        sensCounterCount_ = null;
-        sensCounterCountBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000400);
-      if (sensCrashDataBuilder_ == null) {
-        sensCrashData_ = java.util.Collections.emptyList();
-      } else {
-        sensCrashData_ = null;
-        sensCrashDataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00000800);
-      if (sensDinsFlagsBuilder_ == null) {
-        sensDinsFlags_ = java.util.Collections.emptyList();
-      } else {
-        sensDinsFlags_ = null;
-        sensDinsFlagsBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00001000);
-      if (sensDoutsFlagsBuilder_ == null) {
-        sensDoutsFlags_ = java.util.Collections.emptyList();
-      } else {
-        sensDoutsFlags_ = null;
-        sensDoutsFlagsBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00002000);
-      if (sensFmeterFrequencyBuilder_ == null) {
-        sensFmeterFrequency_ = java.util.Collections.emptyList();
-      } else {
-        sensFmeterFrequency_ = null;
-        sensFmeterFrequencyBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00004000);
-      if (sensFuelLevelBuilder_ == null) {
-        sensFuelLevel_ = java.util.Collections.emptyList();
-      } else {
-        sensFuelLevel_ = null;
-        sensFuelLevelBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00008000);
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        sensGsmCellMonitoring_ = java.util.Collections.emptyList();
-      } else {
-        sensGsmCellMonitoring_ = null;
-        sensGsmCellMonitoringBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00010000);
-      if (sensNdNavDataBuilder_ == null) {
-        sensNdNavData_ = java.util.Collections.emptyList();
-      } else {
-        sensNdNavData_ = null;
-        sensNdNavDataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00020000);
-      if (sensStorInfoBuilder_ == null) {
-        sensStorInfo_ = java.util.Collections.emptyList();
-      } else {
-        sensStorInfo_ = null;
-        sensStorInfoBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00040000);
-      if (sensTermoDataBuilder_ == null) {
-        sensTermoData_ = java.util.Collections.emptyList();
-      } else {
-        sensTermoData_ = null;
-        sensTermoDataBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00080000);
-      if (sensTestEraTestsBuilder_ == null) {
-        sensTestEraTests_ = java.util.Collections.emptyList();
-      } else {
-        sensTestEraTests_ = null;
-        sensTestEraTestsBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00100000);
-      if (sensTrackerInfoBuilder_ == null) {
-        sensTrackerInfo_ = java.util.Collections.emptyList();
-      } else {
-        sensTrackerInfo_ = null;
-        sensTrackerInfoBuilder_.clear();
-      }
-      bitField0_ = (bitField0_ & ~0x00200000);
-      return this;
-    }
 
-    @java.lang.Override
-    public com.google.protobuf.Descriptors.Descriptor
+        public final int getNumber() {
+            if (this == UNRECOGNIZED) {
+                throw new java.lang.IllegalArgumentException(
+                        "Can't get the number of an unknown enum value.");
+            }
+            return value;
+        }
+
+        /**
+         * @param value The numeric wire value of the corresponding enum entry.
+         * @return The enum associated with the given numeric wire value.
+         * @deprecated Use {@link #forNumber(int)} instead.
+         */
+        @java.lang.Deprecated
+        public static Reason valueOf(int value) {
+            return forNumber(value);
+        }
+
+        /**
+         * @param value The numeric wire value of the corresponding enum entry.
+         * @return The enum associated with the given numeric wire value.
+         */
+        public static Reason forNumber(int value) {
+            switch (value) {
+                case 0:
+                    return DEVICE_RESET;
+                case 1:
+                    return PROFILE_CHANGE;
+                case 2:
+                    return IGNITION_ON;
+                case 3:
+                    return IGNITION_OFF;
+                case 4:
+                    return TRIP_BEGIN;
+                case 5:
+                    return TRIP_END;
+                case 6:
+                    return STOP;
+                case 7:
+                    return MOVE;
+                case 8:
+                    return TOWING_BEGIN;
+                case 9:
+                    return TOWING_END;
+                case 10:
+                    return TIMER_MOVE;
+                case 11:
+                    return TIMER_STOP;
+                case 12:
+                    return ANGLE;
+                case 13:
+                    return DISTANCE;
+                case 14:
+                    return SOS_BUTTON;
+                case 15:
+                    return SERVICE_BUTTON;
+                case 16:
+                    return TAMPER;
+                case 17:
+                    return ANTENNA_SWITCH;
+                case 18:
+                    return GSM_LOST;
+                case 19:
+                    return GSM_RECONNECT;
+                case 20:
+                    return GNSS_LOST;
+                case 21:
+                    return GNSS_REAQUISITION;
+                case 22:
+                    return JAMMER_GSM;
+                case 23:
+                    return JAMMER_GNSS;
+                case 24:
+                    return OVER_SPEED;
+                case 25:
+                    return OVER_RPM;
+                case 26:
+                    return OVER_TEMPERATURE;
+                case 27:
+                    return DANGEROUS_DRIVING;
+                case 28:
+                    return ACCIDENT;
+                case 29:
+                    return OVERTHROW;
+                case 30:
+                    return ON_BATTERY;
+                case 31:
+                    return BATTERY_DISCHARGE;
+                case 32:
+                    return RADIO_TAG_REG;
+                case 33:
+                    return RADIO_TAG_UNREG;
+                case 34:
+                    return MOVE_WITHOUT_RADIO_TAG;
+                case 35:
+                    return ECU_ERROR_CODE;
+                case 36:
+                    return EXTERNAL_REQUEST;
+                case 37:
+                    return DEVICE_TEST;
+                case 99:
+                    return OTHER_REASON;
+                default:
+                    return null;
+            }
+        }
+
+        public static com.google.protobuf.Internal.EnumLiteMap<Reason>
+        internalGetValueMap() {
+            return internalValueMap;
+        }
+
+        private static final com.google.protobuf.Internal.EnumLiteMap<
+                Reason> internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<Reason>() {
+                    public Reason findValueByNumber(int number) {
+                        return Reason.forNumber(number);
+                    }
+                };
+
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+            if (this == UNRECOGNIZED) {
+                throw new java.lang.IllegalStateException(
+                        "Can't get the descriptor of an unrecognized enum value.");
+            }
+            return getDescriptor().getValues().get(ordinal());
+        }
+
+        public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
-      return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
+            return getDescriptor();
+        }
+
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+            return org.example.libs.StorageRecord.getDescriptor().getEnumTypes().get(0);
+        }
+
+        private static final Reason[] VALUES = values();
+
+        public static Reason valueOf(
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new java.lang.IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            if (desc.getIndex() == -1) {
+                return UNRECOGNIZED;
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        private final int value;
+
+        private Reason(int value) {
+            this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:StorageRecord.Reason)
     }
 
-    @java.lang.Override
-    public org.example.libs.StorageRecord getDefaultInstanceForType() {
-      return org.example.libs.StorageRecord.getDefaultInstance();
-    }
+    public static final int RECORD_NUMBER_FIELD_NUMBER = 1;
+    private int recordNumber_ = 0;
 
-    @java.lang.Override
-    public org.example.libs.StorageRecord build() {
-      org.example.libs.StorageRecord result = buildPartial();
-      if (!result.isInitialized()) {
-        throw newUninitializedMessageException(result);
-      }
-      return result;
-    }
-
-    @java.lang.Override
-    public org.example.libs.StorageRecord buildPartial() {
-      org.example.libs.StorageRecord result = new org.example.libs.StorageRecord(this);
-      buildPartialRepeatedFields(result);
-      if (bitField0_ != 0) { buildPartial0(result); }
-      onBuilt();
-      return result;
-    }
-
-    private void buildPartialRepeatedFields(org.example.libs.StorageRecord result) {
-      if (((bitField0_ & 0x00000004) != 0)) {
-        recordReason_.makeImmutable();
-        bitField0_ = (bitField0_ & ~0x00000004);
-      }
-      result.recordReason_ = recordReason_;
-      if (sensAccelerometerDataBuilder_ == null) {
-        if (((bitField0_ & 0x00000010) != 0)) {
-          sensAccelerometerData_ = java.util.Collections.unmodifiableList(sensAccelerometerData_);
-          bitField0_ = (bitField0_ & ~0x00000010);
-        }
-        result.sensAccelerometerData_ = sensAccelerometerData_;
-      } else {
-        result.sensAccelerometerData_ = sensAccelerometerDataBuilder_.build();
-      }
-      if (sensAinAinValueBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0)) {
-          sensAinAinValue_ = java.util.Collections.unmodifiableList(sensAinAinValue_);
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.sensAinAinValue_ = sensAinAinValue_;
-      } else {
-        result.sensAinAinValue_ = sensAinAinValueBuilder_.build();
-      }
-      if (sensBufferDataBuilder_ == null) {
-        if (((bitField0_ & 0x00000040) != 0)) {
-          sensBufferData_ = java.util.Collections.unmodifiableList(sensBufferData_);
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.sensBufferData_ = sensBufferData_;
-      } else {
-        result.sensBufferData_ = sensBufferDataBuilder_.build();
-      }
-      if (sensButtonPressCounterBuilder_ == null) {
-        if (((bitField0_ & 0x00000080) != 0)) {
-          sensButtonPressCounter_ = java.util.Collections.unmodifiableList(sensButtonPressCounter_);
-          bitField0_ = (bitField0_ & ~0x00000080);
-        }
-        result.sensButtonPressCounter_ = sensButtonPressCounter_;
-      } else {
-        result.sensButtonPressCounter_ = sensButtonPressCounterBuilder_.build();
-      }
-      if (sensCanLogDataBuilder_ == null) {
-        if (((bitField0_ & 0x00000100) != 0)) {
-          sensCanLogData_ = java.util.Collections.unmodifiableList(sensCanLogData_);
-          bitField0_ = (bitField0_ & ~0x00000100);
-        }
-        result.sensCanLogData_ = sensCanLogData_;
-      } else {
-        result.sensCanLogData_ = sensCanLogDataBuilder_.build();
-      }
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        if (((bitField0_ & 0x00000200) != 0)) {
-          sensCanLogTmpDataExt_ = java.util.Collections.unmodifiableList(sensCanLogTmpDataExt_);
-          bitField0_ = (bitField0_ & ~0x00000200);
-        }
-        result.sensCanLogTmpDataExt_ = sensCanLogTmpDataExt_;
-      } else {
-        result.sensCanLogTmpDataExt_ = sensCanLogTmpDataExtBuilder_.build();
-      }
-      if (sensCounterCountBuilder_ == null) {
-        if (((bitField0_ & 0x00000400) != 0)) {
-          sensCounterCount_ = java.util.Collections.unmodifiableList(sensCounterCount_);
-          bitField0_ = (bitField0_ & ~0x00000400);
-        }
-        result.sensCounterCount_ = sensCounterCount_;
-      } else {
-        result.sensCounterCount_ = sensCounterCountBuilder_.build();
-      }
-      if (sensCrashDataBuilder_ == null) {
-        if (((bitField0_ & 0x00000800) != 0)) {
-          sensCrashData_ = java.util.Collections.unmodifiableList(sensCrashData_);
-          bitField0_ = (bitField0_ & ~0x00000800);
-        }
-        result.sensCrashData_ = sensCrashData_;
-      } else {
-        result.sensCrashData_ = sensCrashDataBuilder_.build();
-      }
-      if (sensDinsFlagsBuilder_ == null) {
-        if (((bitField0_ & 0x00001000) != 0)) {
-          sensDinsFlags_ = java.util.Collections.unmodifiableList(sensDinsFlags_);
-          bitField0_ = (bitField0_ & ~0x00001000);
-        }
-        result.sensDinsFlags_ = sensDinsFlags_;
-      } else {
-        result.sensDinsFlags_ = sensDinsFlagsBuilder_.build();
-      }
-      if (sensDoutsFlagsBuilder_ == null) {
-        if (((bitField0_ & 0x00002000) != 0)) {
-          sensDoutsFlags_ = java.util.Collections.unmodifiableList(sensDoutsFlags_);
-          bitField0_ = (bitField0_ & ~0x00002000);
-        }
-        result.sensDoutsFlags_ = sensDoutsFlags_;
-      } else {
-        result.sensDoutsFlags_ = sensDoutsFlagsBuilder_.build();
-      }
-      if (sensFmeterFrequencyBuilder_ == null) {
-        if (((bitField0_ & 0x00004000) != 0)) {
-          sensFmeterFrequency_ = java.util.Collections.unmodifiableList(sensFmeterFrequency_);
-          bitField0_ = (bitField0_ & ~0x00004000);
-        }
-        result.sensFmeterFrequency_ = sensFmeterFrequency_;
-      } else {
-        result.sensFmeterFrequency_ = sensFmeterFrequencyBuilder_.build();
-      }
-      if (sensFuelLevelBuilder_ == null) {
-        if (((bitField0_ & 0x00008000) != 0)) {
-          sensFuelLevel_ = java.util.Collections.unmodifiableList(sensFuelLevel_);
-          bitField0_ = (bitField0_ & ~0x00008000);
-        }
-        result.sensFuelLevel_ = sensFuelLevel_;
-      } else {
-        result.sensFuelLevel_ = sensFuelLevelBuilder_.build();
-      }
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        if (((bitField0_ & 0x00010000) != 0)) {
-          sensGsmCellMonitoring_ = java.util.Collections.unmodifiableList(sensGsmCellMonitoring_);
-          bitField0_ = (bitField0_ & ~0x00010000);
-        }
-        result.sensGsmCellMonitoring_ = sensGsmCellMonitoring_;
-      } else {
-        result.sensGsmCellMonitoring_ = sensGsmCellMonitoringBuilder_.build();
-      }
-      if (sensNdNavDataBuilder_ == null) {
-        if (((bitField0_ & 0x00020000) != 0)) {
-          sensNdNavData_ = java.util.Collections.unmodifiableList(sensNdNavData_);
-          bitField0_ = (bitField0_ & ~0x00020000);
-        }
-        result.sensNdNavData_ = sensNdNavData_;
-      } else {
-        result.sensNdNavData_ = sensNdNavDataBuilder_.build();
-      }
-      if (sensStorInfoBuilder_ == null) {
-        if (((bitField0_ & 0x00040000) != 0)) {
-          sensStorInfo_ = java.util.Collections.unmodifiableList(sensStorInfo_);
-          bitField0_ = (bitField0_ & ~0x00040000);
-        }
-        result.sensStorInfo_ = sensStorInfo_;
-      } else {
-        result.sensStorInfo_ = sensStorInfoBuilder_.build();
-      }
-      if (sensTermoDataBuilder_ == null) {
-        if (((bitField0_ & 0x00080000) != 0)) {
-          sensTermoData_ = java.util.Collections.unmodifiableList(sensTermoData_);
-          bitField0_ = (bitField0_ & ~0x00080000);
-        }
-        result.sensTermoData_ = sensTermoData_;
-      } else {
-        result.sensTermoData_ = sensTermoDataBuilder_.build();
-      }
-      if (sensTestEraTestsBuilder_ == null) {
-        if (((bitField0_ & 0x00100000) != 0)) {
-          sensTestEraTests_ = java.util.Collections.unmodifiableList(sensTestEraTests_);
-          bitField0_ = (bitField0_ & ~0x00100000);
-        }
-        result.sensTestEraTests_ = sensTestEraTests_;
-      } else {
-        result.sensTestEraTests_ = sensTestEraTestsBuilder_.build();
-      }
-      if (sensTrackerInfoBuilder_ == null) {
-        if (((bitField0_ & 0x00200000) != 0)) {
-          sensTrackerInfo_ = java.util.Collections.unmodifiableList(sensTrackerInfo_);
-          bitField0_ = (bitField0_ & ~0x00200000);
-        }
-        result.sensTrackerInfo_ = sensTrackerInfo_;
-      } else {
-        result.sensTrackerInfo_ = sensTrackerInfoBuilder_.build();
-      }
-    }
-
-    private void buildPartial0(org.example.libs.StorageRecord result) {
-      int from_bitField0_ = bitField0_;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.recordNumber_ = recordNumber_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.timeStamp_ = timeStamp_;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.statusFlags_ = statusFlags_;
-      }
-    }
-
-    @java.lang.Override
-    public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof org.example.libs.StorageRecord) {
-        return mergeFrom((org.example.libs.StorageRecord)other);
-      } else {
-        super.mergeFrom(other);
-        return this;
-      }
-    }
-
-    public Builder mergeFrom(org.example.libs.StorageRecord other) {
-      if (other == org.example.libs.StorageRecord.getDefaultInstance()) return this;
-      if (other.getRecordNumber() != 0) {
-        setRecordNumber(other.getRecordNumber());
-      }
-      if (other.getTimeStamp() != 0) {
-        setTimeStamp(other.getTimeStamp());
-      }
-      if (!other.recordReason_.isEmpty()) {
-        if (recordReason_.isEmpty()) {
-          recordReason_ = other.recordReason_;
-          bitField0_ = (bitField0_ & ~0x00000004);
-        } else {
-          ensureRecordReasonIsMutable();
-          recordReason_.addAll(other.recordReason_);
-        }
-        onChanged();
-      }
-      if (other.getStatusFlags() != 0) {
-        setStatusFlags(other.getStatusFlags());
-      }
-      if (sensAccelerometerDataBuilder_ == null) {
-        if (!other.sensAccelerometerData_.isEmpty()) {
-          if (sensAccelerometerData_.isEmpty()) {
-            sensAccelerometerData_ = other.sensAccelerometerData_;
-            bitField0_ = (bitField0_ & ~0x00000010);
-          } else {
-            ensureSensAccelerometerDataIsMutable();
-            sensAccelerometerData_.addAll(other.sensAccelerometerData_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensAccelerometerData_.isEmpty()) {
-          if (sensAccelerometerDataBuilder_.isEmpty()) {
-            sensAccelerometerDataBuilder_.dispose();
-            sensAccelerometerDataBuilder_ = null;
-            sensAccelerometerData_ = other.sensAccelerometerData_;
-            bitField0_ = (bitField0_ & ~0x00000010);
-            sensAccelerometerDataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensAccelerometerDataFieldBuilder() : null;
-          } else {
-            sensAccelerometerDataBuilder_.addAllMessages(other.sensAccelerometerData_);
-          }
-        }
-      }
-      if (sensAinAinValueBuilder_ == null) {
-        if (!other.sensAinAinValue_.isEmpty()) {
-          if (sensAinAinValue_.isEmpty()) {
-            sensAinAinValue_ = other.sensAinAinValue_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureSensAinAinValueIsMutable();
-            sensAinAinValue_.addAll(other.sensAinAinValue_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensAinAinValue_.isEmpty()) {
-          if (sensAinAinValueBuilder_.isEmpty()) {
-            sensAinAinValueBuilder_.dispose();
-            sensAinAinValueBuilder_ = null;
-            sensAinAinValue_ = other.sensAinAinValue_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-            sensAinAinValueBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensAinAinValueFieldBuilder() : null;
-          } else {
-            sensAinAinValueBuilder_.addAllMessages(other.sensAinAinValue_);
-          }
-        }
-      }
-      if (sensBufferDataBuilder_ == null) {
-        if (!other.sensBufferData_.isEmpty()) {
-          if (sensBufferData_.isEmpty()) {
-            sensBufferData_ = other.sensBufferData_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureSensBufferDataIsMutable();
-            sensBufferData_.addAll(other.sensBufferData_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensBufferData_.isEmpty()) {
-          if (sensBufferDataBuilder_.isEmpty()) {
-            sensBufferDataBuilder_.dispose();
-            sensBufferDataBuilder_ = null;
-            sensBufferData_ = other.sensBufferData_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-            sensBufferDataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensBufferDataFieldBuilder() : null;
-          } else {
-            sensBufferDataBuilder_.addAllMessages(other.sensBufferData_);
-          }
-        }
-      }
-      if (sensButtonPressCounterBuilder_ == null) {
-        if (!other.sensButtonPressCounter_.isEmpty()) {
-          if (sensButtonPressCounter_.isEmpty()) {
-            sensButtonPressCounter_ = other.sensButtonPressCounter_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-          } else {
-            ensureSensButtonPressCounterIsMutable();
-            sensButtonPressCounter_.addAll(other.sensButtonPressCounter_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensButtonPressCounter_.isEmpty()) {
-          if (sensButtonPressCounterBuilder_.isEmpty()) {
-            sensButtonPressCounterBuilder_.dispose();
-            sensButtonPressCounterBuilder_ = null;
-            sensButtonPressCounter_ = other.sensButtonPressCounter_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-            sensButtonPressCounterBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensButtonPressCounterFieldBuilder() : null;
-          } else {
-            sensButtonPressCounterBuilder_.addAllMessages(other.sensButtonPressCounter_);
-          }
-        }
-      }
-      if (sensCanLogDataBuilder_ == null) {
-        if (!other.sensCanLogData_.isEmpty()) {
-          if (sensCanLogData_.isEmpty()) {
-            sensCanLogData_ = other.sensCanLogData_;
-            bitField0_ = (bitField0_ & ~0x00000100);
-          } else {
-            ensureSensCanLogDataIsMutable();
-            sensCanLogData_.addAll(other.sensCanLogData_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensCanLogData_.isEmpty()) {
-          if (sensCanLogDataBuilder_.isEmpty()) {
-            sensCanLogDataBuilder_.dispose();
-            sensCanLogDataBuilder_ = null;
-            sensCanLogData_ = other.sensCanLogData_;
-            bitField0_ = (bitField0_ & ~0x00000100);
-            sensCanLogDataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensCanLogDataFieldBuilder() : null;
-          } else {
-            sensCanLogDataBuilder_.addAllMessages(other.sensCanLogData_);
-          }
-        }
-      }
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        if (!other.sensCanLogTmpDataExt_.isEmpty()) {
-          if (sensCanLogTmpDataExt_.isEmpty()) {
-            sensCanLogTmpDataExt_ = other.sensCanLogTmpDataExt_;
-            bitField0_ = (bitField0_ & ~0x00000200);
-          } else {
-            ensureSensCanLogTmpDataExtIsMutable();
-            sensCanLogTmpDataExt_.addAll(other.sensCanLogTmpDataExt_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensCanLogTmpDataExt_.isEmpty()) {
-          if (sensCanLogTmpDataExtBuilder_.isEmpty()) {
-            sensCanLogTmpDataExtBuilder_.dispose();
-            sensCanLogTmpDataExtBuilder_ = null;
-            sensCanLogTmpDataExt_ = other.sensCanLogTmpDataExt_;
-            bitField0_ = (bitField0_ & ~0x00000200);
-            sensCanLogTmpDataExtBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensCanLogTmpDataExtFieldBuilder() : null;
-          } else {
-            sensCanLogTmpDataExtBuilder_.addAllMessages(other.sensCanLogTmpDataExt_);
-          }
-        }
-      }
-      if (sensCounterCountBuilder_ == null) {
-        if (!other.sensCounterCount_.isEmpty()) {
-          if (sensCounterCount_.isEmpty()) {
-            sensCounterCount_ = other.sensCounterCount_;
-            bitField0_ = (bitField0_ & ~0x00000400);
-          } else {
-            ensureSensCounterCountIsMutable();
-            sensCounterCount_.addAll(other.sensCounterCount_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensCounterCount_.isEmpty()) {
-          if (sensCounterCountBuilder_.isEmpty()) {
-            sensCounterCountBuilder_.dispose();
-            sensCounterCountBuilder_ = null;
-            sensCounterCount_ = other.sensCounterCount_;
-            bitField0_ = (bitField0_ & ~0x00000400);
-            sensCounterCountBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensCounterCountFieldBuilder() : null;
-          } else {
-            sensCounterCountBuilder_.addAllMessages(other.sensCounterCount_);
-          }
-        }
-      }
-      if (sensCrashDataBuilder_ == null) {
-        if (!other.sensCrashData_.isEmpty()) {
-          if (sensCrashData_.isEmpty()) {
-            sensCrashData_ = other.sensCrashData_;
-            bitField0_ = (bitField0_ & ~0x00000800);
-          } else {
-            ensureSensCrashDataIsMutable();
-            sensCrashData_.addAll(other.sensCrashData_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensCrashData_.isEmpty()) {
-          if (sensCrashDataBuilder_.isEmpty()) {
-            sensCrashDataBuilder_.dispose();
-            sensCrashDataBuilder_ = null;
-            sensCrashData_ = other.sensCrashData_;
-            bitField0_ = (bitField0_ & ~0x00000800);
-            sensCrashDataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensCrashDataFieldBuilder() : null;
-          } else {
-            sensCrashDataBuilder_.addAllMessages(other.sensCrashData_);
-          }
-        }
-      }
-      if (sensDinsFlagsBuilder_ == null) {
-        if (!other.sensDinsFlags_.isEmpty()) {
-          if (sensDinsFlags_.isEmpty()) {
-            sensDinsFlags_ = other.sensDinsFlags_;
-            bitField0_ = (bitField0_ & ~0x00001000);
-          } else {
-            ensureSensDinsFlagsIsMutable();
-            sensDinsFlags_.addAll(other.sensDinsFlags_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensDinsFlags_.isEmpty()) {
-          if (sensDinsFlagsBuilder_.isEmpty()) {
-            sensDinsFlagsBuilder_.dispose();
-            sensDinsFlagsBuilder_ = null;
-            sensDinsFlags_ = other.sensDinsFlags_;
-            bitField0_ = (bitField0_ & ~0x00001000);
-            sensDinsFlagsBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensDinsFlagsFieldBuilder() : null;
-          } else {
-            sensDinsFlagsBuilder_.addAllMessages(other.sensDinsFlags_);
-          }
-        }
-      }
-      if (sensDoutsFlagsBuilder_ == null) {
-        if (!other.sensDoutsFlags_.isEmpty()) {
-          if (sensDoutsFlags_.isEmpty()) {
-            sensDoutsFlags_ = other.sensDoutsFlags_;
-            bitField0_ = (bitField0_ & ~0x00002000);
-          } else {
-            ensureSensDoutsFlagsIsMutable();
-            sensDoutsFlags_.addAll(other.sensDoutsFlags_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensDoutsFlags_.isEmpty()) {
-          if (sensDoutsFlagsBuilder_.isEmpty()) {
-            sensDoutsFlagsBuilder_.dispose();
-            sensDoutsFlagsBuilder_ = null;
-            sensDoutsFlags_ = other.sensDoutsFlags_;
-            bitField0_ = (bitField0_ & ~0x00002000);
-            sensDoutsFlagsBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensDoutsFlagsFieldBuilder() : null;
-          } else {
-            sensDoutsFlagsBuilder_.addAllMessages(other.sensDoutsFlags_);
-          }
-        }
-      }
-      if (sensFmeterFrequencyBuilder_ == null) {
-        if (!other.sensFmeterFrequency_.isEmpty()) {
-          if (sensFmeterFrequency_.isEmpty()) {
-            sensFmeterFrequency_ = other.sensFmeterFrequency_;
-            bitField0_ = (bitField0_ & ~0x00004000);
-          } else {
-            ensureSensFmeterFrequencyIsMutable();
-            sensFmeterFrequency_.addAll(other.sensFmeterFrequency_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensFmeterFrequency_.isEmpty()) {
-          if (sensFmeterFrequencyBuilder_.isEmpty()) {
-            sensFmeterFrequencyBuilder_.dispose();
-            sensFmeterFrequencyBuilder_ = null;
-            sensFmeterFrequency_ = other.sensFmeterFrequency_;
-            bitField0_ = (bitField0_ & ~0x00004000);
-            sensFmeterFrequencyBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensFmeterFrequencyFieldBuilder() : null;
-          } else {
-            sensFmeterFrequencyBuilder_.addAllMessages(other.sensFmeterFrequency_);
-          }
-        }
-      }
-      if (sensFuelLevelBuilder_ == null) {
-        if (!other.sensFuelLevel_.isEmpty()) {
-          if (sensFuelLevel_.isEmpty()) {
-            sensFuelLevel_ = other.sensFuelLevel_;
-            bitField0_ = (bitField0_ & ~0x00008000);
-          } else {
-            ensureSensFuelLevelIsMutable();
-            sensFuelLevel_.addAll(other.sensFuelLevel_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensFuelLevel_.isEmpty()) {
-          if (sensFuelLevelBuilder_.isEmpty()) {
-            sensFuelLevelBuilder_.dispose();
-            sensFuelLevelBuilder_ = null;
-            sensFuelLevel_ = other.sensFuelLevel_;
-            bitField0_ = (bitField0_ & ~0x00008000);
-            sensFuelLevelBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensFuelLevelFieldBuilder() : null;
-          } else {
-            sensFuelLevelBuilder_.addAllMessages(other.sensFuelLevel_);
-          }
-        }
-      }
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        if (!other.sensGsmCellMonitoring_.isEmpty()) {
-          if (sensGsmCellMonitoring_.isEmpty()) {
-            sensGsmCellMonitoring_ = other.sensGsmCellMonitoring_;
-            bitField0_ = (bitField0_ & ~0x00010000);
-          } else {
-            ensureSensGsmCellMonitoringIsMutable();
-            sensGsmCellMonitoring_.addAll(other.sensGsmCellMonitoring_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensGsmCellMonitoring_.isEmpty()) {
-          if (sensGsmCellMonitoringBuilder_.isEmpty()) {
-            sensGsmCellMonitoringBuilder_.dispose();
-            sensGsmCellMonitoringBuilder_ = null;
-            sensGsmCellMonitoring_ = other.sensGsmCellMonitoring_;
-            bitField0_ = (bitField0_ & ~0x00010000);
-            sensGsmCellMonitoringBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensGsmCellMonitoringFieldBuilder() : null;
-          } else {
-            sensGsmCellMonitoringBuilder_.addAllMessages(other.sensGsmCellMonitoring_);
-          }
-        }
-      }
-      if (sensNdNavDataBuilder_ == null) {
-        if (!other.sensNdNavData_.isEmpty()) {
-          if (sensNdNavData_.isEmpty()) {
-            sensNdNavData_ = other.sensNdNavData_;
-            bitField0_ = (bitField0_ & ~0x00020000);
-          } else {
-            ensureSensNdNavDataIsMutable();
-            sensNdNavData_.addAll(other.sensNdNavData_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensNdNavData_.isEmpty()) {
-          if (sensNdNavDataBuilder_.isEmpty()) {
-            sensNdNavDataBuilder_.dispose();
-            sensNdNavDataBuilder_ = null;
-            sensNdNavData_ = other.sensNdNavData_;
-            bitField0_ = (bitField0_ & ~0x00020000);
-            sensNdNavDataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensNdNavDataFieldBuilder() : null;
-          } else {
-            sensNdNavDataBuilder_.addAllMessages(other.sensNdNavData_);
-          }
-        }
-      }
-      if (sensStorInfoBuilder_ == null) {
-        if (!other.sensStorInfo_.isEmpty()) {
-          if (sensStorInfo_.isEmpty()) {
-            sensStorInfo_ = other.sensStorInfo_;
-            bitField0_ = (bitField0_ & ~0x00040000);
-          } else {
-            ensureSensStorInfoIsMutable();
-            sensStorInfo_.addAll(other.sensStorInfo_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensStorInfo_.isEmpty()) {
-          if (sensStorInfoBuilder_.isEmpty()) {
-            sensStorInfoBuilder_.dispose();
-            sensStorInfoBuilder_ = null;
-            sensStorInfo_ = other.sensStorInfo_;
-            bitField0_ = (bitField0_ & ~0x00040000);
-            sensStorInfoBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensStorInfoFieldBuilder() : null;
-          } else {
-            sensStorInfoBuilder_.addAllMessages(other.sensStorInfo_);
-          }
-        }
-      }
-      if (sensTermoDataBuilder_ == null) {
-        if (!other.sensTermoData_.isEmpty()) {
-          if (sensTermoData_.isEmpty()) {
-            sensTermoData_ = other.sensTermoData_;
-            bitField0_ = (bitField0_ & ~0x00080000);
-          } else {
-            ensureSensTermoDataIsMutable();
-            sensTermoData_.addAll(other.sensTermoData_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensTermoData_.isEmpty()) {
-          if (sensTermoDataBuilder_.isEmpty()) {
-            sensTermoDataBuilder_.dispose();
-            sensTermoDataBuilder_ = null;
-            sensTermoData_ = other.sensTermoData_;
-            bitField0_ = (bitField0_ & ~0x00080000);
-            sensTermoDataBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensTermoDataFieldBuilder() : null;
-          } else {
-            sensTermoDataBuilder_.addAllMessages(other.sensTermoData_);
-          }
-        }
-      }
-      if (sensTestEraTestsBuilder_ == null) {
-        if (!other.sensTestEraTests_.isEmpty()) {
-          if (sensTestEraTests_.isEmpty()) {
-            sensTestEraTests_ = other.sensTestEraTests_;
-            bitField0_ = (bitField0_ & ~0x00100000);
-          } else {
-            ensureSensTestEraTestsIsMutable();
-            sensTestEraTests_.addAll(other.sensTestEraTests_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensTestEraTests_.isEmpty()) {
-          if (sensTestEraTestsBuilder_.isEmpty()) {
-            sensTestEraTestsBuilder_.dispose();
-            sensTestEraTestsBuilder_ = null;
-            sensTestEraTests_ = other.sensTestEraTests_;
-            bitField0_ = (bitField0_ & ~0x00100000);
-            sensTestEraTestsBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensTestEraTestsFieldBuilder() : null;
-          } else {
-            sensTestEraTestsBuilder_.addAllMessages(other.sensTestEraTests_);
-          }
-        }
-      }
-      if (sensTrackerInfoBuilder_ == null) {
-        if (!other.sensTrackerInfo_.isEmpty()) {
-          if (sensTrackerInfo_.isEmpty()) {
-            sensTrackerInfo_ = other.sensTrackerInfo_;
-            bitField0_ = (bitField0_ & ~0x00200000);
-          } else {
-            ensureSensTrackerInfoIsMutable();
-            sensTrackerInfo_.addAll(other.sensTrackerInfo_);
-          }
-          onChanged();
-        }
-      } else {
-        if (!other.sensTrackerInfo_.isEmpty()) {
-          if (sensTrackerInfoBuilder_.isEmpty()) {
-            sensTrackerInfoBuilder_.dispose();
-            sensTrackerInfoBuilder_ = null;
-            sensTrackerInfo_ = other.sensTrackerInfo_;
-            bitField0_ = (bitField0_ & ~0x00200000);
-            sensTrackerInfoBuilder_ = 
-              com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                 internalGetSensTrackerInfoFieldBuilder() : null;
-          } else {
-            sensTrackerInfoBuilder_.addAllMessages(other.sensTrackerInfo_);
-          }
-        }
-      }
-      this.mergeUnknownFields(other.getUnknownFields());
-      onChanged();
-      return this;
-    }
-
-    @java.lang.Override
-    public final boolean isInitialized() {
-      return true;
-    }
-
-    @java.lang.Override
-    public Builder mergeFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              recordNumber_ = input.readUInt32();
-              bitField0_ |= 0x00000001;
-              break;
-            } // case 8
-            case 21: {
-              timeStamp_ = input.readFixed32();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 21
-            case 24: {
-              int tmpRaw = input.readEnum();
-              ensureRecordReasonIsMutable();
-              recordReason_.addInt(tmpRaw);
-              break;
-            } // case 24
-            case 26: {
-              int length = input.readRawVarint32();
-              int oldLimit = input.pushLimit(length);
-              while(input.getBytesUntilLimit() > 0) {
-                int tmpRaw = input.readEnum();
-                ensureRecordReasonIsMutable();
-                recordReason_.addInt(tmpRaw);
-              }
-              input.popLimit(oldLimit);
-              break;
-            } // case 26
-            case 37: {
-              statusFlags_ = input.readFixed32();
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 37
-            case 58: {
-              org.example.libs.SensNdNavData m =
-                  input.readMessage(
-                      org.example.libs.SensNdNavData.parser(),
-                      extensionRegistry);
-              if (sensNdNavDataBuilder_ == null) {
-                ensureSensNdNavDataIsMutable();
-                sensNdNavData_.add(m);
-              } else {
-                sensNdNavDataBuilder_.addMessage(m);
-              }
-              break;
-            } // case 58
-            case 66: {
-              org.example.libs.SensFuelLevel m =
-                  input.readMessage(
-                      org.example.libs.SensFuelLevel.parser(),
-                      extensionRegistry);
-              if (sensFuelLevelBuilder_ == null) {
-                ensureSensFuelLevelIsMutable();
-                sensFuelLevel_.add(m);
-              } else {
-                sensFuelLevelBuilder_.addMessage(m);
-              }
-              break;
-            } // case 66
-            case 74: {
-              org.example.libs.SensAinAinValue m =
-                  input.readMessage(
-                      org.example.libs.SensAinAinValue.parser(),
-                      extensionRegistry);
-              if (sensAinAinValueBuilder_ == null) {
-                ensureSensAinAinValueIsMutable();
-                sensAinAinValue_.add(m);
-              } else {
-                sensAinAinValueBuilder_.addMessage(m);
-              }
-              break;
-            } // case 74
-            case 82: {
-              org.example.libs.SensDinsFlags m =
-                  input.readMessage(
-                      org.example.libs.SensDinsFlags.parser(),
-                      extensionRegistry);
-              if (sensDinsFlagsBuilder_ == null) {
-                ensureSensDinsFlagsIsMutable();
-                sensDinsFlags_.add(m);
-              } else {
-                sensDinsFlagsBuilder_.addMessage(m);
-              }
-              break;
-            } // case 82
-            case 90: {
-              org.example.libs.SensCounterCount m =
-                  input.readMessage(
-                      org.example.libs.SensCounterCount.parser(),
-                      extensionRegistry);
-              if (sensCounterCountBuilder_ == null) {
-                ensureSensCounterCountIsMutable();
-                sensCounterCount_.add(m);
-              } else {
-                sensCounterCountBuilder_.addMessage(m);
-              }
-              break;
-            } // case 90
-            case 98: {
-              org.example.libs.SensFmeterFrequency m =
-                  input.readMessage(
-                      org.example.libs.SensFmeterFrequency.parser(),
-                      extensionRegistry);
-              if (sensFmeterFrequencyBuilder_ == null) {
-                ensureSensFmeterFrequencyIsMutable();
-                sensFmeterFrequency_.add(m);
-              } else {
-                sensFmeterFrequencyBuilder_.addMessage(m);
-              }
-              break;
-            } // case 98
-            case 106: {
-              org.example.libs.SensGsmCellMonitoring m =
-                  input.readMessage(
-                      org.example.libs.SensGsmCellMonitoring.parser(),
-                      extensionRegistry);
-              if (sensGsmCellMonitoringBuilder_ == null) {
-                ensureSensGsmCellMonitoringIsMutable();
-                sensGsmCellMonitoring_.add(m);
-              } else {
-                sensGsmCellMonitoringBuilder_.addMessage(m);
-              }
-              break;
-            } // case 106
-            case 114: {
-              org.example.libs.SensButtonPressCounter m =
-                  input.readMessage(
-                      org.example.libs.SensButtonPressCounter.parser(),
-                      extensionRegistry);
-              if (sensButtonPressCounterBuilder_ == null) {
-                ensureSensButtonPressCounterIsMutable();
-                sensButtonPressCounter_.add(m);
-              } else {
-                sensButtonPressCounterBuilder_.addMessage(m);
-              }
-              break;
-            } // case 114
-            case 122: {
-              org.example.libs.SensTermoData m =
-                  input.readMessage(
-                      org.example.libs.SensTermoData.parser(),
-                      extensionRegistry);
-              if (sensTermoDataBuilder_ == null) {
-                ensureSensTermoDataIsMutable();
-                sensTermoData_.add(m);
-              } else {
-                sensTermoDataBuilder_.addMessage(m);
-              }
-              break;
-            } // case 122
-            case 130: {
-              org.example.libs.SensCanLogData m =
-                  input.readMessage(
-                      org.example.libs.SensCanLogData.parser(),
-                      extensionRegistry);
-              if (sensCanLogDataBuilder_ == null) {
-                ensureSensCanLogDataIsMutable();
-                sensCanLogData_.add(m);
-              } else {
-                sensCanLogDataBuilder_.addMessage(m);
-              }
-              break;
-            } // case 130
-            case 138: {
-              org.example.libs.SensCanLogTmpDataExt m =
-                  input.readMessage(
-                      org.example.libs.SensCanLogTmpDataExt.parser(),
-                      extensionRegistry);
-              if (sensCanLogTmpDataExtBuilder_ == null) {
-                ensureSensCanLogTmpDataExtIsMutable();
-                sensCanLogTmpDataExt_.add(m);
-              } else {
-                sensCanLogTmpDataExtBuilder_.addMessage(m);
-              }
-              break;
-            } // case 138
-            case 146: {
-              org.example.libs.SensAccelerometerData m =
-                  input.readMessage(
-                      org.example.libs.SensAccelerometerData.parser(),
-                      extensionRegistry);
-              if (sensAccelerometerDataBuilder_ == null) {
-                ensureSensAccelerometerDataIsMutable();
-                sensAccelerometerData_.add(m);
-              } else {
-                sensAccelerometerDataBuilder_.addMessage(m);
-              }
-              break;
-            } // case 146
-            case 154: {
-              org.example.libs.SensDoutsFlags m =
-                  input.readMessage(
-                      org.example.libs.SensDoutsFlags.parser(),
-                      extensionRegistry);
-              if (sensDoutsFlagsBuilder_ == null) {
-                ensureSensDoutsFlagsIsMutable();
-                sensDoutsFlags_.add(m);
-              } else {
-                sensDoutsFlagsBuilder_.addMessage(m);
-              }
-              break;
-            } // case 154
-            case 162: {
-              org.example.libs.SensBufferData m =
-                  input.readMessage(
-                      org.example.libs.SensBufferData.parser(),
-                      extensionRegistry);
-              if (sensBufferDataBuilder_ == null) {
-                ensureSensBufferDataIsMutable();
-                sensBufferData_.add(m);
-              } else {
-                sensBufferDataBuilder_.addMessage(m);
-              }
-              break;
-            } // case 162
-            case 170: {
-              org.example.libs.SensStorInfo m =
-                  input.readMessage(
-                      org.example.libs.SensStorInfo.parser(),
-                      extensionRegistry);
-              if (sensStorInfoBuilder_ == null) {
-                ensureSensStorInfoIsMutable();
-                sensStorInfo_.add(m);
-              } else {
-                sensStorInfoBuilder_.addMessage(m);
-              }
-              break;
-            } // case 170
-            case 178: {
-              org.example.libs.SensTrackerInfo m =
-                  input.readMessage(
-                      org.example.libs.SensTrackerInfo.parser(),
-                      extensionRegistry);
-              if (sensTrackerInfoBuilder_ == null) {
-                ensureSensTrackerInfoIsMutable();
-                sensTrackerInfo_.add(m);
-              } else {
-                sensTrackerInfoBuilder_.addMessage(m);
-              }
-              break;
-            } // case 178
-            case 186: {
-              org.example.libs.SensTestEraTests m =
-                  input.readMessage(
-                      org.example.libs.SensTestEraTests.parser(),
-                      extensionRegistry);
-              if (sensTestEraTestsBuilder_ == null) {
-                ensureSensTestEraTestsIsMutable();
-                sensTestEraTests_.add(m);
-              } else {
-                sensTestEraTestsBuilder_.addMessage(m);
-              }
-              break;
-            } // case 186
-            case 194: {
-              org.example.libs.SensCrashData m =
-                  input.readMessage(
-                      org.example.libs.SensCrashData.parser(),
-                      extensionRegistry);
-              if (sensCrashDataBuilder_ == null) {
-                ensureSensCrashDataIsMutable();
-                sensCrashData_.add(m);
-              } else {
-                sensCrashDataBuilder_.addMessage(m);
-              }
-              break;
-            } // case 194
-            default: {
-              if (!super.parseUnknownField(input, extensionRegistry, tag)) {
-                done = true; // was an endgroup tag
-              }
-              break;
-            } // default:
-          } // switch (tag)
-        } // while (!done)
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.unwrapIOException();
-      } finally {
-        onChanged();
-      } // finally
-      return this;
-    }
-    private int bitField0_;
-
-    private int recordNumber_ ;
     /**
      * <pre>
      * Номер записи
      * </pre>
      *
      * <code>uint32 record_number = 1;</code>
+     *
      * @return The recordNumber.
      */
     @java.lang.Override
     public int getRecordNumber() {
-      return recordNumber_;
-    }
-    /**
-     * <pre>
-     * Номер записи
-     * </pre>
-     *
-     * <code>uint32 record_number = 1;</code>
-     * @param value The recordNumber to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRecordNumber(int value) {
-
-      recordNumber_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Номер записи
-     * </pre>
-     *
-     * <code>uint32 record_number = 1;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearRecordNumber() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      recordNumber_ = 0;
-      onChanged();
-      return this;
+        return recordNumber_;
     }
 
-    private int timeStamp_ ;
+    public static final int TIME_STAMP_FIELD_NUMBER = 2;
+    private int timeStamp_ = 0;
+
     /**
      * <pre>
      * Время отметки
      * </pre>
      *
      * <code>fixed32 time_stamp = 2;</code>
+     *
      * @return The timeStamp.
      */
     @java.lang.Override
     public int getTimeStamp() {
-      return timeStamp_;
-    }
-    /**
-     * <pre>
-     * Время отметки
-     * </pre>
-     *
-     * <code>fixed32 time_stamp = 2;</code>
-     * @param value The timeStamp to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTimeStamp(int value) {
-
-      timeStamp_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Время отметки
-     * </pre>
-     *
-     * <code>fixed32 time_stamp = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearTimeStamp() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      timeStamp_ = 0;
-      onChanged();
-      return this;
+        return timeStamp_;
     }
 
-    private com.google.protobuf.Internal.IntList recordReason_ =
-      emptyIntList();
-    private void ensureRecordReasonIsMutable() {
-      if (!((bitField0_ & 0x00000004) != 0)) {
-        recordReason_ = makeMutableCopy(recordReason_);
-        bitField0_ |= 0x00000004;
-      }
-    }
+    public static final int RECORD_REASON_FIELD_NUMBER = 3;
+    @SuppressWarnings("serial")
+    private com.google.protobuf.Internal.IntList recordReason_;
+    private static final com.google.protobuf.Internal.IntListAdapter.IntConverter<
+            org.example.libs.StorageRecord.Reason> recordReason_converter_ =
+            new com.google.protobuf.Internal.IntListAdapter.IntConverter<
+                    org.example.libs.StorageRecord.Reason>() {
+                public org.example.libs.StorageRecord.Reason convert(int from) {
+                    org.example.libs.StorageRecord.Reason result = org.example.libs.StorageRecord.Reason.forNumber(from);
+                    return result == null ? org.example.libs.StorageRecord.Reason.UNRECOGNIZED : result;
+                }
+            };
+
     /**
      * <pre>
      * Причины формирования отметки
      * </pre>
      *
      * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+     *
      * @return A list containing the recordReason.
      */
+    @java.lang.Override
     public java.util.List<org.example.libs.StorageRecord.Reason> getRecordReasonList() {
-      return new com.google.protobuf.Internal.IntListAdapter<
-          org.example.libs.StorageRecord.Reason>(recordReason_, recordReason_converter_);
+        return new com.google.protobuf.Internal.IntListAdapter<
+                org.example.libs.StorageRecord.Reason>(recordReason_, recordReason_converter_);
     }
+
     /**
      * <pre>
      * Причины формирования отметки
      * </pre>
      *
      * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+     *
      * @return The count of recordReason.
      */
+    @java.lang.Override
     public int getRecordReasonCount() {
-      return recordReason_.size();
+        return recordReason_.size();
     }
+
     /**
      * <pre>
      * Причины формирования отметки
      * </pre>
      *
      * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+     *
      * @param index The index of the element to return.
      * @return The recordReason at the given index.
      */
+    @java.lang.Override
     public org.example.libs.StorageRecord.Reason getRecordReason(int index) {
-      return recordReason_converter_.convert(recordReason_.getInt(index));
+        return recordReason_converter_.convert(recordReason_.getInt(index));
     }
+
     /**
      * <pre>
      * Причины формирования отметки
      * </pre>
      *
      * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @param index The index to set the value at.
-     * @param value The recordReason to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRecordReason(
-        int index, org.example.libs.StorageRecord.Reason value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      ensureRecordReasonIsMutable();
-      recordReason_.setInt(index, value.getNumber());
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
      *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @param value The recordReason to add.
-     * @return This builder for chaining.
-     */
-    public Builder addRecordReason(org.example.libs.StorageRecord.Reason value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      ensureRecordReasonIsMutable();
-      recordReason_.addInt(value.getNumber());
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
-     *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @param values The recordReason to add.
-     * @return This builder for chaining.
-     */
-    public Builder addAllRecordReason(
-        java.lang.Iterable<? extends org.example.libs.StorageRecord.Reason> values) {
-      ensureRecordReasonIsMutable();
-      for (org.example.libs.StorageRecord.Reason value : values) {
-        recordReason_.addInt(value.getNumber());
-      }
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
-     *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearRecordReason() {
-      recordReason_ = emptyIntList();
-      bitField0_ = (bitField0_ & ~0x00000004);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
-     *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
      * @return A list containing the enum numeric values on the wire for recordReason.
      */
+    @java.lang.Override
     public java.util.List<java.lang.Integer>
     getRecordReasonValueList() {
-      return java.util.Collections.unmodifiableList(recordReason_);
+        return recordReason_;
     }
+
     /**
      * <pre>
      * Причины формирования отметки
      * </pre>
      *
      * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+     *
      * @param index The index of the value to return.
      * @return The enum numeric value on the wire of recordReason at the given index.
      */
+    @java.lang.Override
     public int getRecordReasonValue(int index) {
-      return recordReason_.getInt(index);
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
-     *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @param index The index to set the value at.
-     * @param value The enum numeric value on the wire for recordReason to set.
-     * @return This builder for chaining.
-     */
-    public Builder setRecordReasonValue(
-        int index, int value) {
-      ensureRecordReasonIsMutable();
-      recordReason_.setInt(index, value);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
-     *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @param value The enum numeric value on the wire for recordReason to add.
-     * @return This builder for chaining.
-     */
-    public Builder addRecordReasonValue(int value) {
-      ensureRecordReasonIsMutable();
-      recordReason_.addInt(value);
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Причины формирования отметки
-     * </pre>
-     *
-     * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
-     * @param values The enum numeric values on the wire for recordReason to add.
-     * @return This builder for chaining.
-     */
-    public Builder addAllRecordReasonValue(
-        java.lang.Iterable<java.lang.Integer> values) {
-      ensureRecordReasonIsMutable();
-      for (int value : values) {
-        recordReason_.addInt(value);
-      }
-      onChanged();
-      return this;
+        return recordReason_.getInt(index);
     }
 
-    private int statusFlags_ ;
+    private int recordReasonMemoizedSerializedSize;
+
+    public static final int STATUS_FLAGS_FIELD_NUMBER = 4;
+    private int statusFlags_ = 0;
+
     /**
      * <pre>
      * Статусные флаги
      * </pre>
      *
      * <code>fixed32 status_flags = 4;</code>
+     *
      * @return The statusFlags.
      */
     @java.lang.Override
     public int getStatusFlags() {
-      return statusFlags_;
-    }
-    /**
-     * <pre>
-     * Статусные флаги
-     * </pre>
-     *
-     * <code>fixed32 status_flags = 4;</code>
-     * @param value The statusFlags to set.
-     * @return This builder for chaining.
-     */
-    public Builder setStatusFlags(int value) {
-
-      statusFlags_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * Статусные флаги
-     * </pre>
-     *
-     * <code>fixed32 status_flags = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearStatusFlags() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      statusFlags_ = 0;
-      onChanged();
-      return this;
+        return statusFlags_;
     }
 
-    private java.util.List<org.example.libs.SensAccelerometerData> sensAccelerometerData_ =
-      java.util.Collections.emptyList();
-    private void ensureSensAccelerometerDataIsMutable() {
-      if (!((bitField0_ & 0x00000010) != 0)) {
-        sensAccelerometerData_ = new java.util.ArrayList<org.example.libs.SensAccelerometerData>(sensAccelerometerData_);
-        bitField0_ |= 0x00000010;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensAccelerometerData, org.example.libs.SensAccelerometerData.Builder, org.example.libs.SensAccelerometerDataOrBuilder> sensAccelerometerDataBuilder_;
+    public static final int SENS_ACCELEROMETER_DATA_FIELD_NUMBER = 18;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensAccelerometerData> sensAccelerometerData_;
 
     /**
      * <pre>
@@ -3705,5651 +715,9250 @@ private static final long serialVersionUID = 0L;
      *
      * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
      */
-    public java.util.List<org.example.libs.SensAccelerometerData> getSensAccelerometerDataList() {
-      if (sensAccelerometerDataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensAccelerometerData_);
-      } else {
-        return sensAccelerometerDataBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public int getSensAccelerometerDataCount() {
-      if (sensAccelerometerDataBuilder_ == null) {
-        return sensAccelerometerData_.size();
-      } else {
-        return sensAccelerometerDataBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public org.example.libs.SensAccelerometerData getSensAccelerometerData(int index) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        return sensAccelerometerData_.get(index);
-      } else {
-        return sensAccelerometerDataBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder setSensAccelerometerData(
-        int index, org.example.libs.SensAccelerometerData value) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.set(index, value);
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder setSensAccelerometerData(
-        int index, org.example.libs.SensAccelerometerData.Builder builderForValue) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder addSensAccelerometerData(org.example.libs.SensAccelerometerData value) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.add(value);
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder addSensAccelerometerData(
-        int index, org.example.libs.SensAccelerometerData value) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.add(index, value);
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder addSensAccelerometerData(
-        org.example.libs.SensAccelerometerData.Builder builderForValue) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder addSensAccelerometerData(
-        int index, org.example.libs.SensAccelerometerData.Builder builderForValue) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder addAllSensAccelerometerData(
-        java.lang.Iterable<? extends org.example.libs.SensAccelerometerData> values) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        ensureSensAccelerometerDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensAccelerometerData_);
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder clearSensAccelerometerData() {
-      if (sensAccelerometerDataBuilder_ == null) {
-        sensAccelerometerData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000010);
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public Builder removeSensAccelerometerData(int index) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        ensureSensAccelerometerDataIsMutable();
-        sensAccelerometerData_.remove(index);
-        onChanged();
-      } else {
-        sensAccelerometerDataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public org.example.libs.SensAccelerometerData.Builder getSensAccelerometerDataBuilder(
-        int index) {
-      return internalGetSensAccelerometerDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public org.example.libs.SensAccelerometerDataOrBuilder getSensAccelerometerDataOrBuilder(
-        int index) {
-      if (sensAccelerometerDataBuilder_ == null) {
-        return sensAccelerometerData_.get(index);  } else {
-        return sensAccelerometerDataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensAccelerometerDataOrBuilder> 
-         getSensAccelerometerDataOrBuilderList() {
-      if (sensAccelerometerDataBuilder_ != null) {
-        return sensAccelerometerDataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensAccelerometerData_);
-      }
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public org.example.libs.SensAccelerometerData.Builder addSensAccelerometerDataBuilder() {
-      return internalGetSensAccelerometerDataFieldBuilder().addBuilder(
-          org.example.libs.SensAccelerometerData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public org.example.libs.SensAccelerometerData.Builder addSensAccelerometerDataBuilder(
-        int index) {
-      return internalGetSensAccelerometerDataFieldBuilder().addBuilder(
-          index, org.example.libs.SensAccelerometerData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Датчик ускорения
-     * </pre>
-     *
-     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
-     */
-    public java.util.List<org.example.libs.SensAccelerometerData.Builder> 
-         getSensAccelerometerDataBuilderList() {
-      return internalGetSensAccelerometerDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensAccelerometerData, org.example.libs.SensAccelerometerData.Builder, org.example.libs.SensAccelerometerDataOrBuilder> 
-        internalGetSensAccelerometerDataFieldBuilder() {
-      if (sensAccelerometerDataBuilder_ == null) {
-        sensAccelerometerDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensAccelerometerData, org.example.libs.SensAccelerometerData.Builder, org.example.libs.SensAccelerometerDataOrBuilder>(
-                sensAccelerometerData_,
-                ((bitField0_ & 0x00000010) != 0),
-                getParentForChildren(),
-                isClean());
-        sensAccelerometerData_ = null;
-      }
-      return sensAccelerometerDataBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensAinAinValue> sensAinAinValue_ =
-      java.util.Collections.emptyList();
-    private void ensureSensAinAinValueIsMutable() {
-      if (!((bitField0_ & 0x00000020) != 0)) {
-        sensAinAinValue_ = new java.util.ArrayList<org.example.libs.SensAinAinValue>(sensAinAinValue_);
-        bitField0_ |= 0x00000020;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensAinAinValue, org.example.libs.SensAinAinValue.Builder, org.example.libs.SensAinAinValueOrBuilder> sensAinAinValueBuilder_;
-
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public java.util.List<org.example.libs.SensAinAinValue> getSensAinAinValueList() {
-      if (sensAinAinValueBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensAinAinValue_);
-      } else {
-        return sensAinAinValueBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public int getSensAinAinValueCount() {
-      if (sensAinAinValueBuilder_ == null) {
-        return sensAinAinValue_.size();
-      } else {
-        return sensAinAinValueBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public org.example.libs.SensAinAinValue getSensAinAinValue(int index) {
-      if (sensAinAinValueBuilder_ == null) {
-        return sensAinAinValue_.get(index);
-      } else {
-        return sensAinAinValueBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder setSensAinAinValue(
-        int index, org.example.libs.SensAinAinValue value) {
-      if (sensAinAinValueBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.set(index, value);
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder setSensAinAinValue(
-        int index, org.example.libs.SensAinAinValue.Builder builderForValue) {
-      if (sensAinAinValueBuilder_ == null) {
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder addSensAinAinValue(org.example.libs.SensAinAinValue value) {
-      if (sensAinAinValueBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.add(value);
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder addSensAinAinValue(
-        int index, org.example.libs.SensAinAinValue value) {
-      if (sensAinAinValueBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.add(index, value);
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder addSensAinAinValue(
-        org.example.libs.SensAinAinValue.Builder builderForValue) {
-      if (sensAinAinValueBuilder_ == null) {
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder addSensAinAinValue(
-        int index, org.example.libs.SensAinAinValue.Builder builderForValue) {
-      if (sensAinAinValueBuilder_ == null) {
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder addAllSensAinAinValue(
-        java.lang.Iterable<? extends org.example.libs.SensAinAinValue> values) {
-      if (sensAinAinValueBuilder_ == null) {
-        ensureSensAinAinValueIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensAinAinValue_);
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder clearSensAinAinValue() {
-      if (sensAinAinValueBuilder_ == null) {
-        sensAinAinValue_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public Builder removeSensAinAinValue(int index) {
-      if (sensAinAinValueBuilder_ == null) {
-        ensureSensAinAinValueIsMutable();
-        sensAinAinValue_.remove(index);
-        onChanged();
-      } else {
-        sensAinAinValueBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public org.example.libs.SensAinAinValue.Builder getSensAinAinValueBuilder(
-        int index) {
-      return internalGetSensAinAinValueFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public org.example.libs.SensAinAinValueOrBuilder getSensAinAinValueOrBuilder(
-        int index) {
-      if (sensAinAinValueBuilder_ == null) {
-        return sensAinAinValue_.get(index);  } else {
-        return sensAinAinValueBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensAinAinValueOrBuilder> 
-         getSensAinAinValueOrBuilderList() {
-      if (sensAinAinValueBuilder_ != null) {
-        return sensAinAinValueBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensAinAinValue_);
-      }
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public org.example.libs.SensAinAinValue.Builder addSensAinAinValueBuilder() {
-      return internalGetSensAinAinValueFieldBuilder().addBuilder(
-          org.example.libs.SensAinAinValue.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public org.example.libs.SensAinAinValue.Builder addSensAinAinValueBuilder(
-        int index) {
-      return internalGetSensAinAinValueFieldBuilder().addBuilder(
-          index, org.example.libs.SensAinAinValue.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Аналоговый вход
-     * </pre>
-     *
-     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
-     */
-    public java.util.List<org.example.libs.SensAinAinValue.Builder> 
-         getSensAinAinValueBuilderList() {
-      return internalGetSensAinAinValueFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensAinAinValue, org.example.libs.SensAinAinValue.Builder, org.example.libs.SensAinAinValueOrBuilder> 
-        internalGetSensAinAinValueFieldBuilder() {
-      if (sensAinAinValueBuilder_ == null) {
-        sensAinAinValueBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensAinAinValue, org.example.libs.SensAinAinValue.Builder, org.example.libs.SensAinAinValueOrBuilder>(
-                sensAinAinValue_,
-                ((bitField0_ & 0x00000020) != 0),
-                getParentForChildren(),
-                isClean());
-        sensAinAinValue_ = null;
-      }
-      return sensAinAinValueBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensBufferData> sensBufferData_ =
-      java.util.Collections.emptyList();
-    private void ensureSensBufferDataIsMutable() {
-      if (!((bitField0_ & 0x00000040) != 0)) {
-        sensBufferData_ = new java.util.ArrayList<org.example.libs.SensBufferData>(sensBufferData_);
-        bitField0_ |= 0x00000040;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensBufferData, org.example.libs.SensBufferData.Builder, org.example.libs.SensBufferDataOrBuilder> sensBufferDataBuilder_;
-
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public java.util.List<org.example.libs.SensBufferData> getSensBufferDataList() {
-      if (sensBufferDataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensBufferData_);
-      } else {
-        return sensBufferDataBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public int getSensBufferDataCount() {
-      if (sensBufferDataBuilder_ == null) {
-        return sensBufferData_.size();
-      } else {
-        return sensBufferDataBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public org.example.libs.SensBufferData getSensBufferData(int index) {
-      if (sensBufferDataBuilder_ == null) {
-        return sensBufferData_.get(index);
-      } else {
-        return sensBufferDataBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder setSensBufferData(
-        int index, org.example.libs.SensBufferData value) {
-      if (sensBufferDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.set(index, value);
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder setSensBufferData(
-        int index, org.example.libs.SensBufferData.Builder builderForValue) {
-      if (sensBufferDataBuilder_ == null) {
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder addSensBufferData(org.example.libs.SensBufferData value) {
-      if (sensBufferDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.add(value);
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder addSensBufferData(
-        int index, org.example.libs.SensBufferData value) {
-      if (sensBufferDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.add(index, value);
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder addSensBufferData(
-        org.example.libs.SensBufferData.Builder builderForValue) {
-      if (sensBufferDataBuilder_ == null) {
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder addSensBufferData(
-        int index, org.example.libs.SensBufferData.Builder builderForValue) {
-      if (sensBufferDataBuilder_ == null) {
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder addAllSensBufferData(
-        java.lang.Iterable<? extends org.example.libs.SensBufferData> values) {
-      if (sensBufferDataBuilder_ == null) {
-        ensureSensBufferDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensBufferData_);
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder clearSensBufferData() {
-      if (sensBufferDataBuilder_ == null) {
-        sensBufferData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public Builder removeSensBufferData(int index) {
-      if (sensBufferDataBuilder_ == null) {
-        ensureSensBufferDataIsMutable();
-        sensBufferData_.remove(index);
-        onChanged();
-      } else {
-        sensBufferDataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public org.example.libs.SensBufferData.Builder getSensBufferDataBuilder(
-        int index) {
-      return internalGetSensBufferDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public org.example.libs.SensBufferDataOrBuilder getSensBufferDataOrBuilder(
-        int index) {
-      if (sensBufferDataBuilder_ == null) {
-        return sensBufferData_.get(index);  } else {
-        return sensBufferDataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensBufferDataOrBuilder> 
-         getSensBufferDataOrBuilderList() {
-      if (sensBufferDataBuilder_ != null) {
-        return sensBufferDataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensBufferData_);
-      }
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public org.example.libs.SensBufferData.Builder addSensBufferDataBuilder() {
-      return internalGetSensBufferDataFieldBuilder().addBuilder(
-          org.example.libs.SensBufferData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public org.example.libs.SensBufferData.Builder addSensBufferDataBuilder(
-        int index) {
-      return internalGetSensBufferDataFieldBuilder().addBuilder(
-          index, org.example.libs.SensBufferData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Буферизованные данные
-     * </pre>
-     *
-     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
-     */
-    public java.util.List<org.example.libs.SensBufferData.Builder> 
-         getSensBufferDataBuilderList() {
-      return internalGetSensBufferDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensBufferData, org.example.libs.SensBufferData.Builder, org.example.libs.SensBufferDataOrBuilder> 
-        internalGetSensBufferDataFieldBuilder() {
-      if (sensBufferDataBuilder_ == null) {
-        sensBufferDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensBufferData, org.example.libs.SensBufferData.Builder, org.example.libs.SensBufferDataOrBuilder>(
-                sensBufferData_,
-                ((bitField0_ & 0x00000040) != 0),
-                getParentForChildren(),
-                isClean());
-        sensBufferData_ = null;
-      }
-      return sensBufferDataBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensButtonPressCounter> sensButtonPressCounter_ =
-      java.util.Collections.emptyList();
-    private void ensureSensButtonPressCounterIsMutable() {
-      if (!((bitField0_ & 0x00000080) != 0)) {
-        sensButtonPressCounter_ = new java.util.ArrayList<org.example.libs.SensButtonPressCounter>(sensButtonPressCounter_);
-        bitField0_ |= 0x00000080;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensButtonPressCounter, org.example.libs.SensButtonPressCounter.Builder, org.example.libs.SensButtonPressCounterOrBuilder> sensButtonPressCounterBuilder_;
-
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public java.util.List<org.example.libs.SensButtonPressCounter> getSensButtonPressCounterList() {
-      if (sensButtonPressCounterBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensButtonPressCounter_);
-      } else {
-        return sensButtonPressCounterBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public int getSensButtonPressCounterCount() {
-      if (sensButtonPressCounterBuilder_ == null) {
-        return sensButtonPressCounter_.size();
-      } else {
-        return sensButtonPressCounterBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public org.example.libs.SensButtonPressCounter getSensButtonPressCounter(int index) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        return sensButtonPressCounter_.get(index);
-      } else {
-        return sensButtonPressCounterBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder setSensButtonPressCounter(
-        int index, org.example.libs.SensButtonPressCounter value) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.set(index, value);
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder setSensButtonPressCounter(
-        int index, org.example.libs.SensButtonPressCounter.Builder builderForValue) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder addSensButtonPressCounter(org.example.libs.SensButtonPressCounter value) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.add(value);
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder addSensButtonPressCounter(
-        int index, org.example.libs.SensButtonPressCounter value) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.add(index, value);
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder addSensButtonPressCounter(
-        org.example.libs.SensButtonPressCounter.Builder builderForValue) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder addSensButtonPressCounter(
-        int index, org.example.libs.SensButtonPressCounter.Builder builderForValue) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder addAllSensButtonPressCounter(
-        java.lang.Iterable<? extends org.example.libs.SensButtonPressCounter> values) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        ensureSensButtonPressCounterIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensButtonPressCounter_);
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder clearSensButtonPressCounter() {
-      if (sensButtonPressCounterBuilder_ == null) {
-        sensButtonPressCounter_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public Builder removeSensButtonPressCounter(int index) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        ensureSensButtonPressCounterIsMutable();
-        sensButtonPressCounter_.remove(index);
-        onChanged();
-      } else {
-        sensButtonPressCounterBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public org.example.libs.SensButtonPressCounter.Builder getSensButtonPressCounterBuilder(
-        int index) {
-      return internalGetSensButtonPressCounterFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public org.example.libs.SensButtonPressCounterOrBuilder getSensButtonPressCounterOrBuilder(
-        int index) {
-      if (sensButtonPressCounterBuilder_ == null) {
-        return sensButtonPressCounter_.get(index);  } else {
-        return sensButtonPressCounterBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensButtonPressCounterOrBuilder> 
-         getSensButtonPressCounterOrBuilderList() {
-      if (sensButtonPressCounterBuilder_ != null) {
-        return sensButtonPressCounterBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensButtonPressCounter_);
-      }
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public org.example.libs.SensButtonPressCounter.Builder addSensButtonPressCounterBuilder() {
-      return internalGetSensButtonPressCounterFieldBuilder().addBuilder(
-          org.example.libs.SensButtonPressCounter.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public org.example.libs.SensButtonPressCounter.Builder addSensButtonPressCounterBuilder(
-        int index) {
-      return internalGetSensButtonPressCounterFieldBuilder().addBuilder(
-          index, org.example.libs.SensButtonPressCounter.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Кнопка
-     * </pre>
-     *
-     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
-     */
-    public java.util.List<org.example.libs.SensButtonPressCounter.Builder> 
-         getSensButtonPressCounterBuilderList() {
-      return internalGetSensButtonPressCounterFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensButtonPressCounter, org.example.libs.SensButtonPressCounter.Builder, org.example.libs.SensButtonPressCounterOrBuilder> 
-        internalGetSensButtonPressCounterFieldBuilder() {
-      if (sensButtonPressCounterBuilder_ == null) {
-        sensButtonPressCounterBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensButtonPressCounter, org.example.libs.SensButtonPressCounter.Builder, org.example.libs.SensButtonPressCounterOrBuilder>(
-                sensButtonPressCounter_,
-                ((bitField0_ & 0x00000080) != 0),
-                getParentForChildren(),
-                isClean());
-        sensButtonPressCounter_ = null;
-      }
-      return sensButtonPressCounterBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensCanLogData> sensCanLogData_ =
-      java.util.Collections.emptyList();
-    private void ensureSensCanLogDataIsMutable() {
-      if (!((bitField0_ & 0x00000100) != 0)) {
-        sensCanLogData_ = new java.util.ArrayList<org.example.libs.SensCanLogData>(sensCanLogData_);
-        bitField0_ |= 0x00000100;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCanLogData, org.example.libs.SensCanLogData.Builder, org.example.libs.SensCanLogDataOrBuilder> sensCanLogDataBuilder_;
-
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public java.util.List<org.example.libs.SensCanLogData> getSensCanLogDataList() {
-      if (sensCanLogDataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensCanLogData_);
-      } else {
-        return sensCanLogDataBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public int getSensCanLogDataCount() {
-      if (sensCanLogDataBuilder_ == null) {
-        return sensCanLogData_.size();
-      } else {
-        return sensCanLogDataBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public org.example.libs.SensCanLogData getSensCanLogData(int index) {
-      if (sensCanLogDataBuilder_ == null) {
-        return sensCanLogData_.get(index);
-      } else {
-        return sensCanLogDataBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder setSensCanLogData(
-        int index, org.example.libs.SensCanLogData value) {
-      if (sensCanLogDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.set(index, value);
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder setSensCanLogData(
-        int index, org.example.libs.SensCanLogData.Builder builderForValue) {
-      if (sensCanLogDataBuilder_ == null) {
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder addSensCanLogData(org.example.libs.SensCanLogData value) {
-      if (sensCanLogDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.add(value);
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder addSensCanLogData(
-        int index, org.example.libs.SensCanLogData value) {
-      if (sensCanLogDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.add(index, value);
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder addSensCanLogData(
-        org.example.libs.SensCanLogData.Builder builderForValue) {
-      if (sensCanLogDataBuilder_ == null) {
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder addSensCanLogData(
-        int index, org.example.libs.SensCanLogData.Builder builderForValue) {
-      if (sensCanLogDataBuilder_ == null) {
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder addAllSensCanLogData(
-        java.lang.Iterable<? extends org.example.libs.SensCanLogData> values) {
-      if (sensCanLogDataBuilder_ == null) {
-        ensureSensCanLogDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensCanLogData_);
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder clearSensCanLogData() {
-      if (sensCanLogDataBuilder_ == null) {
-        sensCanLogData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public Builder removeSensCanLogData(int index) {
-      if (sensCanLogDataBuilder_ == null) {
-        ensureSensCanLogDataIsMutable();
-        sensCanLogData_.remove(index);
-        onChanged();
-      } else {
-        sensCanLogDataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public org.example.libs.SensCanLogData.Builder getSensCanLogDataBuilder(
-        int index) {
-      return internalGetSensCanLogDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public org.example.libs.SensCanLogDataOrBuilder getSensCanLogDataOrBuilder(
-        int index) {
-      if (sensCanLogDataBuilder_ == null) {
-        return sensCanLogData_.get(index);  } else {
-        return sensCanLogDataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensCanLogDataOrBuilder> 
-         getSensCanLogDataOrBuilderList() {
-      if (sensCanLogDataBuilder_ != null) {
-        return sensCanLogDataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensCanLogData_);
-      }
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public org.example.libs.SensCanLogData.Builder addSensCanLogDataBuilder() {
-      return internalGetSensCanLogDataFieldBuilder().addBuilder(
-          org.example.libs.SensCanLogData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public org.example.libs.SensCanLogData.Builder addSensCanLogDataBuilder(
-        int index) {
-      return internalGetSensCanLogDataFieldBuilder().addBuilder(
-          index, org.example.libs.SensCanLogData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * CAN-лог
-     * </pre>
-     *
-     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
-     */
-    public java.util.List<org.example.libs.SensCanLogData.Builder> 
-         getSensCanLogDataBuilderList() {
-      return internalGetSensCanLogDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCanLogData, org.example.libs.SensCanLogData.Builder, org.example.libs.SensCanLogDataOrBuilder> 
-        internalGetSensCanLogDataFieldBuilder() {
-      if (sensCanLogDataBuilder_ == null) {
-        sensCanLogDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensCanLogData, org.example.libs.SensCanLogData.Builder, org.example.libs.SensCanLogDataOrBuilder>(
-                sensCanLogData_,
-                ((bitField0_ & 0x00000100) != 0),
-                getParentForChildren(),
-                isClean());
-        sensCanLogData_ = null;
-      }
-      return sensCanLogDataBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensCanLogTmpDataExt> sensCanLogTmpDataExt_ =
-      java.util.Collections.emptyList();
-    private void ensureSensCanLogTmpDataExtIsMutable() {
-      if (!((bitField0_ & 0x00000200) != 0)) {
-        sensCanLogTmpDataExt_ = new java.util.ArrayList<org.example.libs.SensCanLogTmpDataExt>(sensCanLogTmpDataExt_);
-        bitField0_ |= 0x00000200;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCanLogTmpDataExt, org.example.libs.SensCanLogTmpDataExt.Builder, org.example.libs.SensCanLogTmpDataExtOrBuilder> sensCanLogTmpDataExtBuilder_;
-
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public java.util.List<org.example.libs.SensCanLogTmpDataExt> getSensCanLogTmpDataExtList() {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensCanLogTmpDataExt_);
-      } else {
-        return sensCanLogTmpDataExtBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public int getSensCanLogTmpDataExtCount() {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        return sensCanLogTmpDataExt_.size();
-      } else {
-        return sensCanLogTmpDataExtBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public org.example.libs.SensCanLogTmpDataExt getSensCanLogTmpDataExt(int index) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        return sensCanLogTmpDataExt_.get(index);
-      } else {
-        return sensCanLogTmpDataExtBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder setSensCanLogTmpDataExt(
-        int index, org.example.libs.SensCanLogTmpDataExt value) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.set(index, value);
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder setSensCanLogTmpDataExt(
-        int index, org.example.libs.SensCanLogTmpDataExt.Builder builderForValue) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder addSensCanLogTmpDataExt(org.example.libs.SensCanLogTmpDataExt value) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.add(value);
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder addSensCanLogTmpDataExt(
-        int index, org.example.libs.SensCanLogTmpDataExt value) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.add(index, value);
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder addSensCanLogTmpDataExt(
-        org.example.libs.SensCanLogTmpDataExt.Builder builderForValue) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder addSensCanLogTmpDataExt(
-        int index, org.example.libs.SensCanLogTmpDataExt.Builder builderForValue) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder addAllSensCanLogTmpDataExt(
-        java.lang.Iterable<? extends org.example.libs.SensCanLogTmpDataExt> values) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        ensureSensCanLogTmpDataExtIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensCanLogTmpDataExt_);
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder clearSensCanLogTmpDataExt() {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        sensCanLogTmpDataExt_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000200);
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public Builder removeSensCanLogTmpDataExt(int index) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        ensureSensCanLogTmpDataExtIsMutable();
-        sensCanLogTmpDataExt_.remove(index);
-        onChanged();
-      } else {
-        sensCanLogTmpDataExtBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public org.example.libs.SensCanLogTmpDataExt.Builder getSensCanLogTmpDataExtBuilder(
-        int index) {
-      return internalGetSensCanLogTmpDataExtFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public org.example.libs.SensCanLogTmpDataExtOrBuilder getSensCanLogTmpDataExtOrBuilder(
-        int index) {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        return sensCanLogTmpDataExt_.get(index);  } else {
-        return sensCanLogTmpDataExtBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensCanLogTmpDataExtOrBuilder> 
-         getSensCanLogTmpDataExtOrBuilderList() {
-      if (sensCanLogTmpDataExtBuilder_ != null) {
-        return sensCanLogTmpDataExtBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensCanLogTmpDataExt_);
-      }
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public org.example.libs.SensCanLogTmpDataExt.Builder addSensCanLogTmpDataExtBuilder() {
-      return internalGetSensCanLogTmpDataExtFieldBuilder().addBuilder(
-          org.example.libs.SensCanLogTmpDataExt.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public org.example.libs.SensCanLogTmpDataExt.Builder addSensCanLogTmpDataExtBuilder(
-        int index) {
-      return internalGetSensCanLogTmpDataExtFieldBuilder().addBuilder(
-          index, org.example.libs.SensCanLogTmpDataExt.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Расширение CAN-лога
-     * </pre>
-     *
-     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
-     */
-    public java.util.List<org.example.libs.SensCanLogTmpDataExt.Builder> 
-         getSensCanLogTmpDataExtBuilderList() {
-      return internalGetSensCanLogTmpDataExtFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCanLogTmpDataExt, org.example.libs.SensCanLogTmpDataExt.Builder, org.example.libs.SensCanLogTmpDataExtOrBuilder> 
-        internalGetSensCanLogTmpDataExtFieldBuilder() {
-      if (sensCanLogTmpDataExtBuilder_ == null) {
-        sensCanLogTmpDataExtBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensCanLogTmpDataExt, org.example.libs.SensCanLogTmpDataExt.Builder, org.example.libs.SensCanLogTmpDataExtOrBuilder>(
-                sensCanLogTmpDataExt_,
-                ((bitField0_ & 0x00000200) != 0),
-                getParentForChildren(),
-                isClean());
-        sensCanLogTmpDataExt_ = null;
-      }
-      return sensCanLogTmpDataExtBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensCounterCount> sensCounterCount_ =
-      java.util.Collections.emptyList();
-    private void ensureSensCounterCountIsMutable() {
-      if (!((bitField0_ & 0x00000400) != 0)) {
-        sensCounterCount_ = new java.util.ArrayList<org.example.libs.SensCounterCount>(sensCounterCount_);
-        bitField0_ |= 0x00000400;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCounterCount, org.example.libs.SensCounterCount.Builder, org.example.libs.SensCounterCountOrBuilder> sensCounterCountBuilder_;
-
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public java.util.List<org.example.libs.SensCounterCount> getSensCounterCountList() {
-      if (sensCounterCountBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensCounterCount_);
-      } else {
-        return sensCounterCountBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public int getSensCounterCountCount() {
-      if (sensCounterCountBuilder_ == null) {
-        return sensCounterCount_.size();
-      } else {
-        return sensCounterCountBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public org.example.libs.SensCounterCount getSensCounterCount(int index) {
-      if (sensCounterCountBuilder_ == null) {
-        return sensCounterCount_.get(index);
-      } else {
-        return sensCounterCountBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder setSensCounterCount(
-        int index, org.example.libs.SensCounterCount value) {
-      if (sensCounterCountBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.set(index, value);
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder setSensCounterCount(
-        int index, org.example.libs.SensCounterCount.Builder builderForValue) {
-      if (sensCounterCountBuilder_ == null) {
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder addSensCounterCount(org.example.libs.SensCounterCount value) {
-      if (sensCounterCountBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.add(value);
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder addSensCounterCount(
-        int index, org.example.libs.SensCounterCount value) {
-      if (sensCounterCountBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.add(index, value);
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder addSensCounterCount(
-        org.example.libs.SensCounterCount.Builder builderForValue) {
-      if (sensCounterCountBuilder_ == null) {
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder addSensCounterCount(
-        int index, org.example.libs.SensCounterCount.Builder builderForValue) {
-      if (sensCounterCountBuilder_ == null) {
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder addAllSensCounterCount(
-        java.lang.Iterable<? extends org.example.libs.SensCounterCount> values) {
-      if (sensCounterCountBuilder_ == null) {
-        ensureSensCounterCountIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensCounterCount_);
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder clearSensCounterCount() {
-      if (sensCounterCountBuilder_ == null) {
-        sensCounterCount_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000400);
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public Builder removeSensCounterCount(int index) {
-      if (sensCounterCountBuilder_ == null) {
-        ensureSensCounterCountIsMutable();
-        sensCounterCount_.remove(index);
-        onChanged();
-      } else {
-        sensCounterCountBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public org.example.libs.SensCounterCount.Builder getSensCounterCountBuilder(
-        int index) {
-      return internalGetSensCounterCountFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public org.example.libs.SensCounterCountOrBuilder getSensCounterCountOrBuilder(
-        int index) {
-      if (sensCounterCountBuilder_ == null) {
-        return sensCounterCount_.get(index);  } else {
-        return sensCounterCountBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensCounterCountOrBuilder> 
-         getSensCounterCountOrBuilderList() {
-      if (sensCounterCountBuilder_ != null) {
-        return sensCounterCountBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensCounterCount_);
-      }
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public org.example.libs.SensCounterCount.Builder addSensCounterCountBuilder() {
-      return internalGetSensCounterCountFieldBuilder().addBuilder(
-          org.example.libs.SensCounterCount.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public org.example.libs.SensCounterCount.Builder addSensCounterCountBuilder(
-        int index) {
-      return internalGetSensCounterCountFieldBuilder().addBuilder(
-          index, org.example.libs.SensCounterCount.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Счётчик
-     * </pre>
-     *
-     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
-     */
-    public java.util.List<org.example.libs.SensCounterCount.Builder> 
-         getSensCounterCountBuilderList() {
-      return internalGetSensCounterCountFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCounterCount, org.example.libs.SensCounterCount.Builder, org.example.libs.SensCounterCountOrBuilder> 
-        internalGetSensCounterCountFieldBuilder() {
-      if (sensCounterCountBuilder_ == null) {
-        sensCounterCountBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensCounterCount, org.example.libs.SensCounterCount.Builder, org.example.libs.SensCounterCountOrBuilder>(
-                sensCounterCount_,
-                ((bitField0_ & 0x00000400) != 0),
-                getParentForChildren(),
-                isClean());
-        sensCounterCount_ = null;
-      }
-      return sensCounterCountBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensCrashData> sensCrashData_ =
-      java.util.Collections.emptyList();
-    private void ensureSensCrashDataIsMutable() {
-      if (!((bitField0_ & 0x00000800) != 0)) {
-        sensCrashData_ = new java.util.ArrayList<org.example.libs.SensCrashData>(sensCrashData_);
-        bitField0_ |= 0x00000800;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCrashData, org.example.libs.SensCrashData.Builder, org.example.libs.SensCrashDataOrBuilder> sensCrashDataBuilder_;
-
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public java.util.List<org.example.libs.SensCrashData> getSensCrashDataList() {
-      if (sensCrashDataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensCrashData_);
-      } else {
-        return sensCrashDataBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public int getSensCrashDataCount() {
-      if (sensCrashDataBuilder_ == null) {
-        return sensCrashData_.size();
-      } else {
-        return sensCrashDataBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public org.example.libs.SensCrashData getSensCrashData(int index) {
-      if (sensCrashDataBuilder_ == null) {
-        return sensCrashData_.get(index);
-      } else {
-        return sensCrashDataBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder setSensCrashData(
-        int index, org.example.libs.SensCrashData value) {
-      if (sensCrashDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.set(index, value);
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder setSensCrashData(
-        int index, org.example.libs.SensCrashData.Builder builderForValue) {
-      if (sensCrashDataBuilder_ == null) {
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder addSensCrashData(org.example.libs.SensCrashData value) {
-      if (sensCrashDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.add(value);
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder addSensCrashData(
-        int index, org.example.libs.SensCrashData value) {
-      if (sensCrashDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.add(index, value);
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder addSensCrashData(
-        org.example.libs.SensCrashData.Builder builderForValue) {
-      if (sensCrashDataBuilder_ == null) {
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder addSensCrashData(
-        int index, org.example.libs.SensCrashData.Builder builderForValue) {
-      if (sensCrashDataBuilder_ == null) {
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder addAllSensCrashData(
-        java.lang.Iterable<? extends org.example.libs.SensCrashData> values) {
-      if (sensCrashDataBuilder_ == null) {
-        ensureSensCrashDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensCrashData_);
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder clearSensCrashData() {
-      if (sensCrashDataBuilder_ == null) {
-        sensCrashData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000800);
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public Builder removeSensCrashData(int index) {
-      if (sensCrashDataBuilder_ == null) {
-        ensureSensCrashDataIsMutable();
-        sensCrashData_.remove(index);
-        onChanged();
-      } else {
-        sensCrashDataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public org.example.libs.SensCrashData.Builder getSensCrashDataBuilder(
-        int index) {
-      return internalGetSensCrashDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public org.example.libs.SensCrashDataOrBuilder getSensCrashDataOrBuilder(
-        int index) {
-      if (sensCrashDataBuilder_ == null) {
-        return sensCrashData_.get(index);  } else {
-        return sensCrashDataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensCrashDataOrBuilder> 
-         getSensCrashDataOrBuilderList() {
-      if (sensCrashDataBuilder_ != null) {
-        return sensCrashDataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensCrashData_);
-      }
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public org.example.libs.SensCrashData.Builder addSensCrashDataBuilder() {
-      return internalGetSensCrashDataFieldBuilder().addBuilder(
-          org.example.libs.SensCrashData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public org.example.libs.SensCrashData.Builder addSensCrashDataBuilder(
-        int index) {
-      return internalGetSensCrashDataFieldBuilder().addBuilder(
-          index, org.example.libs.SensCrashData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Данные об аварии
-     * </pre>
-     *
-     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
-     */
-    public java.util.List<org.example.libs.SensCrashData.Builder> 
-         getSensCrashDataBuilderList() {
-      return internalGetSensCrashDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensCrashData, org.example.libs.SensCrashData.Builder, org.example.libs.SensCrashDataOrBuilder> 
-        internalGetSensCrashDataFieldBuilder() {
-      if (sensCrashDataBuilder_ == null) {
-        sensCrashDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensCrashData, org.example.libs.SensCrashData.Builder, org.example.libs.SensCrashDataOrBuilder>(
-                sensCrashData_,
-                ((bitField0_ & 0x00000800) != 0),
-                getParentForChildren(),
-                isClean());
-        sensCrashData_ = null;
-      }
-      return sensCrashDataBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensDinsFlags> sensDinsFlags_ =
-      java.util.Collections.emptyList();
-    private void ensureSensDinsFlagsIsMutable() {
-      if (!((bitField0_ & 0x00001000) != 0)) {
-        sensDinsFlags_ = new java.util.ArrayList<org.example.libs.SensDinsFlags>(sensDinsFlags_);
-        bitField0_ |= 0x00001000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensDinsFlags, org.example.libs.SensDinsFlags.Builder, org.example.libs.SensDinsFlagsOrBuilder> sensDinsFlagsBuilder_;
-
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public java.util.List<org.example.libs.SensDinsFlags> getSensDinsFlagsList() {
-      if (sensDinsFlagsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensDinsFlags_);
-      } else {
-        return sensDinsFlagsBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public int getSensDinsFlagsCount() {
-      if (sensDinsFlagsBuilder_ == null) {
-        return sensDinsFlags_.size();
-      } else {
-        return sensDinsFlagsBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public org.example.libs.SensDinsFlags getSensDinsFlags(int index) {
-      if (sensDinsFlagsBuilder_ == null) {
-        return sensDinsFlags_.get(index);
-      } else {
-        return sensDinsFlagsBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder setSensDinsFlags(
-        int index, org.example.libs.SensDinsFlags value) {
-      if (sensDinsFlagsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.set(index, value);
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder setSensDinsFlags(
-        int index, org.example.libs.SensDinsFlags.Builder builderForValue) {
-      if (sensDinsFlagsBuilder_ == null) {
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder addSensDinsFlags(org.example.libs.SensDinsFlags value) {
-      if (sensDinsFlagsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.add(value);
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder addSensDinsFlags(
-        int index, org.example.libs.SensDinsFlags value) {
-      if (sensDinsFlagsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.add(index, value);
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder addSensDinsFlags(
-        org.example.libs.SensDinsFlags.Builder builderForValue) {
-      if (sensDinsFlagsBuilder_ == null) {
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder addSensDinsFlags(
-        int index, org.example.libs.SensDinsFlags.Builder builderForValue) {
-      if (sensDinsFlagsBuilder_ == null) {
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder addAllSensDinsFlags(
-        java.lang.Iterable<? extends org.example.libs.SensDinsFlags> values) {
-      if (sensDinsFlagsBuilder_ == null) {
-        ensureSensDinsFlagsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensDinsFlags_);
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder clearSensDinsFlags() {
-      if (sensDinsFlagsBuilder_ == null) {
-        sensDinsFlags_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00001000);
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public Builder removeSensDinsFlags(int index) {
-      if (sensDinsFlagsBuilder_ == null) {
-        ensureSensDinsFlagsIsMutable();
-        sensDinsFlags_.remove(index);
-        onChanged();
-      } else {
-        sensDinsFlagsBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public org.example.libs.SensDinsFlags.Builder getSensDinsFlagsBuilder(
-        int index) {
-      return internalGetSensDinsFlagsFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public org.example.libs.SensDinsFlagsOrBuilder getSensDinsFlagsOrBuilder(
-        int index) {
-      if (sensDinsFlagsBuilder_ == null) {
-        return sensDinsFlags_.get(index);  } else {
-        return sensDinsFlagsBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensDinsFlagsOrBuilder> 
-         getSensDinsFlagsOrBuilderList() {
-      if (sensDinsFlagsBuilder_ != null) {
-        return sensDinsFlagsBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensDinsFlags_);
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public org.example.libs.SensDinsFlags.Builder addSensDinsFlagsBuilder() {
-      return internalGetSensDinsFlagsFieldBuilder().addBuilder(
-          org.example.libs.SensDinsFlags.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public org.example.libs.SensDinsFlags.Builder addSensDinsFlagsBuilder(
-        int index) {
-      return internalGetSensDinsFlagsFieldBuilder().addBuilder(
-          index, org.example.libs.SensDinsFlags.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Цифровые входы
-     * </pre>
-     *
-     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
-     */
-    public java.util.List<org.example.libs.SensDinsFlags.Builder> 
-         getSensDinsFlagsBuilderList() {
-      return internalGetSensDinsFlagsFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensDinsFlags, org.example.libs.SensDinsFlags.Builder, org.example.libs.SensDinsFlagsOrBuilder> 
-        internalGetSensDinsFlagsFieldBuilder() {
-      if (sensDinsFlagsBuilder_ == null) {
-        sensDinsFlagsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensDinsFlags, org.example.libs.SensDinsFlags.Builder, org.example.libs.SensDinsFlagsOrBuilder>(
-                sensDinsFlags_,
-                ((bitField0_ & 0x00001000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensDinsFlags_ = null;
-      }
-      return sensDinsFlagsBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensDoutsFlags> sensDoutsFlags_ =
-      java.util.Collections.emptyList();
-    private void ensureSensDoutsFlagsIsMutable() {
-      if (!((bitField0_ & 0x00002000) != 0)) {
-        sensDoutsFlags_ = new java.util.ArrayList<org.example.libs.SensDoutsFlags>(sensDoutsFlags_);
-        bitField0_ |= 0x00002000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensDoutsFlags, org.example.libs.SensDoutsFlags.Builder, org.example.libs.SensDoutsFlagsOrBuilder> sensDoutsFlagsBuilder_;
-
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public java.util.List<org.example.libs.SensDoutsFlags> getSensDoutsFlagsList() {
-      if (sensDoutsFlagsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensDoutsFlags_);
-      } else {
-        return sensDoutsFlagsBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public int getSensDoutsFlagsCount() {
-      if (sensDoutsFlagsBuilder_ == null) {
-        return sensDoutsFlags_.size();
-      } else {
-        return sensDoutsFlagsBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public org.example.libs.SensDoutsFlags getSensDoutsFlags(int index) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        return sensDoutsFlags_.get(index);
-      } else {
-        return sensDoutsFlagsBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder setSensDoutsFlags(
-        int index, org.example.libs.SensDoutsFlags value) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.set(index, value);
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder setSensDoutsFlags(
-        int index, org.example.libs.SensDoutsFlags.Builder builderForValue) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder addSensDoutsFlags(org.example.libs.SensDoutsFlags value) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.add(value);
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder addSensDoutsFlags(
-        int index, org.example.libs.SensDoutsFlags value) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.add(index, value);
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder addSensDoutsFlags(
-        org.example.libs.SensDoutsFlags.Builder builderForValue) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder addSensDoutsFlags(
-        int index, org.example.libs.SensDoutsFlags.Builder builderForValue) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder addAllSensDoutsFlags(
-        java.lang.Iterable<? extends org.example.libs.SensDoutsFlags> values) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        ensureSensDoutsFlagsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensDoutsFlags_);
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder clearSensDoutsFlags() {
-      if (sensDoutsFlagsBuilder_ == null) {
-        sensDoutsFlags_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00002000);
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public Builder removeSensDoutsFlags(int index) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        ensureSensDoutsFlagsIsMutable();
-        sensDoutsFlags_.remove(index);
-        onChanged();
-      } else {
-        sensDoutsFlagsBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public org.example.libs.SensDoutsFlags.Builder getSensDoutsFlagsBuilder(
-        int index) {
-      return internalGetSensDoutsFlagsFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public org.example.libs.SensDoutsFlagsOrBuilder getSensDoutsFlagsOrBuilder(
-        int index) {
-      if (sensDoutsFlagsBuilder_ == null) {
-        return sensDoutsFlags_.get(index);  } else {
-        return sensDoutsFlagsBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensDoutsFlagsOrBuilder> 
-         getSensDoutsFlagsOrBuilderList() {
-      if (sensDoutsFlagsBuilder_ != null) {
-        return sensDoutsFlagsBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensDoutsFlags_);
-      }
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public org.example.libs.SensDoutsFlags.Builder addSensDoutsFlagsBuilder() {
-      return internalGetSensDoutsFlagsFieldBuilder().addBuilder(
-          org.example.libs.SensDoutsFlags.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public org.example.libs.SensDoutsFlags.Builder addSensDoutsFlagsBuilder(
-        int index) {
-      return internalGetSensDoutsFlagsFieldBuilder().addBuilder(
-          index, org.example.libs.SensDoutsFlags.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Цифровые выходы
-     * </pre>
-     *
-     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
-     */
-    public java.util.List<org.example.libs.SensDoutsFlags.Builder> 
-         getSensDoutsFlagsBuilderList() {
-      return internalGetSensDoutsFlagsFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensDoutsFlags, org.example.libs.SensDoutsFlags.Builder, org.example.libs.SensDoutsFlagsOrBuilder> 
-        internalGetSensDoutsFlagsFieldBuilder() {
-      if (sensDoutsFlagsBuilder_ == null) {
-        sensDoutsFlagsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensDoutsFlags, org.example.libs.SensDoutsFlags.Builder, org.example.libs.SensDoutsFlagsOrBuilder>(
-                sensDoutsFlags_,
-                ((bitField0_ & 0x00002000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensDoutsFlags_ = null;
-      }
-      return sensDoutsFlagsBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensFmeterFrequency> sensFmeterFrequency_ =
-      java.util.Collections.emptyList();
-    private void ensureSensFmeterFrequencyIsMutable() {
-      if (!((bitField0_ & 0x00004000) != 0)) {
-        sensFmeterFrequency_ = new java.util.ArrayList<org.example.libs.SensFmeterFrequency>(sensFmeterFrequency_);
-        bitField0_ |= 0x00004000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensFmeterFrequency, org.example.libs.SensFmeterFrequency.Builder, org.example.libs.SensFmeterFrequencyOrBuilder> sensFmeterFrequencyBuilder_;
-
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public java.util.List<org.example.libs.SensFmeterFrequency> getSensFmeterFrequencyList() {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensFmeterFrequency_);
-      } else {
-        return sensFmeterFrequencyBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public int getSensFmeterFrequencyCount() {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        return sensFmeterFrequency_.size();
-      } else {
-        return sensFmeterFrequencyBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public org.example.libs.SensFmeterFrequency getSensFmeterFrequency(int index) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        return sensFmeterFrequency_.get(index);
-      } else {
-        return sensFmeterFrequencyBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder setSensFmeterFrequency(
-        int index, org.example.libs.SensFmeterFrequency value) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.set(index, value);
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder setSensFmeterFrequency(
-        int index, org.example.libs.SensFmeterFrequency.Builder builderForValue) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder addSensFmeterFrequency(org.example.libs.SensFmeterFrequency value) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.add(value);
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder addSensFmeterFrequency(
-        int index, org.example.libs.SensFmeterFrequency value) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.add(index, value);
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder addSensFmeterFrequency(
-        org.example.libs.SensFmeterFrequency.Builder builderForValue) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder addSensFmeterFrequency(
-        int index, org.example.libs.SensFmeterFrequency.Builder builderForValue) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder addAllSensFmeterFrequency(
-        java.lang.Iterable<? extends org.example.libs.SensFmeterFrequency> values) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        ensureSensFmeterFrequencyIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensFmeterFrequency_);
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder clearSensFmeterFrequency() {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        sensFmeterFrequency_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00004000);
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public Builder removeSensFmeterFrequency(int index) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        ensureSensFmeterFrequencyIsMutable();
-        sensFmeterFrequency_.remove(index);
-        onChanged();
-      } else {
-        sensFmeterFrequencyBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public org.example.libs.SensFmeterFrequency.Builder getSensFmeterFrequencyBuilder(
-        int index) {
-      return internalGetSensFmeterFrequencyFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public org.example.libs.SensFmeterFrequencyOrBuilder getSensFmeterFrequencyOrBuilder(
-        int index) {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        return sensFmeterFrequency_.get(index);  } else {
-        return sensFmeterFrequencyBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensFmeterFrequencyOrBuilder> 
-         getSensFmeterFrequencyOrBuilderList() {
-      if (sensFmeterFrequencyBuilder_ != null) {
-        return sensFmeterFrequencyBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensFmeterFrequency_);
-      }
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public org.example.libs.SensFmeterFrequency.Builder addSensFmeterFrequencyBuilder() {
-      return internalGetSensFmeterFrequencyFieldBuilder().addBuilder(
-          org.example.libs.SensFmeterFrequency.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public org.example.libs.SensFmeterFrequency.Builder addSensFmeterFrequencyBuilder(
-        int index) {
-      return internalGetSensFmeterFrequencyFieldBuilder().addBuilder(
-          index, org.example.libs.SensFmeterFrequency.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Частотомер
-     * </pre>
-     *
-     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
-     */
-    public java.util.List<org.example.libs.SensFmeterFrequency.Builder> 
-         getSensFmeterFrequencyBuilderList() {
-      return internalGetSensFmeterFrequencyFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensFmeterFrequency, org.example.libs.SensFmeterFrequency.Builder, org.example.libs.SensFmeterFrequencyOrBuilder> 
-        internalGetSensFmeterFrequencyFieldBuilder() {
-      if (sensFmeterFrequencyBuilder_ == null) {
-        sensFmeterFrequencyBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensFmeterFrequency, org.example.libs.SensFmeterFrequency.Builder, org.example.libs.SensFmeterFrequencyOrBuilder>(
-                sensFmeterFrequency_,
-                ((bitField0_ & 0x00004000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensFmeterFrequency_ = null;
-      }
-      return sensFmeterFrequencyBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensFuelLevel> sensFuelLevel_ =
-      java.util.Collections.emptyList();
-    private void ensureSensFuelLevelIsMutable() {
-      if (!((bitField0_ & 0x00008000) != 0)) {
-        sensFuelLevel_ = new java.util.ArrayList<org.example.libs.SensFuelLevel>(sensFuelLevel_);
-        bitField0_ |= 0x00008000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensFuelLevel, org.example.libs.SensFuelLevel.Builder, org.example.libs.SensFuelLevelOrBuilder> sensFuelLevelBuilder_;
-
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public java.util.List<org.example.libs.SensFuelLevel> getSensFuelLevelList() {
-      if (sensFuelLevelBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensFuelLevel_);
-      } else {
-        return sensFuelLevelBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public int getSensFuelLevelCount() {
-      if (sensFuelLevelBuilder_ == null) {
-        return sensFuelLevel_.size();
-      } else {
-        return sensFuelLevelBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public org.example.libs.SensFuelLevel getSensFuelLevel(int index) {
-      if (sensFuelLevelBuilder_ == null) {
-        return sensFuelLevel_.get(index);
-      } else {
-        return sensFuelLevelBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder setSensFuelLevel(
-        int index, org.example.libs.SensFuelLevel value) {
-      if (sensFuelLevelBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.set(index, value);
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder setSensFuelLevel(
-        int index, org.example.libs.SensFuelLevel.Builder builderForValue) {
-      if (sensFuelLevelBuilder_ == null) {
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder addSensFuelLevel(org.example.libs.SensFuelLevel value) {
-      if (sensFuelLevelBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.add(value);
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder addSensFuelLevel(
-        int index, org.example.libs.SensFuelLevel value) {
-      if (sensFuelLevelBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.add(index, value);
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder addSensFuelLevel(
-        org.example.libs.SensFuelLevel.Builder builderForValue) {
-      if (sensFuelLevelBuilder_ == null) {
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder addSensFuelLevel(
-        int index, org.example.libs.SensFuelLevel.Builder builderForValue) {
-      if (sensFuelLevelBuilder_ == null) {
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder addAllSensFuelLevel(
-        java.lang.Iterable<? extends org.example.libs.SensFuelLevel> values) {
-      if (sensFuelLevelBuilder_ == null) {
-        ensureSensFuelLevelIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensFuelLevel_);
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder clearSensFuelLevel() {
-      if (sensFuelLevelBuilder_ == null) {
-        sensFuelLevel_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00008000);
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public Builder removeSensFuelLevel(int index) {
-      if (sensFuelLevelBuilder_ == null) {
-        ensureSensFuelLevelIsMutable();
-        sensFuelLevel_.remove(index);
-        onChanged();
-      } else {
-        sensFuelLevelBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public org.example.libs.SensFuelLevel.Builder getSensFuelLevelBuilder(
-        int index) {
-      return internalGetSensFuelLevelFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public org.example.libs.SensFuelLevelOrBuilder getSensFuelLevelOrBuilder(
-        int index) {
-      if (sensFuelLevelBuilder_ == null) {
-        return sensFuelLevel_.get(index);  } else {
-        return sensFuelLevelBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensFuelLevelOrBuilder> 
-         getSensFuelLevelOrBuilderList() {
-      if (sensFuelLevelBuilder_ != null) {
-        return sensFuelLevelBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensFuelLevel_);
-      }
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public org.example.libs.SensFuelLevel.Builder addSensFuelLevelBuilder() {
-      return internalGetSensFuelLevelFieldBuilder().addBuilder(
-          org.example.libs.SensFuelLevel.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public org.example.libs.SensFuelLevel.Builder addSensFuelLevelBuilder(
-        int index) {
-      return internalGetSensFuelLevelFieldBuilder().addBuilder(
-          index, org.example.libs.SensFuelLevel.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Уровень топлива
-     * </pre>
-     *
-     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
-     */
-    public java.util.List<org.example.libs.SensFuelLevel.Builder> 
-         getSensFuelLevelBuilderList() {
-      return internalGetSensFuelLevelFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensFuelLevel, org.example.libs.SensFuelLevel.Builder, org.example.libs.SensFuelLevelOrBuilder> 
-        internalGetSensFuelLevelFieldBuilder() {
-      if (sensFuelLevelBuilder_ == null) {
-        sensFuelLevelBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensFuelLevel, org.example.libs.SensFuelLevel.Builder, org.example.libs.SensFuelLevelOrBuilder>(
-                sensFuelLevel_,
-                ((bitField0_ & 0x00008000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensFuelLevel_ = null;
-      }
-      return sensFuelLevelBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensGsmCellMonitoring> sensGsmCellMonitoring_ =
-      java.util.Collections.emptyList();
-    private void ensureSensGsmCellMonitoringIsMutable() {
-      if (!((bitField0_ & 0x00010000) != 0)) {
-        sensGsmCellMonitoring_ = new java.util.ArrayList<org.example.libs.SensGsmCellMonitoring>(sensGsmCellMonitoring_);
-        bitField0_ |= 0x00010000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensGsmCellMonitoring, org.example.libs.SensGsmCellMonitoring.Builder, org.example.libs.SensGsmCellMonitoringOrBuilder> sensGsmCellMonitoringBuilder_;
-
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public java.util.List<org.example.libs.SensGsmCellMonitoring> getSensGsmCellMonitoringList() {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensGsmCellMonitoring_);
-      } else {
-        return sensGsmCellMonitoringBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public int getSensGsmCellMonitoringCount() {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        return sensGsmCellMonitoring_.size();
-      } else {
-        return sensGsmCellMonitoringBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public org.example.libs.SensGsmCellMonitoring getSensGsmCellMonitoring(int index) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        return sensGsmCellMonitoring_.get(index);
-      } else {
-        return sensGsmCellMonitoringBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder setSensGsmCellMonitoring(
-        int index, org.example.libs.SensGsmCellMonitoring value) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.set(index, value);
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder setSensGsmCellMonitoring(
-        int index, org.example.libs.SensGsmCellMonitoring.Builder builderForValue) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder addSensGsmCellMonitoring(org.example.libs.SensGsmCellMonitoring value) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.add(value);
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder addSensGsmCellMonitoring(
-        int index, org.example.libs.SensGsmCellMonitoring value) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.add(index, value);
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder addSensGsmCellMonitoring(
-        org.example.libs.SensGsmCellMonitoring.Builder builderForValue) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder addSensGsmCellMonitoring(
-        int index, org.example.libs.SensGsmCellMonitoring.Builder builderForValue) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder addAllSensGsmCellMonitoring(
-        java.lang.Iterable<? extends org.example.libs.SensGsmCellMonitoring> values) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        ensureSensGsmCellMonitoringIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensGsmCellMonitoring_);
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder clearSensGsmCellMonitoring() {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        sensGsmCellMonitoring_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00010000);
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public Builder removeSensGsmCellMonitoring(int index) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        ensureSensGsmCellMonitoringIsMutable();
-        sensGsmCellMonitoring_.remove(index);
-        onChanged();
-      } else {
-        sensGsmCellMonitoringBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public org.example.libs.SensGsmCellMonitoring.Builder getSensGsmCellMonitoringBuilder(
-        int index) {
-      return internalGetSensGsmCellMonitoringFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public org.example.libs.SensGsmCellMonitoringOrBuilder getSensGsmCellMonitoringOrBuilder(
-        int index) {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        return sensGsmCellMonitoring_.get(index);  } else {
-        return sensGsmCellMonitoringBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensGsmCellMonitoringOrBuilder> 
-         getSensGsmCellMonitoringOrBuilderList() {
-      if (sensGsmCellMonitoringBuilder_ != null) {
-        return sensGsmCellMonitoringBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensGsmCellMonitoring_);
-      }
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public org.example.libs.SensGsmCellMonitoring.Builder addSensGsmCellMonitoringBuilder() {
-      return internalGetSensGsmCellMonitoringFieldBuilder().addBuilder(
-          org.example.libs.SensGsmCellMonitoring.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public org.example.libs.SensGsmCellMonitoring.Builder addSensGsmCellMonitoringBuilder(
-        int index) {
-      return internalGetSensGsmCellMonitoringFieldBuilder().addBuilder(
-          index, org.example.libs.SensGsmCellMonitoring.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Информация о базовых станциях GSM
-     * </pre>
-     *
-     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
-     */
-    public java.util.List<org.example.libs.SensGsmCellMonitoring.Builder> 
-         getSensGsmCellMonitoringBuilderList() {
-      return internalGetSensGsmCellMonitoringFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensGsmCellMonitoring, org.example.libs.SensGsmCellMonitoring.Builder, org.example.libs.SensGsmCellMonitoringOrBuilder> 
-        internalGetSensGsmCellMonitoringFieldBuilder() {
-      if (sensGsmCellMonitoringBuilder_ == null) {
-        sensGsmCellMonitoringBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensGsmCellMonitoring, org.example.libs.SensGsmCellMonitoring.Builder, org.example.libs.SensGsmCellMonitoringOrBuilder>(
-                sensGsmCellMonitoring_,
-                ((bitField0_ & 0x00010000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensGsmCellMonitoring_ = null;
-      }
-      return sensGsmCellMonitoringBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensNdNavData> sensNdNavData_ =
-      java.util.Collections.emptyList();
-    private void ensureSensNdNavDataIsMutable() {
-      if (!((bitField0_ & 0x00020000) != 0)) {
-        sensNdNavData_ = new java.util.ArrayList<org.example.libs.SensNdNavData>(sensNdNavData_);
-        bitField0_ |= 0x00020000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensNdNavData, org.example.libs.SensNdNavData.Builder, org.example.libs.SensNdNavDataOrBuilder> sensNdNavDataBuilder_;
-
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public java.util.List<org.example.libs.SensNdNavData> getSensNdNavDataList() {
-      if (sensNdNavDataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensNdNavData_);
-      } else {
-        return sensNdNavDataBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public int getSensNdNavDataCount() {
-      if (sensNdNavDataBuilder_ == null) {
-        return sensNdNavData_.size();
-      } else {
-        return sensNdNavDataBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public org.example.libs.SensNdNavData getSensNdNavData(int index) {
-      if (sensNdNavDataBuilder_ == null) {
-        return sensNdNavData_.get(index);
-      } else {
-        return sensNdNavDataBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder setSensNdNavData(
-        int index, org.example.libs.SensNdNavData value) {
-      if (sensNdNavDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.set(index, value);
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder setSensNdNavData(
-        int index, org.example.libs.SensNdNavData.Builder builderForValue) {
-      if (sensNdNavDataBuilder_ == null) {
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder addSensNdNavData(org.example.libs.SensNdNavData value) {
-      if (sensNdNavDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.add(value);
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder addSensNdNavData(
-        int index, org.example.libs.SensNdNavData value) {
-      if (sensNdNavDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.add(index, value);
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder addSensNdNavData(
-        org.example.libs.SensNdNavData.Builder builderForValue) {
-      if (sensNdNavDataBuilder_ == null) {
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder addSensNdNavData(
-        int index, org.example.libs.SensNdNavData.Builder builderForValue) {
-      if (sensNdNavDataBuilder_ == null) {
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder addAllSensNdNavData(
-        java.lang.Iterable<? extends org.example.libs.SensNdNavData> values) {
-      if (sensNdNavDataBuilder_ == null) {
-        ensureSensNdNavDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensNdNavData_);
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder clearSensNdNavData() {
-      if (sensNdNavDataBuilder_ == null) {
-        sensNdNavData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00020000);
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public Builder removeSensNdNavData(int index) {
-      if (sensNdNavDataBuilder_ == null) {
-        ensureSensNdNavDataIsMutable();
-        sensNdNavData_.remove(index);
-        onChanged();
-      } else {
-        sensNdNavDataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public org.example.libs.SensNdNavData.Builder getSensNdNavDataBuilder(
-        int index) {
-      return internalGetSensNdNavDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public org.example.libs.SensNdNavDataOrBuilder getSensNdNavDataOrBuilder(
-        int index) {
-      if (sensNdNavDataBuilder_ == null) {
-        return sensNdNavData_.get(index);  } else {
-        return sensNdNavDataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensNdNavDataOrBuilder> 
-         getSensNdNavDataOrBuilderList() {
-      if (sensNdNavDataBuilder_ != null) {
-        return sensNdNavDataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensNdNavData_);
-      }
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public org.example.libs.SensNdNavData.Builder addSensNdNavDataBuilder() {
-      return internalGetSensNdNavDataFieldBuilder().addBuilder(
-          org.example.libs.SensNdNavData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public org.example.libs.SensNdNavData.Builder addSensNdNavDataBuilder(
-        int index) {
-      return internalGetSensNdNavDataFieldBuilder().addBuilder(
-          index, org.example.libs.SensNdNavData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Навигационные данные
-     * </pre>
-     *
-     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
-     */
-    public java.util.List<org.example.libs.SensNdNavData.Builder> 
-         getSensNdNavDataBuilderList() {
-      return internalGetSensNdNavDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensNdNavData, org.example.libs.SensNdNavData.Builder, org.example.libs.SensNdNavDataOrBuilder> 
-        internalGetSensNdNavDataFieldBuilder() {
-      if (sensNdNavDataBuilder_ == null) {
-        sensNdNavDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensNdNavData, org.example.libs.SensNdNavData.Builder, org.example.libs.SensNdNavDataOrBuilder>(
-                sensNdNavData_,
-                ((bitField0_ & 0x00020000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensNdNavData_ = null;
-      }
-      return sensNdNavDataBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensStorInfo> sensStorInfo_ =
-      java.util.Collections.emptyList();
-    private void ensureSensStorInfoIsMutable() {
-      if (!((bitField0_ & 0x00040000) != 0)) {
-        sensStorInfo_ = new java.util.ArrayList<org.example.libs.SensStorInfo>(sensStorInfo_);
-        bitField0_ |= 0x00040000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensStorInfo, org.example.libs.SensStorInfo.Builder, org.example.libs.SensStorInfoOrBuilder> sensStorInfoBuilder_;
-
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public java.util.List<org.example.libs.SensStorInfo> getSensStorInfoList() {
-      if (sensStorInfoBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensStorInfo_);
-      } else {
-        return sensStorInfoBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public int getSensStorInfoCount() {
-      if (sensStorInfoBuilder_ == null) {
-        return sensStorInfo_.size();
-      } else {
-        return sensStorInfoBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public org.example.libs.SensStorInfo getSensStorInfo(int index) {
-      if (sensStorInfoBuilder_ == null) {
-        return sensStorInfo_.get(index);
-      } else {
-        return sensStorInfoBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder setSensStorInfo(
-        int index, org.example.libs.SensStorInfo value) {
-      if (sensStorInfoBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.set(index, value);
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder setSensStorInfo(
-        int index, org.example.libs.SensStorInfo.Builder builderForValue) {
-      if (sensStorInfoBuilder_ == null) {
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder addSensStorInfo(org.example.libs.SensStorInfo value) {
-      if (sensStorInfoBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.add(value);
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder addSensStorInfo(
-        int index, org.example.libs.SensStorInfo value) {
-      if (sensStorInfoBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.add(index, value);
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder addSensStorInfo(
-        org.example.libs.SensStorInfo.Builder builderForValue) {
-      if (sensStorInfoBuilder_ == null) {
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder addSensStorInfo(
-        int index, org.example.libs.SensStorInfo.Builder builderForValue) {
-      if (sensStorInfoBuilder_ == null) {
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder addAllSensStorInfo(
-        java.lang.Iterable<? extends org.example.libs.SensStorInfo> values) {
-      if (sensStorInfoBuilder_ == null) {
-        ensureSensStorInfoIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensStorInfo_);
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder clearSensStorInfo() {
-      if (sensStorInfoBuilder_ == null) {
-        sensStorInfo_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00040000);
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public Builder removeSensStorInfo(int index) {
-      if (sensStorInfoBuilder_ == null) {
-        ensureSensStorInfoIsMutable();
-        sensStorInfo_.remove(index);
-        onChanged();
-      } else {
-        sensStorInfoBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public org.example.libs.SensStorInfo.Builder getSensStorInfoBuilder(
-        int index) {
-      return internalGetSensStorInfoFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public org.example.libs.SensStorInfoOrBuilder getSensStorInfoOrBuilder(
-        int index) {
-      if (sensStorInfoBuilder_ == null) {
-        return sensStorInfo_.get(index);  } else {
-        return sensStorInfoBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensStorInfoOrBuilder> 
-         getSensStorInfoOrBuilderList() {
-      if (sensStorInfoBuilder_ != null) {
-        return sensStorInfoBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensStorInfo_);
-      }
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public org.example.libs.SensStorInfo.Builder addSensStorInfoBuilder() {
-      return internalGetSensStorInfoFieldBuilder().addBuilder(
-          org.example.libs.SensStorInfo.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public org.example.libs.SensStorInfo.Builder addSensStorInfoBuilder(
-        int index) {
-      return internalGetSensStorInfoFieldBuilder().addBuilder(
-          index, org.example.libs.SensStorInfo.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Статистика хранилище навигационных данных
-     * </pre>
-     *
-     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
-     */
-    public java.util.List<org.example.libs.SensStorInfo.Builder> 
-         getSensStorInfoBuilderList() {
-      return internalGetSensStorInfoFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensStorInfo, org.example.libs.SensStorInfo.Builder, org.example.libs.SensStorInfoOrBuilder> 
-        internalGetSensStorInfoFieldBuilder() {
-      if (sensStorInfoBuilder_ == null) {
-        sensStorInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensStorInfo, org.example.libs.SensStorInfo.Builder, org.example.libs.SensStorInfoOrBuilder>(
-                sensStorInfo_,
-                ((bitField0_ & 0x00040000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensStorInfo_ = null;
-      }
-      return sensStorInfoBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensTermoData> sensTermoData_ =
-      java.util.Collections.emptyList();
-    private void ensureSensTermoDataIsMutable() {
-      if (!((bitField0_ & 0x00080000) != 0)) {
-        sensTermoData_ = new java.util.ArrayList<org.example.libs.SensTermoData>(sensTermoData_);
-        bitField0_ |= 0x00080000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensTermoData, org.example.libs.SensTermoData.Builder, org.example.libs.SensTermoDataOrBuilder> sensTermoDataBuilder_;
-
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public java.util.List<org.example.libs.SensTermoData> getSensTermoDataList() {
-      if (sensTermoDataBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensTermoData_);
-      } else {
-        return sensTermoDataBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public int getSensTermoDataCount() {
-      if (sensTermoDataBuilder_ == null) {
-        return sensTermoData_.size();
-      } else {
-        return sensTermoDataBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public org.example.libs.SensTermoData getSensTermoData(int index) {
-      if (sensTermoDataBuilder_ == null) {
-        return sensTermoData_.get(index);
-      } else {
-        return sensTermoDataBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder setSensTermoData(
-        int index, org.example.libs.SensTermoData value) {
-      if (sensTermoDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.set(index, value);
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder setSensTermoData(
-        int index, org.example.libs.SensTermoData.Builder builderForValue) {
-      if (sensTermoDataBuilder_ == null) {
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder addSensTermoData(org.example.libs.SensTermoData value) {
-      if (sensTermoDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.add(value);
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder addSensTermoData(
-        int index, org.example.libs.SensTermoData value) {
-      if (sensTermoDataBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.add(index, value);
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder addSensTermoData(
-        org.example.libs.SensTermoData.Builder builderForValue) {
-      if (sensTermoDataBuilder_ == null) {
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder addSensTermoData(
-        int index, org.example.libs.SensTermoData.Builder builderForValue) {
-      if (sensTermoDataBuilder_ == null) {
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder addAllSensTermoData(
-        java.lang.Iterable<? extends org.example.libs.SensTermoData> values) {
-      if (sensTermoDataBuilder_ == null) {
-        ensureSensTermoDataIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensTermoData_);
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder clearSensTermoData() {
-      if (sensTermoDataBuilder_ == null) {
-        sensTermoData_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00080000);
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public Builder removeSensTermoData(int index) {
-      if (sensTermoDataBuilder_ == null) {
-        ensureSensTermoDataIsMutable();
-        sensTermoData_.remove(index);
-        onChanged();
-      } else {
-        sensTermoDataBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public org.example.libs.SensTermoData.Builder getSensTermoDataBuilder(
-        int index) {
-      return internalGetSensTermoDataFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public org.example.libs.SensTermoDataOrBuilder getSensTermoDataOrBuilder(
-        int index) {
-      if (sensTermoDataBuilder_ == null) {
-        return sensTermoData_.get(index);  } else {
-        return sensTermoDataBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensTermoDataOrBuilder> 
-         getSensTermoDataOrBuilderList() {
-      if (sensTermoDataBuilder_ != null) {
-        return sensTermoDataBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensTermoData_);
-      }
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public org.example.libs.SensTermoData.Builder addSensTermoDataBuilder() {
-      return internalGetSensTermoDataFieldBuilder().addBuilder(
-          org.example.libs.SensTermoData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public org.example.libs.SensTermoData.Builder addSensTermoDataBuilder(
-        int index) {
-      return internalGetSensTermoDataFieldBuilder().addBuilder(
-          index, org.example.libs.SensTermoData.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Датчик температуры
-     * </pre>
-     *
-     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
-     */
-    public java.util.List<org.example.libs.SensTermoData.Builder> 
-         getSensTermoDataBuilderList() {
-      return internalGetSensTermoDataFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensTermoData, org.example.libs.SensTermoData.Builder, org.example.libs.SensTermoDataOrBuilder> 
-        internalGetSensTermoDataFieldBuilder() {
-      if (sensTermoDataBuilder_ == null) {
-        sensTermoDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensTermoData, org.example.libs.SensTermoData.Builder, org.example.libs.SensTermoDataOrBuilder>(
-                sensTermoData_,
-                ((bitField0_ & 0x00080000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensTermoData_ = null;
-      }
-      return sensTermoDataBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensTestEraTests> sensTestEraTests_ =
-      java.util.Collections.emptyList();
-    private void ensureSensTestEraTestsIsMutable() {
-      if (!((bitField0_ & 0x00100000) != 0)) {
-        sensTestEraTests_ = new java.util.ArrayList<org.example.libs.SensTestEraTests>(sensTestEraTests_);
-        bitField0_ |= 0x00100000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensTestEraTests, org.example.libs.SensTestEraTests.Builder, org.example.libs.SensTestEraTestsOrBuilder> sensTestEraTestsBuilder_;
-
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public java.util.List<org.example.libs.SensTestEraTests> getSensTestEraTestsList() {
-      if (sensTestEraTestsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensTestEraTests_);
-      } else {
-        return sensTestEraTestsBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public int getSensTestEraTestsCount() {
-      if (sensTestEraTestsBuilder_ == null) {
-        return sensTestEraTests_.size();
-      } else {
-        return sensTestEraTestsBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public org.example.libs.SensTestEraTests getSensTestEraTests(int index) {
-      if (sensTestEraTestsBuilder_ == null) {
-        return sensTestEraTests_.get(index);
-      } else {
-        return sensTestEraTestsBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder setSensTestEraTests(
-        int index, org.example.libs.SensTestEraTests value) {
-      if (sensTestEraTestsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.set(index, value);
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder setSensTestEraTests(
-        int index, org.example.libs.SensTestEraTests.Builder builderForValue) {
-      if (sensTestEraTestsBuilder_ == null) {
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder addSensTestEraTests(org.example.libs.SensTestEraTests value) {
-      if (sensTestEraTestsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.add(value);
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder addSensTestEraTests(
-        int index, org.example.libs.SensTestEraTests value) {
-      if (sensTestEraTestsBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.add(index, value);
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder addSensTestEraTests(
-        org.example.libs.SensTestEraTests.Builder builderForValue) {
-      if (sensTestEraTestsBuilder_ == null) {
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder addSensTestEraTests(
-        int index, org.example.libs.SensTestEraTests.Builder builderForValue) {
-      if (sensTestEraTestsBuilder_ == null) {
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder addAllSensTestEraTests(
-        java.lang.Iterable<? extends org.example.libs.SensTestEraTests> values) {
-      if (sensTestEraTestsBuilder_ == null) {
-        ensureSensTestEraTestsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensTestEraTests_);
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder clearSensTestEraTests() {
-      if (sensTestEraTestsBuilder_ == null) {
-        sensTestEraTests_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00100000);
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public Builder removeSensTestEraTests(int index) {
-      if (sensTestEraTestsBuilder_ == null) {
-        ensureSensTestEraTestsIsMutable();
-        sensTestEraTests_.remove(index);
-        onChanged();
-      } else {
-        sensTestEraTestsBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public org.example.libs.SensTestEraTests.Builder getSensTestEraTestsBuilder(
-        int index) {
-      return internalGetSensTestEraTestsFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public org.example.libs.SensTestEraTestsOrBuilder getSensTestEraTestsOrBuilder(
-        int index) {
-      if (sensTestEraTestsBuilder_ == null) {
-        return sensTestEraTests_.get(index);  } else {
-        return sensTestEraTestsBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensTestEraTestsOrBuilder> 
-         getSensTestEraTestsOrBuilderList() {
-      if (sensTestEraTestsBuilder_ != null) {
-        return sensTestEraTestsBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensTestEraTests_);
-      }
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public org.example.libs.SensTestEraTests.Builder addSensTestEraTestsBuilder() {
-      return internalGetSensTestEraTestsFieldBuilder().addBuilder(
-          org.example.libs.SensTestEraTests.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public org.example.libs.SensTestEraTests.Builder addSensTestEraTestsBuilder(
-        int index) {
-      return internalGetSensTestEraTestsFieldBuilder().addBuilder(
-          index, org.example.libs.SensTestEraTests.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Тесты ЭРА ГЛОНАСС
-     * </pre>
-     *
-     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
-     */
-    public java.util.List<org.example.libs.SensTestEraTests.Builder> 
-         getSensTestEraTestsBuilderList() {
-      return internalGetSensTestEraTestsFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensTestEraTests, org.example.libs.SensTestEraTests.Builder, org.example.libs.SensTestEraTestsOrBuilder> 
-        internalGetSensTestEraTestsFieldBuilder() {
-      if (sensTestEraTestsBuilder_ == null) {
-        sensTestEraTestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensTestEraTests, org.example.libs.SensTestEraTests.Builder, org.example.libs.SensTestEraTestsOrBuilder>(
-                sensTestEraTests_,
-                ((bitField0_ & 0x00100000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensTestEraTests_ = null;
-      }
-      return sensTestEraTestsBuilder_;
-    }
-
-    private java.util.List<org.example.libs.SensTrackerInfo> sensTrackerInfo_ =
-      java.util.Collections.emptyList();
-    private void ensureSensTrackerInfoIsMutable() {
-      if (!((bitField0_ & 0x00200000) != 0)) {
-        sensTrackerInfo_ = new java.util.ArrayList<org.example.libs.SensTrackerInfo>(sensTrackerInfo_);
-        bitField0_ |= 0x00200000;
-       }
-    }
-
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensTrackerInfo, org.example.libs.SensTrackerInfo.Builder, org.example.libs.SensTrackerInfoOrBuilder> sensTrackerInfoBuilder_;
-
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public java.util.List<org.example.libs.SensTrackerInfo> getSensTrackerInfoList() {
-      if (sensTrackerInfoBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(sensTrackerInfo_);
-      } else {
-        return sensTrackerInfoBuilder_.getMessageList();
-      }
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public int getSensTrackerInfoCount() {
-      if (sensTrackerInfoBuilder_ == null) {
-        return sensTrackerInfo_.size();
-      } else {
-        return sensTrackerInfoBuilder_.getCount();
-      }
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public org.example.libs.SensTrackerInfo getSensTrackerInfo(int index) {
-      if (sensTrackerInfoBuilder_ == null) {
-        return sensTrackerInfo_.get(index);
-      } else {
-        return sensTrackerInfoBuilder_.getMessage(index);
-      }
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder setSensTrackerInfo(
-        int index, org.example.libs.SensTrackerInfo value) {
-      if (sensTrackerInfoBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.set(index, value);
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.setMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder setSensTrackerInfo(
-        int index, org.example.libs.SensTrackerInfo.Builder builderForValue) {
-      if (sensTrackerInfoBuilder_ == null) {
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.set(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.setMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder addSensTrackerInfo(org.example.libs.SensTrackerInfo value) {
-      if (sensTrackerInfoBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.add(value);
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.addMessage(value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder addSensTrackerInfo(
-        int index, org.example.libs.SensTrackerInfo value) {
-      if (sensTrackerInfoBuilder_ == null) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.add(index, value);
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.addMessage(index, value);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder addSensTrackerInfo(
-        org.example.libs.SensTrackerInfo.Builder builderForValue) {
-      if (sensTrackerInfoBuilder_ == null) {
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.add(builderForValue.build());
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.addMessage(builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder addSensTrackerInfo(
-        int index, org.example.libs.SensTrackerInfo.Builder builderForValue) {
-      if (sensTrackerInfoBuilder_ == null) {
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.add(index, builderForValue.build());
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.addMessage(index, builderForValue.build());
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder addAllSensTrackerInfo(
-        java.lang.Iterable<? extends org.example.libs.SensTrackerInfo> values) {
-      if (sensTrackerInfoBuilder_ == null) {
-        ensureSensTrackerInfoIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sensTrackerInfo_);
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.addAllMessages(values);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder clearSensTrackerInfo() {
-      if (sensTrackerInfoBuilder_ == null) {
-        sensTrackerInfo_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00200000);
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.clear();
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public Builder removeSensTrackerInfo(int index) {
-      if (sensTrackerInfoBuilder_ == null) {
-        ensureSensTrackerInfoIsMutable();
-        sensTrackerInfo_.remove(index);
-        onChanged();
-      } else {
-        sensTrackerInfoBuilder_.remove(index);
-      }
-      return this;
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public org.example.libs.SensTrackerInfo.Builder getSensTrackerInfoBuilder(
-        int index) {
-      return internalGetSensTrackerInfoFieldBuilder().getBuilder(index);
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public org.example.libs.SensTrackerInfoOrBuilder getSensTrackerInfoOrBuilder(
-        int index) {
-      if (sensTrackerInfoBuilder_ == null) {
-        return sensTrackerInfo_.get(index);  } else {
-        return sensTrackerInfoBuilder_.getMessageOrBuilder(index);
-      }
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public java.util.List<? extends org.example.libs.SensTrackerInfoOrBuilder> 
-         getSensTrackerInfoOrBuilderList() {
-      if (sensTrackerInfoBuilder_ != null) {
-        return sensTrackerInfoBuilder_.getMessageOrBuilderList();
-      } else {
-        return java.util.Collections.unmodifiableList(sensTrackerInfo_);
-      }
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public org.example.libs.SensTrackerInfo.Builder addSensTrackerInfoBuilder() {
-      return internalGetSensTrackerInfoFieldBuilder().addBuilder(
-          org.example.libs.SensTrackerInfo.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public org.example.libs.SensTrackerInfo.Builder addSensTrackerInfoBuilder(
-        int index) {
-      return internalGetSensTrackerInfoFieldBuilder().addBuilder(
-          index, org.example.libs.SensTrackerInfo.getDefaultInstance());
-    }
-    /**
-     * <pre>
-     * Статистика трекера
-     * </pre>
-     *
-     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
-     */
-    public java.util.List<org.example.libs.SensTrackerInfo.Builder> 
-         getSensTrackerInfoBuilderList() {
-      return internalGetSensTrackerInfoFieldBuilder().getBuilderList();
-    }
-    private com.google.protobuf.RepeatedFieldBuilder<
-        org.example.libs.SensTrackerInfo, org.example.libs.SensTrackerInfo.Builder, org.example.libs.SensTrackerInfoOrBuilder> 
-        internalGetSensTrackerInfoFieldBuilder() {
-      if (sensTrackerInfoBuilder_ == null) {
-        sensTrackerInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-            org.example.libs.SensTrackerInfo, org.example.libs.SensTrackerInfo.Builder, org.example.libs.SensTrackerInfoOrBuilder>(
-                sensTrackerInfo_,
-                ((bitField0_ & 0x00200000) != 0),
-                getParentForChildren(),
-                isClean());
-        sensTrackerInfo_ = null;
-      }
-      return sensTrackerInfoBuilder_;
-    }
-
-    // @@protoc_insertion_point(builder_scope:StorageRecord)
-  }
-
-  // @@protoc_insertion_point(class_scope:StorageRecord)
-  private static final org.example.libs.StorageRecord DEFAULT_INSTANCE;
-  static {
-    DEFAULT_INSTANCE = new org.example.libs.StorageRecord();
-  }
-
-  public static org.example.libs.StorageRecord getDefaultInstance() {
-    return DEFAULT_INSTANCE;
-  }
-
-  private static final com.google.protobuf.Parser<StorageRecord>
-      PARSER = new com.google.protobuf.AbstractParser<StorageRecord>() {
     @java.lang.Override
-    public StorageRecord parsePartialFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      Builder builder = newBuilder();
-      try {
-        builder.mergeFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
-      }
-      return builder.buildPartial();
+    public java.util.List<org.example.libs.SensAccelerometerData> getSensAccelerometerDataList() {
+        return sensAccelerometerData_;
     }
-  };
 
-  public static com.google.protobuf.Parser<StorageRecord> parser() {
-    return PARSER;
-  }
+    /**
+     * <pre>
+     * Датчик ускорения
+     * </pre>
+     *
+     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensAccelerometerDataOrBuilder>
+    getSensAccelerometerDataOrBuilderList() {
+        return sensAccelerometerData_;
+    }
 
-  @java.lang.Override
-  public com.google.protobuf.Parser<StorageRecord> getParserForType() {
-    return PARSER;
-  }
+    /**
+     * <pre>
+     * Датчик ускорения
+     * </pre>
+     *
+     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+     */
+    @java.lang.Override
+    public int getSensAccelerometerDataCount() {
+        return sensAccelerometerData_.size();
+    }
 
-  @java.lang.Override
-  public org.example.libs.StorageRecord getDefaultInstanceForType() {
-    return DEFAULT_INSTANCE;
-  }
+    /**
+     * <pre>
+     * Датчик ускорения
+     * </pre>
+     *
+     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensAccelerometerData getSensAccelerometerData(int index) {
+        return sensAccelerometerData_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Датчик ускорения
+     * </pre>
+     *
+     * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensAccelerometerDataOrBuilder getSensAccelerometerDataOrBuilder(
+            int index) {
+        return sensAccelerometerData_.get(index);
+    }
+
+    public static final int SENS_AIN_AIN_VALUE_FIELD_NUMBER = 9;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensAinAinValue> sensAinAinValue_;
+
+    /**
+     * <pre>
+     * Аналоговый вход
+     * </pre>
+     *
+     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensAinAinValue> getSensAinAinValueList() {
+        return sensAinAinValue_;
+    }
+
+    /**
+     * <pre>
+     * Аналоговый вход
+     * </pre>
+     *
+     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensAinAinValueOrBuilder>
+    getSensAinAinValueOrBuilderList() {
+        return sensAinAinValue_;
+    }
+
+    /**
+     * <pre>
+     * Аналоговый вход
+     * </pre>
+     *
+     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+     */
+    @java.lang.Override
+    public int getSensAinAinValueCount() {
+        return sensAinAinValue_.size();
+    }
+
+    /**
+     * <pre>
+     * Аналоговый вход
+     * </pre>
+     *
+     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensAinAinValue getSensAinAinValue(int index) {
+        return sensAinAinValue_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Аналоговый вход
+     * </pre>
+     *
+     * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensAinAinValueOrBuilder getSensAinAinValueOrBuilder(
+            int index) {
+        return sensAinAinValue_.get(index);
+    }
+
+    public static final int SENS_BUFFER_DATA_FIELD_NUMBER = 20;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensBufferData> sensBufferData_;
+
+    /**
+     * <pre>
+     * Буферизованные данные
+     * </pre>
+     *
+     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensBufferData> getSensBufferDataList() {
+        return sensBufferData_;
+    }
+
+    /**
+     * <pre>
+     * Буферизованные данные
+     * </pre>
+     *
+     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensBufferDataOrBuilder>
+    getSensBufferDataOrBuilderList() {
+        return sensBufferData_;
+    }
+
+    /**
+     * <pre>
+     * Буферизованные данные
+     * </pre>
+     *
+     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+     */
+    @java.lang.Override
+    public int getSensBufferDataCount() {
+        return sensBufferData_.size();
+    }
+
+    /**
+     * <pre>
+     * Буферизованные данные
+     * </pre>
+     *
+     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensBufferData getSensBufferData(int index) {
+        return sensBufferData_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Буферизованные данные
+     * </pre>
+     *
+     * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensBufferDataOrBuilder getSensBufferDataOrBuilder(
+            int index) {
+        return sensBufferData_.get(index);
+    }
+
+    public static final int SENS_BUTTON_PRESS_COUNTER_FIELD_NUMBER = 14;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensButtonPressCounter> sensButtonPressCounter_;
+
+    /**
+     * <pre>
+     * Кнопка
+     * </pre>
+     *
+     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensButtonPressCounter> getSensButtonPressCounterList() {
+        return sensButtonPressCounter_;
+    }
+
+    /**
+     * <pre>
+     * Кнопка
+     * </pre>
+     *
+     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensButtonPressCounterOrBuilder>
+    getSensButtonPressCounterOrBuilderList() {
+        return sensButtonPressCounter_;
+    }
+
+    /**
+     * <pre>
+     * Кнопка
+     * </pre>
+     *
+     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+     */
+    @java.lang.Override
+    public int getSensButtonPressCounterCount() {
+        return sensButtonPressCounter_.size();
+    }
+
+    /**
+     * <pre>
+     * Кнопка
+     * </pre>
+     *
+     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensButtonPressCounter getSensButtonPressCounter(int index) {
+        return sensButtonPressCounter_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Кнопка
+     * </pre>
+     *
+     * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensButtonPressCounterOrBuilder getSensButtonPressCounterOrBuilder(
+            int index) {
+        return sensButtonPressCounter_.get(index);
+    }
+
+    public static final int SENS_CAN_LOG_DATA_FIELD_NUMBER = 16;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensCanLogData> sensCanLogData_;
+
+    /**
+     * <pre>
+     * CAN-лог
+     * </pre>
+     *
+     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensCanLogData> getSensCanLogDataList() {
+        return sensCanLogData_;
+    }
+
+    /**
+     * <pre>
+     * CAN-лог
+     * </pre>
+     *
+     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensCanLogDataOrBuilder>
+    getSensCanLogDataOrBuilderList() {
+        return sensCanLogData_;
+    }
+
+    /**
+     * <pre>
+     * CAN-лог
+     * </pre>
+     *
+     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+     */
+    @java.lang.Override
+    public int getSensCanLogDataCount() {
+        return sensCanLogData_.size();
+    }
+
+    /**
+     * <pre>
+     * CAN-лог
+     * </pre>
+     *
+     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCanLogData getSensCanLogData(int index) {
+        return sensCanLogData_.get(index);
+    }
+
+    /**
+     * <pre>
+     * CAN-лог
+     * </pre>
+     *
+     * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCanLogDataOrBuilder getSensCanLogDataOrBuilder(
+            int index) {
+        return sensCanLogData_.get(index);
+    }
+
+    public static final int SENS_CAN_LOG_TMP_DATA_EXT_FIELD_NUMBER = 17;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensCanLogTmpDataExt> sensCanLogTmpDataExt_;
+
+    /**
+     * <pre>
+     * Расширение CAN-лога
+     * </pre>
+     *
+     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensCanLogTmpDataExt> getSensCanLogTmpDataExtList() {
+        return sensCanLogTmpDataExt_;
+    }
+
+    /**
+     * <pre>
+     * Расширение CAN-лога
+     * </pre>
+     *
+     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensCanLogTmpDataExtOrBuilder>
+    getSensCanLogTmpDataExtOrBuilderList() {
+        return sensCanLogTmpDataExt_;
+    }
+
+    /**
+     * <pre>
+     * Расширение CAN-лога
+     * </pre>
+     *
+     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+     */
+    @java.lang.Override
+    public int getSensCanLogTmpDataExtCount() {
+        return sensCanLogTmpDataExt_.size();
+    }
+
+    /**
+     * <pre>
+     * Расширение CAN-лога
+     * </pre>
+     *
+     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCanLogTmpDataExt getSensCanLogTmpDataExt(int index) {
+        return sensCanLogTmpDataExt_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Расширение CAN-лога
+     * </pre>
+     *
+     * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCanLogTmpDataExtOrBuilder getSensCanLogTmpDataExtOrBuilder(
+            int index) {
+        return sensCanLogTmpDataExt_.get(index);
+    }
+
+    public static final int SENS_COUNTER_COUNT_FIELD_NUMBER = 11;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensCounterCount> sensCounterCount_;
+
+    /**
+     * <pre>
+     * Счётчик
+     * </pre>
+     *
+     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensCounterCount> getSensCounterCountList() {
+        return sensCounterCount_;
+    }
+
+    /**
+     * <pre>
+     * Счётчик
+     * </pre>
+     *
+     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensCounterCountOrBuilder>
+    getSensCounterCountOrBuilderList() {
+        return sensCounterCount_;
+    }
+
+    /**
+     * <pre>
+     * Счётчик
+     * </pre>
+     *
+     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+     */
+    @java.lang.Override
+    public int getSensCounterCountCount() {
+        return sensCounterCount_.size();
+    }
+
+    /**
+     * <pre>
+     * Счётчик
+     * </pre>
+     *
+     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCounterCount getSensCounterCount(int index) {
+        return sensCounterCount_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Счётчик
+     * </pre>
+     *
+     * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCounterCountOrBuilder getSensCounterCountOrBuilder(
+            int index) {
+        return sensCounterCount_.get(index);
+    }
+
+    public static final int SENS_CRASH_DATA_FIELD_NUMBER = 24;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensCrashData> sensCrashData_;
+
+    /**
+     * <pre>
+     * Данные об аварии
+     * </pre>
+     *
+     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensCrashData> getSensCrashDataList() {
+        return sensCrashData_;
+    }
+
+    /**
+     * <pre>
+     * Данные об аварии
+     * </pre>
+     *
+     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensCrashDataOrBuilder>
+    getSensCrashDataOrBuilderList() {
+        return sensCrashData_;
+    }
+
+    /**
+     * <pre>
+     * Данные об аварии
+     * </pre>
+     *
+     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+     */
+    @java.lang.Override
+    public int getSensCrashDataCount() {
+        return sensCrashData_.size();
+    }
+
+    /**
+     * <pre>
+     * Данные об аварии
+     * </pre>
+     *
+     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCrashData getSensCrashData(int index) {
+        return sensCrashData_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Данные об аварии
+     * </pre>
+     *
+     * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensCrashDataOrBuilder getSensCrashDataOrBuilder(
+            int index) {
+        return sensCrashData_.get(index);
+    }
+
+    public static final int SENS_DINS_FLAGS_FIELD_NUMBER = 10;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensDinsFlags> sensDinsFlags_;
+
+    /**
+     * <pre>
+     * Цифровые входы
+     * </pre>
+     *
+     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensDinsFlags> getSensDinsFlagsList() {
+        return sensDinsFlags_;
+    }
+
+    /**
+     * <pre>
+     * Цифровые входы
+     * </pre>
+     *
+     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensDinsFlagsOrBuilder>
+    getSensDinsFlagsOrBuilderList() {
+        return sensDinsFlags_;
+    }
+
+    /**
+     * <pre>
+     * Цифровые входы
+     * </pre>
+     *
+     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+     */
+    @java.lang.Override
+    public int getSensDinsFlagsCount() {
+        return sensDinsFlags_.size();
+    }
+
+    /**
+     * <pre>
+     * Цифровые входы
+     * </pre>
+     *
+     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensDinsFlags getSensDinsFlags(int index) {
+        return sensDinsFlags_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Цифровые входы
+     * </pre>
+     *
+     * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensDinsFlagsOrBuilder getSensDinsFlagsOrBuilder(
+            int index) {
+        return sensDinsFlags_.get(index);
+    }
+
+    public static final int SENS_DOUTS_FLAGS_FIELD_NUMBER = 19;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensDoutsFlags> sensDoutsFlags_;
+
+    /**
+     * <pre>
+     * Цифровые выходы
+     * </pre>
+     *
+     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensDoutsFlags> getSensDoutsFlagsList() {
+        return sensDoutsFlags_;
+    }
+
+    /**
+     * <pre>
+     * Цифровые выходы
+     * </pre>
+     *
+     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensDoutsFlagsOrBuilder>
+    getSensDoutsFlagsOrBuilderList() {
+        return sensDoutsFlags_;
+    }
+
+    /**
+     * <pre>
+     * Цифровые выходы
+     * </pre>
+     *
+     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+     */
+    @java.lang.Override
+    public int getSensDoutsFlagsCount() {
+        return sensDoutsFlags_.size();
+    }
+
+    /**
+     * <pre>
+     * Цифровые выходы
+     * </pre>
+     *
+     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensDoutsFlags getSensDoutsFlags(int index) {
+        return sensDoutsFlags_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Цифровые выходы
+     * </pre>
+     *
+     * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensDoutsFlagsOrBuilder getSensDoutsFlagsOrBuilder(
+            int index) {
+        return sensDoutsFlags_.get(index);
+    }
+
+    public static final int SENS_FMETER_FREQUENCY_FIELD_NUMBER = 12;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensFmeterFrequency> sensFmeterFrequency_;
+
+    /**
+     * <pre>
+     * Частотомер
+     * </pre>
+     *
+     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensFmeterFrequency> getSensFmeterFrequencyList() {
+        return sensFmeterFrequency_;
+    }
+
+    /**
+     * <pre>
+     * Частотомер
+     * </pre>
+     *
+     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensFmeterFrequencyOrBuilder>
+    getSensFmeterFrequencyOrBuilderList() {
+        return sensFmeterFrequency_;
+    }
+
+    /**
+     * <pre>
+     * Частотомер
+     * </pre>
+     *
+     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+     */
+    @java.lang.Override
+    public int getSensFmeterFrequencyCount() {
+        return sensFmeterFrequency_.size();
+    }
+
+    /**
+     * <pre>
+     * Частотомер
+     * </pre>
+     *
+     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensFmeterFrequency getSensFmeterFrequency(int index) {
+        return sensFmeterFrequency_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Частотомер
+     * </pre>
+     *
+     * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensFmeterFrequencyOrBuilder getSensFmeterFrequencyOrBuilder(
+            int index) {
+        return sensFmeterFrequency_.get(index);
+    }
+
+    public static final int SENS_FUEL_LEVEL_FIELD_NUMBER = 8;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensFuelLevel> sensFuelLevel_;
+
+    /**
+     * <pre>
+     * Уровень топлива
+     * </pre>
+     *
+     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensFuelLevel> getSensFuelLevelList() {
+        return sensFuelLevel_;
+    }
+
+    /**
+     * <pre>
+     * Уровень топлива
+     * </pre>
+     *
+     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensFuelLevelOrBuilder>
+    getSensFuelLevelOrBuilderList() {
+        return sensFuelLevel_;
+    }
+
+    /**
+     * <pre>
+     * Уровень топлива
+     * </pre>
+     *
+     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+     */
+    @java.lang.Override
+    public int getSensFuelLevelCount() {
+        return sensFuelLevel_.size();
+    }
+
+    /**
+     * <pre>
+     * Уровень топлива
+     * </pre>
+     *
+     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensFuelLevel getSensFuelLevel(int index) {
+        return sensFuelLevel_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Уровень топлива
+     * </pre>
+     *
+     * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensFuelLevelOrBuilder getSensFuelLevelOrBuilder(
+            int index) {
+        return sensFuelLevel_.get(index);
+    }
+
+    public static final int SENS_GSM_CELL_MONITORING_FIELD_NUMBER = 13;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensGsmCellMonitoring> sensGsmCellMonitoring_;
+
+    /**
+     * <pre>
+     * Информация о базовых станциях GSM
+     * </pre>
+     *
+     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensGsmCellMonitoring> getSensGsmCellMonitoringList() {
+        return sensGsmCellMonitoring_;
+    }
+
+    /**
+     * <pre>
+     * Информация о базовых станциях GSM
+     * </pre>
+     *
+     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensGsmCellMonitoringOrBuilder>
+    getSensGsmCellMonitoringOrBuilderList() {
+        return sensGsmCellMonitoring_;
+    }
+
+    /**
+     * <pre>
+     * Информация о базовых станциях GSM
+     * </pre>
+     *
+     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+     */
+    @java.lang.Override
+    public int getSensGsmCellMonitoringCount() {
+        return sensGsmCellMonitoring_.size();
+    }
+
+    /**
+     * <pre>
+     * Информация о базовых станциях GSM
+     * </pre>
+     *
+     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensGsmCellMonitoring getSensGsmCellMonitoring(int index) {
+        return sensGsmCellMonitoring_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Информация о базовых станциях GSM
+     * </pre>
+     *
+     * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensGsmCellMonitoringOrBuilder getSensGsmCellMonitoringOrBuilder(
+            int index) {
+        return sensGsmCellMonitoring_.get(index);
+    }
+
+    public static final int SENS_ND_NAV_DATA_FIELD_NUMBER = 7;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensNdNavData> sensNdNavData_;
+
+    /**
+     * <pre>
+     * Навигационные данные
+     * </pre>
+     *
+     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensNdNavData> getSensNdNavDataList() {
+        return sensNdNavData_;
+    }
+
+    /**
+     * <pre>
+     * Навигационные данные
+     * </pre>
+     *
+     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensNdNavDataOrBuilder>
+    getSensNdNavDataOrBuilderList() {
+        return sensNdNavData_;
+    }
+
+    /**
+     * <pre>
+     * Навигационные данные
+     * </pre>
+     *
+     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+     */
+    @java.lang.Override
+    public int getSensNdNavDataCount() {
+        return sensNdNavData_.size();
+    }
+
+    /**
+     * <pre>
+     * Навигационные данные
+     * </pre>
+     *
+     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensNdNavData getSensNdNavData(int index) {
+        return sensNdNavData_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Навигационные данные
+     * </pre>
+     *
+     * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensNdNavDataOrBuilder getSensNdNavDataOrBuilder(
+            int index) {
+        return sensNdNavData_.get(index);
+    }
+
+    public static final int SENS_STOR_INFO_FIELD_NUMBER = 21;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensStorInfo> sensStorInfo_;
+
+    /**
+     * <pre>
+     * Статистика хранилище навигационных данных
+     * </pre>
+     *
+     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensStorInfo> getSensStorInfoList() {
+        return sensStorInfo_;
+    }
+
+    /**
+     * <pre>
+     * Статистика хранилище навигационных данных
+     * </pre>
+     *
+     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensStorInfoOrBuilder>
+    getSensStorInfoOrBuilderList() {
+        return sensStorInfo_;
+    }
+
+    /**
+     * <pre>
+     * Статистика хранилище навигационных данных
+     * </pre>
+     *
+     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+     */
+    @java.lang.Override
+    public int getSensStorInfoCount() {
+        return sensStorInfo_.size();
+    }
+
+    /**
+     * <pre>
+     * Статистика хранилище навигационных данных
+     * </pre>
+     *
+     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensStorInfo getSensStorInfo(int index) {
+        return sensStorInfo_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Статистика хранилище навигационных данных
+     * </pre>
+     *
+     * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensStorInfoOrBuilder getSensStorInfoOrBuilder(
+            int index) {
+        return sensStorInfo_.get(index);
+    }
+
+    public static final int SENS_TERMO_DATA_FIELD_NUMBER = 15;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensTermoData> sensTermoData_;
+
+    /**
+     * <pre>
+     * Датчик температуры
+     * </pre>
+     *
+     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensTermoData> getSensTermoDataList() {
+        return sensTermoData_;
+    }
+
+    /**
+     * <pre>
+     * Датчик температуры
+     * </pre>
+     *
+     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensTermoDataOrBuilder>
+    getSensTermoDataOrBuilderList() {
+        return sensTermoData_;
+    }
+
+    /**
+     * <pre>
+     * Датчик температуры
+     * </pre>
+     *
+     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+     */
+    @java.lang.Override
+    public int getSensTermoDataCount() {
+        return sensTermoData_.size();
+    }
+
+    /**
+     * <pre>
+     * Датчик температуры
+     * </pre>
+     *
+     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensTermoData getSensTermoData(int index) {
+        return sensTermoData_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Датчик температуры
+     * </pre>
+     *
+     * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensTermoDataOrBuilder getSensTermoDataOrBuilder(
+            int index) {
+        return sensTermoData_.get(index);
+    }
+
+    public static final int SENS_TEST_ERA_TESTS_FIELD_NUMBER = 23;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensTestEraTests> sensTestEraTests_;
+
+    /**
+     * <pre>
+     * Тесты ЭРА ГЛОНАСС
+     * </pre>
+     *
+     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensTestEraTests> getSensTestEraTestsList() {
+        return sensTestEraTests_;
+    }
+
+    /**
+     * <pre>
+     * Тесты ЭРА ГЛОНАСС
+     * </pre>
+     *
+     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensTestEraTestsOrBuilder>
+    getSensTestEraTestsOrBuilderList() {
+        return sensTestEraTests_;
+    }
+
+    /**
+     * <pre>
+     * Тесты ЭРА ГЛОНАСС
+     * </pre>
+     *
+     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+     */
+    @java.lang.Override
+    public int getSensTestEraTestsCount() {
+        return sensTestEraTests_.size();
+    }
+
+    /**
+     * <pre>
+     * Тесты ЭРА ГЛОНАСС
+     * </pre>
+     *
+     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensTestEraTests getSensTestEraTests(int index) {
+        return sensTestEraTests_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Тесты ЭРА ГЛОНАСС
+     * </pre>
+     *
+     * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensTestEraTestsOrBuilder getSensTestEraTestsOrBuilder(
+            int index) {
+        return sensTestEraTests_.get(index);
+    }
+
+    public static final int SENS_TRACKER_INFO_FIELD_NUMBER = 22;
+    @SuppressWarnings("serial")
+    private java.util.List<org.example.libs.SensTrackerInfo> sensTrackerInfo_;
+
+    /**
+     * <pre>
+     * Статистика трекера
+     * </pre>
+     *
+     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.example.libs.SensTrackerInfo> getSensTrackerInfoList() {
+        return sensTrackerInfo_;
+    }
+
+    /**
+     * <pre>
+     * Статистика трекера
+     * </pre>
+     *
+     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.example.libs.SensTrackerInfoOrBuilder>
+    getSensTrackerInfoOrBuilderList() {
+        return sensTrackerInfo_;
+    }
+
+    /**
+     * <pre>
+     * Статистика трекера
+     * </pre>
+     *
+     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+     */
+    @java.lang.Override
+    public int getSensTrackerInfoCount() {
+        return sensTrackerInfo_.size();
+    }
+
+    /**
+     * <pre>
+     * Статистика трекера
+     * </pre>
+     *
+     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensTrackerInfo getSensTrackerInfo(int index) {
+        return sensTrackerInfo_.get(index);
+    }
+
+    /**
+     * <pre>
+     * Статистика трекера
+     * </pre>
+     *
+     * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+     */
+    @java.lang.Override
+    public org.example.libs.SensTrackerInfoOrBuilder getSensTrackerInfoOrBuilder(
+            int index) {
+        return sensTrackerInfo_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+
+    @java.lang.Override
+    public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+        getSerializedSize();
+        if (recordNumber_ != 0) {
+            output.writeUInt32(1, recordNumber_);
+        }
+        if (timeStamp_ != 0) {
+            output.writeFixed32(2, timeStamp_);
+        }
+        if (getRecordReasonList().size() > 0) {
+            output.writeUInt32NoTag(26);
+            output.writeUInt32NoTag(recordReasonMemoizedSerializedSize);
+        }
+        for (int i = 0; i < recordReason_.size(); i++) {
+            output.writeEnumNoTag(recordReason_.getInt(i));
+        }
+        if (statusFlags_ != 0) {
+            output.writeFixed32(4, statusFlags_);
+        }
+        for (int i = 0; i < sensNdNavData_.size(); i++) {
+            output.writeMessage(7, sensNdNavData_.get(i));
+        }
+        for (int i = 0; i < sensFuelLevel_.size(); i++) {
+            output.writeMessage(8, sensFuelLevel_.get(i));
+        }
+        for (int i = 0; i < sensAinAinValue_.size(); i++) {
+            output.writeMessage(9, sensAinAinValue_.get(i));
+        }
+        for (int i = 0; i < sensDinsFlags_.size(); i++) {
+            output.writeMessage(10, sensDinsFlags_.get(i));
+        }
+        for (int i = 0; i < sensCounterCount_.size(); i++) {
+            output.writeMessage(11, sensCounterCount_.get(i));
+        }
+        for (int i = 0; i < sensFmeterFrequency_.size(); i++) {
+            output.writeMessage(12, sensFmeterFrequency_.get(i));
+        }
+        for (int i = 0; i < sensGsmCellMonitoring_.size(); i++) {
+            output.writeMessage(13, sensGsmCellMonitoring_.get(i));
+        }
+        for (int i = 0; i < sensButtonPressCounter_.size(); i++) {
+            output.writeMessage(14, sensButtonPressCounter_.get(i));
+        }
+        for (int i = 0; i < sensTermoData_.size(); i++) {
+            output.writeMessage(15, sensTermoData_.get(i));
+        }
+        for (int i = 0; i < sensCanLogData_.size(); i++) {
+            output.writeMessage(16, sensCanLogData_.get(i));
+        }
+        for (int i = 0; i < sensCanLogTmpDataExt_.size(); i++) {
+            output.writeMessage(17, sensCanLogTmpDataExt_.get(i));
+        }
+        for (int i = 0; i < sensAccelerometerData_.size(); i++) {
+            output.writeMessage(18, sensAccelerometerData_.get(i));
+        }
+        for (int i = 0; i < sensDoutsFlags_.size(); i++) {
+            output.writeMessage(19, sensDoutsFlags_.get(i));
+        }
+        for (int i = 0; i < sensBufferData_.size(); i++) {
+            output.writeMessage(20, sensBufferData_.get(i));
+        }
+        for (int i = 0; i < sensStorInfo_.size(); i++) {
+            output.writeMessage(21, sensStorInfo_.get(i));
+        }
+        for (int i = 0; i < sensTrackerInfo_.size(); i++) {
+            output.writeMessage(22, sensTrackerInfo_.get(i));
+        }
+        for (int i = 0; i < sensTestEraTests_.size(); i++) {
+            output.writeMessage(23, sensTestEraTests_.get(i));
+        }
+        for (int i = 0; i < sensCrashData_.size(); i++) {
+            output.writeMessage(24, sensCrashData_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (recordNumber_ != 0) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeUInt32Size(1, recordNumber_);
+        }
+        if (timeStamp_ != 0) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeFixed32Size(2, timeStamp_);
+        }
+        {
+            int dataSize = 0;
+            for (int i = 0; i < recordReason_.size(); i++) {
+                dataSize += com.google.protobuf.CodedOutputStream
+                        .computeEnumSizeNoTag(recordReason_.getInt(i));
+            }
+            size += dataSize;
+            if (!getRecordReasonList().isEmpty()) {
+                size += 1;
+                size += com.google.protobuf.CodedOutputStream
+                        .computeUInt32SizeNoTag(dataSize);
+            }
+            recordReasonMemoizedSerializedSize = dataSize;
+        }
+        if (statusFlags_ != 0) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeFixed32Size(4, statusFlags_);
+        }
+        for (int i = 0; i < sensNdNavData_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(7, sensNdNavData_.get(i));
+        }
+        for (int i = 0; i < sensFuelLevel_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(8, sensFuelLevel_.get(i));
+        }
+        for (int i = 0; i < sensAinAinValue_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(9, sensAinAinValue_.get(i));
+        }
+        for (int i = 0; i < sensDinsFlags_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(10, sensDinsFlags_.get(i));
+        }
+        for (int i = 0; i < sensCounterCount_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(11, sensCounterCount_.get(i));
+        }
+        for (int i = 0; i < sensFmeterFrequency_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(12, sensFmeterFrequency_.get(i));
+        }
+        for (int i = 0; i < sensGsmCellMonitoring_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(13, sensGsmCellMonitoring_.get(i));
+        }
+        for (int i = 0; i < sensButtonPressCounter_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(14, sensButtonPressCounter_.get(i));
+        }
+        for (int i = 0; i < sensTermoData_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(15, sensTermoData_.get(i));
+        }
+        for (int i = 0; i < sensCanLogData_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(16, sensCanLogData_.get(i));
+        }
+        for (int i = 0; i < sensCanLogTmpDataExt_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(17, sensCanLogTmpDataExt_.get(i));
+        }
+        for (int i = 0; i < sensAccelerometerData_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(18, sensAccelerometerData_.get(i));
+        }
+        for (int i = 0; i < sensDoutsFlags_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(19, sensDoutsFlags_.get(i));
+        }
+        for (int i = 0; i < sensBufferData_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(20, sensBufferData_.get(i));
+        }
+        for (int i = 0; i < sensStorInfo_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(21, sensStorInfo_.get(i));
+        }
+        for (int i = 0; i < sensTrackerInfo_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(22, sensTrackerInfo_.get(i));
+        }
+        for (int i = 0; i < sensTestEraTests_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(23, sensTestEraTests_.get(i));
+        }
+        for (int i = 0; i < sensCrashData_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(24, sensCrashData_.get(i));
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSize = size;
+        return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof org.example.libs.StorageRecord)) {
+            return super.equals(obj);
+        }
+        org.example.libs.StorageRecord other = (org.example.libs.StorageRecord) obj;
+
+        if (getRecordNumber()
+                != other.getRecordNumber()) return false;
+        if (getTimeStamp()
+                != other.getTimeStamp()) return false;
+        if (!recordReason_.equals(other.recordReason_)) return false;
+        if (getStatusFlags()
+                != other.getStatusFlags()) return false;
+        if (!getSensAccelerometerDataList()
+                .equals(other.getSensAccelerometerDataList())) return false;
+        if (!getSensAinAinValueList()
+                .equals(other.getSensAinAinValueList())) return false;
+        if (!getSensBufferDataList()
+                .equals(other.getSensBufferDataList())) return false;
+        if (!getSensButtonPressCounterList()
+                .equals(other.getSensButtonPressCounterList())) return false;
+        if (!getSensCanLogDataList()
+                .equals(other.getSensCanLogDataList())) return false;
+        if (!getSensCanLogTmpDataExtList()
+                .equals(other.getSensCanLogTmpDataExtList())) return false;
+        if (!getSensCounterCountList()
+                .equals(other.getSensCounterCountList())) return false;
+        if (!getSensCrashDataList()
+                .equals(other.getSensCrashDataList())) return false;
+        if (!getSensDinsFlagsList()
+                .equals(other.getSensDinsFlagsList())) return false;
+        if (!getSensDoutsFlagsList()
+                .equals(other.getSensDoutsFlagsList())) return false;
+        if (!getSensFmeterFrequencyList()
+                .equals(other.getSensFmeterFrequencyList())) return false;
+        if (!getSensFuelLevelList()
+                .equals(other.getSensFuelLevelList())) return false;
+        if (!getSensGsmCellMonitoringList()
+                .equals(other.getSensGsmCellMonitoringList())) return false;
+        if (!getSensNdNavDataList()
+                .equals(other.getSensNdNavDataList())) return false;
+        if (!getSensStorInfoList()
+                .equals(other.getSensStorInfoList())) return false;
+        if (!getSensTermoDataList()
+                .equals(other.getSensTermoDataList())) return false;
+        if (!getSensTestEraTestsList()
+                .equals(other.getSensTestEraTestsList())) return false;
+        if (!getSensTrackerInfoList()
+                .equals(other.getSensTrackerInfoList())) return false;
+        if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+        return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+        if (memoizedHashCode != 0) {
+            return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + RECORD_NUMBER_FIELD_NUMBER;
+        hash = (53 * hash) + getRecordNumber();
+        hash = (37 * hash) + TIME_STAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getTimeStamp();
+        if (getRecordReasonCount() > 0) {
+            hash = (37 * hash) + RECORD_REASON_FIELD_NUMBER;
+            hash = (53 * hash) + recordReason_.hashCode();
+        }
+        hash = (37 * hash) + STATUS_FLAGS_FIELD_NUMBER;
+        hash = (53 * hash) + getStatusFlags();
+        if (getSensAccelerometerDataCount() > 0) {
+            hash = (37 * hash) + SENS_ACCELEROMETER_DATA_FIELD_NUMBER;
+            hash = (53 * hash) + getSensAccelerometerDataList().hashCode();
+        }
+        if (getSensAinAinValueCount() > 0) {
+            hash = (37 * hash) + SENS_AIN_AIN_VALUE_FIELD_NUMBER;
+            hash = (53 * hash) + getSensAinAinValueList().hashCode();
+        }
+        if (getSensBufferDataCount() > 0) {
+            hash = (37 * hash) + SENS_BUFFER_DATA_FIELD_NUMBER;
+            hash = (53 * hash) + getSensBufferDataList().hashCode();
+        }
+        if (getSensButtonPressCounterCount() > 0) {
+            hash = (37 * hash) + SENS_BUTTON_PRESS_COUNTER_FIELD_NUMBER;
+            hash = (53 * hash) + getSensButtonPressCounterList().hashCode();
+        }
+        if (getSensCanLogDataCount() > 0) {
+            hash = (37 * hash) + SENS_CAN_LOG_DATA_FIELD_NUMBER;
+            hash = (53 * hash) + getSensCanLogDataList().hashCode();
+        }
+        if (getSensCanLogTmpDataExtCount() > 0) {
+            hash = (37 * hash) + SENS_CAN_LOG_TMP_DATA_EXT_FIELD_NUMBER;
+            hash = (53 * hash) + getSensCanLogTmpDataExtList().hashCode();
+        }
+        if (getSensCounterCountCount() > 0) {
+            hash = (37 * hash) + SENS_COUNTER_COUNT_FIELD_NUMBER;
+            hash = (53 * hash) + getSensCounterCountList().hashCode();
+        }
+        if (getSensCrashDataCount() > 0) {
+            hash = (37 * hash) + SENS_CRASH_DATA_FIELD_NUMBER;
+            hash = (53 * hash) + getSensCrashDataList().hashCode();
+        }
+        if (getSensDinsFlagsCount() > 0) {
+            hash = (37 * hash) + SENS_DINS_FLAGS_FIELD_NUMBER;
+            hash = (53 * hash) + getSensDinsFlagsList().hashCode();
+        }
+        if (getSensDoutsFlagsCount() > 0) {
+            hash = (37 * hash) + SENS_DOUTS_FLAGS_FIELD_NUMBER;
+            hash = (53 * hash) + getSensDoutsFlagsList().hashCode();
+        }
+        if (getSensFmeterFrequencyCount() > 0) {
+            hash = (37 * hash) + SENS_FMETER_FREQUENCY_FIELD_NUMBER;
+            hash = (53 * hash) + getSensFmeterFrequencyList().hashCode();
+        }
+        if (getSensFuelLevelCount() > 0) {
+            hash = (37 * hash) + SENS_FUEL_LEVEL_FIELD_NUMBER;
+            hash = (53 * hash) + getSensFuelLevelList().hashCode();
+        }
+        if (getSensGsmCellMonitoringCount() > 0) {
+            hash = (37 * hash) + SENS_GSM_CELL_MONITORING_FIELD_NUMBER;
+            hash = (53 * hash) + getSensGsmCellMonitoringList().hashCode();
+        }
+        if (getSensNdNavDataCount() > 0) {
+            hash = (37 * hash) + SENS_ND_NAV_DATA_FIELD_NUMBER;
+            hash = (53 * hash) + getSensNdNavDataList().hashCode();
+        }
+        if (getSensStorInfoCount() > 0) {
+            hash = (37 * hash) + SENS_STOR_INFO_FIELD_NUMBER;
+            hash = (53 * hash) + getSensStorInfoList().hashCode();
+        }
+        if (getSensTermoDataCount() > 0) {
+            hash = (37 * hash) + SENS_TERMO_DATA_FIELD_NUMBER;
+            hash = (53 * hash) + getSensTermoDataList().hashCode();
+        }
+        if (getSensTestEraTestsCount() > 0) {
+            hash = (37 * hash) + SENS_TEST_ERA_TESTS_FIELD_NUMBER;
+            hash = (53 * hash) + getSensTestEraTestsList().hashCode();
+        }
+        if (getSensTrackerInfoCount() > 0) {
+            hash = (37 * hash) + SENS_TRACKER_INFO_FIELD_NUMBER;
+            hash = (53 * hash) + getSensTrackerInfoList().hashCode();
+        }
+        hash = (29 * hash) + getUnknownFields().hashCode();
+        memoizedHashCode = hash;
+        return hash;
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+                .parseWithIOException(PARSER, input);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+                .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static org.example.libs.StorageRecord parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+                .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static org.example.libs.StorageRecord parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+                .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+                .parseWithIOException(PARSER, input);
+    }
+
+    public static org.example.libs.StorageRecord parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessage
+                .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() {
+        return newBuilder();
+    }
+
+    public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(org.example.libs.StorageRecord prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    @java.lang.Override
+    public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+                ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+    }
+
+    /**
+     * <pre>
+     * Причина формирования отметки
+     * </pre>
+     * <p>
+     * Protobuf type {@code StorageRecord}
+     */
+    public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:StorageRecord)
+            org.example.libs.StorageRecordOrBuilder, BinaryData {
+        public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+            return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+            return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_fieldAccessorTable
+                    .ensureFieldAccessorsInitialized(
+                            org.example.libs.StorageRecord.class, org.example.libs.StorageRecord.Builder.class);
+        }
+
+        // Construct using org.example.libs.StorageRecord.newBuilder()
+        private Builder() {
+
+        }
+
+        private Builder(
+                com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            super(parent);
+
+        }
+
+        /**
+         * Заполняет поля из массива байт
+         */
+        @Override
+        public void decode(byte[] data) throws java.io.IOException {
+            // mergeFrom загрузит все поля из data в этот Builder
+            this.mergeFrom(data);
+        }
+
+        /**
+         * Упаковывает текущее состояние в protobuf‑байты
+         */
+        @Override
+        public byte[] encode() throws java.io.IOException {
+            // build() → immutable message → toByteArray()
+            return this.build().toByteArray();
+        }
+
+        /**
+         * Длина сериализованных байт без повторной строчковой сборки
+         */
+        @Override
+        public int length() {
+            // можно дернуть у собранного объекта
+            return this.build().getSerializedSize();
+        }
+
+        @java.lang.Override
+        public Builder clear() {
+            super.clear();
+            bitField0_ = 0;
+            recordNumber_ = 0;
+            timeStamp_ = 0;
+            recordReason_ = emptyIntList();
+            bitField0_ = (bitField0_ & ~0x00000004);
+            statusFlags_ = 0;
+            if (sensAccelerometerDataBuilder_ == null) {
+                sensAccelerometerData_ = java.util.Collections.emptyList();
+            } else {
+                sensAccelerometerData_ = null;
+                sensAccelerometerDataBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000010);
+            if (sensAinAinValueBuilder_ == null) {
+                sensAinAinValue_ = java.util.Collections.emptyList();
+            } else {
+                sensAinAinValue_ = null;
+                sensAinAinValueBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000020);
+            if (sensBufferDataBuilder_ == null) {
+                sensBufferData_ = java.util.Collections.emptyList();
+            } else {
+                sensBufferData_ = null;
+                sensBufferDataBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000040);
+            if (sensButtonPressCounterBuilder_ == null) {
+                sensButtonPressCounter_ = java.util.Collections.emptyList();
+            } else {
+                sensButtonPressCounter_ = null;
+                sensButtonPressCounterBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000080);
+            if (sensCanLogDataBuilder_ == null) {
+                sensCanLogData_ = java.util.Collections.emptyList();
+            } else {
+                sensCanLogData_ = null;
+                sensCanLogDataBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000100);
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                sensCanLogTmpDataExt_ = java.util.Collections.emptyList();
+            } else {
+                sensCanLogTmpDataExt_ = null;
+                sensCanLogTmpDataExtBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000200);
+            if (sensCounterCountBuilder_ == null) {
+                sensCounterCount_ = java.util.Collections.emptyList();
+            } else {
+                sensCounterCount_ = null;
+                sensCounterCountBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000400);
+            if (sensCrashDataBuilder_ == null) {
+                sensCrashData_ = java.util.Collections.emptyList();
+            } else {
+                sensCrashData_ = null;
+                sensCrashDataBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000800);
+            if (sensDinsFlagsBuilder_ == null) {
+                sensDinsFlags_ = java.util.Collections.emptyList();
+            } else {
+                sensDinsFlags_ = null;
+                sensDinsFlagsBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00001000);
+            if (sensDoutsFlagsBuilder_ == null) {
+                sensDoutsFlags_ = java.util.Collections.emptyList();
+            } else {
+                sensDoutsFlags_ = null;
+                sensDoutsFlagsBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00002000);
+            if (sensFmeterFrequencyBuilder_ == null) {
+                sensFmeterFrequency_ = java.util.Collections.emptyList();
+            } else {
+                sensFmeterFrequency_ = null;
+                sensFmeterFrequencyBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00004000);
+            if (sensFuelLevelBuilder_ == null) {
+                sensFuelLevel_ = java.util.Collections.emptyList();
+            } else {
+                sensFuelLevel_ = null;
+                sensFuelLevelBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00008000);
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                sensGsmCellMonitoring_ = java.util.Collections.emptyList();
+            } else {
+                sensGsmCellMonitoring_ = null;
+                sensGsmCellMonitoringBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00010000);
+            if (sensNdNavDataBuilder_ == null) {
+                sensNdNavData_ = java.util.Collections.emptyList();
+            } else {
+                sensNdNavData_ = null;
+                sensNdNavDataBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00020000);
+            if (sensStorInfoBuilder_ == null) {
+                sensStorInfo_ = java.util.Collections.emptyList();
+            } else {
+                sensStorInfo_ = null;
+                sensStorInfoBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00040000);
+            if (sensTermoDataBuilder_ == null) {
+                sensTermoData_ = java.util.Collections.emptyList();
+            } else {
+                sensTermoData_ = null;
+                sensTermoDataBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00080000);
+            if (sensTestEraTestsBuilder_ == null) {
+                sensTestEraTests_ = java.util.Collections.emptyList();
+            } else {
+                sensTestEraTests_ = null;
+                sensTestEraTestsBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00100000);
+            if (sensTrackerInfoBuilder_ == null) {
+                sensTrackerInfo_ = java.util.Collections.emptyList();
+            } else {
+                sensTrackerInfo_ = null;
+                sensTrackerInfoBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00200000);
+            return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+        getDescriptorForType() {
+            return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
+        }
+
+        @java.lang.Override
+        public org.example.libs.StorageRecord getDefaultInstanceForType() {
+            return org.example.libs.StorageRecord.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public org.example.libs.StorageRecord build() {
+            org.example.libs.StorageRecord result = buildPartial();
+            if (!result.isInitialized()) {
+                throw newUninitializedMessageException(result);
+            }
+            return result;
+        }
+
+        @java.lang.Override
+        public org.example.libs.StorageRecord buildPartial() {
+            org.example.libs.StorageRecord result = new org.example.libs.StorageRecord(this);
+            buildPartialRepeatedFields(result);
+            if (bitField0_ != 0) {
+                buildPartial0(result);
+            }
+            onBuilt();
+            return result;
+        }
+
+        private void buildPartialRepeatedFields(org.example.libs.StorageRecord result) {
+            if (((bitField0_ & 0x00000004) != 0)) {
+                recordReason_.makeImmutable();
+                bitField0_ = (bitField0_ & ~0x00000004);
+            }
+            result.recordReason_ = recordReason_;
+            if (sensAccelerometerDataBuilder_ == null) {
+                if (((bitField0_ & 0x00000010) != 0)) {
+                    sensAccelerometerData_ = java.util.Collections.unmodifiableList(sensAccelerometerData_);
+                    bitField0_ = (bitField0_ & ~0x00000010);
+                }
+                result.sensAccelerometerData_ = sensAccelerometerData_;
+            } else {
+                result.sensAccelerometerData_ = sensAccelerometerDataBuilder_.build();
+            }
+            if (sensAinAinValueBuilder_ == null) {
+                if (((bitField0_ & 0x00000020) != 0)) {
+                    sensAinAinValue_ = java.util.Collections.unmodifiableList(sensAinAinValue_);
+                    bitField0_ = (bitField0_ & ~0x00000020);
+                }
+                result.sensAinAinValue_ = sensAinAinValue_;
+            } else {
+                result.sensAinAinValue_ = sensAinAinValueBuilder_.build();
+            }
+            if (sensBufferDataBuilder_ == null) {
+                if (((bitField0_ & 0x00000040) != 0)) {
+                    sensBufferData_ = java.util.Collections.unmodifiableList(sensBufferData_);
+                    bitField0_ = (bitField0_ & ~0x00000040);
+                }
+                result.sensBufferData_ = sensBufferData_;
+            } else {
+                result.sensBufferData_ = sensBufferDataBuilder_.build();
+            }
+            if (sensButtonPressCounterBuilder_ == null) {
+                if (((bitField0_ & 0x00000080) != 0)) {
+                    sensButtonPressCounter_ = java.util.Collections.unmodifiableList(sensButtonPressCounter_);
+                    bitField0_ = (bitField0_ & ~0x00000080);
+                }
+                result.sensButtonPressCounter_ = sensButtonPressCounter_;
+            } else {
+                result.sensButtonPressCounter_ = sensButtonPressCounterBuilder_.build();
+            }
+            if (sensCanLogDataBuilder_ == null) {
+                if (((bitField0_ & 0x00000100) != 0)) {
+                    sensCanLogData_ = java.util.Collections.unmodifiableList(sensCanLogData_);
+                    bitField0_ = (bitField0_ & ~0x00000100);
+                }
+                result.sensCanLogData_ = sensCanLogData_;
+            } else {
+                result.sensCanLogData_ = sensCanLogDataBuilder_.build();
+            }
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                if (((bitField0_ & 0x00000200) != 0)) {
+                    sensCanLogTmpDataExt_ = java.util.Collections.unmodifiableList(sensCanLogTmpDataExt_);
+                    bitField0_ = (bitField0_ & ~0x00000200);
+                }
+                result.sensCanLogTmpDataExt_ = sensCanLogTmpDataExt_;
+            } else {
+                result.sensCanLogTmpDataExt_ = sensCanLogTmpDataExtBuilder_.build();
+            }
+            if (sensCounterCountBuilder_ == null) {
+                if (((bitField0_ & 0x00000400) != 0)) {
+                    sensCounterCount_ = java.util.Collections.unmodifiableList(sensCounterCount_);
+                    bitField0_ = (bitField0_ & ~0x00000400);
+                }
+                result.sensCounterCount_ = sensCounterCount_;
+            } else {
+                result.sensCounterCount_ = sensCounterCountBuilder_.build();
+            }
+            if (sensCrashDataBuilder_ == null) {
+                if (((bitField0_ & 0x00000800) != 0)) {
+                    sensCrashData_ = java.util.Collections.unmodifiableList(sensCrashData_);
+                    bitField0_ = (bitField0_ & ~0x00000800);
+                }
+                result.sensCrashData_ = sensCrashData_;
+            } else {
+                result.sensCrashData_ = sensCrashDataBuilder_.build();
+            }
+            if (sensDinsFlagsBuilder_ == null) {
+                if (((bitField0_ & 0x00001000) != 0)) {
+                    sensDinsFlags_ = java.util.Collections.unmodifiableList(sensDinsFlags_);
+                    bitField0_ = (bitField0_ & ~0x00001000);
+                }
+                result.sensDinsFlags_ = sensDinsFlags_;
+            } else {
+                result.sensDinsFlags_ = sensDinsFlagsBuilder_.build();
+            }
+            if (sensDoutsFlagsBuilder_ == null) {
+                if (((bitField0_ & 0x00002000) != 0)) {
+                    sensDoutsFlags_ = java.util.Collections.unmodifiableList(sensDoutsFlags_);
+                    bitField0_ = (bitField0_ & ~0x00002000);
+                }
+                result.sensDoutsFlags_ = sensDoutsFlags_;
+            } else {
+                result.sensDoutsFlags_ = sensDoutsFlagsBuilder_.build();
+            }
+            if (sensFmeterFrequencyBuilder_ == null) {
+                if (((bitField0_ & 0x00004000) != 0)) {
+                    sensFmeterFrequency_ = java.util.Collections.unmodifiableList(sensFmeterFrequency_);
+                    bitField0_ = (bitField0_ & ~0x00004000);
+                }
+                result.sensFmeterFrequency_ = sensFmeterFrequency_;
+            } else {
+                result.sensFmeterFrequency_ = sensFmeterFrequencyBuilder_.build();
+            }
+            if (sensFuelLevelBuilder_ == null) {
+                if (((bitField0_ & 0x00008000) != 0)) {
+                    sensFuelLevel_ = java.util.Collections.unmodifiableList(sensFuelLevel_);
+                    bitField0_ = (bitField0_ & ~0x00008000);
+                }
+                result.sensFuelLevel_ = sensFuelLevel_;
+            } else {
+                result.sensFuelLevel_ = sensFuelLevelBuilder_.build();
+            }
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                if (((bitField0_ & 0x00010000) != 0)) {
+                    sensGsmCellMonitoring_ = java.util.Collections.unmodifiableList(sensGsmCellMonitoring_);
+                    bitField0_ = (bitField0_ & ~0x00010000);
+                }
+                result.sensGsmCellMonitoring_ = sensGsmCellMonitoring_;
+            } else {
+                result.sensGsmCellMonitoring_ = sensGsmCellMonitoringBuilder_.build();
+            }
+            if (sensNdNavDataBuilder_ == null) {
+                if (((bitField0_ & 0x00020000) != 0)) {
+                    sensNdNavData_ = java.util.Collections.unmodifiableList(sensNdNavData_);
+                    bitField0_ = (bitField0_ & ~0x00020000);
+                }
+                result.sensNdNavData_ = sensNdNavData_;
+            } else {
+                result.sensNdNavData_ = sensNdNavDataBuilder_.build();
+            }
+            if (sensStorInfoBuilder_ == null) {
+                if (((bitField0_ & 0x00040000) != 0)) {
+                    sensStorInfo_ = java.util.Collections.unmodifiableList(sensStorInfo_);
+                    bitField0_ = (bitField0_ & ~0x00040000);
+                }
+                result.sensStorInfo_ = sensStorInfo_;
+            } else {
+                result.sensStorInfo_ = sensStorInfoBuilder_.build();
+            }
+            if (sensTermoDataBuilder_ == null) {
+                if (((bitField0_ & 0x00080000) != 0)) {
+                    sensTermoData_ = java.util.Collections.unmodifiableList(sensTermoData_);
+                    bitField0_ = (bitField0_ & ~0x00080000);
+                }
+                result.sensTermoData_ = sensTermoData_;
+            } else {
+                result.sensTermoData_ = sensTermoDataBuilder_.build();
+            }
+            if (sensTestEraTestsBuilder_ == null) {
+                if (((bitField0_ & 0x00100000) != 0)) {
+                    sensTestEraTests_ = java.util.Collections.unmodifiableList(sensTestEraTests_);
+                    bitField0_ = (bitField0_ & ~0x00100000);
+                }
+                result.sensTestEraTests_ = sensTestEraTests_;
+            } else {
+                result.sensTestEraTests_ = sensTestEraTestsBuilder_.build();
+            }
+            if (sensTrackerInfoBuilder_ == null) {
+                if (((bitField0_ & 0x00200000) != 0)) {
+                    sensTrackerInfo_ = java.util.Collections.unmodifiableList(sensTrackerInfo_);
+                    bitField0_ = (bitField0_ & ~0x00200000);
+                }
+                result.sensTrackerInfo_ = sensTrackerInfo_;
+            } else {
+                result.sensTrackerInfo_ = sensTrackerInfoBuilder_.build();
+            }
+        }
+
+        private void buildPartial0(org.example.libs.StorageRecord result) {
+            int from_bitField0_ = bitField0_;
+            if (((from_bitField0_ & 0x00000001) != 0)) {
+                result.recordNumber_ = recordNumber_;
+            }
+            if (((from_bitField0_ & 0x00000002) != 0)) {
+                result.timeStamp_ = timeStamp_;
+            }
+            if (((from_bitField0_ & 0x00000008) != 0)) {
+                result.statusFlags_ = statusFlags_;
+            }
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof org.example.libs.StorageRecord) {
+                return mergeFrom((org.example.libs.StorageRecord) other);
+            } else {
+                super.mergeFrom(other);
+                return this;
+            }
+        }
+
+        public Builder mergeFrom(org.example.libs.StorageRecord other) {
+            if (other == org.example.libs.StorageRecord.getDefaultInstance()) return this;
+            if (other.getRecordNumber() != 0) {
+                setRecordNumber(other.getRecordNumber());
+            }
+            if (other.getTimeStamp() != 0) {
+                setTimeStamp(other.getTimeStamp());
+            }
+            if (!other.recordReason_.isEmpty()) {
+                if (recordReason_.isEmpty()) {
+                    recordReason_ = other.recordReason_;
+                    bitField0_ = (bitField0_ & ~0x00000004);
+                } else {
+                    ensureRecordReasonIsMutable();
+                    recordReason_.addAll(other.recordReason_);
+                }
+                onChanged();
+            }
+            if (other.getStatusFlags() != 0) {
+                setStatusFlags(other.getStatusFlags());
+            }
+            if (sensAccelerometerDataBuilder_ == null) {
+                if (!other.sensAccelerometerData_.isEmpty()) {
+                    if (sensAccelerometerData_.isEmpty()) {
+                        sensAccelerometerData_ = other.sensAccelerometerData_;
+                        bitField0_ = (bitField0_ & ~0x00000010);
+                    } else {
+                        ensureSensAccelerometerDataIsMutable();
+                        sensAccelerometerData_.addAll(other.sensAccelerometerData_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensAccelerometerData_.isEmpty()) {
+                    if (sensAccelerometerDataBuilder_.isEmpty()) {
+                        sensAccelerometerDataBuilder_.dispose();
+                        sensAccelerometerDataBuilder_ = null;
+                        sensAccelerometerData_ = other.sensAccelerometerData_;
+                        bitField0_ = (bitField0_ & ~0x00000010);
+                        sensAccelerometerDataBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensAccelerometerDataFieldBuilder() : null;
+                    } else {
+                        sensAccelerometerDataBuilder_.addAllMessages(other.sensAccelerometerData_);
+                    }
+                }
+            }
+            if (sensAinAinValueBuilder_ == null) {
+                if (!other.sensAinAinValue_.isEmpty()) {
+                    if (sensAinAinValue_.isEmpty()) {
+                        sensAinAinValue_ = other.sensAinAinValue_;
+                        bitField0_ = (bitField0_ & ~0x00000020);
+                    } else {
+                        ensureSensAinAinValueIsMutable();
+                        sensAinAinValue_.addAll(other.sensAinAinValue_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensAinAinValue_.isEmpty()) {
+                    if (sensAinAinValueBuilder_.isEmpty()) {
+                        sensAinAinValueBuilder_.dispose();
+                        sensAinAinValueBuilder_ = null;
+                        sensAinAinValue_ = other.sensAinAinValue_;
+                        bitField0_ = (bitField0_ & ~0x00000020);
+                        sensAinAinValueBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensAinAinValueFieldBuilder() : null;
+                    } else {
+                        sensAinAinValueBuilder_.addAllMessages(other.sensAinAinValue_);
+                    }
+                }
+            }
+            if (sensBufferDataBuilder_ == null) {
+                if (!other.sensBufferData_.isEmpty()) {
+                    if (sensBufferData_.isEmpty()) {
+                        sensBufferData_ = other.sensBufferData_;
+                        bitField0_ = (bitField0_ & ~0x00000040);
+                    } else {
+                        ensureSensBufferDataIsMutable();
+                        sensBufferData_.addAll(other.sensBufferData_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensBufferData_.isEmpty()) {
+                    if (sensBufferDataBuilder_.isEmpty()) {
+                        sensBufferDataBuilder_.dispose();
+                        sensBufferDataBuilder_ = null;
+                        sensBufferData_ = other.sensBufferData_;
+                        bitField0_ = (bitField0_ & ~0x00000040);
+                        sensBufferDataBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensBufferDataFieldBuilder() : null;
+                    } else {
+                        sensBufferDataBuilder_.addAllMessages(other.sensBufferData_);
+                    }
+                }
+            }
+            if (sensButtonPressCounterBuilder_ == null) {
+                if (!other.sensButtonPressCounter_.isEmpty()) {
+                    if (sensButtonPressCounter_.isEmpty()) {
+                        sensButtonPressCounter_ = other.sensButtonPressCounter_;
+                        bitField0_ = (bitField0_ & ~0x00000080);
+                    } else {
+                        ensureSensButtonPressCounterIsMutable();
+                        sensButtonPressCounter_.addAll(other.sensButtonPressCounter_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensButtonPressCounter_.isEmpty()) {
+                    if (sensButtonPressCounterBuilder_.isEmpty()) {
+                        sensButtonPressCounterBuilder_.dispose();
+                        sensButtonPressCounterBuilder_ = null;
+                        sensButtonPressCounter_ = other.sensButtonPressCounter_;
+                        bitField0_ = (bitField0_ & ~0x00000080);
+                        sensButtonPressCounterBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensButtonPressCounterFieldBuilder() : null;
+                    } else {
+                        sensButtonPressCounterBuilder_.addAllMessages(other.sensButtonPressCounter_);
+                    }
+                }
+            }
+            if (sensCanLogDataBuilder_ == null) {
+                if (!other.sensCanLogData_.isEmpty()) {
+                    if (sensCanLogData_.isEmpty()) {
+                        sensCanLogData_ = other.sensCanLogData_;
+                        bitField0_ = (bitField0_ & ~0x00000100);
+                    } else {
+                        ensureSensCanLogDataIsMutable();
+                        sensCanLogData_.addAll(other.sensCanLogData_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensCanLogData_.isEmpty()) {
+                    if (sensCanLogDataBuilder_.isEmpty()) {
+                        sensCanLogDataBuilder_.dispose();
+                        sensCanLogDataBuilder_ = null;
+                        sensCanLogData_ = other.sensCanLogData_;
+                        bitField0_ = (bitField0_ & ~0x00000100);
+                        sensCanLogDataBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensCanLogDataFieldBuilder() : null;
+                    } else {
+                        sensCanLogDataBuilder_.addAllMessages(other.sensCanLogData_);
+                    }
+                }
+            }
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                if (!other.sensCanLogTmpDataExt_.isEmpty()) {
+                    if (sensCanLogTmpDataExt_.isEmpty()) {
+                        sensCanLogTmpDataExt_ = other.sensCanLogTmpDataExt_;
+                        bitField0_ = (bitField0_ & ~0x00000200);
+                    } else {
+                        ensureSensCanLogTmpDataExtIsMutable();
+                        sensCanLogTmpDataExt_.addAll(other.sensCanLogTmpDataExt_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensCanLogTmpDataExt_.isEmpty()) {
+                    if (sensCanLogTmpDataExtBuilder_.isEmpty()) {
+                        sensCanLogTmpDataExtBuilder_.dispose();
+                        sensCanLogTmpDataExtBuilder_ = null;
+                        sensCanLogTmpDataExt_ = other.sensCanLogTmpDataExt_;
+                        bitField0_ = (bitField0_ & ~0x00000200);
+                        sensCanLogTmpDataExtBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensCanLogTmpDataExtFieldBuilder() : null;
+                    } else {
+                        sensCanLogTmpDataExtBuilder_.addAllMessages(other.sensCanLogTmpDataExt_);
+                    }
+                }
+            }
+            if (sensCounterCountBuilder_ == null) {
+                if (!other.sensCounterCount_.isEmpty()) {
+                    if (sensCounterCount_.isEmpty()) {
+                        sensCounterCount_ = other.sensCounterCount_;
+                        bitField0_ = (bitField0_ & ~0x00000400);
+                    } else {
+                        ensureSensCounterCountIsMutable();
+                        sensCounterCount_.addAll(other.sensCounterCount_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensCounterCount_.isEmpty()) {
+                    if (sensCounterCountBuilder_.isEmpty()) {
+                        sensCounterCountBuilder_.dispose();
+                        sensCounterCountBuilder_ = null;
+                        sensCounterCount_ = other.sensCounterCount_;
+                        bitField0_ = (bitField0_ & ~0x00000400);
+                        sensCounterCountBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensCounterCountFieldBuilder() : null;
+                    } else {
+                        sensCounterCountBuilder_.addAllMessages(other.sensCounterCount_);
+                    }
+                }
+            }
+            if (sensCrashDataBuilder_ == null) {
+                if (!other.sensCrashData_.isEmpty()) {
+                    if (sensCrashData_.isEmpty()) {
+                        sensCrashData_ = other.sensCrashData_;
+                        bitField0_ = (bitField0_ & ~0x00000800);
+                    } else {
+                        ensureSensCrashDataIsMutable();
+                        sensCrashData_.addAll(other.sensCrashData_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensCrashData_.isEmpty()) {
+                    if (sensCrashDataBuilder_.isEmpty()) {
+                        sensCrashDataBuilder_.dispose();
+                        sensCrashDataBuilder_ = null;
+                        sensCrashData_ = other.sensCrashData_;
+                        bitField0_ = (bitField0_ & ~0x00000800);
+                        sensCrashDataBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensCrashDataFieldBuilder() : null;
+                    } else {
+                        sensCrashDataBuilder_.addAllMessages(other.sensCrashData_);
+                    }
+                }
+            }
+            if (sensDinsFlagsBuilder_ == null) {
+                if (!other.sensDinsFlags_.isEmpty()) {
+                    if (sensDinsFlags_.isEmpty()) {
+                        sensDinsFlags_ = other.sensDinsFlags_;
+                        bitField0_ = (bitField0_ & ~0x00001000);
+                    } else {
+                        ensureSensDinsFlagsIsMutable();
+                        sensDinsFlags_.addAll(other.sensDinsFlags_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensDinsFlags_.isEmpty()) {
+                    if (sensDinsFlagsBuilder_.isEmpty()) {
+                        sensDinsFlagsBuilder_.dispose();
+                        sensDinsFlagsBuilder_ = null;
+                        sensDinsFlags_ = other.sensDinsFlags_;
+                        bitField0_ = (bitField0_ & ~0x00001000);
+                        sensDinsFlagsBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensDinsFlagsFieldBuilder() : null;
+                    } else {
+                        sensDinsFlagsBuilder_.addAllMessages(other.sensDinsFlags_);
+                    }
+                }
+            }
+            if (sensDoutsFlagsBuilder_ == null) {
+                if (!other.sensDoutsFlags_.isEmpty()) {
+                    if (sensDoutsFlags_.isEmpty()) {
+                        sensDoutsFlags_ = other.sensDoutsFlags_;
+                        bitField0_ = (bitField0_ & ~0x00002000);
+                    } else {
+                        ensureSensDoutsFlagsIsMutable();
+                        sensDoutsFlags_.addAll(other.sensDoutsFlags_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensDoutsFlags_.isEmpty()) {
+                    if (sensDoutsFlagsBuilder_.isEmpty()) {
+                        sensDoutsFlagsBuilder_.dispose();
+                        sensDoutsFlagsBuilder_ = null;
+                        sensDoutsFlags_ = other.sensDoutsFlags_;
+                        bitField0_ = (bitField0_ & ~0x00002000);
+                        sensDoutsFlagsBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensDoutsFlagsFieldBuilder() : null;
+                    } else {
+                        sensDoutsFlagsBuilder_.addAllMessages(other.sensDoutsFlags_);
+                    }
+                }
+            }
+            if (sensFmeterFrequencyBuilder_ == null) {
+                if (!other.sensFmeterFrequency_.isEmpty()) {
+                    if (sensFmeterFrequency_.isEmpty()) {
+                        sensFmeterFrequency_ = other.sensFmeterFrequency_;
+                        bitField0_ = (bitField0_ & ~0x00004000);
+                    } else {
+                        ensureSensFmeterFrequencyIsMutable();
+                        sensFmeterFrequency_.addAll(other.sensFmeterFrequency_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensFmeterFrequency_.isEmpty()) {
+                    if (sensFmeterFrequencyBuilder_.isEmpty()) {
+                        sensFmeterFrequencyBuilder_.dispose();
+                        sensFmeterFrequencyBuilder_ = null;
+                        sensFmeterFrequency_ = other.sensFmeterFrequency_;
+                        bitField0_ = (bitField0_ & ~0x00004000);
+                        sensFmeterFrequencyBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensFmeterFrequencyFieldBuilder() : null;
+                    } else {
+                        sensFmeterFrequencyBuilder_.addAllMessages(other.sensFmeterFrequency_);
+                    }
+                }
+            }
+            if (sensFuelLevelBuilder_ == null) {
+                if (!other.sensFuelLevel_.isEmpty()) {
+                    if (sensFuelLevel_.isEmpty()) {
+                        sensFuelLevel_ = other.sensFuelLevel_;
+                        bitField0_ = (bitField0_ & ~0x00008000);
+                    } else {
+                        ensureSensFuelLevelIsMutable();
+                        sensFuelLevel_.addAll(other.sensFuelLevel_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensFuelLevel_.isEmpty()) {
+                    if (sensFuelLevelBuilder_.isEmpty()) {
+                        sensFuelLevelBuilder_.dispose();
+                        sensFuelLevelBuilder_ = null;
+                        sensFuelLevel_ = other.sensFuelLevel_;
+                        bitField0_ = (bitField0_ & ~0x00008000);
+                        sensFuelLevelBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensFuelLevelFieldBuilder() : null;
+                    } else {
+                        sensFuelLevelBuilder_.addAllMessages(other.sensFuelLevel_);
+                    }
+                }
+            }
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                if (!other.sensGsmCellMonitoring_.isEmpty()) {
+                    if (sensGsmCellMonitoring_.isEmpty()) {
+                        sensGsmCellMonitoring_ = other.sensGsmCellMonitoring_;
+                        bitField0_ = (bitField0_ & ~0x00010000);
+                    } else {
+                        ensureSensGsmCellMonitoringIsMutable();
+                        sensGsmCellMonitoring_.addAll(other.sensGsmCellMonitoring_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensGsmCellMonitoring_.isEmpty()) {
+                    if (sensGsmCellMonitoringBuilder_.isEmpty()) {
+                        sensGsmCellMonitoringBuilder_.dispose();
+                        sensGsmCellMonitoringBuilder_ = null;
+                        sensGsmCellMonitoring_ = other.sensGsmCellMonitoring_;
+                        bitField0_ = (bitField0_ & ~0x00010000);
+                        sensGsmCellMonitoringBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensGsmCellMonitoringFieldBuilder() : null;
+                    } else {
+                        sensGsmCellMonitoringBuilder_.addAllMessages(other.sensGsmCellMonitoring_);
+                    }
+                }
+            }
+            if (sensNdNavDataBuilder_ == null) {
+                if (!other.sensNdNavData_.isEmpty()) {
+                    if (sensNdNavData_.isEmpty()) {
+                        sensNdNavData_ = other.sensNdNavData_;
+                        bitField0_ = (bitField0_ & ~0x00020000);
+                    } else {
+                        ensureSensNdNavDataIsMutable();
+                        sensNdNavData_.addAll(other.sensNdNavData_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensNdNavData_.isEmpty()) {
+                    if (sensNdNavDataBuilder_.isEmpty()) {
+                        sensNdNavDataBuilder_.dispose();
+                        sensNdNavDataBuilder_ = null;
+                        sensNdNavData_ = other.sensNdNavData_;
+                        bitField0_ = (bitField0_ & ~0x00020000);
+                        sensNdNavDataBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensNdNavDataFieldBuilder() : null;
+                    } else {
+                        sensNdNavDataBuilder_.addAllMessages(other.sensNdNavData_);
+                    }
+                }
+            }
+            if (sensStorInfoBuilder_ == null) {
+                if (!other.sensStorInfo_.isEmpty()) {
+                    if (sensStorInfo_.isEmpty()) {
+                        sensStorInfo_ = other.sensStorInfo_;
+                        bitField0_ = (bitField0_ & ~0x00040000);
+                    } else {
+                        ensureSensStorInfoIsMutable();
+                        sensStorInfo_.addAll(other.sensStorInfo_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensStorInfo_.isEmpty()) {
+                    if (sensStorInfoBuilder_.isEmpty()) {
+                        sensStorInfoBuilder_.dispose();
+                        sensStorInfoBuilder_ = null;
+                        sensStorInfo_ = other.sensStorInfo_;
+                        bitField0_ = (bitField0_ & ~0x00040000);
+                        sensStorInfoBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensStorInfoFieldBuilder() : null;
+                    } else {
+                        sensStorInfoBuilder_.addAllMessages(other.sensStorInfo_);
+                    }
+                }
+            }
+            if (sensTermoDataBuilder_ == null) {
+                if (!other.sensTermoData_.isEmpty()) {
+                    if (sensTermoData_.isEmpty()) {
+                        sensTermoData_ = other.sensTermoData_;
+                        bitField0_ = (bitField0_ & ~0x00080000);
+                    } else {
+                        ensureSensTermoDataIsMutable();
+                        sensTermoData_.addAll(other.sensTermoData_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensTermoData_.isEmpty()) {
+                    if (sensTermoDataBuilder_.isEmpty()) {
+                        sensTermoDataBuilder_.dispose();
+                        sensTermoDataBuilder_ = null;
+                        sensTermoData_ = other.sensTermoData_;
+                        bitField0_ = (bitField0_ & ~0x00080000);
+                        sensTermoDataBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensTermoDataFieldBuilder() : null;
+                    } else {
+                        sensTermoDataBuilder_.addAllMessages(other.sensTermoData_);
+                    }
+                }
+            }
+            if (sensTestEraTestsBuilder_ == null) {
+                if (!other.sensTestEraTests_.isEmpty()) {
+                    if (sensTestEraTests_.isEmpty()) {
+                        sensTestEraTests_ = other.sensTestEraTests_;
+                        bitField0_ = (bitField0_ & ~0x00100000);
+                    } else {
+                        ensureSensTestEraTestsIsMutable();
+                        sensTestEraTests_.addAll(other.sensTestEraTests_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensTestEraTests_.isEmpty()) {
+                    if (sensTestEraTestsBuilder_.isEmpty()) {
+                        sensTestEraTestsBuilder_.dispose();
+                        sensTestEraTestsBuilder_ = null;
+                        sensTestEraTests_ = other.sensTestEraTests_;
+                        bitField0_ = (bitField0_ & ~0x00100000);
+                        sensTestEraTestsBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensTestEraTestsFieldBuilder() : null;
+                    } else {
+                        sensTestEraTestsBuilder_.addAllMessages(other.sensTestEraTests_);
+                    }
+                }
+            }
+            if (sensTrackerInfoBuilder_ == null) {
+                if (!other.sensTrackerInfo_.isEmpty()) {
+                    if (sensTrackerInfo_.isEmpty()) {
+                        sensTrackerInfo_ = other.sensTrackerInfo_;
+                        bitField0_ = (bitField0_ & ~0x00200000);
+                    } else {
+                        ensureSensTrackerInfoIsMutable();
+                        sensTrackerInfo_.addAll(other.sensTrackerInfo_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.sensTrackerInfo_.isEmpty()) {
+                    if (sensTrackerInfoBuilder_.isEmpty()) {
+                        sensTrackerInfoBuilder_.dispose();
+                        sensTrackerInfoBuilder_ = null;
+                        sensTrackerInfo_ = other.sensTrackerInfo_;
+                        bitField0_ = (bitField0_ & ~0x00200000);
+                        sensTrackerInfoBuilder_ =
+                                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                                        internalGetSensTrackerInfoFieldBuilder() : null;
+                    } else {
+                        sensTrackerInfoBuilder_.addAllMessages(other.sensTrackerInfo_);
+                    }
+                }
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            onChanged();
+            return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+            return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            if (extensionRegistry == null) {
+                throw new java.lang.NullPointerException();
+            }
+            try {
+                boolean done = false;
+                while (!done) {
+                    int tag = input.readTag();
+                    switch (tag) {
+                        case 0:
+                            done = true;
+                            break;
+                        case 8: {
+                            recordNumber_ = input.readUInt32();
+                            bitField0_ |= 0x00000001;
+                            break;
+                        } // case 8
+                        case 21: {
+                            timeStamp_ = input.readFixed32();
+                            bitField0_ |= 0x00000002;
+                            break;
+                        } // case 21
+                        case 24: {
+                            int tmpRaw = input.readEnum();
+                            ensureRecordReasonIsMutable();
+                            recordReason_.addInt(tmpRaw);
+                            break;
+                        } // case 24
+                        case 26: {
+                            int length = input.readRawVarint32();
+                            int oldLimit = input.pushLimit(length);
+                            while (input.getBytesUntilLimit() > 0) {
+                                int tmpRaw = input.readEnum();
+                                ensureRecordReasonIsMutable();
+                                recordReason_.addInt(tmpRaw);
+                            }
+                            input.popLimit(oldLimit);
+                            break;
+                        } // case 26
+                        case 37: {
+                            statusFlags_ = input.readFixed32();
+                            bitField0_ |= 0x00000008;
+                            break;
+                        } // case 37
+                        case 58: {
+                            org.example.libs.SensNdNavData m =
+                                    input.readMessage(
+                                            org.example.libs.SensNdNavData.parser(),
+                                            extensionRegistry);
+                            if (sensNdNavDataBuilder_ == null) {
+                                ensureSensNdNavDataIsMutable();
+                                sensNdNavData_.add(m);
+                            } else {
+                                sensNdNavDataBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 58
+                        case 66: {
+                            org.example.libs.SensFuelLevel m =
+                                    input.readMessage(
+                                            org.example.libs.SensFuelLevel.parser(),
+                                            extensionRegistry);
+                            if (sensFuelLevelBuilder_ == null) {
+                                ensureSensFuelLevelIsMutable();
+                                sensFuelLevel_.add(m);
+                            } else {
+                                sensFuelLevelBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 66
+                        case 74: {
+                            org.example.libs.SensAinAinValue m =
+                                    input.readMessage(
+                                            org.example.libs.SensAinAinValue.parser(),
+                                            extensionRegistry);
+                            if (sensAinAinValueBuilder_ == null) {
+                                ensureSensAinAinValueIsMutable();
+                                sensAinAinValue_.add(m);
+                            } else {
+                                sensAinAinValueBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 74
+                        case 82: {
+                            org.example.libs.SensDinsFlags m =
+                                    input.readMessage(
+                                            org.example.libs.SensDinsFlags.parser(),
+                                            extensionRegistry);
+                            if (sensDinsFlagsBuilder_ == null) {
+                                ensureSensDinsFlagsIsMutable();
+                                sensDinsFlags_.add(m);
+                            } else {
+                                sensDinsFlagsBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 82
+                        case 90: {
+                            org.example.libs.SensCounterCount m =
+                                    input.readMessage(
+                                            org.example.libs.SensCounterCount.parser(),
+                                            extensionRegistry);
+                            if (sensCounterCountBuilder_ == null) {
+                                ensureSensCounterCountIsMutable();
+                                sensCounterCount_.add(m);
+                            } else {
+                                sensCounterCountBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 90
+                        case 98: {
+                            org.example.libs.SensFmeterFrequency m =
+                                    input.readMessage(
+                                            org.example.libs.SensFmeterFrequency.parser(),
+                                            extensionRegistry);
+                            if (sensFmeterFrequencyBuilder_ == null) {
+                                ensureSensFmeterFrequencyIsMutable();
+                                sensFmeterFrequency_.add(m);
+                            } else {
+                                sensFmeterFrequencyBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 98
+                        case 106: {
+                            org.example.libs.SensGsmCellMonitoring m =
+                                    input.readMessage(
+                                            org.example.libs.SensGsmCellMonitoring.parser(),
+                                            extensionRegistry);
+                            if (sensGsmCellMonitoringBuilder_ == null) {
+                                ensureSensGsmCellMonitoringIsMutable();
+                                sensGsmCellMonitoring_.add(m);
+                            } else {
+                                sensGsmCellMonitoringBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 106
+                        case 114: {
+                            org.example.libs.SensButtonPressCounter m =
+                                    input.readMessage(
+                                            org.example.libs.SensButtonPressCounter.parser(),
+                                            extensionRegistry);
+                            if (sensButtonPressCounterBuilder_ == null) {
+                                ensureSensButtonPressCounterIsMutable();
+                                sensButtonPressCounter_.add(m);
+                            } else {
+                                sensButtonPressCounterBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 114
+                        case 122: {
+                            org.example.libs.SensTermoData m =
+                                    input.readMessage(
+                                            org.example.libs.SensTermoData.parser(),
+                                            extensionRegistry);
+                            if (sensTermoDataBuilder_ == null) {
+                                ensureSensTermoDataIsMutable();
+                                sensTermoData_.add(m);
+                            } else {
+                                sensTermoDataBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 122
+                        case 130: {
+                            org.example.libs.SensCanLogData m =
+                                    input.readMessage(
+                                            org.example.libs.SensCanLogData.parser(),
+                                            extensionRegistry);
+                            if (sensCanLogDataBuilder_ == null) {
+                                ensureSensCanLogDataIsMutable();
+                                sensCanLogData_.add(m);
+                            } else {
+                                sensCanLogDataBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 130
+                        case 138: {
+                            org.example.libs.SensCanLogTmpDataExt m =
+                                    input.readMessage(
+                                            org.example.libs.SensCanLogTmpDataExt.parser(),
+                                            extensionRegistry);
+                            if (sensCanLogTmpDataExtBuilder_ == null) {
+                                ensureSensCanLogTmpDataExtIsMutable();
+                                sensCanLogTmpDataExt_.add(m);
+                            } else {
+                                sensCanLogTmpDataExtBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 138
+                        case 146: {
+                            org.example.libs.SensAccelerometerData m =
+                                    input.readMessage(
+                                            org.example.libs.SensAccelerometerData.parser(),
+                                            extensionRegistry);
+                            if (sensAccelerometerDataBuilder_ == null) {
+                                ensureSensAccelerometerDataIsMutable();
+                                sensAccelerometerData_.add(m);
+                            } else {
+                                sensAccelerometerDataBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 146
+                        case 154: {
+                            org.example.libs.SensDoutsFlags m =
+                                    input.readMessage(
+                                            org.example.libs.SensDoutsFlags.parser(),
+                                            extensionRegistry);
+                            if (sensDoutsFlagsBuilder_ == null) {
+                                ensureSensDoutsFlagsIsMutable();
+                                sensDoutsFlags_.add(m);
+                            } else {
+                                sensDoutsFlagsBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 154
+                        case 162: {
+                            org.example.libs.SensBufferData m =
+                                    input.readMessage(
+                                            org.example.libs.SensBufferData.parser(),
+                                            extensionRegistry);
+                            if (sensBufferDataBuilder_ == null) {
+                                ensureSensBufferDataIsMutable();
+                                sensBufferData_.add(m);
+                            } else {
+                                sensBufferDataBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 162
+                        case 170: {
+                            org.example.libs.SensStorInfo m =
+                                    input.readMessage(
+                                            org.example.libs.SensStorInfo.parser(),
+                                            extensionRegistry);
+                            if (sensStorInfoBuilder_ == null) {
+                                ensureSensStorInfoIsMutable();
+                                sensStorInfo_.add(m);
+                            } else {
+                                sensStorInfoBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 170
+                        case 178: {
+                            org.example.libs.SensTrackerInfo m =
+                                    input.readMessage(
+                                            org.example.libs.SensTrackerInfo.parser(),
+                                            extensionRegistry);
+                            if (sensTrackerInfoBuilder_ == null) {
+                                ensureSensTrackerInfoIsMutable();
+                                sensTrackerInfo_.add(m);
+                            } else {
+                                sensTrackerInfoBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 178
+                        case 186: {
+                            org.example.libs.SensTestEraTests m =
+                                    input.readMessage(
+                                            org.example.libs.SensTestEraTests.parser(),
+                                            extensionRegistry);
+                            if (sensTestEraTestsBuilder_ == null) {
+                                ensureSensTestEraTestsIsMutable();
+                                sensTestEraTests_.add(m);
+                            } else {
+                                sensTestEraTestsBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 186
+                        case 194: {
+                            org.example.libs.SensCrashData m =
+                                    input.readMessage(
+                                            org.example.libs.SensCrashData.parser(),
+                                            extensionRegistry);
+                            if (sensCrashDataBuilder_ == null) {
+                                ensureSensCrashDataIsMutable();
+                                sensCrashData_.add(m);
+                            } else {
+                                sensCrashDataBuilder_.addMessage(m);
+                            }
+                            break;
+                        } // case 194
+                        default: {
+                            if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                                done = true; // was an endgroup tag
+                            }
+                            break;
+                        } // default:
+                    } // switch (tag)
+                } // while (!done)
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                throw e.unwrapIOException();
+            } finally {
+                onChanged();
+            } // finally
+            return this;
+        }
+
+        private int bitField0_;
+
+        private int recordNumber_;
+
+        /**
+         * <pre>
+         * Номер записи
+         * </pre>
+         *
+         * <code>uint32 record_number = 1;</code>
+         *
+         * @return The recordNumber.
+         */
+        @java.lang.Override
+        public int getRecordNumber() {
+            return recordNumber_;
+        }
+
+        /**
+         * <pre>
+         * Номер записи
+         * </pre>
+         *
+         * <code>uint32 record_number = 1;</code>
+         *
+         * @param value The recordNumber to set.
+         * @return This builder for chaining.
+         */
+        public Builder setRecordNumber(int value) {
+
+            recordNumber_ = value;
+            bitField0_ |= 0x00000001;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Номер записи
+         * </pre>
+         *
+         * <code>uint32 record_number = 1;</code>
+         *
+         * @return This builder for chaining.
+         */
+        public Builder clearRecordNumber() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            recordNumber_ = 0;
+            onChanged();
+            return this;
+        }
+
+        private int timeStamp_;
+
+        /**
+         * <pre>
+         * Время отметки
+         * </pre>
+         *
+         * <code>fixed32 time_stamp = 2;</code>
+         *
+         * @return The timeStamp.
+         */
+        @java.lang.Override
+        public int getTimeStamp() {
+            return timeStamp_;
+        }
+
+        /**
+         * <pre>
+         * Время отметки
+         * </pre>
+         *
+         * <code>fixed32 time_stamp = 2;</code>
+         *
+         * @param value The timeStamp to set.
+         * @return This builder for chaining.
+         */
+        public Builder setTimeStamp(int value) {
+
+            timeStamp_ = value;
+            bitField0_ |= 0x00000002;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Время отметки
+         * </pre>
+         *
+         * <code>fixed32 time_stamp = 2;</code>
+         *
+         * @return This builder for chaining.
+         */
+        public Builder clearTimeStamp() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            timeStamp_ = 0;
+            onChanged();
+            return this;
+        }
+
+        private com.google.protobuf.Internal.IntList recordReason_ =
+                emptyIntList();
+
+        private void ensureRecordReasonIsMutable() {
+            if (!((bitField0_ & 0x00000004) != 0)) {
+                recordReason_ = makeMutableCopy(recordReason_);
+                bitField0_ |= 0x00000004;
+            }
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @return A list containing the recordReason.
+         */
+        public java.util.List<org.example.libs.StorageRecord.Reason> getRecordReasonList() {
+            return new com.google.protobuf.Internal.IntListAdapter<
+                    org.example.libs.StorageRecord.Reason>(recordReason_, recordReason_converter_);
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @return The count of recordReason.
+         */
+        public int getRecordReasonCount() {
+            return recordReason_.size();
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param index The index of the element to return.
+         * @return The recordReason at the given index.
+         */
+        public org.example.libs.StorageRecord.Reason getRecordReason(int index) {
+            return recordReason_converter_.convert(recordReason_.getInt(index));
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param index The index to set the value at.
+         * @param value The recordReason to set.
+         * @return This builder for chaining.
+         */
+        public Builder setRecordReason(
+                int index, org.example.libs.StorageRecord.Reason value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            ensureRecordReasonIsMutable();
+            recordReason_.setInt(index, value.getNumber());
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param value The recordReason to add.
+         * @return This builder for chaining.
+         */
+        public Builder addRecordReason(org.example.libs.StorageRecord.Reason value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            ensureRecordReasonIsMutable();
+            recordReason_.addInt(value.getNumber());
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param values The recordReason to add.
+         * @return This builder for chaining.
+         */
+        public Builder addAllRecordReason(
+                java.lang.Iterable<? extends org.example.libs.StorageRecord.Reason> values) {
+            ensureRecordReasonIsMutable();
+            for (org.example.libs.StorageRecord.Reason value : values) {
+                recordReason_.addInt(value.getNumber());
+            }
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @return This builder for chaining.
+         */
+        public Builder clearRecordReason() {
+            recordReason_ = emptyIntList();
+            bitField0_ = (bitField0_ & ~0x00000004);
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @return A list containing the enum numeric values on the wire for recordReason.
+         */
+        public java.util.List<java.lang.Integer>
+        getRecordReasonValueList() {
+            return java.util.Collections.unmodifiableList(recordReason_);
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param index The index of the value to return.
+         * @return The enum numeric value on the wire of recordReason at the given index.
+         */
+        public int getRecordReasonValue(int index) {
+            return recordReason_.getInt(index);
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param index The index to set the value at.
+         * @param value The enum numeric value on the wire for recordReason to set.
+         * @return This builder for chaining.
+         */
+        public Builder setRecordReasonValue(
+                int index, int value) {
+            ensureRecordReasonIsMutable();
+            recordReason_.setInt(index, value);
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param value The enum numeric value on the wire for recordReason to add.
+         * @return This builder for chaining.
+         */
+        public Builder addRecordReasonValue(int value) {
+            ensureRecordReasonIsMutable();
+            recordReason_.addInt(value);
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Причины формирования отметки
+         * </pre>
+         *
+         * <code>repeated .StorageRecord.Reason record_reason = 3;</code>
+         *
+         * @param values The enum numeric values on the wire for recordReason to add.
+         * @return This builder for chaining.
+         */
+        public Builder addAllRecordReasonValue(
+                java.lang.Iterable<java.lang.Integer> values) {
+            ensureRecordReasonIsMutable();
+            for (int value : values) {
+                recordReason_.addInt(value);
+            }
+            onChanged();
+            return this;
+        }
+
+        private int statusFlags_;
+
+        /**
+         * <pre>
+         * Статусные флаги
+         * </pre>
+         *
+         * <code>fixed32 status_flags = 4;</code>
+         *
+         * @return The statusFlags.
+         */
+        @java.lang.Override
+        public int getStatusFlags() {
+            return statusFlags_;
+        }
+
+        /**
+         * <pre>
+         * Статусные флаги
+         * </pre>
+         *
+         * <code>fixed32 status_flags = 4;</code>
+         *
+         * @param value The statusFlags to set.
+         * @return This builder for chaining.
+         */
+        public Builder setStatusFlags(int value) {
+
+            statusFlags_ = value;
+            bitField0_ |= 0x00000008;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статусные флаги
+         * </pre>
+         *
+         * <code>fixed32 status_flags = 4;</code>
+         *
+         * @return This builder for chaining.
+         */
+        public Builder clearStatusFlags() {
+            bitField0_ = (bitField0_ & ~0x00000008);
+            statusFlags_ = 0;
+            onChanged();
+            return this;
+        }
+
+        private java.util.List<org.example.libs.SensAccelerometerData> sensAccelerometerData_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensAccelerometerDataIsMutable() {
+            if (!((bitField0_ & 0x00000010) != 0)) {
+                sensAccelerometerData_ = new java.util.ArrayList<org.example.libs.SensAccelerometerData>(sensAccelerometerData_);
+                bitField0_ |= 0x00000010;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensAccelerometerData, org.example.libs.SensAccelerometerData.Builder, org.example.libs.SensAccelerometerDataOrBuilder> sensAccelerometerDataBuilder_;
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public java.util.List<org.example.libs.SensAccelerometerData> getSensAccelerometerDataList() {
+            if (sensAccelerometerDataBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensAccelerometerData_);
+            } else {
+                return sensAccelerometerDataBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public int getSensAccelerometerDataCount() {
+            if (sensAccelerometerDataBuilder_ == null) {
+                return sensAccelerometerData_.size();
+            } else {
+                return sensAccelerometerDataBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public org.example.libs.SensAccelerometerData getSensAccelerometerData(int index) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                return sensAccelerometerData_.get(index);
+            } else {
+                return sensAccelerometerDataBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder setSensAccelerometerData(
+                int index, org.example.libs.SensAccelerometerData value) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.set(index, value);
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder setSensAccelerometerData(
+                int index, org.example.libs.SensAccelerometerData.Builder builderForValue) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder addSensAccelerometerData(org.example.libs.SensAccelerometerData value) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.add(value);
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder addSensAccelerometerData(
+                int index, org.example.libs.SensAccelerometerData value) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.add(index, value);
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder addSensAccelerometerData(
+                org.example.libs.SensAccelerometerData.Builder builderForValue) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder addSensAccelerometerData(
+                int index, org.example.libs.SensAccelerometerData.Builder builderForValue) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder addAllSensAccelerometerData(
+                java.lang.Iterable<? extends org.example.libs.SensAccelerometerData> values) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                ensureSensAccelerometerDataIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensAccelerometerData_);
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder clearSensAccelerometerData() {
+            if (sensAccelerometerDataBuilder_ == null) {
+                sensAccelerometerData_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000010);
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public Builder removeSensAccelerometerData(int index) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                ensureSensAccelerometerDataIsMutable();
+                sensAccelerometerData_.remove(index);
+                onChanged();
+            } else {
+                sensAccelerometerDataBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public org.example.libs.SensAccelerometerData.Builder getSensAccelerometerDataBuilder(
+                int index) {
+            return internalGetSensAccelerometerDataFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public org.example.libs.SensAccelerometerDataOrBuilder getSensAccelerometerDataOrBuilder(
+                int index) {
+            if (sensAccelerometerDataBuilder_ == null) {
+                return sensAccelerometerData_.get(index);
+            } else {
+                return sensAccelerometerDataBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensAccelerometerDataOrBuilder>
+        getSensAccelerometerDataOrBuilderList() {
+            if (sensAccelerometerDataBuilder_ != null) {
+                return sensAccelerometerDataBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensAccelerometerData_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public org.example.libs.SensAccelerometerData.Builder addSensAccelerometerDataBuilder() {
+            return internalGetSensAccelerometerDataFieldBuilder().addBuilder(
+                    org.example.libs.SensAccelerometerData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public org.example.libs.SensAccelerometerData.Builder addSensAccelerometerDataBuilder(
+                int index) {
+            return internalGetSensAccelerometerDataFieldBuilder().addBuilder(
+                    index, org.example.libs.SensAccelerometerData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Датчик ускорения
+         * </pre>
+         *
+         * <code>repeated .SensAccelerometerData sens_accelerometer_data = 18;</code>
+         */
+        public java.util.List<org.example.libs.SensAccelerometerData.Builder>
+        getSensAccelerometerDataBuilderList() {
+            return internalGetSensAccelerometerDataFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensAccelerometerData, org.example.libs.SensAccelerometerData.Builder, org.example.libs.SensAccelerometerDataOrBuilder>
+        internalGetSensAccelerometerDataFieldBuilder() {
+            if (sensAccelerometerDataBuilder_ == null) {
+                sensAccelerometerDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensAccelerometerData, org.example.libs.SensAccelerometerData.Builder, org.example.libs.SensAccelerometerDataOrBuilder>(
+                        sensAccelerometerData_,
+                        ((bitField0_ & 0x00000010) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensAccelerometerData_ = null;
+            }
+            return sensAccelerometerDataBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensAinAinValue> sensAinAinValue_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensAinAinValueIsMutable() {
+            if (!((bitField0_ & 0x00000020) != 0)) {
+                sensAinAinValue_ = new java.util.ArrayList<org.example.libs.SensAinAinValue>(sensAinAinValue_);
+                bitField0_ |= 0x00000020;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensAinAinValue, org.example.libs.SensAinAinValue.Builder, org.example.libs.SensAinAinValueOrBuilder> sensAinAinValueBuilder_;
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public java.util.List<org.example.libs.SensAinAinValue> getSensAinAinValueList() {
+            if (sensAinAinValueBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensAinAinValue_);
+            } else {
+                return sensAinAinValueBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public int getSensAinAinValueCount() {
+            if (sensAinAinValueBuilder_ == null) {
+                return sensAinAinValue_.size();
+            } else {
+                return sensAinAinValueBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public org.example.libs.SensAinAinValue getSensAinAinValue(int index) {
+            if (sensAinAinValueBuilder_ == null) {
+                return sensAinAinValue_.get(index);
+            } else {
+                return sensAinAinValueBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder setSensAinAinValue(
+                int index, org.example.libs.SensAinAinValue value) {
+            if (sensAinAinValueBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.set(index, value);
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder setSensAinAinValue(
+                int index, org.example.libs.SensAinAinValue.Builder builderForValue) {
+            if (sensAinAinValueBuilder_ == null) {
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder addSensAinAinValue(org.example.libs.SensAinAinValue value) {
+            if (sensAinAinValueBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.add(value);
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder addSensAinAinValue(
+                int index, org.example.libs.SensAinAinValue value) {
+            if (sensAinAinValueBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.add(index, value);
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder addSensAinAinValue(
+                org.example.libs.SensAinAinValue.Builder builderForValue) {
+            if (sensAinAinValueBuilder_ == null) {
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder addSensAinAinValue(
+                int index, org.example.libs.SensAinAinValue.Builder builderForValue) {
+            if (sensAinAinValueBuilder_ == null) {
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder addAllSensAinAinValue(
+                java.lang.Iterable<? extends org.example.libs.SensAinAinValue> values) {
+            if (sensAinAinValueBuilder_ == null) {
+                ensureSensAinAinValueIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensAinAinValue_);
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder clearSensAinAinValue() {
+            if (sensAinAinValueBuilder_ == null) {
+                sensAinAinValue_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000020);
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public Builder removeSensAinAinValue(int index) {
+            if (sensAinAinValueBuilder_ == null) {
+                ensureSensAinAinValueIsMutable();
+                sensAinAinValue_.remove(index);
+                onChanged();
+            } else {
+                sensAinAinValueBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public org.example.libs.SensAinAinValue.Builder getSensAinAinValueBuilder(
+                int index) {
+            return internalGetSensAinAinValueFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public org.example.libs.SensAinAinValueOrBuilder getSensAinAinValueOrBuilder(
+                int index) {
+            if (sensAinAinValueBuilder_ == null) {
+                return sensAinAinValue_.get(index);
+            } else {
+                return sensAinAinValueBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensAinAinValueOrBuilder>
+        getSensAinAinValueOrBuilderList() {
+            if (sensAinAinValueBuilder_ != null) {
+                return sensAinAinValueBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensAinAinValue_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public org.example.libs.SensAinAinValue.Builder addSensAinAinValueBuilder() {
+            return internalGetSensAinAinValueFieldBuilder().addBuilder(
+                    org.example.libs.SensAinAinValue.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public org.example.libs.SensAinAinValue.Builder addSensAinAinValueBuilder(
+                int index) {
+            return internalGetSensAinAinValueFieldBuilder().addBuilder(
+                    index, org.example.libs.SensAinAinValue.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Аналоговый вход
+         * </pre>
+         *
+         * <code>repeated .SensAinAinValue sens_ain_ain_value = 9;</code>
+         */
+        public java.util.List<org.example.libs.SensAinAinValue.Builder>
+        getSensAinAinValueBuilderList() {
+            return internalGetSensAinAinValueFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensAinAinValue, org.example.libs.SensAinAinValue.Builder, org.example.libs.SensAinAinValueOrBuilder>
+        internalGetSensAinAinValueFieldBuilder() {
+            if (sensAinAinValueBuilder_ == null) {
+                sensAinAinValueBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensAinAinValue, org.example.libs.SensAinAinValue.Builder, org.example.libs.SensAinAinValueOrBuilder>(
+                        sensAinAinValue_,
+                        ((bitField0_ & 0x00000020) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensAinAinValue_ = null;
+            }
+            return sensAinAinValueBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensBufferData> sensBufferData_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensBufferDataIsMutable() {
+            if (!((bitField0_ & 0x00000040) != 0)) {
+                sensBufferData_ = new java.util.ArrayList<org.example.libs.SensBufferData>(sensBufferData_);
+                bitField0_ |= 0x00000040;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensBufferData, org.example.libs.SensBufferData.Builder, org.example.libs.SensBufferDataOrBuilder> sensBufferDataBuilder_;
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public java.util.List<org.example.libs.SensBufferData> getSensBufferDataList() {
+            if (sensBufferDataBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensBufferData_);
+            } else {
+                return sensBufferDataBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public int getSensBufferDataCount() {
+            if (sensBufferDataBuilder_ == null) {
+                return sensBufferData_.size();
+            } else {
+                return sensBufferDataBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public org.example.libs.SensBufferData getSensBufferData(int index) {
+            if (sensBufferDataBuilder_ == null) {
+                return sensBufferData_.get(index);
+            } else {
+                return sensBufferDataBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder setSensBufferData(
+                int index, org.example.libs.SensBufferData value) {
+            if (sensBufferDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.set(index, value);
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder setSensBufferData(
+                int index, org.example.libs.SensBufferData.Builder builderForValue) {
+            if (sensBufferDataBuilder_ == null) {
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder addSensBufferData(org.example.libs.SensBufferData value) {
+            if (sensBufferDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.add(value);
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder addSensBufferData(
+                int index, org.example.libs.SensBufferData value) {
+            if (sensBufferDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.add(index, value);
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder addSensBufferData(
+                org.example.libs.SensBufferData.Builder builderForValue) {
+            if (sensBufferDataBuilder_ == null) {
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder addSensBufferData(
+                int index, org.example.libs.SensBufferData.Builder builderForValue) {
+            if (sensBufferDataBuilder_ == null) {
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder addAllSensBufferData(
+                java.lang.Iterable<? extends org.example.libs.SensBufferData> values) {
+            if (sensBufferDataBuilder_ == null) {
+                ensureSensBufferDataIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensBufferData_);
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder clearSensBufferData() {
+            if (sensBufferDataBuilder_ == null) {
+                sensBufferData_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000040);
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public Builder removeSensBufferData(int index) {
+            if (sensBufferDataBuilder_ == null) {
+                ensureSensBufferDataIsMutable();
+                sensBufferData_.remove(index);
+                onChanged();
+            } else {
+                sensBufferDataBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public org.example.libs.SensBufferData.Builder getSensBufferDataBuilder(
+                int index) {
+            return internalGetSensBufferDataFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public org.example.libs.SensBufferDataOrBuilder getSensBufferDataOrBuilder(
+                int index) {
+            if (sensBufferDataBuilder_ == null) {
+                return sensBufferData_.get(index);
+            } else {
+                return sensBufferDataBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensBufferDataOrBuilder>
+        getSensBufferDataOrBuilderList() {
+            if (sensBufferDataBuilder_ != null) {
+                return sensBufferDataBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensBufferData_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public org.example.libs.SensBufferData.Builder addSensBufferDataBuilder() {
+            return internalGetSensBufferDataFieldBuilder().addBuilder(
+                    org.example.libs.SensBufferData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public org.example.libs.SensBufferData.Builder addSensBufferDataBuilder(
+                int index) {
+            return internalGetSensBufferDataFieldBuilder().addBuilder(
+                    index, org.example.libs.SensBufferData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Буферизованные данные
+         * </pre>
+         *
+         * <code>repeated .SensBufferData sens_buffer_data = 20;</code>
+         */
+        public java.util.List<org.example.libs.SensBufferData.Builder>
+        getSensBufferDataBuilderList() {
+            return internalGetSensBufferDataFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensBufferData, org.example.libs.SensBufferData.Builder, org.example.libs.SensBufferDataOrBuilder>
+        internalGetSensBufferDataFieldBuilder() {
+            if (sensBufferDataBuilder_ == null) {
+                sensBufferDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensBufferData, org.example.libs.SensBufferData.Builder, org.example.libs.SensBufferDataOrBuilder>(
+                        sensBufferData_,
+                        ((bitField0_ & 0x00000040) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensBufferData_ = null;
+            }
+            return sensBufferDataBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensButtonPressCounter> sensButtonPressCounter_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensButtonPressCounterIsMutable() {
+            if (!((bitField0_ & 0x00000080) != 0)) {
+                sensButtonPressCounter_ = new java.util.ArrayList<org.example.libs.SensButtonPressCounter>(sensButtonPressCounter_);
+                bitField0_ |= 0x00000080;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensButtonPressCounter, org.example.libs.SensButtonPressCounter.Builder, org.example.libs.SensButtonPressCounterOrBuilder> sensButtonPressCounterBuilder_;
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public java.util.List<org.example.libs.SensButtonPressCounter> getSensButtonPressCounterList() {
+            if (sensButtonPressCounterBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensButtonPressCounter_);
+            } else {
+                return sensButtonPressCounterBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public int getSensButtonPressCounterCount() {
+            if (sensButtonPressCounterBuilder_ == null) {
+                return sensButtonPressCounter_.size();
+            } else {
+                return sensButtonPressCounterBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public org.example.libs.SensButtonPressCounter getSensButtonPressCounter(int index) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                return sensButtonPressCounter_.get(index);
+            } else {
+                return sensButtonPressCounterBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder setSensButtonPressCounter(
+                int index, org.example.libs.SensButtonPressCounter value) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.set(index, value);
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder setSensButtonPressCounter(
+                int index, org.example.libs.SensButtonPressCounter.Builder builderForValue) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder addSensButtonPressCounter(org.example.libs.SensButtonPressCounter value) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.add(value);
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder addSensButtonPressCounter(
+                int index, org.example.libs.SensButtonPressCounter value) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.add(index, value);
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder addSensButtonPressCounter(
+                org.example.libs.SensButtonPressCounter.Builder builderForValue) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder addSensButtonPressCounter(
+                int index, org.example.libs.SensButtonPressCounter.Builder builderForValue) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder addAllSensButtonPressCounter(
+                java.lang.Iterable<? extends org.example.libs.SensButtonPressCounter> values) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                ensureSensButtonPressCounterIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensButtonPressCounter_);
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder clearSensButtonPressCounter() {
+            if (sensButtonPressCounterBuilder_ == null) {
+                sensButtonPressCounter_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000080);
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public Builder removeSensButtonPressCounter(int index) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                ensureSensButtonPressCounterIsMutable();
+                sensButtonPressCounter_.remove(index);
+                onChanged();
+            } else {
+                sensButtonPressCounterBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public org.example.libs.SensButtonPressCounter.Builder getSensButtonPressCounterBuilder(
+                int index) {
+            return internalGetSensButtonPressCounterFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public org.example.libs.SensButtonPressCounterOrBuilder getSensButtonPressCounterOrBuilder(
+                int index) {
+            if (sensButtonPressCounterBuilder_ == null) {
+                return sensButtonPressCounter_.get(index);
+            } else {
+                return sensButtonPressCounterBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensButtonPressCounterOrBuilder>
+        getSensButtonPressCounterOrBuilderList() {
+            if (sensButtonPressCounterBuilder_ != null) {
+                return sensButtonPressCounterBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensButtonPressCounter_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public org.example.libs.SensButtonPressCounter.Builder addSensButtonPressCounterBuilder() {
+            return internalGetSensButtonPressCounterFieldBuilder().addBuilder(
+                    org.example.libs.SensButtonPressCounter.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public org.example.libs.SensButtonPressCounter.Builder addSensButtonPressCounterBuilder(
+                int index) {
+            return internalGetSensButtonPressCounterFieldBuilder().addBuilder(
+                    index, org.example.libs.SensButtonPressCounter.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Кнопка
+         * </pre>
+         *
+         * <code>repeated .SensButtonPressCounter sens_button_press_counter = 14;</code>
+         */
+        public java.util.List<org.example.libs.SensButtonPressCounter.Builder>
+        getSensButtonPressCounterBuilderList() {
+            return internalGetSensButtonPressCounterFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensButtonPressCounter, org.example.libs.SensButtonPressCounter.Builder, org.example.libs.SensButtonPressCounterOrBuilder>
+        internalGetSensButtonPressCounterFieldBuilder() {
+            if (sensButtonPressCounterBuilder_ == null) {
+                sensButtonPressCounterBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensButtonPressCounter, org.example.libs.SensButtonPressCounter.Builder, org.example.libs.SensButtonPressCounterOrBuilder>(
+                        sensButtonPressCounter_,
+                        ((bitField0_ & 0x00000080) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensButtonPressCounter_ = null;
+            }
+            return sensButtonPressCounterBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensCanLogData> sensCanLogData_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensCanLogDataIsMutable() {
+            if (!((bitField0_ & 0x00000100) != 0)) {
+                sensCanLogData_ = new java.util.ArrayList<org.example.libs.SensCanLogData>(sensCanLogData_);
+                bitField0_ |= 0x00000100;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCanLogData, org.example.libs.SensCanLogData.Builder, org.example.libs.SensCanLogDataOrBuilder> sensCanLogDataBuilder_;
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public java.util.List<org.example.libs.SensCanLogData> getSensCanLogDataList() {
+            if (sensCanLogDataBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensCanLogData_);
+            } else {
+                return sensCanLogDataBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public int getSensCanLogDataCount() {
+            if (sensCanLogDataBuilder_ == null) {
+                return sensCanLogData_.size();
+            } else {
+                return sensCanLogDataBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public org.example.libs.SensCanLogData getSensCanLogData(int index) {
+            if (sensCanLogDataBuilder_ == null) {
+                return sensCanLogData_.get(index);
+            } else {
+                return sensCanLogDataBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder setSensCanLogData(
+                int index, org.example.libs.SensCanLogData value) {
+            if (sensCanLogDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.set(index, value);
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder setSensCanLogData(
+                int index, org.example.libs.SensCanLogData.Builder builderForValue) {
+            if (sensCanLogDataBuilder_ == null) {
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder addSensCanLogData(org.example.libs.SensCanLogData value) {
+            if (sensCanLogDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.add(value);
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder addSensCanLogData(
+                int index, org.example.libs.SensCanLogData value) {
+            if (sensCanLogDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.add(index, value);
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder addSensCanLogData(
+                org.example.libs.SensCanLogData.Builder builderForValue) {
+            if (sensCanLogDataBuilder_ == null) {
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder addSensCanLogData(
+                int index, org.example.libs.SensCanLogData.Builder builderForValue) {
+            if (sensCanLogDataBuilder_ == null) {
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder addAllSensCanLogData(
+                java.lang.Iterable<? extends org.example.libs.SensCanLogData> values) {
+            if (sensCanLogDataBuilder_ == null) {
+                ensureSensCanLogDataIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensCanLogData_);
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder clearSensCanLogData() {
+            if (sensCanLogDataBuilder_ == null) {
+                sensCanLogData_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000100);
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public Builder removeSensCanLogData(int index) {
+            if (sensCanLogDataBuilder_ == null) {
+                ensureSensCanLogDataIsMutable();
+                sensCanLogData_.remove(index);
+                onChanged();
+            } else {
+                sensCanLogDataBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public org.example.libs.SensCanLogData.Builder getSensCanLogDataBuilder(
+                int index) {
+            return internalGetSensCanLogDataFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public org.example.libs.SensCanLogDataOrBuilder getSensCanLogDataOrBuilder(
+                int index) {
+            if (sensCanLogDataBuilder_ == null) {
+                return sensCanLogData_.get(index);
+            } else {
+                return sensCanLogDataBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensCanLogDataOrBuilder>
+        getSensCanLogDataOrBuilderList() {
+            if (sensCanLogDataBuilder_ != null) {
+                return sensCanLogDataBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensCanLogData_);
+            }
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public org.example.libs.SensCanLogData.Builder addSensCanLogDataBuilder() {
+            return internalGetSensCanLogDataFieldBuilder().addBuilder(
+                    org.example.libs.SensCanLogData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public org.example.libs.SensCanLogData.Builder addSensCanLogDataBuilder(
+                int index) {
+            return internalGetSensCanLogDataFieldBuilder().addBuilder(
+                    index, org.example.libs.SensCanLogData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * CAN-лог
+         * </pre>
+         *
+         * <code>repeated .SensCanLogData sens_can_log_data = 16;</code>
+         */
+        public java.util.List<org.example.libs.SensCanLogData.Builder>
+        getSensCanLogDataBuilderList() {
+            return internalGetSensCanLogDataFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCanLogData, org.example.libs.SensCanLogData.Builder, org.example.libs.SensCanLogDataOrBuilder>
+        internalGetSensCanLogDataFieldBuilder() {
+            if (sensCanLogDataBuilder_ == null) {
+                sensCanLogDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensCanLogData, org.example.libs.SensCanLogData.Builder, org.example.libs.SensCanLogDataOrBuilder>(
+                        sensCanLogData_,
+                        ((bitField0_ & 0x00000100) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensCanLogData_ = null;
+            }
+            return sensCanLogDataBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensCanLogTmpDataExt> sensCanLogTmpDataExt_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensCanLogTmpDataExtIsMutable() {
+            if (!((bitField0_ & 0x00000200) != 0)) {
+                sensCanLogTmpDataExt_ = new java.util.ArrayList<org.example.libs.SensCanLogTmpDataExt>(sensCanLogTmpDataExt_);
+                bitField0_ |= 0x00000200;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCanLogTmpDataExt, org.example.libs.SensCanLogTmpDataExt.Builder, org.example.libs.SensCanLogTmpDataExtOrBuilder> sensCanLogTmpDataExtBuilder_;
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public java.util.List<org.example.libs.SensCanLogTmpDataExt> getSensCanLogTmpDataExtList() {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensCanLogTmpDataExt_);
+            } else {
+                return sensCanLogTmpDataExtBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public int getSensCanLogTmpDataExtCount() {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                return sensCanLogTmpDataExt_.size();
+            } else {
+                return sensCanLogTmpDataExtBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public org.example.libs.SensCanLogTmpDataExt getSensCanLogTmpDataExt(int index) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                return sensCanLogTmpDataExt_.get(index);
+            } else {
+                return sensCanLogTmpDataExtBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder setSensCanLogTmpDataExt(
+                int index, org.example.libs.SensCanLogTmpDataExt value) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.set(index, value);
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder setSensCanLogTmpDataExt(
+                int index, org.example.libs.SensCanLogTmpDataExt.Builder builderForValue) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder addSensCanLogTmpDataExt(org.example.libs.SensCanLogTmpDataExt value) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.add(value);
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder addSensCanLogTmpDataExt(
+                int index, org.example.libs.SensCanLogTmpDataExt value) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.add(index, value);
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder addSensCanLogTmpDataExt(
+                org.example.libs.SensCanLogTmpDataExt.Builder builderForValue) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder addSensCanLogTmpDataExt(
+                int index, org.example.libs.SensCanLogTmpDataExt.Builder builderForValue) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder addAllSensCanLogTmpDataExt(
+                java.lang.Iterable<? extends org.example.libs.SensCanLogTmpDataExt> values) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                ensureSensCanLogTmpDataExtIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensCanLogTmpDataExt_);
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder clearSensCanLogTmpDataExt() {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                sensCanLogTmpDataExt_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000200);
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public Builder removeSensCanLogTmpDataExt(int index) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                ensureSensCanLogTmpDataExtIsMutable();
+                sensCanLogTmpDataExt_.remove(index);
+                onChanged();
+            } else {
+                sensCanLogTmpDataExtBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public org.example.libs.SensCanLogTmpDataExt.Builder getSensCanLogTmpDataExtBuilder(
+                int index) {
+            return internalGetSensCanLogTmpDataExtFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public org.example.libs.SensCanLogTmpDataExtOrBuilder getSensCanLogTmpDataExtOrBuilder(
+                int index) {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                return sensCanLogTmpDataExt_.get(index);
+            } else {
+                return sensCanLogTmpDataExtBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensCanLogTmpDataExtOrBuilder>
+        getSensCanLogTmpDataExtOrBuilderList() {
+            if (sensCanLogTmpDataExtBuilder_ != null) {
+                return sensCanLogTmpDataExtBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensCanLogTmpDataExt_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public org.example.libs.SensCanLogTmpDataExt.Builder addSensCanLogTmpDataExtBuilder() {
+            return internalGetSensCanLogTmpDataExtFieldBuilder().addBuilder(
+                    org.example.libs.SensCanLogTmpDataExt.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public org.example.libs.SensCanLogTmpDataExt.Builder addSensCanLogTmpDataExtBuilder(
+                int index) {
+            return internalGetSensCanLogTmpDataExtFieldBuilder().addBuilder(
+                    index, org.example.libs.SensCanLogTmpDataExt.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Расширение CAN-лога
+         * </pre>
+         *
+         * <code>repeated .SensCanLogTmpDataExt sens_can_log_tmp_data_ext = 17;</code>
+         */
+        public java.util.List<org.example.libs.SensCanLogTmpDataExt.Builder>
+        getSensCanLogTmpDataExtBuilderList() {
+            return internalGetSensCanLogTmpDataExtFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCanLogTmpDataExt, org.example.libs.SensCanLogTmpDataExt.Builder, org.example.libs.SensCanLogTmpDataExtOrBuilder>
+        internalGetSensCanLogTmpDataExtFieldBuilder() {
+            if (sensCanLogTmpDataExtBuilder_ == null) {
+                sensCanLogTmpDataExtBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensCanLogTmpDataExt, org.example.libs.SensCanLogTmpDataExt.Builder, org.example.libs.SensCanLogTmpDataExtOrBuilder>(
+                        sensCanLogTmpDataExt_,
+                        ((bitField0_ & 0x00000200) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensCanLogTmpDataExt_ = null;
+            }
+            return sensCanLogTmpDataExtBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensCounterCount> sensCounterCount_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensCounterCountIsMutable() {
+            if (!((bitField0_ & 0x00000400) != 0)) {
+                sensCounterCount_ = new java.util.ArrayList<org.example.libs.SensCounterCount>(sensCounterCount_);
+                bitField0_ |= 0x00000400;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCounterCount, org.example.libs.SensCounterCount.Builder, org.example.libs.SensCounterCountOrBuilder> sensCounterCountBuilder_;
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public java.util.List<org.example.libs.SensCounterCount> getSensCounterCountList() {
+            if (sensCounterCountBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensCounterCount_);
+            } else {
+                return sensCounterCountBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public int getSensCounterCountCount() {
+            if (sensCounterCountBuilder_ == null) {
+                return sensCounterCount_.size();
+            } else {
+                return sensCounterCountBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public org.example.libs.SensCounterCount getSensCounterCount(int index) {
+            if (sensCounterCountBuilder_ == null) {
+                return sensCounterCount_.get(index);
+            } else {
+                return sensCounterCountBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder setSensCounterCount(
+                int index, org.example.libs.SensCounterCount value) {
+            if (sensCounterCountBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.set(index, value);
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder setSensCounterCount(
+                int index, org.example.libs.SensCounterCount.Builder builderForValue) {
+            if (sensCounterCountBuilder_ == null) {
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder addSensCounterCount(org.example.libs.SensCounterCount value) {
+            if (sensCounterCountBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.add(value);
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder addSensCounterCount(
+                int index, org.example.libs.SensCounterCount value) {
+            if (sensCounterCountBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.add(index, value);
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder addSensCounterCount(
+                org.example.libs.SensCounterCount.Builder builderForValue) {
+            if (sensCounterCountBuilder_ == null) {
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder addSensCounterCount(
+                int index, org.example.libs.SensCounterCount.Builder builderForValue) {
+            if (sensCounterCountBuilder_ == null) {
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder addAllSensCounterCount(
+                java.lang.Iterable<? extends org.example.libs.SensCounterCount> values) {
+            if (sensCounterCountBuilder_ == null) {
+                ensureSensCounterCountIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensCounterCount_);
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder clearSensCounterCount() {
+            if (sensCounterCountBuilder_ == null) {
+                sensCounterCount_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000400);
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public Builder removeSensCounterCount(int index) {
+            if (sensCounterCountBuilder_ == null) {
+                ensureSensCounterCountIsMutable();
+                sensCounterCount_.remove(index);
+                onChanged();
+            } else {
+                sensCounterCountBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public org.example.libs.SensCounterCount.Builder getSensCounterCountBuilder(
+                int index) {
+            return internalGetSensCounterCountFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public org.example.libs.SensCounterCountOrBuilder getSensCounterCountOrBuilder(
+                int index) {
+            if (sensCounterCountBuilder_ == null) {
+                return sensCounterCount_.get(index);
+            } else {
+                return sensCounterCountBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensCounterCountOrBuilder>
+        getSensCounterCountOrBuilderList() {
+            if (sensCounterCountBuilder_ != null) {
+                return sensCounterCountBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensCounterCount_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public org.example.libs.SensCounterCount.Builder addSensCounterCountBuilder() {
+            return internalGetSensCounterCountFieldBuilder().addBuilder(
+                    org.example.libs.SensCounterCount.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public org.example.libs.SensCounterCount.Builder addSensCounterCountBuilder(
+                int index) {
+            return internalGetSensCounterCountFieldBuilder().addBuilder(
+                    index, org.example.libs.SensCounterCount.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Счётчик
+         * </pre>
+         *
+         * <code>repeated .SensCounterCount sens_counter_count = 11;</code>
+         */
+        public java.util.List<org.example.libs.SensCounterCount.Builder>
+        getSensCounterCountBuilderList() {
+            return internalGetSensCounterCountFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCounterCount, org.example.libs.SensCounterCount.Builder, org.example.libs.SensCounterCountOrBuilder>
+        internalGetSensCounterCountFieldBuilder() {
+            if (sensCounterCountBuilder_ == null) {
+                sensCounterCountBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensCounterCount, org.example.libs.SensCounterCount.Builder, org.example.libs.SensCounterCountOrBuilder>(
+                        sensCounterCount_,
+                        ((bitField0_ & 0x00000400) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensCounterCount_ = null;
+            }
+            return sensCounterCountBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensCrashData> sensCrashData_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensCrashDataIsMutable() {
+            if (!((bitField0_ & 0x00000800) != 0)) {
+                sensCrashData_ = new java.util.ArrayList<org.example.libs.SensCrashData>(sensCrashData_);
+                bitField0_ |= 0x00000800;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCrashData, org.example.libs.SensCrashData.Builder, org.example.libs.SensCrashDataOrBuilder> sensCrashDataBuilder_;
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public java.util.List<org.example.libs.SensCrashData> getSensCrashDataList() {
+            if (sensCrashDataBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensCrashData_);
+            } else {
+                return sensCrashDataBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public int getSensCrashDataCount() {
+            if (sensCrashDataBuilder_ == null) {
+                return sensCrashData_.size();
+            } else {
+                return sensCrashDataBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public org.example.libs.SensCrashData getSensCrashData(int index) {
+            if (sensCrashDataBuilder_ == null) {
+                return sensCrashData_.get(index);
+            } else {
+                return sensCrashDataBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder setSensCrashData(
+                int index, org.example.libs.SensCrashData value) {
+            if (sensCrashDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.set(index, value);
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder setSensCrashData(
+                int index, org.example.libs.SensCrashData.Builder builderForValue) {
+            if (sensCrashDataBuilder_ == null) {
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder addSensCrashData(org.example.libs.SensCrashData value) {
+            if (sensCrashDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.add(value);
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder addSensCrashData(
+                int index, org.example.libs.SensCrashData value) {
+            if (sensCrashDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.add(index, value);
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder addSensCrashData(
+                org.example.libs.SensCrashData.Builder builderForValue) {
+            if (sensCrashDataBuilder_ == null) {
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder addSensCrashData(
+                int index, org.example.libs.SensCrashData.Builder builderForValue) {
+            if (sensCrashDataBuilder_ == null) {
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder addAllSensCrashData(
+                java.lang.Iterable<? extends org.example.libs.SensCrashData> values) {
+            if (sensCrashDataBuilder_ == null) {
+                ensureSensCrashDataIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensCrashData_);
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder clearSensCrashData() {
+            if (sensCrashDataBuilder_ == null) {
+                sensCrashData_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000800);
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public Builder removeSensCrashData(int index) {
+            if (sensCrashDataBuilder_ == null) {
+                ensureSensCrashDataIsMutable();
+                sensCrashData_.remove(index);
+                onChanged();
+            } else {
+                sensCrashDataBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public org.example.libs.SensCrashData.Builder getSensCrashDataBuilder(
+                int index) {
+            return internalGetSensCrashDataFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public org.example.libs.SensCrashDataOrBuilder getSensCrashDataOrBuilder(
+                int index) {
+            if (sensCrashDataBuilder_ == null) {
+                return sensCrashData_.get(index);
+            } else {
+                return sensCrashDataBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensCrashDataOrBuilder>
+        getSensCrashDataOrBuilderList() {
+            if (sensCrashDataBuilder_ != null) {
+                return sensCrashDataBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensCrashData_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public org.example.libs.SensCrashData.Builder addSensCrashDataBuilder() {
+            return internalGetSensCrashDataFieldBuilder().addBuilder(
+                    org.example.libs.SensCrashData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public org.example.libs.SensCrashData.Builder addSensCrashDataBuilder(
+                int index) {
+            return internalGetSensCrashDataFieldBuilder().addBuilder(
+                    index, org.example.libs.SensCrashData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Данные об аварии
+         * </pre>
+         *
+         * <code>repeated .SensCrashData sens_crash_data = 24;</code>
+         */
+        public java.util.List<org.example.libs.SensCrashData.Builder>
+        getSensCrashDataBuilderList() {
+            return internalGetSensCrashDataFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensCrashData, org.example.libs.SensCrashData.Builder, org.example.libs.SensCrashDataOrBuilder>
+        internalGetSensCrashDataFieldBuilder() {
+            if (sensCrashDataBuilder_ == null) {
+                sensCrashDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensCrashData, org.example.libs.SensCrashData.Builder, org.example.libs.SensCrashDataOrBuilder>(
+                        sensCrashData_,
+                        ((bitField0_ & 0x00000800) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensCrashData_ = null;
+            }
+            return sensCrashDataBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensDinsFlags> sensDinsFlags_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensDinsFlagsIsMutable() {
+            if (!((bitField0_ & 0x00001000) != 0)) {
+                sensDinsFlags_ = new java.util.ArrayList<org.example.libs.SensDinsFlags>(sensDinsFlags_);
+                bitField0_ |= 0x00001000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensDinsFlags, org.example.libs.SensDinsFlags.Builder, org.example.libs.SensDinsFlagsOrBuilder> sensDinsFlagsBuilder_;
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public java.util.List<org.example.libs.SensDinsFlags> getSensDinsFlagsList() {
+            if (sensDinsFlagsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensDinsFlags_);
+            } else {
+                return sensDinsFlagsBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public int getSensDinsFlagsCount() {
+            if (sensDinsFlagsBuilder_ == null) {
+                return sensDinsFlags_.size();
+            } else {
+                return sensDinsFlagsBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public org.example.libs.SensDinsFlags getSensDinsFlags(int index) {
+            if (sensDinsFlagsBuilder_ == null) {
+                return sensDinsFlags_.get(index);
+            } else {
+                return sensDinsFlagsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder setSensDinsFlags(
+                int index, org.example.libs.SensDinsFlags value) {
+            if (sensDinsFlagsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.set(index, value);
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder setSensDinsFlags(
+                int index, org.example.libs.SensDinsFlags.Builder builderForValue) {
+            if (sensDinsFlagsBuilder_ == null) {
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder addSensDinsFlags(org.example.libs.SensDinsFlags value) {
+            if (sensDinsFlagsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.add(value);
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder addSensDinsFlags(
+                int index, org.example.libs.SensDinsFlags value) {
+            if (sensDinsFlagsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.add(index, value);
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder addSensDinsFlags(
+                org.example.libs.SensDinsFlags.Builder builderForValue) {
+            if (sensDinsFlagsBuilder_ == null) {
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder addSensDinsFlags(
+                int index, org.example.libs.SensDinsFlags.Builder builderForValue) {
+            if (sensDinsFlagsBuilder_ == null) {
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder addAllSensDinsFlags(
+                java.lang.Iterable<? extends org.example.libs.SensDinsFlags> values) {
+            if (sensDinsFlagsBuilder_ == null) {
+                ensureSensDinsFlagsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensDinsFlags_);
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder clearSensDinsFlags() {
+            if (sensDinsFlagsBuilder_ == null) {
+                sensDinsFlags_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00001000);
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public Builder removeSensDinsFlags(int index) {
+            if (sensDinsFlagsBuilder_ == null) {
+                ensureSensDinsFlagsIsMutable();
+                sensDinsFlags_.remove(index);
+                onChanged();
+            } else {
+                sensDinsFlagsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public org.example.libs.SensDinsFlags.Builder getSensDinsFlagsBuilder(
+                int index) {
+            return internalGetSensDinsFlagsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public org.example.libs.SensDinsFlagsOrBuilder getSensDinsFlagsOrBuilder(
+                int index) {
+            if (sensDinsFlagsBuilder_ == null) {
+                return sensDinsFlags_.get(index);
+            } else {
+                return sensDinsFlagsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensDinsFlagsOrBuilder>
+        getSensDinsFlagsOrBuilderList() {
+            if (sensDinsFlagsBuilder_ != null) {
+                return sensDinsFlagsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensDinsFlags_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public org.example.libs.SensDinsFlags.Builder addSensDinsFlagsBuilder() {
+            return internalGetSensDinsFlagsFieldBuilder().addBuilder(
+                    org.example.libs.SensDinsFlags.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public org.example.libs.SensDinsFlags.Builder addSensDinsFlagsBuilder(
+                int index) {
+            return internalGetSensDinsFlagsFieldBuilder().addBuilder(
+                    index, org.example.libs.SensDinsFlags.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Цифровые входы
+         * </pre>
+         *
+         * <code>repeated .SensDinsFlags sens_dins_flags = 10;</code>
+         */
+        public java.util.List<org.example.libs.SensDinsFlags.Builder>
+        getSensDinsFlagsBuilderList() {
+            return internalGetSensDinsFlagsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensDinsFlags, org.example.libs.SensDinsFlags.Builder, org.example.libs.SensDinsFlagsOrBuilder>
+        internalGetSensDinsFlagsFieldBuilder() {
+            if (sensDinsFlagsBuilder_ == null) {
+                sensDinsFlagsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensDinsFlags, org.example.libs.SensDinsFlags.Builder, org.example.libs.SensDinsFlagsOrBuilder>(
+                        sensDinsFlags_,
+                        ((bitField0_ & 0x00001000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensDinsFlags_ = null;
+            }
+            return sensDinsFlagsBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensDoutsFlags> sensDoutsFlags_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensDoutsFlagsIsMutable() {
+            if (!((bitField0_ & 0x00002000) != 0)) {
+                sensDoutsFlags_ = new java.util.ArrayList<org.example.libs.SensDoutsFlags>(sensDoutsFlags_);
+                bitField0_ |= 0x00002000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensDoutsFlags, org.example.libs.SensDoutsFlags.Builder, org.example.libs.SensDoutsFlagsOrBuilder> sensDoutsFlagsBuilder_;
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public java.util.List<org.example.libs.SensDoutsFlags> getSensDoutsFlagsList() {
+            if (sensDoutsFlagsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensDoutsFlags_);
+            } else {
+                return sensDoutsFlagsBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public int getSensDoutsFlagsCount() {
+            if (sensDoutsFlagsBuilder_ == null) {
+                return sensDoutsFlags_.size();
+            } else {
+                return sensDoutsFlagsBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public org.example.libs.SensDoutsFlags getSensDoutsFlags(int index) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                return sensDoutsFlags_.get(index);
+            } else {
+                return sensDoutsFlagsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder setSensDoutsFlags(
+                int index, org.example.libs.SensDoutsFlags value) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.set(index, value);
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder setSensDoutsFlags(
+                int index, org.example.libs.SensDoutsFlags.Builder builderForValue) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder addSensDoutsFlags(org.example.libs.SensDoutsFlags value) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.add(value);
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder addSensDoutsFlags(
+                int index, org.example.libs.SensDoutsFlags value) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.add(index, value);
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder addSensDoutsFlags(
+                org.example.libs.SensDoutsFlags.Builder builderForValue) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder addSensDoutsFlags(
+                int index, org.example.libs.SensDoutsFlags.Builder builderForValue) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder addAllSensDoutsFlags(
+                java.lang.Iterable<? extends org.example.libs.SensDoutsFlags> values) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                ensureSensDoutsFlagsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensDoutsFlags_);
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder clearSensDoutsFlags() {
+            if (sensDoutsFlagsBuilder_ == null) {
+                sensDoutsFlags_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00002000);
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public Builder removeSensDoutsFlags(int index) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                ensureSensDoutsFlagsIsMutable();
+                sensDoutsFlags_.remove(index);
+                onChanged();
+            } else {
+                sensDoutsFlagsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public org.example.libs.SensDoutsFlags.Builder getSensDoutsFlagsBuilder(
+                int index) {
+            return internalGetSensDoutsFlagsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public org.example.libs.SensDoutsFlagsOrBuilder getSensDoutsFlagsOrBuilder(
+                int index) {
+            if (sensDoutsFlagsBuilder_ == null) {
+                return sensDoutsFlags_.get(index);
+            } else {
+                return sensDoutsFlagsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensDoutsFlagsOrBuilder>
+        getSensDoutsFlagsOrBuilderList() {
+            if (sensDoutsFlagsBuilder_ != null) {
+                return sensDoutsFlagsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensDoutsFlags_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public org.example.libs.SensDoutsFlags.Builder addSensDoutsFlagsBuilder() {
+            return internalGetSensDoutsFlagsFieldBuilder().addBuilder(
+                    org.example.libs.SensDoutsFlags.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public org.example.libs.SensDoutsFlags.Builder addSensDoutsFlagsBuilder(
+                int index) {
+            return internalGetSensDoutsFlagsFieldBuilder().addBuilder(
+                    index, org.example.libs.SensDoutsFlags.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Цифровые выходы
+         * </pre>
+         *
+         * <code>repeated .SensDoutsFlags sens_douts_flags = 19;</code>
+         */
+        public java.util.List<org.example.libs.SensDoutsFlags.Builder>
+        getSensDoutsFlagsBuilderList() {
+            return internalGetSensDoutsFlagsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensDoutsFlags, org.example.libs.SensDoutsFlags.Builder, org.example.libs.SensDoutsFlagsOrBuilder>
+        internalGetSensDoutsFlagsFieldBuilder() {
+            if (sensDoutsFlagsBuilder_ == null) {
+                sensDoutsFlagsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensDoutsFlags, org.example.libs.SensDoutsFlags.Builder, org.example.libs.SensDoutsFlagsOrBuilder>(
+                        sensDoutsFlags_,
+                        ((bitField0_ & 0x00002000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensDoutsFlags_ = null;
+            }
+            return sensDoutsFlagsBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensFmeterFrequency> sensFmeterFrequency_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensFmeterFrequencyIsMutable() {
+            if (!((bitField0_ & 0x00004000) != 0)) {
+                sensFmeterFrequency_ = new java.util.ArrayList<org.example.libs.SensFmeterFrequency>(sensFmeterFrequency_);
+                bitField0_ |= 0x00004000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensFmeterFrequency, org.example.libs.SensFmeterFrequency.Builder, org.example.libs.SensFmeterFrequencyOrBuilder> sensFmeterFrequencyBuilder_;
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public java.util.List<org.example.libs.SensFmeterFrequency> getSensFmeterFrequencyList() {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensFmeterFrequency_);
+            } else {
+                return sensFmeterFrequencyBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public int getSensFmeterFrequencyCount() {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                return sensFmeterFrequency_.size();
+            } else {
+                return sensFmeterFrequencyBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public org.example.libs.SensFmeterFrequency getSensFmeterFrequency(int index) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                return sensFmeterFrequency_.get(index);
+            } else {
+                return sensFmeterFrequencyBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder setSensFmeterFrequency(
+                int index, org.example.libs.SensFmeterFrequency value) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.set(index, value);
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder setSensFmeterFrequency(
+                int index, org.example.libs.SensFmeterFrequency.Builder builderForValue) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder addSensFmeterFrequency(org.example.libs.SensFmeterFrequency value) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.add(value);
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder addSensFmeterFrequency(
+                int index, org.example.libs.SensFmeterFrequency value) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.add(index, value);
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder addSensFmeterFrequency(
+                org.example.libs.SensFmeterFrequency.Builder builderForValue) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder addSensFmeterFrequency(
+                int index, org.example.libs.SensFmeterFrequency.Builder builderForValue) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder addAllSensFmeterFrequency(
+                java.lang.Iterable<? extends org.example.libs.SensFmeterFrequency> values) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                ensureSensFmeterFrequencyIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensFmeterFrequency_);
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder clearSensFmeterFrequency() {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                sensFmeterFrequency_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00004000);
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public Builder removeSensFmeterFrequency(int index) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                ensureSensFmeterFrequencyIsMutable();
+                sensFmeterFrequency_.remove(index);
+                onChanged();
+            } else {
+                sensFmeterFrequencyBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public org.example.libs.SensFmeterFrequency.Builder getSensFmeterFrequencyBuilder(
+                int index) {
+            return internalGetSensFmeterFrequencyFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public org.example.libs.SensFmeterFrequencyOrBuilder getSensFmeterFrequencyOrBuilder(
+                int index) {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                return sensFmeterFrequency_.get(index);
+            } else {
+                return sensFmeterFrequencyBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensFmeterFrequencyOrBuilder>
+        getSensFmeterFrequencyOrBuilderList() {
+            if (sensFmeterFrequencyBuilder_ != null) {
+                return sensFmeterFrequencyBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensFmeterFrequency_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public org.example.libs.SensFmeterFrequency.Builder addSensFmeterFrequencyBuilder() {
+            return internalGetSensFmeterFrequencyFieldBuilder().addBuilder(
+                    org.example.libs.SensFmeterFrequency.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public org.example.libs.SensFmeterFrequency.Builder addSensFmeterFrequencyBuilder(
+                int index) {
+            return internalGetSensFmeterFrequencyFieldBuilder().addBuilder(
+                    index, org.example.libs.SensFmeterFrequency.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Частотомер
+         * </pre>
+         *
+         * <code>repeated .SensFmeterFrequency sens_fmeter_frequency = 12;</code>
+         */
+        public java.util.List<org.example.libs.SensFmeterFrequency.Builder>
+        getSensFmeterFrequencyBuilderList() {
+            return internalGetSensFmeterFrequencyFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensFmeterFrequency, org.example.libs.SensFmeterFrequency.Builder, org.example.libs.SensFmeterFrequencyOrBuilder>
+        internalGetSensFmeterFrequencyFieldBuilder() {
+            if (sensFmeterFrequencyBuilder_ == null) {
+                sensFmeterFrequencyBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensFmeterFrequency, org.example.libs.SensFmeterFrequency.Builder, org.example.libs.SensFmeterFrequencyOrBuilder>(
+                        sensFmeterFrequency_,
+                        ((bitField0_ & 0x00004000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensFmeterFrequency_ = null;
+            }
+            return sensFmeterFrequencyBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensFuelLevel> sensFuelLevel_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensFuelLevelIsMutable() {
+            if (!((bitField0_ & 0x00008000) != 0)) {
+                sensFuelLevel_ = new java.util.ArrayList<org.example.libs.SensFuelLevel>(sensFuelLevel_);
+                bitField0_ |= 0x00008000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensFuelLevel, org.example.libs.SensFuelLevel.Builder, org.example.libs.SensFuelLevelOrBuilder> sensFuelLevelBuilder_;
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public java.util.List<org.example.libs.SensFuelLevel> getSensFuelLevelList() {
+            if (sensFuelLevelBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensFuelLevel_);
+            } else {
+                return sensFuelLevelBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public int getSensFuelLevelCount() {
+            if (sensFuelLevelBuilder_ == null) {
+                return sensFuelLevel_.size();
+            } else {
+                return sensFuelLevelBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public org.example.libs.SensFuelLevel getSensFuelLevel(int index) {
+            if (sensFuelLevelBuilder_ == null) {
+                return sensFuelLevel_.get(index);
+            } else {
+                return sensFuelLevelBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder setSensFuelLevel(
+                int index, org.example.libs.SensFuelLevel value) {
+            if (sensFuelLevelBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.set(index, value);
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder setSensFuelLevel(
+                int index, org.example.libs.SensFuelLevel.Builder builderForValue) {
+            if (sensFuelLevelBuilder_ == null) {
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder addSensFuelLevel(org.example.libs.SensFuelLevel value) {
+            if (sensFuelLevelBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.add(value);
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder addSensFuelLevel(
+                int index, org.example.libs.SensFuelLevel value) {
+            if (sensFuelLevelBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.add(index, value);
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder addSensFuelLevel(
+                org.example.libs.SensFuelLevel.Builder builderForValue) {
+            if (sensFuelLevelBuilder_ == null) {
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder addSensFuelLevel(
+                int index, org.example.libs.SensFuelLevel.Builder builderForValue) {
+            if (sensFuelLevelBuilder_ == null) {
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder addAllSensFuelLevel(
+                java.lang.Iterable<? extends org.example.libs.SensFuelLevel> values) {
+            if (sensFuelLevelBuilder_ == null) {
+                ensureSensFuelLevelIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensFuelLevel_);
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder clearSensFuelLevel() {
+            if (sensFuelLevelBuilder_ == null) {
+                sensFuelLevel_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00008000);
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public Builder removeSensFuelLevel(int index) {
+            if (sensFuelLevelBuilder_ == null) {
+                ensureSensFuelLevelIsMutable();
+                sensFuelLevel_.remove(index);
+                onChanged();
+            } else {
+                sensFuelLevelBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public org.example.libs.SensFuelLevel.Builder getSensFuelLevelBuilder(
+                int index) {
+            return internalGetSensFuelLevelFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public org.example.libs.SensFuelLevelOrBuilder getSensFuelLevelOrBuilder(
+                int index) {
+            if (sensFuelLevelBuilder_ == null) {
+                return sensFuelLevel_.get(index);
+            } else {
+                return sensFuelLevelBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensFuelLevelOrBuilder>
+        getSensFuelLevelOrBuilderList() {
+            if (sensFuelLevelBuilder_ != null) {
+                return sensFuelLevelBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensFuelLevel_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public org.example.libs.SensFuelLevel.Builder addSensFuelLevelBuilder() {
+            return internalGetSensFuelLevelFieldBuilder().addBuilder(
+                    org.example.libs.SensFuelLevel.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public org.example.libs.SensFuelLevel.Builder addSensFuelLevelBuilder(
+                int index) {
+            return internalGetSensFuelLevelFieldBuilder().addBuilder(
+                    index, org.example.libs.SensFuelLevel.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Уровень топлива
+         * </pre>
+         *
+         * <code>repeated .SensFuelLevel sens_fuel_level = 8;</code>
+         */
+        public java.util.List<org.example.libs.SensFuelLevel.Builder>
+        getSensFuelLevelBuilderList() {
+            return internalGetSensFuelLevelFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensFuelLevel, org.example.libs.SensFuelLevel.Builder, org.example.libs.SensFuelLevelOrBuilder>
+        internalGetSensFuelLevelFieldBuilder() {
+            if (sensFuelLevelBuilder_ == null) {
+                sensFuelLevelBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensFuelLevel, org.example.libs.SensFuelLevel.Builder, org.example.libs.SensFuelLevelOrBuilder>(
+                        sensFuelLevel_,
+                        ((bitField0_ & 0x00008000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensFuelLevel_ = null;
+            }
+            return sensFuelLevelBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensGsmCellMonitoring> sensGsmCellMonitoring_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensGsmCellMonitoringIsMutable() {
+            if (!((bitField0_ & 0x00010000) != 0)) {
+                sensGsmCellMonitoring_ = new java.util.ArrayList<org.example.libs.SensGsmCellMonitoring>(sensGsmCellMonitoring_);
+                bitField0_ |= 0x00010000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensGsmCellMonitoring, org.example.libs.SensGsmCellMonitoring.Builder, org.example.libs.SensGsmCellMonitoringOrBuilder> sensGsmCellMonitoringBuilder_;
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public java.util.List<org.example.libs.SensGsmCellMonitoring> getSensGsmCellMonitoringList() {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensGsmCellMonitoring_);
+            } else {
+                return sensGsmCellMonitoringBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public int getSensGsmCellMonitoringCount() {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                return sensGsmCellMonitoring_.size();
+            } else {
+                return sensGsmCellMonitoringBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public org.example.libs.SensGsmCellMonitoring getSensGsmCellMonitoring(int index) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                return sensGsmCellMonitoring_.get(index);
+            } else {
+                return sensGsmCellMonitoringBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder setSensGsmCellMonitoring(
+                int index, org.example.libs.SensGsmCellMonitoring value) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.set(index, value);
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder setSensGsmCellMonitoring(
+                int index, org.example.libs.SensGsmCellMonitoring.Builder builderForValue) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder addSensGsmCellMonitoring(org.example.libs.SensGsmCellMonitoring value) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.add(value);
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder addSensGsmCellMonitoring(
+                int index, org.example.libs.SensGsmCellMonitoring value) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.add(index, value);
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder addSensGsmCellMonitoring(
+                org.example.libs.SensGsmCellMonitoring.Builder builderForValue) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder addSensGsmCellMonitoring(
+                int index, org.example.libs.SensGsmCellMonitoring.Builder builderForValue) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder addAllSensGsmCellMonitoring(
+                java.lang.Iterable<? extends org.example.libs.SensGsmCellMonitoring> values) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                ensureSensGsmCellMonitoringIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensGsmCellMonitoring_);
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder clearSensGsmCellMonitoring() {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                sensGsmCellMonitoring_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00010000);
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public Builder removeSensGsmCellMonitoring(int index) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                ensureSensGsmCellMonitoringIsMutable();
+                sensGsmCellMonitoring_.remove(index);
+                onChanged();
+            } else {
+                sensGsmCellMonitoringBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public org.example.libs.SensGsmCellMonitoring.Builder getSensGsmCellMonitoringBuilder(
+                int index) {
+            return internalGetSensGsmCellMonitoringFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public org.example.libs.SensGsmCellMonitoringOrBuilder getSensGsmCellMonitoringOrBuilder(
+                int index) {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                return sensGsmCellMonitoring_.get(index);
+            } else {
+                return sensGsmCellMonitoringBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensGsmCellMonitoringOrBuilder>
+        getSensGsmCellMonitoringOrBuilderList() {
+            if (sensGsmCellMonitoringBuilder_ != null) {
+                return sensGsmCellMonitoringBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensGsmCellMonitoring_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public org.example.libs.SensGsmCellMonitoring.Builder addSensGsmCellMonitoringBuilder() {
+            return internalGetSensGsmCellMonitoringFieldBuilder().addBuilder(
+                    org.example.libs.SensGsmCellMonitoring.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public org.example.libs.SensGsmCellMonitoring.Builder addSensGsmCellMonitoringBuilder(
+                int index) {
+            return internalGetSensGsmCellMonitoringFieldBuilder().addBuilder(
+                    index, org.example.libs.SensGsmCellMonitoring.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Информация о базовых станциях GSM
+         * </pre>
+         *
+         * <code>repeated .SensGsmCellMonitoring sens_gsm_cell_monitoring = 13;</code>
+         */
+        public java.util.List<org.example.libs.SensGsmCellMonitoring.Builder>
+        getSensGsmCellMonitoringBuilderList() {
+            return internalGetSensGsmCellMonitoringFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensGsmCellMonitoring, org.example.libs.SensGsmCellMonitoring.Builder, org.example.libs.SensGsmCellMonitoringOrBuilder>
+        internalGetSensGsmCellMonitoringFieldBuilder() {
+            if (sensGsmCellMonitoringBuilder_ == null) {
+                sensGsmCellMonitoringBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensGsmCellMonitoring, org.example.libs.SensGsmCellMonitoring.Builder, org.example.libs.SensGsmCellMonitoringOrBuilder>(
+                        sensGsmCellMonitoring_,
+                        ((bitField0_ & 0x00010000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensGsmCellMonitoring_ = null;
+            }
+            return sensGsmCellMonitoringBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensNdNavData> sensNdNavData_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensNdNavDataIsMutable() {
+            if (!((bitField0_ & 0x00020000) != 0)) {
+                sensNdNavData_ = new java.util.ArrayList<org.example.libs.SensNdNavData>(sensNdNavData_);
+                bitField0_ |= 0x00020000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensNdNavData, org.example.libs.SensNdNavData.Builder, org.example.libs.SensNdNavDataOrBuilder> sensNdNavDataBuilder_;
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public java.util.List<org.example.libs.SensNdNavData> getSensNdNavDataList() {
+            if (sensNdNavDataBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensNdNavData_);
+            } else {
+                return sensNdNavDataBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public int getSensNdNavDataCount() {
+            if (sensNdNavDataBuilder_ == null) {
+                return sensNdNavData_.size();
+            } else {
+                return sensNdNavDataBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public org.example.libs.SensNdNavData getSensNdNavData(int index) {
+            if (sensNdNavDataBuilder_ == null) {
+                return sensNdNavData_.get(index);
+            } else {
+                return sensNdNavDataBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder setSensNdNavData(
+                int index, org.example.libs.SensNdNavData value) {
+            if (sensNdNavDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.set(index, value);
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder setSensNdNavData(
+                int index, org.example.libs.SensNdNavData.Builder builderForValue) {
+            if (sensNdNavDataBuilder_ == null) {
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder addSensNdNavData(org.example.libs.SensNdNavData value) {
+            if (sensNdNavDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.add(value);
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder addSensNdNavData(
+                int index, org.example.libs.SensNdNavData value) {
+            if (sensNdNavDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.add(index, value);
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder addSensNdNavData(
+                org.example.libs.SensNdNavData.Builder builderForValue) {
+            if (sensNdNavDataBuilder_ == null) {
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder addSensNdNavData(
+                int index, org.example.libs.SensNdNavData.Builder builderForValue) {
+            if (sensNdNavDataBuilder_ == null) {
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder addAllSensNdNavData(
+                java.lang.Iterable<? extends org.example.libs.SensNdNavData> values) {
+            if (sensNdNavDataBuilder_ == null) {
+                ensureSensNdNavDataIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensNdNavData_);
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder clearSensNdNavData() {
+            if (sensNdNavDataBuilder_ == null) {
+                sensNdNavData_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00020000);
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public Builder removeSensNdNavData(int index) {
+            if (sensNdNavDataBuilder_ == null) {
+                ensureSensNdNavDataIsMutable();
+                sensNdNavData_.remove(index);
+                onChanged();
+            } else {
+                sensNdNavDataBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public org.example.libs.SensNdNavData.Builder getSensNdNavDataBuilder(
+                int index) {
+            return internalGetSensNdNavDataFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public org.example.libs.SensNdNavDataOrBuilder getSensNdNavDataOrBuilder(
+                int index) {
+            if (sensNdNavDataBuilder_ == null) {
+                return sensNdNavData_.get(index);
+            } else {
+                return sensNdNavDataBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensNdNavDataOrBuilder>
+        getSensNdNavDataOrBuilderList() {
+            if (sensNdNavDataBuilder_ != null) {
+                return sensNdNavDataBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensNdNavData_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public org.example.libs.SensNdNavData.Builder addSensNdNavDataBuilder() {
+            return internalGetSensNdNavDataFieldBuilder().addBuilder(
+                    org.example.libs.SensNdNavData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public org.example.libs.SensNdNavData.Builder addSensNdNavDataBuilder(
+                int index) {
+            return internalGetSensNdNavDataFieldBuilder().addBuilder(
+                    index, org.example.libs.SensNdNavData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Навигационные данные
+         * </pre>
+         *
+         * <code>repeated .SensNdNavData sens_nd_nav_data = 7;</code>
+         */
+        public java.util.List<org.example.libs.SensNdNavData.Builder>
+        getSensNdNavDataBuilderList() {
+            return internalGetSensNdNavDataFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensNdNavData, org.example.libs.SensNdNavData.Builder, org.example.libs.SensNdNavDataOrBuilder>
+        internalGetSensNdNavDataFieldBuilder() {
+            if (sensNdNavDataBuilder_ == null) {
+                sensNdNavDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensNdNavData, org.example.libs.SensNdNavData.Builder, org.example.libs.SensNdNavDataOrBuilder>(
+                        sensNdNavData_,
+                        ((bitField0_ & 0x00020000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensNdNavData_ = null;
+            }
+            return sensNdNavDataBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensStorInfo> sensStorInfo_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensStorInfoIsMutable() {
+            if (!((bitField0_ & 0x00040000) != 0)) {
+                sensStorInfo_ = new java.util.ArrayList<org.example.libs.SensStorInfo>(sensStorInfo_);
+                bitField0_ |= 0x00040000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensStorInfo, org.example.libs.SensStorInfo.Builder, org.example.libs.SensStorInfoOrBuilder> sensStorInfoBuilder_;
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public java.util.List<org.example.libs.SensStorInfo> getSensStorInfoList() {
+            if (sensStorInfoBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensStorInfo_);
+            } else {
+                return sensStorInfoBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public int getSensStorInfoCount() {
+            if (sensStorInfoBuilder_ == null) {
+                return sensStorInfo_.size();
+            } else {
+                return sensStorInfoBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public org.example.libs.SensStorInfo getSensStorInfo(int index) {
+            if (sensStorInfoBuilder_ == null) {
+                return sensStorInfo_.get(index);
+            } else {
+                return sensStorInfoBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder setSensStorInfo(
+                int index, org.example.libs.SensStorInfo value) {
+            if (sensStorInfoBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.set(index, value);
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder setSensStorInfo(
+                int index, org.example.libs.SensStorInfo.Builder builderForValue) {
+            if (sensStorInfoBuilder_ == null) {
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder addSensStorInfo(org.example.libs.SensStorInfo value) {
+            if (sensStorInfoBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.add(value);
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder addSensStorInfo(
+                int index, org.example.libs.SensStorInfo value) {
+            if (sensStorInfoBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.add(index, value);
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder addSensStorInfo(
+                org.example.libs.SensStorInfo.Builder builderForValue) {
+            if (sensStorInfoBuilder_ == null) {
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder addSensStorInfo(
+                int index, org.example.libs.SensStorInfo.Builder builderForValue) {
+            if (sensStorInfoBuilder_ == null) {
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder addAllSensStorInfo(
+                java.lang.Iterable<? extends org.example.libs.SensStorInfo> values) {
+            if (sensStorInfoBuilder_ == null) {
+                ensureSensStorInfoIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensStorInfo_);
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder clearSensStorInfo() {
+            if (sensStorInfoBuilder_ == null) {
+                sensStorInfo_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00040000);
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public Builder removeSensStorInfo(int index) {
+            if (sensStorInfoBuilder_ == null) {
+                ensureSensStorInfoIsMutable();
+                sensStorInfo_.remove(index);
+                onChanged();
+            } else {
+                sensStorInfoBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public org.example.libs.SensStorInfo.Builder getSensStorInfoBuilder(
+                int index) {
+            return internalGetSensStorInfoFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public org.example.libs.SensStorInfoOrBuilder getSensStorInfoOrBuilder(
+                int index) {
+            if (sensStorInfoBuilder_ == null) {
+                return sensStorInfo_.get(index);
+            } else {
+                return sensStorInfoBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensStorInfoOrBuilder>
+        getSensStorInfoOrBuilderList() {
+            if (sensStorInfoBuilder_ != null) {
+                return sensStorInfoBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensStorInfo_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public org.example.libs.SensStorInfo.Builder addSensStorInfoBuilder() {
+            return internalGetSensStorInfoFieldBuilder().addBuilder(
+                    org.example.libs.SensStorInfo.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public org.example.libs.SensStorInfo.Builder addSensStorInfoBuilder(
+                int index) {
+            return internalGetSensStorInfoFieldBuilder().addBuilder(
+                    index, org.example.libs.SensStorInfo.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Статистика хранилище навигационных данных
+         * </pre>
+         *
+         * <code>repeated .SensStorInfo sens_stor_info = 21;</code>
+         */
+        public java.util.List<org.example.libs.SensStorInfo.Builder>
+        getSensStorInfoBuilderList() {
+            return internalGetSensStorInfoFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensStorInfo, org.example.libs.SensStorInfo.Builder, org.example.libs.SensStorInfoOrBuilder>
+        internalGetSensStorInfoFieldBuilder() {
+            if (sensStorInfoBuilder_ == null) {
+                sensStorInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensStorInfo, org.example.libs.SensStorInfo.Builder, org.example.libs.SensStorInfoOrBuilder>(
+                        sensStorInfo_,
+                        ((bitField0_ & 0x00040000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensStorInfo_ = null;
+            }
+            return sensStorInfoBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensTermoData> sensTermoData_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensTermoDataIsMutable() {
+            if (!((bitField0_ & 0x00080000) != 0)) {
+                sensTermoData_ = new java.util.ArrayList<org.example.libs.SensTermoData>(sensTermoData_);
+                bitField0_ |= 0x00080000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensTermoData, org.example.libs.SensTermoData.Builder, org.example.libs.SensTermoDataOrBuilder> sensTermoDataBuilder_;
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public java.util.List<org.example.libs.SensTermoData> getSensTermoDataList() {
+            if (sensTermoDataBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensTermoData_);
+            } else {
+                return sensTermoDataBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public int getSensTermoDataCount() {
+            if (sensTermoDataBuilder_ == null) {
+                return sensTermoData_.size();
+            } else {
+                return sensTermoDataBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public org.example.libs.SensTermoData getSensTermoData(int index) {
+            if (sensTermoDataBuilder_ == null) {
+                return sensTermoData_.get(index);
+            } else {
+                return sensTermoDataBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder setSensTermoData(
+                int index, org.example.libs.SensTermoData value) {
+            if (sensTermoDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.set(index, value);
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder setSensTermoData(
+                int index, org.example.libs.SensTermoData.Builder builderForValue) {
+            if (sensTermoDataBuilder_ == null) {
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder addSensTermoData(org.example.libs.SensTermoData value) {
+            if (sensTermoDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.add(value);
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder addSensTermoData(
+                int index, org.example.libs.SensTermoData value) {
+            if (sensTermoDataBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.add(index, value);
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder addSensTermoData(
+                org.example.libs.SensTermoData.Builder builderForValue) {
+            if (sensTermoDataBuilder_ == null) {
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder addSensTermoData(
+                int index, org.example.libs.SensTermoData.Builder builderForValue) {
+            if (sensTermoDataBuilder_ == null) {
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder addAllSensTermoData(
+                java.lang.Iterable<? extends org.example.libs.SensTermoData> values) {
+            if (sensTermoDataBuilder_ == null) {
+                ensureSensTermoDataIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensTermoData_);
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder clearSensTermoData() {
+            if (sensTermoDataBuilder_ == null) {
+                sensTermoData_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00080000);
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public Builder removeSensTermoData(int index) {
+            if (sensTermoDataBuilder_ == null) {
+                ensureSensTermoDataIsMutable();
+                sensTermoData_.remove(index);
+                onChanged();
+            } else {
+                sensTermoDataBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public org.example.libs.SensTermoData.Builder getSensTermoDataBuilder(
+                int index) {
+            return internalGetSensTermoDataFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public org.example.libs.SensTermoDataOrBuilder getSensTermoDataOrBuilder(
+                int index) {
+            if (sensTermoDataBuilder_ == null) {
+                return sensTermoData_.get(index);
+            } else {
+                return sensTermoDataBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensTermoDataOrBuilder>
+        getSensTermoDataOrBuilderList() {
+            if (sensTermoDataBuilder_ != null) {
+                return sensTermoDataBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensTermoData_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public org.example.libs.SensTermoData.Builder addSensTermoDataBuilder() {
+            return internalGetSensTermoDataFieldBuilder().addBuilder(
+                    org.example.libs.SensTermoData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public org.example.libs.SensTermoData.Builder addSensTermoDataBuilder(
+                int index) {
+            return internalGetSensTermoDataFieldBuilder().addBuilder(
+                    index, org.example.libs.SensTermoData.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Датчик температуры
+         * </pre>
+         *
+         * <code>repeated .SensTermoData sens_termo_data = 15;</code>
+         */
+        public java.util.List<org.example.libs.SensTermoData.Builder>
+        getSensTermoDataBuilderList() {
+            return internalGetSensTermoDataFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensTermoData, org.example.libs.SensTermoData.Builder, org.example.libs.SensTermoDataOrBuilder>
+        internalGetSensTermoDataFieldBuilder() {
+            if (sensTermoDataBuilder_ == null) {
+                sensTermoDataBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensTermoData, org.example.libs.SensTermoData.Builder, org.example.libs.SensTermoDataOrBuilder>(
+                        sensTermoData_,
+                        ((bitField0_ & 0x00080000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensTermoData_ = null;
+            }
+            return sensTermoDataBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensTestEraTests> sensTestEraTests_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensTestEraTestsIsMutable() {
+            if (!((bitField0_ & 0x00100000) != 0)) {
+                sensTestEraTests_ = new java.util.ArrayList<org.example.libs.SensTestEraTests>(sensTestEraTests_);
+                bitField0_ |= 0x00100000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensTestEraTests, org.example.libs.SensTestEraTests.Builder, org.example.libs.SensTestEraTestsOrBuilder> sensTestEraTestsBuilder_;
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public java.util.List<org.example.libs.SensTestEraTests> getSensTestEraTestsList() {
+            if (sensTestEraTestsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensTestEraTests_);
+            } else {
+                return sensTestEraTestsBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public int getSensTestEraTestsCount() {
+            if (sensTestEraTestsBuilder_ == null) {
+                return sensTestEraTests_.size();
+            } else {
+                return sensTestEraTestsBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public org.example.libs.SensTestEraTests getSensTestEraTests(int index) {
+            if (sensTestEraTestsBuilder_ == null) {
+                return sensTestEraTests_.get(index);
+            } else {
+                return sensTestEraTestsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder setSensTestEraTests(
+                int index, org.example.libs.SensTestEraTests value) {
+            if (sensTestEraTestsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.set(index, value);
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder setSensTestEraTests(
+                int index, org.example.libs.SensTestEraTests.Builder builderForValue) {
+            if (sensTestEraTestsBuilder_ == null) {
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder addSensTestEraTests(org.example.libs.SensTestEraTests value) {
+            if (sensTestEraTestsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.add(value);
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder addSensTestEraTests(
+                int index, org.example.libs.SensTestEraTests value) {
+            if (sensTestEraTestsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.add(index, value);
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder addSensTestEraTests(
+                org.example.libs.SensTestEraTests.Builder builderForValue) {
+            if (sensTestEraTestsBuilder_ == null) {
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder addSensTestEraTests(
+                int index, org.example.libs.SensTestEraTests.Builder builderForValue) {
+            if (sensTestEraTestsBuilder_ == null) {
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder addAllSensTestEraTests(
+                java.lang.Iterable<? extends org.example.libs.SensTestEraTests> values) {
+            if (sensTestEraTestsBuilder_ == null) {
+                ensureSensTestEraTestsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensTestEraTests_);
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder clearSensTestEraTests() {
+            if (sensTestEraTestsBuilder_ == null) {
+                sensTestEraTests_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00100000);
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public Builder removeSensTestEraTests(int index) {
+            if (sensTestEraTestsBuilder_ == null) {
+                ensureSensTestEraTestsIsMutable();
+                sensTestEraTests_.remove(index);
+                onChanged();
+            } else {
+                sensTestEraTestsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public org.example.libs.SensTestEraTests.Builder getSensTestEraTestsBuilder(
+                int index) {
+            return internalGetSensTestEraTestsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public org.example.libs.SensTestEraTestsOrBuilder getSensTestEraTestsOrBuilder(
+                int index) {
+            if (sensTestEraTestsBuilder_ == null) {
+                return sensTestEraTests_.get(index);
+            } else {
+                return sensTestEraTestsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensTestEraTestsOrBuilder>
+        getSensTestEraTestsOrBuilderList() {
+            if (sensTestEraTestsBuilder_ != null) {
+                return sensTestEraTestsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensTestEraTests_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public org.example.libs.SensTestEraTests.Builder addSensTestEraTestsBuilder() {
+            return internalGetSensTestEraTestsFieldBuilder().addBuilder(
+                    org.example.libs.SensTestEraTests.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public org.example.libs.SensTestEraTests.Builder addSensTestEraTestsBuilder(
+                int index) {
+            return internalGetSensTestEraTestsFieldBuilder().addBuilder(
+                    index, org.example.libs.SensTestEraTests.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Тесты ЭРА ГЛОНАСС
+         * </pre>
+         *
+         * <code>repeated .SensTestEraTests sens_test_era_tests = 23;</code>
+         */
+        public java.util.List<org.example.libs.SensTestEraTests.Builder>
+        getSensTestEraTestsBuilderList() {
+            return internalGetSensTestEraTestsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensTestEraTests, org.example.libs.SensTestEraTests.Builder, org.example.libs.SensTestEraTestsOrBuilder>
+        internalGetSensTestEraTestsFieldBuilder() {
+            if (sensTestEraTestsBuilder_ == null) {
+                sensTestEraTestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensTestEraTests, org.example.libs.SensTestEraTests.Builder, org.example.libs.SensTestEraTestsOrBuilder>(
+                        sensTestEraTests_,
+                        ((bitField0_ & 0x00100000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensTestEraTests_ = null;
+            }
+            return sensTestEraTestsBuilder_;
+        }
+
+        private java.util.List<org.example.libs.SensTrackerInfo> sensTrackerInfo_ =
+                java.util.Collections.emptyList();
+
+        private void ensureSensTrackerInfoIsMutable() {
+            if (!((bitField0_ & 0x00200000) != 0)) {
+                sensTrackerInfo_ = new java.util.ArrayList<org.example.libs.SensTrackerInfo>(sensTrackerInfo_);
+                bitField0_ |= 0x00200000;
+            }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensTrackerInfo, org.example.libs.SensTrackerInfo.Builder, org.example.libs.SensTrackerInfoOrBuilder> sensTrackerInfoBuilder_;
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public java.util.List<org.example.libs.SensTrackerInfo> getSensTrackerInfoList() {
+            if (sensTrackerInfoBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(sensTrackerInfo_);
+            } else {
+                return sensTrackerInfoBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public int getSensTrackerInfoCount() {
+            if (sensTrackerInfoBuilder_ == null) {
+                return sensTrackerInfo_.size();
+            } else {
+                return sensTrackerInfoBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public org.example.libs.SensTrackerInfo getSensTrackerInfo(int index) {
+            if (sensTrackerInfoBuilder_ == null) {
+                return sensTrackerInfo_.get(index);
+            } else {
+                return sensTrackerInfoBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder setSensTrackerInfo(
+                int index, org.example.libs.SensTrackerInfo value) {
+            if (sensTrackerInfoBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.set(index, value);
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder setSensTrackerInfo(
+                int index, org.example.libs.SensTrackerInfo.Builder builderForValue) {
+            if (sensTrackerInfoBuilder_ == null) {
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder addSensTrackerInfo(org.example.libs.SensTrackerInfo value) {
+            if (sensTrackerInfoBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.add(value);
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder addSensTrackerInfo(
+                int index, org.example.libs.SensTrackerInfo value) {
+            if (sensTrackerInfoBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.add(index, value);
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder addSensTrackerInfo(
+                org.example.libs.SensTrackerInfo.Builder builderForValue) {
+            if (sensTrackerInfoBuilder_ == null) {
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.add(builderForValue.build());
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder addSensTrackerInfo(
+                int index, org.example.libs.SensTrackerInfo.Builder builderForValue) {
+            if (sensTrackerInfoBuilder_ == null) {
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder addAllSensTrackerInfo(
+                java.lang.Iterable<? extends org.example.libs.SensTrackerInfo> values) {
+            if (sensTrackerInfoBuilder_ == null) {
+                ensureSensTrackerInfoIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, sensTrackerInfo_);
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder clearSensTrackerInfo() {
+            if (sensTrackerInfoBuilder_ == null) {
+                sensTrackerInfo_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00200000);
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public Builder removeSensTrackerInfo(int index) {
+            if (sensTrackerInfoBuilder_ == null) {
+                ensureSensTrackerInfoIsMutable();
+                sensTrackerInfo_.remove(index);
+                onChanged();
+            } else {
+                sensTrackerInfoBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public org.example.libs.SensTrackerInfo.Builder getSensTrackerInfoBuilder(
+                int index) {
+            return internalGetSensTrackerInfoFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public org.example.libs.SensTrackerInfoOrBuilder getSensTrackerInfoOrBuilder(
+                int index) {
+            if (sensTrackerInfoBuilder_ == null) {
+                return sensTrackerInfo_.get(index);
+            } else {
+                return sensTrackerInfoBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public java.util.List<? extends org.example.libs.SensTrackerInfoOrBuilder>
+        getSensTrackerInfoOrBuilderList() {
+            if (sensTrackerInfoBuilder_ != null) {
+                return sensTrackerInfoBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(sensTrackerInfo_);
+            }
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public org.example.libs.SensTrackerInfo.Builder addSensTrackerInfoBuilder() {
+            return internalGetSensTrackerInfoFieldBuilder().addBuilder(
+                    org.example.libs.SensTrackerInfo.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public org.example.libs.SensTrackerInfo.Builder addSensTrackerInfoBuilder(
+                int index) {
+            return internalGetSensTrackerInfoFieldBuilder().addBuilder(
+                    index, org.example.libs.SensTrackerInfo.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * Статистика трекера
+         * </pre>
+         *
+         * <code>repeated .SensTrackerInfo sens_tracker_info = 22;</code>
+         */
+        public java.util.List<org.example.libs.SensTrackerInfo.Builder>
+        getSensTrackerInfoBuilderList() {
+            return internalGetSensTrackerInfoFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilder<
+                org.example.libs.SensTrackerInfo, org.example.libs.SensTrackerInfo.Builder, org.example.libs.SensTrackerInfoOrBuilder>
+        internalGetSensTrackerInfoFieldBuilder() {
+            if (sensTrackerInfoBuilder_ == null) {
+                sensTrackerInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+                        org.example.libs.SensTrackerInfo, org.example.libs.SensTrackerInfo.Builder, org.example.libs.SensTrackerInfoOrBuilder>(
+                        sensTrackerInfo_,
+                        ((bitField0_ & 0x00200000) != 0),
+                        getParentForChildren(),
+                        isClean());
+                sensTrackerInfo_ = null;
+            }
+            return sensTrackerInfoBuilder_;
+        }
+
+        // @@protoc_insertion_point(builder_scope:StorageRecord)
+    }
+
+    // @@protoc_insertion_point(class_scope:StorageRecord)
+    private static final org.example.libs.StorageRecord DEFAULT_INSTANCE;
+
+    static {
+        DEFAULT_INSTANCE = new org.example.libs.StorageRecord();
+    }
+
+    public static org.example.libs.StorageRecord getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<StorageRecord>
+            PARSER = new com.google.protobuf.AbstractParser<StorageRecord>() {
+        @java.lang.Override
+        public StorageRecord parsePartialFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            Builder builder = newBuilder();
+            try {
+                builder.mergeFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                throw e.setUnfinishedMessage(builder.buildPartial());
+            } catch (com.google.protobuf.UninitializedMessageException e) {
+                throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+            } catch (java.io.IOException e) {
+                throw new com.google.protobuf.InvalidProtocolBufferException(e)
+                        .setUnfinishedMessage(builder.buildPartial());
+            }
+            return builder.buildPartial();
+        }
+    };
+
+    public static com.google.protobuf.Parser<StorageRecord> parser() {
+        return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<StorageRecord> getParserForType() {
+        return PARSER;
+    }
+
+    @java.lang.Override
+    public org.example.libs.StorageRecord getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+    }
 
 }
 
