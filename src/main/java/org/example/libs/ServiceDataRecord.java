@@ -39,58 +39,39 @@ public class ServiceDataRecord implements BinaryData {
     public void decode(byte[] data) throws IOException {
         ByteBuffer buf = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN);
 
-        recordLength = Short.toUnsignedInt(buf.getShort());
-        if (buf.remaining() < recordLength) {
-            throw new IOException(String.format(
-                    "ServiceDataRecord: recordLength=%d, available=%d",
-                    recordLength, buf.remaining()));
-        }
-        recordNumber = Short.toUnsignedInt(buf.getShort());
+        // 1) Читаем recordLength и сразу избавляемся от знаковых значений
+        int recordLength = Short.toUnsignedInt(buf.getShort());
 
+// Читаем recordNumber, flags и optional поля
+        this.recordNumber = Short.toUnsignedInt(buf.getShort());
+        // TODO Тут хуйня какя-то, кирилл исправляй
         byte flags = buf.get();
-        String flagBits = String.format("%8s", Integer.toBinaryString(flags & 0xFF)).replace(' ', '0');
+// … если биты flags говорят, что есть ObjectID, EventID, Time — читайте buf.getInt() соответствующее количество раз
+        byte sourceService = buf.get();
+        byte recipientService = buf.get();
 
-        sourceServiceOnDevice = flagBits.substring(0, 1);
-        recipientServiceOnDevice = flagBits.substring(1, 2);
-        group = flagBits.substring(2, 3);
-        recordProcessingPriority = flagBits.substring(3, 5);
-        timeFieldExists = flagBits.substring(5, 6);
-        eventIDFieldExists = flagBits.substring(6, 7);
-        objectIDFieldExists = flagBits.substring(7, 8);
+// Правильный подсчёт заголовочных байт:
+        int headerBytes = buf.position() - 2;  // 2 байта for recordLength
+        int rdsLength = recordLength - headerBytes;
 
-        if (objectIDFieldExists.equals("1")) {
-            objectIdentifier = buf.getInt();
+        System.out.printf(">>> Debug ServiceDataRecord: recordLength=%d, headerBytes=%d, rdsLength=%d, buf.remaining() before read=%d%n", recordLength, headerBytes, rdsLength, buf.remaining());
+
+// Проверяем
+        if (rdsLength < 0 || buf.remaining() < rdsLength) {
+            throw new IOException(String.format("ServiceDataRecord: declared %d, headerBytes=%d ⇒ rdsLength=%d but remaining=%d", recordLength, headerBytes, rdsLength, buf.remaining()));
         }
 
-        if (eventIDFieldExists.equals("1")) {
-            eventIdentifier = buf.getInt();
-        }
-
-        if (timeFieldExists.equals("1")) {
-            int seconds = buf.getInt();
-            time = Instant.ofEpochSecond(TIME_OFFSET_SECONDS + seconds);
-        }
-
-        sourceServiceType = buf.get();
-        recipientServiceType = buf.get();
-
-        int remaining = buf.remaining();
-        if (remaining < recordLength) {
-            throw new IOException(String.format(
-                    "ServiceDataRecord: recordLength=%d, а оставшихся байт=%d",
-                    recordLength, remaining));
-        }
-        byte[] rdsBytes = new byte[recordLength];
+// Вырезаем и decode
+        byte[] rdsBytes = new byte[rdsLength];
         buf.get(rdsBytes);
         this.recordDataSet = new RecordDataSet();
         recordDataSet.decode(rdsBytes);
-
     }
+
 
     @Override
     public byte[] encode() throws IOException {
-        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-             DataOutputStream dos = new DataOutputStream(baos)) {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream(); DataOutputStream dos = new DataOutputStream(baos)) {
 
             byte[] rdsBytes = recordDataSet != null ? recordDataSet.encode() : new byte[0];
 
@@ -101,8 +82,7 @@ public class ServiceDataRecord implements BinaryData {
             writeShortLE(dos, recordLength);
             writeShortLE(dos, recordNumber);
 
-            String flagBits = sourceServiceOnDevice + recipientServiceOnDevice + group + recordProcessingPriority +
-                    timeFieldExists + eventIDFieldExists + objectIDFieldExists;
+            String flagBits = sourceServiceOnDevice + recipientServiceOnDevice + group + recordProcessingPriority + timeFieldExists + eventIDFieldExists + objectIDFieldExists;
 
             byte flags = (byte) Integer.parseInt(flagBits, 2);
             dos.writeByte(flags);
