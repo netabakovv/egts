@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Arrays;
 
 @Data
 public class EgtsPackage {
@@ -17,15 +18,15 @@ public class EgtsPackage {
     private String priority;                // Приоритет
     private byte headerLength;             // Длина заголовка
     private byte headerEncoding;            // Кодировка заголовка
-    private short frameDataLength;          // Длина секции данных
+    private int frameDataLength;          // Длина секции данных
     private int packetIdentifier;         // Идентификатор пакета
     private EgtsPacketType packetType;               // Тип пакета
-    private short peerAddress;              // Адрес отправителя
-    private short recipientAddress;         // Адрес получателя
+    private int peerAddress;              // Адрес отправителя
+    private int recipientAddress;         // Адрес получателя
     private byte timeToLive;               // Время жизни пакета
     private byte headerCheckSum;           // Контрольная сумма заголовка
     private BinaryData servicesFrameData;  // Данные сервиса
-    private short servicesFrameDataCheckSum; // Контрольная сумма данных сервиса
+    private int servicesFrameDataCheckSum; // Контрольная сумма данных сервиса
 
     public record EncodeOptions(SecretKey secretKey) {}
     public record DecodeOptions(SecretKey secretKey) {}
@@ -36,7 +37,8 @@ public class EgtsPackage {
         HEADER_CRC_ERROR,
         DECRYPTION_ERROR,
         UNSUPPORTED_PACKET_TYPE,
-        INCOMPLETE_DATA_FORMAT
+        INCOMPLETE_DATA_FORMAT,
+        FRAME_LENGTH_MISMATCH
     }
 
     public record DecodeResult(DecodeResultCode code, String message, EgtsPackage pkg) {}
@@ -70,13 +72,13 @@ public class EgtsPackage {
         }
         frameDataLength = (short) sfrd.length;
 
-        buf.putShort(frameDataLength);
-        buf.putShort((short) packetIdentifier);
+        buf.put((byte) frameDataLength);
+        buf.put((byte) packetIdentifier);
         buf.put((byte) packetType.getCode());
 
         if ("1".equals(route)) {
-            buf.putShort(peerAddress);
-            buf.putShort(recipientAddress);
+            buf.put((byte) peerAddress);
+            buf.put((byte) recipientAddress);
             buf.put(timeToLive);
         }
 
@@ -110,62 +112,113 @@ public class EgtsPackage {
         ByteBuffer buf = ByteBuffer.wrap(content).order(ByteOrder.LITTLE_ENDIAN);
 
         try {
-            protocolVersion = buf.get();
-            securityKeyId = buf.get();
+            protocolVersion    = buf.get();
+            securityKeyId      = buf.get();
 
-            byte flags = buf.get();
+            byte flags         = buf.get();
             parseFlags(flags);
 
-            headerLength = buf.get();
-            headerEncoding = buf.get();
+            headerLength       = buf.get();
+            headerEncoding     = buf.get();
 
-            frameDataLength = buf.getShort();
-            packetIdentifier = Short.toUnsignedInt(buf.getShort());
-            packetType = EgtsPacketType.fromCode(buf.get());
+            // 1) unsigned frame length
+            int frameDataLength = Short.toUnsignedInt(buf.getShort());
+
+            packetIdentifier   = Short.toUnsignedInt(buf.getShort());
+            packetType         = EgtsPacketType.fromCode(buf.get());
 
             if ("1".equals(route)) {
-                peerAddress = buf.getShort();
-                recipientAddress = buf.getShort();
-                timeToLive = buf.get();
+                peerAddress      = Short.toUnsignedInt(buf.getShort());
+                recipientAddress = Short.toUnsignedInt(buf.getShort());
+                timeToLive       = buf.get();
             }
 
-            int headerEndPos = buf.position();
-            byte[] headerBytes = new byte[headerEndPos];
+            // позиция сразу после заголовка, перед CRC8
+            int headerEndPos    = buf.position();
+
+            // CRC8 заголовка
+            byte[] headerBytes  = new byte[headerEndPos];
             System.arraycopy(content, 0, headerBytes, 0, headerEndPos);
-            headerCheckSum = buf.get();
+            headerCheckSum     = buf.get();
             byte calculatedHCS = CRC.crc8(headerBytes);
             if (headerCheckSum != calculatedHCS) {
-                return new DecodeResult(DecodeResultCode.HEADER_CRC_ERROR, "CRC8 заголовка неверен", this);
+                return new DecodeResult(
+                        DecodeResultCode.HEADER_CRC_ERROR,
+                        "CRC8 заголовка неверен",
+                        this
+                );
             }
 
-            byte[] dataFrameBytes = new byte[frameDataLength];
-            buf.get(dataFrameBytes);
+            // 2) Забираем ровно frameDataLength байт из content
+            int start = headerEndPos + 1; // сразу после CRC8
+            if (content.length < start + frameDataLength) {
+                return new DecodeResult(
+                        DecodeResultCode.FRAME_LENGTH_MISMATCH,
+                        String.format(
+                                "Declared frameDataLength=%d, but only %d bytes available after header",
+                                frameDataLength, content.length - start
+                        ),
+                        this
+                );
+            }
+            byte[] dataFrameBytes = Arrays.copyOfRange(
+                    content,
+                    start,
+                    start + frameDataLength
+            );
 
+            // 3) Если есть шифрование — расшифровываем
             boolean isEncrypted = !"00".equals(encryptionAlg);
             if (isEncrypted) {
                 if (secretKey == null) {
-                    return new DecodeResult(DecodeResultCode.DECRYPTION_ERROR, "Отсутствует ключь шифрования", this);
+                    return new DecodeResult(
+                            DecodeResultCode.DECRYPTION_ERROR,
+                            "Отсутствует ключ шифрования",
+                            this
+                    );
                 }
                 dataFrameBytes = secretKey.decode(dataFrameBytes);
             }
 
+            // 4) Создаём нужный декодер для сервисов
             switch (packetType) {
                 case PT_APP_DATA -> servicesFrameData = new ServiceDataSet();
                 case PT_RESPONSE -> servicesFrameData = new PtResponse();
                 default -> {
-                    return new DecodeResult(DecodeResultCode.UNSUPPORTED_PACKET_TYPE, "Неизвестный тип пакета", this);
+                    return new DecodeResult(
+                            DecodeResultCode.UNSUPPORTED_PACKET_TYPE,
+                            "Неизвестный тип пакета",
+                            this
+                    );
                 }
             }
 
+            System.out.printf(
+                    ">>> EGTS Packet: frameDataLength=%d, content.length=%d%n",
+                    frameDataLength, content.length
+            );
+
+            // 5) Декодируем сервисный блок
             servicesFrameData.decode(dataFrameBytes);
 
-            servicesFrameDataCheckSum = buf.getShort();
-            short expectedCrc = CRC.crc16(dataFrameBytes);
+            // 6) Сдвигаем буфер вперёд на длину сервиса, чтобы читать CRC16
+            buf.position(start + frameDataLength);
+
+            servicesFrameDataCheckSum = Short.toUnsignedInt(buf.getShort());
+            int expectedCrc = CRC.crc16(dataFrameBytes);
             if (servicesFrameDataCheckSum != expectedCrc) {
-                return new DecodeResult(DecodeResultCode.HEADER_CRC_ERROR, "CRC16 тела пакета неверен", this);
+                return new DecodeResult(
+                        DecodeResultCode.HEADER_CRC_ERROR,
+                        "CRC16 тела пакета неверен",
+                        this
+                );
             }
 
-            return new DecodeResult(DecodeResultCode.OK, "Успешно декодировано", this);
+            return new DecodeResult(
+                    DecodeResultCode.OK,
+                    "Успешно декодировано",
+                    this
+            );
 
         } catch (Exception e) {
             throw new RuntimeException(e);
