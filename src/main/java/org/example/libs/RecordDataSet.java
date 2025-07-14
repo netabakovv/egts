@@ -54,6 +54,7 @@ public class RecordDataSet implements BinaryData {
             }
 
             byte subrecordType = buf.get();
+
             short length = buf.getShort();  // Little-endian уже установлен
 
             if (length < 0) {

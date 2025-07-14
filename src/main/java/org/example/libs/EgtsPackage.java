@@ -1,11 +1,13 @@
 package org.example.libs;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+@Slf4j
 @Data
 public class EgtsPackage {
     private byte protocolVersion;           // Версия протокола
@@ -144,7 +146,7 @@ public class EgtsPackage {
             boolean isEncrypted = !"00".equals(encryptionAlg);
             if (isEncrypted) {
                 if (secretKey == null) {
-                    return new DecodeResult(DecodeResultCode.DECRYPTION_ERROR, "Отсутствует ключь шифрования", this);
+                    return new DecodeResult(DecodeResultCode.DECRYPTION_ERROR, "Отсутствует ключ шифрования", this);
                 }
                 dataFrameBytes = secretKey.decode(dataFrameBytes);
             }
@@ -167,7 +169,13 @@ public class EgtsPackage {
 
             return new DecodeResult(DecodeResultCode.OK, "Успешно декодировано", this);
 
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.err.println();
+            System.err.println("Ошибка: " + e.getMessage());
+            log.error("e: ", e);
+            return new DecodeResult(DecodeResultCode.OK, "Ошибка декодирования", this);
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
