@@ -145,7 +145,7 @@ public class RecordDataSet implements BinaryData {
             case SrAbsCntrDataType -> new SrAbsCntrData();
             case SrAuthInfoType -> new SrAuthInfo();
             case SrCountersDataType -> new SrCountersData();
-            case SrEgtsPlusDataType -> new StorageRecordWrapper(); // Обертка над сгенерированным StorageRecord
+            case SrEgtsPlusDataType -> StorageRecord.newBuilder();
             case SrAbsAnSensDataType -> new SrAbsSensData();
             case SrDispatcherIdentityType -> new SrDispatcherIdentity();
             case SrPassengersCountersType -> new SrPassengersCountersData();
@@ -165,7 +165,7 @@ public class RecordDataSet implements BinaryData {
         if (data instanceof SrAbsCntrData) return SrAbsCntrDataType;
         if (data instanceof SrAuthInfo) return SrAuthInfoType;
         if (data instanceof SrCountersData) return SrCountersDataType;
-        if (data instanceof StorageRecordWrapper) return SrEgtsPlusDataType;  // Обертка над сгенерированным StorageRecord
+        if (data instanceof StorageRecord.Builder) return SrEgtsPlusDataType;
         if (data instanceof SrAbsSensData) return SrAbsAnSensDataType;
         if (data instanceof SrDispatcherIdentity) return SrDispatcherIdentityType;
         if (data instanceof SrPassengersCountersData) return SrPassengersCountersType;

@@ -5,6 +5,8 @@
 
 package org.example.libs;
 
+import java.io.IOException;
+
 /**
  * <pre>
  * Причина формирования отметки
@@ -2184,7 +2186,7 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:StorageRecord)
-      org.example.libs.StorageRecordOrBuilder {
+      org.example.libs.StorageRecordOrBuilder, BinaryData {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.example.libs.StorageRecordOuterClass.internal_static_StorageRecord_descriptor;
@@ -2208,6 +2210,31 @@ private static final long serialVersionUID = 0L;
       super(parent);
 
     }
+
+    @Override
+    public void decode(byte[] data) throws java.io.IOException {
+      // mergeFrom загрузит все поля из data в этот Builder
+      this.mergeFrom(data);
+    }
+
+    /**
+     * Упаковывает текущее состояние в protobuf‑байты
+     */
+    @Override
+    public byte[] encode() throws java.io.IOException {
+      // build() → immutable message → toByteArray()
+      return this.build().toByteArray();
+    }
+
+    /**
+     * Длина сериализованных байт без повторной строчковой сборки
+     */
+    @Override
+    public int length() {
+      // можно дернуть у собранного объекта
+      return this.build().getSerializedSize();
+    }
+
     @java.lang.Override
     public Builder clear() {
       super.clear();
