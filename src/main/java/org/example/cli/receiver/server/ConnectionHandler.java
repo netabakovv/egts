@@ -33,6 +33,8 @@ public class ConnectionHandler implements Runnable {
 
             byte[] header = new byte[10];
             while (true) {
+                RecordDataSet srResponsesRecord = new RecordDataSet();
+                byte serviceType = 0;
                 int bytesRead = input.read(header);
                 if (bytesRead == -1) break;
 
@@ -67,8 +69,21 @@ public class ConnectionHandler implements Runnable {
                     ServiceDataSet sds = (ServiceDataSet) egtsPkg.getServicesFrameData();
                     for (var record : sds.getRecords()) {
                         // Переменные для накопления данных
+
+                        RecordDataSet.RecordData recordData = new RecordDataSet.RecordData();
+                        recordData.setSubrecordType((byte) EgtsPacketType.PT_RESPONSE.getCode());
+                        recordData.setSubrecordLength((short) 3);
+                        SrResponse srResponse = new SrResponse();
+                        srResponse.setRecordStatus(EgtsProcessingCode.OK.getCode());
+                        srResponse.setConfirmedRecordNumber(record.getRecordNumber());
+                        recordData.setSubrecordData(srResponse);
+                        srResponsesRecord.addRecord(recordData);
+
+                        serviceType = record.getSourceServiceType();
+                        logger.debug("Тип сервиса ", serviceType);
+
                         long clientId = 0;
-                        if (!Objects.equals(record.getObjectIDFieldExists(), "0")){
+                        if (!Objects.equals(record.getObjectIDFieldExists(), "0")) {
                             clientId = record.getObjectIdentifier();
                         }
                         int packetId = egtsPkg.getPacketIdentifier();
@@ -130,8 +145,11 @@ public class ConnectionHandler implements Runnable {
                                     logger.info("SrExtPosData: pdop={}, hdop={}, vdop={}, nsat={}, ns={}",
                                             ext.getPdop(), ext.getHdop(), ext.getVdop(), ext.getSatellites(), ext.getNavigationSystem());
 
-                                    pdop = ext.getPdop(); hdop = ext.getHdop(); vdop = ext.getVdop();
-                                    nsat = ext.getSatellites(); ns = ext.getNavigationSystem();
+                                    pdop = ext.getPdop();
+                                    hdop = ext.getHdop();
+                                    vdop = ext.getVdop();
+                                    nsat = ext.getSatellites();
+                                    ns = ext.getNavigationSystem();
                                 }
                                 case RecordDataSet.SrStateDataType -> {
                                     var state = (SrStateData) rd.getSubrecordData();
@@ -150,13 +168,16 @@ public class ConnectionHandler implements Runnable {
 //                                    var dig = (SensButtonPressCounter) rd.getSubrecordData();
 //                                    anSensors.add(AnSensor.of(dig.getSensNum(), dig.getValue()));
 //                                }
-//                                case RecordDataSet.SrCountersDataType -> {
-//                                    // TODO Раздефать
-//                                    var cnts = (SrCountersData) rd.getSubrecordData();
-//                                    for (var c : cnts.get()) {
-//                                        anSensors.add(AnSensor.of(c.getCounterNumber(), c.getCounterValue()));
-//                                    }
-//                                }
+                                case RecordDataSet.SrCountersDataType -> {
+                                    var cnts = (SrCountersData) rd.getSubrecordData();
+                                    for (var c : cnts.getAllCounters()) {
+                                        anSensors.add(AnSensor.of(c.getCounterNumber(), c.getCounterValue()));
+                                    }
+                                }
+                                case RecordDataSet.SrAbsCntrDataType -> {
+                                    var absCntr = (SrAbsCntrData) rd.getSubrecordData();
+                                    anSensors.add(AnSensor.of(absCntr.getCounterNumber(), absCntr.getCounterValue()));
+                                }
 ////                                case RecordDataSet.SrAbsLoopInDataType -> {
 ////                                    var absLoop = (SrAbsLoopinData) rd.getSubrecordData();
 ////                                    // TODO: обработка одного петлевого входа absLoop.getLoopinNumber(), getFlag()
@@ -194,23 +215,41 @@ public class ConnectionHandler implements Runnable {
                     // Ответ
                     PtResponse pt = new PtResponse();
                     pt.setResponsePacketID((short) egtsPkg.getPacketIdentifier());
-                    pt.setProcessingResult((byte) 0);
+                    pt.setProcessingResult((byte) EgtsProcessingCode.OK.getCode());
 
-                    EgtsPackage resp = new EgtsPackage();
-                    resp.setProtocolVersion((byte) 1);
-                    resp.setSecurityKeyId((byte) 0);
-                    resp.setPrefix("00");
-                    resp.setRoute("0");
-                    resp.setEncryptionAlg("00");
-                    resp.setCompression("0");
-                    resp.setPriority("00");
-                    resp.setHeaderLength((byte) 11);
-                    resp.setHeaderEncoding((byte) 0);
-                    resp.setPacketIdentifier((short) (egtsPkg.getPacketIdentifier() + 1));
-                    resp.setPacketType(EgtsPacketType.PT_RESPONSE);
-                    resp.setServicesFrameData(pt);
+                    if (srResponsesRecord != null) {
+                        ServiceDataSet sr = new ServiceDataSet();
+                        ServiceDataRecord service = new ServiceDataRecord();
+                        service.setRecordLength((short) srResponsesRecord.getRecords().size());
+                        service.setRecordNumber((short) 1);
+                        service.setSourceServiceOnDevice("0");
+                        service.setRecipientServiceOnDevice("0");
+                        service.setGroup("1");
+                        service.setRecordProcessingPriority("00");
+                        service.setTimeFieldExists("0");
+                        service.setEventIDFieldExists("0");
+                        service.setObjectIDFieldExists("0");
+                        service.setSourceServiceType(serviceType);
+                        service.setRecipientServiceType(serviceType);
+                        service.setRecordDataSet(srResponsesRecord);
+                        pt.setSdr(sr);
+                    }
+                    EgtsPackage egtsPackage = new EgtsPackage();
+                    egtsPackage.setProtocolVersion((byte) 1);
+                    egtsPackage.setSecurityKeyId((byte) 0);
+                    egtsPackage.setPrefix("00");
+                    egtsPackage.setRoute("0");
+                    egtsPackage.setEncryptionAlg("00");
+                    egtsPackage.setCompression("0");
+                    egtsPackage.setPriority("00");
+                    egtsPackage.setHeaderLength((byte) 11);
+                    egtsPackage.setHeaderEncoding((byte) 0);
+                    egtsPackage.setFrameDataLength((short) pt.length());
+                    egtsPackage.setPacketIdentifier(egtsPackage.getPacketIdentifier() + 1);
+                    egtsPackage.setPacketType(EgtsPacketType.PT_RESPONSE);
+                    egtsPackage.setServicesFrameData(pt);
 
-                    byte[] buf = resp.encode();
+                    byte[] buf = egtsPackage.encode();
                     output.write(buf);
                 }
             }

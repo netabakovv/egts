@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 
 @Data
@@ -202,6 +204,29 @@ public class SrCountersData implements BinaryData {
         byte[] threeBytes = new byte[3];
         System.arraycopy(full, 0, threeBytes, 0, 3);
         return threeBytes;
+    }
+
+    public List<CounterEntry> getAllCounters() {
+        List<CounterEntry> result = new ArrayList<>();
+
+        if ("1".equals(counterFieldExists1)) result.add(new CounterEntry(1, counter1));
+        if ("1".equals(counterFieldExists2)) result.add(new CounterEntry(2, counter2));
+        if ("1".equals(counterFieldExists3)) result.add(new CounterEntry(3, counter3));
+        if ("1".equals(counterFieldExists4)) result.add(new CounterEntry(4, counter4));
+        if ("1".equals(counterFieldExists5)) result.add(new CounterEntry(5, counter5));
+        if ("1".equals(counterFieldExists6)) result.add(new CounterEntry(6, counter6));
+        if ("1".equals(counterFieldExists7)) result.add(new CounterEntry(7, counter7));
+        if ("1".equals(counterFieldExists8)) result.add(new CounterEntry(8, counter8));
+
+        return result;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CounterEntry {
+        private int counterNumber;
+        private long counterValue;
     }
 
     /**
